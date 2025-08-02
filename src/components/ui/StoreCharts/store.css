@@ -1,0 +1,23 @@
+.moneyPattern {
+    background-image: url('/magicpattern8.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.2;
+}
+
+.curvePattern {
+    background-image: url('/magicpattern1.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+}
+
+.magicPattern {
+    background-image: url('/magicPattern.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.1;
+}

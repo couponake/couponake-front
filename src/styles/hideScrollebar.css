@@ -1,0 +1,13 @@
+.scrollbar-visible::-webkit-scrollbar {
+  height: 8px;
+  display: none;
+}
+
+.scrollbar-visible::-webkit-scrollbar-thumb {
+  background-color: #81807e;
+  border-radius: 0px;
+}
+
+.scrollbar-visible::-webkit-scrollbar-track {
+  background-color: #191919;
+}

@@ -1,0 +1,7 @@
+{
+    "i18n-ally.localesPaths": [
+        "./messages"
+    ],
+    "i18next.i18nPaths": "c:/Users/333/next15/src/i18n",
+    "i18n-ally.keystyle": "nested"
+}

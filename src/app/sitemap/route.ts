@@ -1,0 +1,79 @@
+// app/sitemap.xml/route.ts
+import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getAllBlogsData, getAllStoresData } from "@/lib/sitemap-utils";
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  const baseURL = "https://el-afdl.com/";
+  //get Settings
+  const settings = await useSitemapSettingEnabled();
+  if (!settings.superSite) {
+    return new NextResponse("", { status: 404 });
+  }
+
+  //blogs pages
+  const blogsURLs = [];
+  if (settings.blogs) {
+    const blogPages = await getAllBlogsData(1);
+    const blogTotalPages = blogPages.totalPages;
+    for (let page = 1; page <= blogTotalPages; page++) {
+      blogsURLs.push(`<sitemap>
+        <loc>${baseURL}sitemap-blogs/${page}/</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+        </sitemap>`);
+    }
+  }
+
+  //stores images & pages
+  const StoreImagesURLs = [];
+  const storesURLs = [];
+  if (settings.stores) {
+    const slugs = await getAllStoresData(1);
+    const StoresPages = slugs.totalPages;
+    for (let page = 1; page <= StoresPages; page++) {
+      StoreImagesURLs.push(`<sitemap>
+      <loc>${baseURL}sitemap-stores-images/${page}/</loc>
+      <lastmod>${new Date().toISOString()}</lastmod>
+    </sitemap>`);
+
+      storesURLs.push(`<sitemap>
+      <loc>${baseURL}sitemap-stores/${page}/</loc>
+      <lastmod>${new Date().toISOString()}</lastmod>
+    </sitemap>`);
+    }
+  }
+
+  //main urls
+  const URLs: string[] = [];
+
+  URLs.push(`${baseURL}sitemap-main.xml`);
+  if (settings.countries) {
+    URLs.push(`${baseURL}sitemap-countries.xml`);
+  }
+  if (settings.categories) {
+    URLs.push(`${baseURL}sitemap-categories.xml`);
+  }
+
+  const urls = URLs.map(
+    (url) => `<sitemap>
+    <loc>${url}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+  </sitemap>`
+  ).join("");
+
+  const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
+  <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
+<!-- URLs count: ${URLs.length + storesURLs.length + StoreImagesURLs.length + blogsURLs.length} -->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${urls}
+  ${storesURLs.join("")}
+  ${StoreImagesURLs.join("")}
+  ${blogsURLs.join("")}
+</sitemapindex>`;
+
+  return new NextResponse(sitemapIndex, {
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+    },
+  });
+}
