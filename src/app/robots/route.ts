@@ -10,7 +10,7 @@ Disallow: /_next/
 Disallow: /private/
 Disallow: /*?couponID=
 
-Sitemap: https://el-afdl.com/sitemap.xml
+Sitemap: https://couponalyom.com/sitemap.xml
 `.trim();
 
   return new NextResponse(content, {

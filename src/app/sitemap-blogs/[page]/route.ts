@@ -16,7 +16,7 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const blogs = await getAllBlogsData(pageNumber);
-  const baseURL = "https://el-afdl.com";
+  const baseURL = "https://couponalyom.com";
 
   if (!blogs || !blogs.slugs || blogs.slugs.length === 0) {
     return new NextResponse("", { status: 404 });

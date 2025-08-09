@@ -37,7 +37,7 @@ export async function generateMetadata() {
         : "Review site rules, your rights, and obligations as a user",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -52,7 +52,7 @@ export async function generateMetadata() {
         : "Review site rules, your rights, and obligations as a user",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -83,7 +83,7 @@ const TermsPage = async () => {
         dateModified: page.created_at
           ? new Date(page.created_at).toISOString()
           : undefined,
-        image: "https://el-afdl.com/AlafdalNewLogo.webp",
+        image: "https://couponalyom.com/AlafdalNewLogo.webp",
         breadcrumb: {
           "@type": "BreadcrumbList",
           itemListElement: [
@@ -125,7 +125,7 @@ const TermsPage = async () => {
           name: "الأفضل",
           logo: {
             "@type": "ImageObject",
-            url: "https://el-afdl.com/AlafdalNewLogo.webp",
+            url: "https://couponalyom.com/AlafdalNewLogo.webp",
           },
         },
         isPartOf: {

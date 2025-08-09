@@ -36,7 +36,7 @@ export async function generateMetadata() {
         : "Meet our vision and the experts delivering top shopping coupons",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -51,7 +51,7 @@ export async function generateMetadata() {
         : "Meet our vision and the experts delivering top shopping coupons",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -72,7 +72,7 @@ const AboutUsPage = async () => {
     "@type": "Article",
     headline: page.title,
     description: "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء",
-    image: "https://el-afdl.com/AlafdalNewLogo.webp",
+    image: "https://couponalyom.com/AlafdalNewLogo.webp",
     author: {
       "@type": "Organization",
       name: "الأفضل",
@@ -82,7 +82,7 @@ const AboutUsPage = async () => {
       name: "الأفضل",
       logo: {
         "@type": "ImageObject",
-        url: "https://el-afdl.com/AlafdalNewLogo.webp",
+        url: "https://couponalyom.com/AlafdalNewLogo.webp",
       },
     },
     datePublished: page.created_at || "2024-01-01",

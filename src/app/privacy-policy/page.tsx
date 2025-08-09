@@ -36,7 +36,7 @@ export async function generateMetadata() {
         : "Learn how we protect your data and keep your information secure",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -51,7 +51,7 @@ export async function generateMetadata() {
         : "Learn how we protect your data and keep your information secure",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -108,7 +108,7 @@ const PrivacyPage = async () => {
       dateModified: page.created_at
         ? new Date(page.created_at).toISOString()
         : undefined,
-      image: "https://el-afdl.com/AlafdalNewLogo.webp",
+      image: "https://couponalyom.com/AlafdalNewLogo.webp",
       author: {
         "@type": "Organization",
         name: "الأفضل",
@@ -119,7 +119,7 @@ const PrivacyPage = async () => {
         name: "الأفضل",
         logo: {
           "@type": "ImageObject",
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
         },
       },
       articleBody: secureHtmlLinks(page.content as string),

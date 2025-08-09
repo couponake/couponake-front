@@ -36,7 +36,7 @@ export async function generateMetadata() {
         : "Select your country to unlock tailored discount codes for local stores",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -51,7 +51,7 @@ export async function generateMetadata() {
         : "Select your country to unlock tailored discount codes for local stores",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],

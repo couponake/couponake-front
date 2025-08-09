@@ -9,7 +9,7 @@ type SitemapEntry = {
 };
 
 export async function GET() {
-  const baseURL = "https://el-afdl.com/";
+  const baseURL = "https://couponalyom.com/";
   //get Settings
   const settings = await useSitemapSettingEnabled();
   if (!settings.superSite) {

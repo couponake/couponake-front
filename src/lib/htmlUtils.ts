@@ -4,7 +4,7 @@
 /**
  * Adds security attributes to all anchor tags in HTML content
  * - referrerPolicy="no-referrer" to prevent referrer information leakage
- * - rel="follow" if URL contains "el-afdl", otherwise "nofollow"
+ * - rel="follow" if URL contains "couponalyom", otherwise "nofollow"
  * - target="_blank" to open links in a new tab
  *
  * @param htmlContent The original HTML content
@@ -41,8 +41,8 @@ export function secureHtmlLinks(htmlContent: string): string {
     if (hrefMatch) {
       const originalHref = hrefMatch[1];
       
-      // Check if URL contains "el-afdl"
-      shouldFollow = originalHref.includes("el-afdl");
+      // Check if URL contains "couponalyom"
+      shouldFollow = originalHref.includes("couponalyom");
       
       // Clean and modify URL
       try {
@@ -59,12 +59,12 @@ export function secureHtmlLinks(htmlContent: string): string {
           `href="${encodedHref}"`
         );
       } catch (e) {
-        // If it's a malformed URL (e.g., relative), still check for "el-afdl"
+        // If it's a malformed URL (e.g., relative), still check for "couponalyom"
         // Keep the original href
       }
     }
     
-    // Set rel attribute based on whether URL contains "el-afdl"
+    // Set rel attribute based on whether URL contains "couponalyom"
     const relValue = shouldFollow ? "follow" : "nofollow";
     const relMatch = /rel\s*=\s*["']([^"']*)["']/i.exec(attributes);
     
