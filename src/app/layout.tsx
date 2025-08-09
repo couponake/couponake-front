@@ -129,7 +129,7 @@ export default async function LocaleLayout({
       dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <head>
-        <Script id="google-tag-manager" strategy="afterInteractive">
+        {/* <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -155,17 +155,17 @@ export default async function LocaleLayout({
               });
             `,
           }}
-        />
+        /> */}
       </head>
       <body className={`${cairo.variable} ${poppins.variable} font-inherit`}>
-        <noscript>
+        {/* <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WWJH6F2R"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
           />
-        </noscript>
+        </noscript> */}
         <SessionProvider>
           <Analytics />
           <NextIntlClientProvider locale={locale} messages={messages}>
