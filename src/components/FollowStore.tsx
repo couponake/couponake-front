@@ -88,7 +88,7 @@ const FollowStore = ({ links, storeName }: { links: string | { key: string, valu
           <button
             onMouseEnter={toggleIsOpen}
             className={cn(
-              "bg-white rtl:max-w-44 shadow fixed top-60 flex-row-reverse z-[100] ltr:-left-12 rtl:-right-9 rotate-90 ltr:hover:-left-12 rtl:hover:-right-9 rounded-md transition-all ease-in-out duration-300 text-main-500 py-2 px-3 flex items-center gap-3",
+              "bg-main-500 rtl:max-w-44 shadow fixed top-60 flex-row-reverse z-[100] ltr:-left-12 rtl:-right-9 rotate-90 ltr:hover:-left-12 rtl:hover:-right-9 rounded-md transition-all ease-in-out duration-300 text-white py-2 px-3 flex items-center gap-3",
               isOpen && "rtl:-right-9 ltr:-left-12"
             )}
           >

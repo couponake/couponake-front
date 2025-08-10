@@ -52,12 +52,15 @@ const nextConfig = {
       { source: "/sitemap-countries.xml", destination: "/sitemap-countries" },
       { source: "/sitemap-stores.xml", destination: "/sitemap-stores" },
       { source: "/sitemap-categories.xml", destination: "/sitemap-categories" },
-      { source: "/sitemap-stores-images.xml", destination: "/sitemap-stores-images" },
+      {
+        source: "/sitemap-stores-images.xml",
+        destination: "/sitemap-stores-images",
+      },
     ];
   },
   async redirects() {
     return [
-      ...redirectsList.flatMap((redirect : any) => [
+      ...redirectsList.flatMap((redirect: any) => [
         {
           source: redirect,
           destination: "/",
@@ -80,6 +83,51 @@ const nextConfig = {
       {
         source:
           "/:path*/(التليجرام|%D8%A7%D9%84%D8%AA%D9%84%D9%8A%D8%AC%D8%B1%D8%A7%D9%85)/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/:path*/feed/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/:path*%20:pathAfter*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/coupon/:slug*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/blog/page/:page(\\d+)",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/wp-content/uploads/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/store/:path*\\.(png|jpg|jpeg|gif|webp|svg)",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/author/:slug*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/.well-known/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/:protocol(http|https)/:path*",
         destination: "/",
         permanent: true,
       },
