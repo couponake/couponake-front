@@ -18,7 +18,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "cdn.couponalyom.com",
+        hostname: "cdn.coupoonat.com",
         pathname: "/**",
       },
     ],
