@@ -3,7 +3,7 @@ import { getAllBlogsData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://el-afdl.com";
+  const baseURL = "https://couponalyom.com";
   //get Settings
   const blogSettings = await useSitemapSettingEnabled();
   if (!blogSettings.blogs || !blogSettings.superSite) {

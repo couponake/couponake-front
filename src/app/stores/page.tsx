@@ -20,7 +20,7 @@ export async function generateMetadata() {
       ? "وفّر في كل عملية شراء عبر الإنترنت مع كوبونات حصرية لمتاجر السعودية"
       : "Save on every online order with exclusive Saudi e-store coupons",
     alternates: {
-      canonical: "https://el-afdl.com/stores/",
+      canonical: "https://couponalyom.com/stores/",
     },
     robots: {
       index: indexingStores,
@@ -34,7 +34,7 @@ export async function generateMetadata() {
         : "Save on every online order with exclusive Saudi e-store coupons",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -49,7 +49,7 @@ export async function generateMetadata() {
         : "Save on every online order with exclusive Saudi e-store coupons",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],

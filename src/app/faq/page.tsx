@@ -36,7 +36,7 @@ export async function generateMetadata() {
         : "Quick answers to top questions on coupon use and saving money",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -51,7 +51,7 @@ export async function generateMetadata() {
         : "Quick answers to top questions on coupon use and saving money",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -68,13 +68,13 @@ const FAQ = async () => {
     name: "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |الأفضل",
     description: "أجوبة سريعة لأهم الأسئلة حول استخدام الكوبونات والتوفير",
     url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/`,
-    image: "https://el-afdl.com/AlafdalNewLogo.webp",
+    image: "https://couponalyom.com/AlafdalNewLogo.webp",
     publisher: {
       "@type": "Organization",
       name: "الأفضل",
       logo: {
         "@type": "ImageObject",
-        url: "https://el-afdl.com/AlafdalNewLogo.webp",
+        url: "https://couponalyom.com/AlafdalNewLogo.webp",
       },
     },
     mainEntity: data?.data.map((faq) => ({

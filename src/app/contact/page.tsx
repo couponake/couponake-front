@@ -34,7 +34,7 @@ export async function generateMetadata() {
         : "Send your coupon questions or feedback through any channel",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -49,7 +49,7 @@ export async function generateMetadata() {
         : "Send your coupon questions or feedback through any channel",
       images: [
         {
-          url: "https://el-afdl.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/AlafdalNewLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
