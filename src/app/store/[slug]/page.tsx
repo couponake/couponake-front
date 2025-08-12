@@ -1,6 +1,6 @@
 import React from "react";
 import ShowStore from "@/components/Pages/Stores/show";
-import { getQueryClient } from "@/app/get-query-client";
+import { getQueryClient } from "@/services/get-query-client";
 import { cookies, headers } from "next/headers";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import api from "@/lib/api";

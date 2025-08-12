@@ -1,7 +1,7 @@
 import Main from "@/components/Pages/Home/main";
 import { getData } from "@/lib/actions";
 import React from "react";
-import ClientSideComponents from "./ClientSideComponents";
+import ClientSideComponents from "../components/Pages/Home/ClientSideComponents";
 import { getLocale, getTranslations } from "next-intl/server";
 import ScrollTracker from "@/hooks/ScrollPageAnalytics";
 
