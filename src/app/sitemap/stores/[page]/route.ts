@@ -1,5 +1,5 @@
 import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
-import { getAllBlogsData } from "@/lib/sitemap-utils";
+import { getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -7,26 +7,27 @@ export async function GET(
   { params }: { params: Promise<{ page: string }> }
 ) {
   //get Settings
-  const blogSettings = await useSitemapSettingEnabled();
-  if (!blogSettings.blogs || !blogSettings.superSite) {
+  const storesSettings = await useSitemapSettingEnabled();
+  if (!storesSettings.stores || !storesSettings.superSite) {
     return new NextResponse("", { status: 404 });
   }
 
   const resolvedParams = await params;
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
-  const blogs = await getAllBlogsData(pageNumber);
-  const baseURL = "https://couponalyom.com";
+  const stores = await getAllStoresData(pageNumber);
+  // const baseURL = "https://couponalyom.com";
+  const baseURL = "localhost:3000/";
 
-  if (!blogs || !blogs.slugs || blogs.slugs.length === 0) {
+  if (!stores || !stores.storesSlugs || stores.storesSlugs.length === 0) {
     return new NextResponse("", { status: 404 });
   }
 
-  const urls = blogs.slugs
+  const urls = stores.storesSlugs
     .map((slug) => {
       return `
     <url>
-      <loc>${baseURL}/${slug}/</loc>
+      <loc>${baseURL}/store/${slug}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
@@ -41,7 +42,7 @@ export async function GET(
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="/sitemap-blogs.xsl"?>
+<?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-stores.xsl"?>
 <urlset 
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 >

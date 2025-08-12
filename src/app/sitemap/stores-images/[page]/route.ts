@@ -15,33 +15,36 @@ export async function GET(
   const resolvedParams = await params;
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
-  const stores = await getAllStoresData(pageNumber);
-  const baseURL = "https://couponalyom.com";
+  const slugs = await getAllStoresData(pageNumber);
 
-  if (!stores || !stores.storesSlugs || stores.storesSlugs.length === 0) {
+  if (!slugs || !slugs.images || slugs.images.length === 0) {
     return new NextResponse("", { status: 404 });
   }
 
-  const urls = stores.storesSlugs
+  function escapeXml(unsafe: string) {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&apos;");
+  }
+
+  const urls = slugs.images
     .map((slug) => {
+      const safeSlug = escapeXml(slug);
       return `
-    <url>
-      <loc>${baseURL}/store/${slug}/</loc>
-      <lastmod>${new Date().toISOString()}</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-      <xhtml:link 
-        rel="canonical" 
-        href="${baseURL}/store/${slug}/"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-      />
-    </url>
-  `;
+  <url>
+    <loc>${safeSlug}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
     })
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="/sitemap-stores.xsl"?>
+<?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-stores.xsl"?>
 <urlset 
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 >

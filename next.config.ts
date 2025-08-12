@@ -47,15 +47,12 @@ const nextConfig = {
     return [
       { source: "/robots.txt", destination: "/robots" },
       { source: "/sitemap.xml", destination: "/sitemap" },
-      { source: "/sitemap-main.xml", destination: "/sitemap-main" },
-      { source: "/sitemap-blogs.xml", destination: "/sitemap-blogs" },
-      { source: "/sitemap-countries.xml", destination: "/sitemap-countries" },
-      { source: "/sitemap-stores.xml", destination: "/sitemap-stores" },
-      { source: "/sitemap-categories.xml", destination: "/sitemap-categories" },
-      {
-        source: "/sitemap-stores-images.xml",
-        destination: "/sitemap-stores-images",
-      },
+      { source: "/main.xml", destination: "/sitemap/main" },
+      { source: "/blogs.xml", destination: "/sitemap/blogs" },
+      { source: "/countries.xml", destination: "/sitemap/countries" },
+      { source: "/stores.xml", destination: "/sitemap/stores" },
+      { source: "/categories.xml", destination: "/sitemap/categories" },
+      { source: "/stores-images.xml", destination: "/sitemap/stores-images" },
     ];
   },
   async redirects() {
