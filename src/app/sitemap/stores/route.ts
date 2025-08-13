@@ -3,7 +3,7 @@ import { getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://couponalyom.com";
+  const baseURL = "https://couponalyom.com/sitemap/";
   //get Settings
   const storesSettings = await useSitemapSettingEnabled();
   if (!storesSettings.stores || !storesSettings.superSite) {
@@ -12,16 +12,12 @@ export async function GET() {
 
   const slugs = await getAllStoresData(1);
 
-  const pages = slugs.totalPages;
+  const pages = slugs.storesSlugs.length === 0 ? 0 : slugs.totalPages;
   const urls = [];
-
-  if (!slugs || !slugs.storesSlugs || slugs.storesSlugs.length === 0) {
-    return new NextResponse("", { status: 404 });
-  }
 
   for (let page = 1; page <= pages; page++) {
     urls.push(`<url>
-    <loc>${baseURL}/sitemap-stores/${page}/</loc>
+    <loc>${baseURL}stores/${page}/</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -29,7 +25,7 @@ export async function GET() {
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <?xml-stylesheet type="text/xsl" href="/sitemap-stores.xsl"?>
+  <?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-stores.xsl"?>
   <!-- Store count: ${pages} -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${urls}

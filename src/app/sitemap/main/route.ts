@@ -93,7 +93,7 @@ export async function GET() {
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <?xml-stylesheet type="text/xsl" href="/sitemap-main.xsl"?>
+  <?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-main.xsl"?>
   <!-- Pages count: ${mainPages.length} -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${urls}

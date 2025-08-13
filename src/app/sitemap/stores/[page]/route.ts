@@ -16,11 +16,7 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const stores = await getAllStoresData(pageNumber);
-  const baseURL = "https://couponalyom.com";
-
-  if (!stores || !stores.storesSlugs || stores.storesSlugs.length === 0) {
-    return new NextResponse("", { status: 404 });
-  }
+  const baseURL = "https://couponalyom.com/";
 
   const urls = stores.storesSlugs
     .map((slug) => {
@@ -32,7 +28,7 @@ export async function GET(
       <priority>0.8</priority>
       <xhtml:link 
         rel="canonical" 
-        href="${baseURL}/store/${slug}/"
+        href="${baseURL}store/${slug}/"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
       />
     </url>
@@ -41,7 +37,7 @@ export async function GET(
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="/sitemap-stores.xsl"?>
+<?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-stores.xsl"?>
 <urlset 
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 >

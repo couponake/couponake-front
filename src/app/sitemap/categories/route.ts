@@ -3,7 +3,7 @@ import { getAllCategories } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://couponalyom.com";
+  const baseURL = "https://couponalyom.com/";
   //get Settings
   const categoriesSettings = await useSitemapSettingEnabled();
   if (!categoriesSettings.categories || !categoriesSettings.superSite) {
@@ -16,7 +16,7 @@ export async function GET() {
     .map(
       (slug) => `
     <url>
-      <loc>${baseURL}/coupon-category/${slug}/</loc>
+      <loc>${baseURL}coupon-category/${slug}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
@@ -26,7 +26,7 @@ export async function GET() {
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-    <?xml-stylesheet type="text/xsl" href="/sitemap-categories.xsl"?>
+    <?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-categories.xsl"?>
   <!-- Categories count: ${slugs.length} -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${urls}

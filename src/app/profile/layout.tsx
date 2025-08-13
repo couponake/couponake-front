@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useStore } from "@/store";
 import Navigation from "@/components/Pages/Profile/Navigation";
 import { Avatar } from "@heroui/avatar";
-import { getQueryClient } from "../get-query-client";
+import { getQueryClient } from "../../services/get-query-client";
 import api from "@/lib/api";
 
 const ProfileLayout = ({ children }: { children: React.ReactNode }) => {

@@ -1,26 +1,23 @@
 import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
-import { getAllBlogsData } from "@/lib/sitemap-utils";
+import { getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://couponalyom.com";
+  const baseURL = "https://couponalyom.com/sitemap/";
   //get Settings
-  const blogSettings = await useSitemapSettingEnabled();
-  if (!blogSettings.blogs || !blogSettings.superSite) {
+  const storesSettings = await useSitemapSettingEnabled();
+  if (!storesSettings.stores || !storesSettings.superSite) {
     return new NextResponse("", { status: 404 });
   }
-  
-  const blogPages = await getAllBlogsData(1);
-  const pages = blogPages.totalPages;
-  const urls = [];
 
-  if (!blogPages || !blogPages.slugs || blogPages.slugs.length === 0) {
-    return new NextResponse("", { status: 404 });
-  }
+  const slugs = await getAllStoresData(1);
+
+  const pages = slugs.storesSlugs.length === 0 ? 0 : slugs.totalPages;
+  const urls = [];
 
   for (let page = 1; page <= pages; page++) {
     urls.push(`<url>
-    <loc>${baseURL}/sitemap-blogs/${page}/</loc>
+    <loc>${baseURL}stores-images/${page}/</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -28,10 +25,10 @@ export async function GET() {
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <?xml-stylesheet type="text/xsl" href="/sitemap-blogs.xsl"?>
-  <!-- Blogs count: ${pages} -->
+<?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-stores.xsl"?>
+<!-- Stores pages: ${pages} -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
- ${urls.join("")}
+  ${urls.join("")}
 </urlset>`;
 
   return new NextResponse(xml, {

@@ -1,27 +1,23 @@
 import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
-import { getAllStoresData } from "@/lib/sitemap-utils";
+import { getAllBlogsData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://couponalyom.com";
+  const baseURL = "https://couponalyom.com/sitemap/";
   //get Settings
-  const storesSettings = await useSitemapSettingEnabled();
-  if (!storesSettings.stores || !storesSettings.superSite) {
-    return new NextResponse("", { status: 404 });
+  const blogSettings = await useSitemapSettingEnabled();
+  if (!blogSettings.blogs || !blogSettings.superSite) {
+    return new NextResponse("Sitemap disabled", { status: 404 });
   }
 
-  const slugs = await getAllStoresData(1);
+  const blogPages = await getAllBlogsData(1);
 
-  const pages = slugs.totalPages;
+  const pages = blogPages.slugs.length === 0 ? 0 : blogPages.totalPages;
   const urls = [];
-
-  if (!slugs || !slugs.storesSlugs || slugs.storesSlugs.length === 0) {
-    return new NextResponse("", { status: 404 });
-  }
 
   for (let page = 1; page <= pages; page++) {
     urls.push(`<url>
-    <loc>${baseURL}/sitemap-stores-images/${page}/</loc>
+    <loc>${baseURL}blogs/${page}/</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -29,10 +25,10 @@ export async function GET() {
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="/sitemap-stores.xsl"?>
-<!-- Stores pages: ${pages} -->
+  <?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-blogs.xsl"?>
+  <!-- Blogs count: ${pages} -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${urls.join("")}
+ ${urls.join("")}
 </urlset>`;
 
   return new NextResponse(xml, {

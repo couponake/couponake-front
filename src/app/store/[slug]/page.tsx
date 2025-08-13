@@ -1,13 +1,12 @@
-import React from "react";
-import ShowStore from "@/components/Pages/Stores/show";
-import { getQueryClient } from "@/app/get-query-client";
-import { cookies, headers } from "next/headers";
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import api from "@/lib/api";
-import { StoreResponse } from "@/hooks/useStoreData";
-import { redirect } from "next/navigation";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
-import { SettingsEnum } from "@/types/settingsEnum";
+import ShowStore from '@/components/Pages/Stores/show';
+import { useSettingEnabled } from '@/hooks/useIndexingSettings';
+import { StoreResponse } from '@/hooks/useStoreData';
+import api from '@/lib/api';
+import { SettingsEnum } from '@/types/settingsEnum';
+import { HydrationBoundary } from '@tanstack/react-query';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import React from 'react';
 
 const stripHtml = (html: string) => {
   if (!html) return "";
@@ -355,29 +354,9 @@ const ShowStorePage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const slug = (await params).slug;
-  const access_token = (await cookies()).get("access_token")?.value;
-  const queryClient = getQueryClient();
   let schemas: any = [];
 
-  await queryClient.prefetchQuery({
-    queryKey: ["store", slug, access_token],
-    queryFn: async () => {
-      // const endpoint = access_token ? `stores/${slug}` : `stores/store/${slug}`;
-      const endpoint = `stores/store/${slug}`;
-      const data = await api.request.get(endpoint, {
-        headers: {
-          Authorization: access_token ? `Bearer ${access_token}` : "",
-        },
-      });
-      return data;
-    },
-  });
-
-  const storeData = queryClient.getQueryData<StoreResponse>([
-    "store",
-    slug,
-    access_token,
-  ]);
+  const storeData = await api.request.get(`stores/store/${slug}`);
 
   if ((storeData as any)?.redirect_url) {
     redirect((storeData as any).redirect_url);
@@ -394,9 +373,7 @@ const ShowStorePage = async ({
           __html: JSON.stringify(schemas),
         }}
       />
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <ShowStore slug={slug} />
-      </HydrationBoundary>
+      <ShowStore slug={slug} />
     </>
   );
 };
