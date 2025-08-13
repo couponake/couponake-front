@@ -17,10 +17,6 @@ export async function GET(
   const pageNumber = parseInt(page, 10);
   const slugs = await getAllStoresData(pageNumber);
 
-  if (!slugs || !slugs.images || slugs.images.length === 0) {
-    return new NextResponse("", { status: 404 });
-  }
-
   function escapeXml(unsafe: string) {
     return unsafe
       .replace(/&/g, "&amp;")

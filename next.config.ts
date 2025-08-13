@@ -45,14 +45,47 @@ const nextConfig = {
 
   async rewrites() {
     return [
-      { source: "/robots.txt", destination: "/robots" },
+      // Main sitemap index
       { source: "/sitemap.xml", destination: "/sitemap" },
-      { source: "/main.xml", destination: "/sitemap/main" },
-      { source: "/blogs.xml", destination: "/sitemap/blogs" },
-      { source: "/countries.xml", destination: "/sitemap/countries" },
-      { source: "/stores.xml", destination: "/sitemap/stores" },
-      { source: "/categories.xml", destination: "/sitemap/categories" },
-      { source: "/stores-images.xml", destination: "/sitemap/stores-images" },
+
+      // Section sitemaps (main pages)
+      { source: "/sitemap/main.xml", destination: "/sitemap/main" },
+      { source: "/sitemap/blogs.xml", destination: "/sitemap/blogs" },
+      { source: "/sitemap/countries.xml", destination: "/sitemap/countries" },
+      { source: "/sitemap/stores.xml", destination: "/sitemap/stores" },
+      { source: "/sitemap/categories.xml", destination: "/sitemap/categories" },
+      {
+        source: "/sitemap/stores-images.xml",
+        destination: "/sitemap/stores-images",
+      },
+
+      // Paginated sitemaps
+      {
+        source: "/sitemap/blogs/:page.xml",
+        destination: "/sitemap/blogs/:page",
+      },
+      {
+        source: "/sitemap/stores/:page.xml",
+        destination: "/sitemap/stores/:page",
+      },
+      {
+        source: "/sitemap/stores-images/:page.xml",
+        destination: "/sitemap/stores-images/:page",
+      },
+
+      // Alternative patterns for numeric pagination (if needed)
+      {
+        source: "/sitemap/blogs/page-:page(\\d+).xml",
+        destination: "/sitemap/blogs/:page",
+      },
+      {
+        source: "/sitemap/stores/page-:page(\\d+).xml",
+        destination: "/sitemap/stores/:page",
+      },
+      {
+        source: "/sitemap/stores-images/page-:page(\\d+).xml",
+        destination: "/sitemap/stores-images/:page",
+      },
     ];
   },
   async redirects() {

@@ -10,7 +10,7 @@ type SitemapEntry = {
 
 export async function GET() {
   // const baseURL = "https://couponalyom.com/";
-  const baseURL = "localhost:3000/";
+  const baseURL = "http://localhost:3000/";
   //get Settings
   const settings = await useSitemapSettingEnabled();
   if (!settings.superSite) {

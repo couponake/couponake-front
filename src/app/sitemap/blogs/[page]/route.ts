@@ -16,18 +16,14 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const blogs = await getAllBlogsData(pageNumber);
-  // const baseURL = "https://couponalyom.com";
-  const baseURL = "localhost:3000/";
-
-  if (!blogs || !blogs.slugs || blogs.slugs.length === 0) {
-    return new NextResponse("", { status: 404 });
-  }
+  // const baseURL = "https://couponalyom.com/";
+  const baseURL = "http://localhost:3000/";
 
   const urls = blogs.slugs
     .map((slug) => {
       return `
     <url>
-      <loc>${baseURL}/${slug}/</loc>
+      <loc>${baseURL}${slug}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>

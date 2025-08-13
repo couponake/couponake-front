@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   // const baseURL = "https://couponalyom.com/";
-  const baseURL = "localhost:3000/";
+  const baseURL = "localhost:3000/sitemap/";
   //get Settings
   const settings = await useSitemapSettingEnabled();
   if (!settings.superSite) {
@@ -16,7 +16,7 @@ export async function GET() {
   const blogsURLs = [];
   if (settings.blogs) {
     const blogPages = await getAllBlogsData(1);
-    const blogTotalPages = blogPages.totalPages;
+    const blogTotalPages = blogPages.slugs.length === 0 ? 0 : blogPages.totalPages;
     for (let page = 1; page <= blogTotalPages; page++) {
       blogsURLs.push(`<sitemap>
         <loc>${baseURL}blogs/${page}/</loc>
@@ -30,7 +30,7 @@ export async function GET() {
   const storesURLs = [];
   if (settings.stores) {
     const slugs = await getAllStoresData(1);
-    const StoresPages = slugs.totalPages;
+    const StoresPages = slugs.storesSlugs.length === 0 ? 0 : slugs.totalPages;
     for (let page = 1; page <= StoresPages; page++) {
       StoreImagesURLs.push(`<sitemap>
       <loc>${baseURL}stores-images/${page}/</loc>

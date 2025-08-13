@@ -16,12 +16,8 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const stores = await getAllStoresData(pageNumber);
-  // const baseURL = "https://couponalyom.com";
-  const baseURL = "localhost:3000/";
-
-  if (!stores || !stores.storesSlugs || stores.storesSlugs.length === 0) {
-    return new NextResponse("", { status: 404 });
-  }
+  // const baseURL = "https://couponalyom.com/";
+  const baseURL = "http://localhost:3000/";
 
   const urls = stores.storesSlugs
     .map((slug) => {
