@@ -4,8 +4,7 @@ import { getAllBlogsData, getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  // const baseURL = "https://couponalyom.com/";
-  const baseURL = "localhost:3000/sitemap/";
+  const baseURL = "https://couponalyom.com/sitemap/";
   //get Settings
   const settings = await useSitemapSettingEnabled();
   if (!settings.superSite) {

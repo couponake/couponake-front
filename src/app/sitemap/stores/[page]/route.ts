@@ -16,8 +16,7 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const stores = await getAllStoresData(pageNumber);
-  // const baseURL = "https://couponalyom.com/";
-  const baseURL = "http://localhost:3000/";
+  const baseURL = "https://couponalyom.com/";
 
   const urls = stores.storesSlugs
     .map((slug) => {
@@ -29,7 +28,7 @@ export async function GET(
       <priority>0.8</priority>
       <xhtml:link 
         rel="canonical" 
-        href="${baseURL}/store/${slug}/"
+        href="${baseURL}store/${slug}/"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
       />
     </url>

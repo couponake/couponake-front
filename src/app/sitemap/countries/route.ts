@@ -3,8 +3,7 @@ import { getAllCountries } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  // const baseURL = "https://couponalyom.com/";
-  const baseURL = "http://localhost:3000/";
+  const baseURL = "https://couponalyom.com/";
   //get Settings
   const countriesSettings = await useSitemapSettingEnabled();
   if (!countriesSettings.countries || !countriesSettings.superSite) {
