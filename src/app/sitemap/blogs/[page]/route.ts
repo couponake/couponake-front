@@ -16,17 +16,14 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const blogs = await getAllBlogsData(pageNumber);
-  const baseURL = "https://couponalyom.com";
-
-  if (!blogs || !blogs.slugs || blogs.slugs.length === 0) {
-    return new NextResponse("", { status: 404 });
-  }
+  // const baseURL = "https://couponalyom.com/";
+  const baseURL = "http://localhost:3000/";
 
   const urls = blogs.slugs
     .map((slug) => {
       return `
     <url>
-      <loc>${baseURL}/${slug}/</loc>
+      <loc>${baseURL}${slug}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
@@ -41,7 +38,7 @@ export async function GET(
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="/sitemap-blogs.xsl"?>
+<?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-blogs.xsl"?>
 <urlset 
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 >

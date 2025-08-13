@@ -10,7 +10,7 @@
   <xsl:template match="/">
     <html>
       <head>
-        <title>Al Afdl Coupons - Countries</title>
+        <title>Coupoonat - Main</title>
         <style>
           body { font-family: Arial; padding: 20px; background: #f4f4f4; }
           table { width: 100%; border-collapse: collapse; }
@@ -28,7 +28,7 @@
         </style>
       </head>
       <body>
-        <h1>Al AFdl Coupons - Countries (<xsl:value-of select="count(//sitemap:url)"/>)</h1>
+        <h1>Coupoonat - Main (<xsl:value-of select="count(//sitemap:url)"/>)</h1>
         <table>
           <tbody>
             <xsl:for-each select="//sitemap:url">

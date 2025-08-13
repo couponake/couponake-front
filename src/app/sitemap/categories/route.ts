@@ -1,22 +1,23 @@
 import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
-import { getAllCountries } from "@/lib/sitemap-utils";
+import { getAllCategories } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://couponalyom.com";
+  // const baseURL = "https://couponalyom.com/";
+  const baseURL = "http://localhost:3000/";
   //get Settings
-  const countriesSettings = await useSitemapSettingEnabled();
-  if (!countriesSettings.countries || !countriesSettings.superSite) {
+  const categoriesSettings = await useSitemapSettingEnabled();
+  if (!categoriesSettings.categories || !categoriesSettings.superSite) {
     return new NextResponse("", { status: 404 });
   }
 
-  const countries = await getAllCountries();
+  const slugs = await getAllCategories();
 
-  const urls = countries
+  const urls = slugs
     .map(
-      (name) => `
+      (slug) => `
     <url>
-      <loc>${baseURL}/coupon_country/${name}/</loc>
+      <loc>${baseURL}coupon-category/${slug}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
@@ -26,8 +27,8 @@ export async function GET() {
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <?xml-stylesheet type="text/xsl" href="/sitemap-countries.xsl"?>
-  <!-- Country count: ${countries.length} -->
+    <?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-categories.xsl"?>
+  <!-- Categories count: ${slugs.length} -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${urls}
 </urlset>`;

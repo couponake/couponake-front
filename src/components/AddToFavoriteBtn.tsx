@@ -6,7 +6,7 @@ import { useStore } from "@/store";
 import { Button } from "@heroui/button";
 import { Heart } from "lucide-react";
 import api from "@/lib/api";
-import { getQueryClient } from "@/app/get-query-client";
+import { getQueryClient } from "@/services/get-query-client";
 
 type AddToFavoriteBtnProps = {
   storeId: number;

@@ -1,6 +1,6 @@
 import React from "react";
 import ShowStore from "@/components/Pages/Stores/show";
-import { getQueryClient } from "@/app/get-query-client";
+import { getQueryClient } from "@/services/get-query-client";
 import { cookies, headers } from "next/headers";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import api from "@/lib/api";
@@ -359,25 +359,27 @@ const ShowStorePage = async ({
   const queryClient = getQueryClient();
   let schemas: any = [];
 
-  await queryClient.prefetchQuery({
-    queryKey: ["store", slug, access_token],
-    queryFn: async () => {
-      // const endpoint = access_token ? `stores/${slug}` : `stores/store/${slug}`;
-      const endpoint = `stores/store/${slug}`;
-      const data = await api.request.get(endpoint, {
-        headers: {
-          Authorization: access_token ? `Bearer ${access_token}` : "",
-        },
-      });
-      return data;
-    },
-  });
+  // await queryClient.prefetchQuery({
+  //   queryKey: ["store", slug, access_token],
+  //   queryFn: async () => {
+  //     // const endpoint = access_token ? `stores/${slug}` : `stores/store/${slug}`;
+  //     const endpoint = `stores/store/${slug}`;
+  //     const data = await api.request.get(endpoint, {
+  //       headers: {
+  //         Authorization: access_token ? `Bearer ${access_token}` : "",
+  //       },
+  //     });
+  //     return data;
+  //   },
+  // });
 
-  const storeData = queryClient.getQueryData<StoreResponse>([
-    "store",
-    slug,
-    access_token,
-  ]);
+  // const storeData = queryClient.getQueryData<StoreResponse>([
+  //   "store",
+  //   slug,
+  //   access_token,
+  // ]);
+
+  const storeData = await api.request.get(`stores/store/${slug}`);
 
   if ((storeData as any)?.redirect_url) {
     redirect((storeData as any).redirect_url);

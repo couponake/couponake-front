@@ -4,7 +4,8 @@ import { getAllBlogsData, getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://couponalyom.com/";
+  // const baseURL = "https://couponalyom.com/";
+  const baseURL = "localhost:3000/sitemap/";
   //get Settings
   const settings = await useSitemapSettingEnabled();
   if (!settings.superSite) {
@@ -15,10 +16,10 @@ export async function GET() {
   const blogsURLs = [];
   if (settings.blogs) {
     const blogPages = await getAllBlogsData(1);
-    const blogTotalPages = blogPages.totalPages;
+    const blogTotalPages = blogPages.slugs.length === 0 ? 0 : blogPages.totalPages;
     for (let page = 1; page <= blogTotalPages; page++) {
       blogsURLs.push(`<sitemap>
-        <loc>${baseURL}sitemap-blogs/${page}/</loc>
+        <loc>${baseURL}blogs/${page}/</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         </sitemap>`);
     }
@@ -29,15 +30,15 @@ export async function GET() {
   const storesURLs = [];
   if (settings.stores) {
     const slugs = await getAllStoresData(1);
-    const StoresPages = slugs.totalPages;
+    const StoresPages = slugs.storesSlugs.length === 0 ? 0 : slugs.totalPages;
     for (let page = 1; page <= StoresPages; page++) {
       StoreImagesURLs.push(`<sitemap>
-      <loc>${baseURL}sitemap-stores-images/${page}/</loc>
+      <loc>${baseURL}stores-images/${page}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
     </sitemap>`);
 
       storesURLs.push(`<sitemap>
-      <loc>${baseURL}sitemap-stores/${page}/</loc>
+      <loc>${baseURL}stores/${page}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
     </sitemap>`);
     }
@@ -46,12 +47,12 @@ export async function GET() {
   //main urls
   const URLs: string[] = [];
 
-  URLs.push(`${baseURL}sitemap-main.xml`);
+  URLs.push(`${baseURL}main.xml`);
   if (settings.countries) {
-    URLs.push(`${baseURL}sitemap-countries.xml`);
+    URLs.push(`${baseURL}countries.xml`);
   }
   if (settings.categories) {
-    URLs.push(`${baseURL}sitemap-categories.xml`);
+    URLs.push(`${baseURL}categories.xml`);
   }
 
   const urls = URLs.map(
@@ -62,7 +63,7 @@ export async function GET() {
   ).join("");
 
   const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
-  <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
+  <?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap.xsl"?>
 <!-- URLs count: ${URLs.length + storesURLs.length + StoreImagesURLs.length + blogsURLs.length} -->
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${urls}
