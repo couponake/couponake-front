@@ -31,9 +31,13 @@ interface CookiePolicy {
 export default function CookieConsent() {
   const [isOpen, setIsOpen] = useState(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("cookieConsent") === null;
+      try {
+        return localStorage.getItem("cookieConsent") === null;
+      } catch {
+        return true;
+      }
     }
-    return true;
+    return false;
   });
   const [preferences, setPreferences] = useState<CookiePreferences>({
     necessary: true,
