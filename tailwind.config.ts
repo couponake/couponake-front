@@ -8,15 +8,15 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/layouts/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/components/(accordion|autocomplete|avatar|badge|button|chip|divider|drawer|dropdown|image|input|link|listbox|modal|navbar|pagination|popover|progress|select|skeleton|snippet|spinner|toggle|tabs|ripple|form|scroll-shadow|menu).js"
+    "./node_modules/@heroui/theme/dist/components/(accordion|autocomplete|avatar|badge|button|chip|divider|drawer|dropdown|image|input|link|listbox|modal|navbar|pagination|popover|progress|select|skeleton|snippet|spinner|toggle|tabs|ripple|form|scroll-shadow|menu).js",
   ],
 
   theme: {
     backgroundImage: {},
     fontFamily: {
       inherit: ["inherit"],
-      cairo: ["var(--font-cairo)", "var(--font-poppins)", 'monospace'],
-      poppins: ["var(--font-poppins)", "var(--font-cairo)", 'monospace'],
+      cairo: ["var(--font-cairo)", "var(--font-poppins)", "monospace"],
+      poppins: ["var(--font-poppins)", "var(--font-cairo)", "monospace"],
     },
     container: {
       center: "true",
@@ -152,19 +152,18 @@ export default {
         "[auto,auto,1fr]": "auto auto 1fr",
       },
       colors: {
-
         main: {
-          50: "#fcf3f7",
-          100: "#fbe8f2",
-          200: "#f9d1e6",
-          300: "#f5acd0",
-          400: "#ee78af",
-          500: "#e45090",
-          600: "#d53c77",
-          700: "#b62055",
-          800: "#971d47",
-          900: "#7e1d3e",
-          950: "#4c0b21",
+          50: "#f5f3ff",
+          100: "#ede9fe",
+          200: "#ddd6fe",
+          300: "#c4b5fd",
+          400: "#a78bfa",
+          500: "#7214d1",
+          600: "#5b0faa",
+          700: "#470b87",
+          800: "#350865",
+          900: "#27064d",
+          950: "#150230",
         },
         red: {
           "50": "#fef2f2",
@@ -181,6 +180,11 @@ export default {
         },
         green: {
           250: "#1B998B",
+        },
+        orangeCoupoonat: {
+          200: "#fbd872",
+          500: "#fca809",
+          900: "#f69839",
         },
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -369,7 +373,7 @@ export default {
         light: {
           colors: {
             primary: {
-              DEFAULT: "#e45090",
+              DEFAULT: "#7214d1",
               foreground: "#FFFFFF",
             },
           },
@@ -377,7 +381,7 @@ export default {
         dark: {
           colors: {
             primary: {
-              DEFAULT: "#e45090",
+              DEFAULT: "#7214d1",
               foreground: "#FFFFFF",
             },
           },
@@ -392,73 +396,73 @@ export default {
           "background-image":
             "linear-gradient(to top, var(--tw-gradient-stops))",
           "@supports (background: linear-gradient(in oklch to top, black, white))":
-          {
-            "background-image":
-              "linear-gradient(in oklch to top, var(--tw-gradient-stops))",
-          },
+            {
+              "background-image":
+                "linear-gradient(in oklch to top, var(--tw-gradient-stops))",
+            },
         },
         ".bg-gradient-to-b": {
           "background-image":
             "linear-gradient(to bottom, var(--tw-gradient-stops))",
           "@supports (background: linear-gradient(in oklch to bottom, black, white))":
-          {
-            "background-image":
-              "linear-gradient(in oklch to bottom, var(--tw-gradient-stops))",
-          },
+            {
+              "background-image":
+                "linear-gradient(in oklch to bottom, var(--tw-gradient-stops))",
+            },
         },
         ".bg-gradient-to-l": {
           "background-image":
             "linear-gradient(to left, var(--tw-gradient-stops))",
           "@supports (background: linear-gradient(in oklch to left, black, white))":
-          {
-            "background-image":
-              "linear-gradient(in oklch to left, var(--tw-gradient-stops))",
-          },
+            {
+              "background-image":
+                "linear-gradient(in oklch to left, var(--tw-gradient-stops))",
+            },
         },
         ".bg-gradient-to-r": {
           "background-image":
             "linear-gradient(to right, var(--tw-gradient-stops))",
           "@supports (background: linear-gradient(in oklch to right, black, white))":
-          {
-            "background-image":
-              "linear-gradient(in oklch to right, var(--tw-gradient-stops))",
-          },
+            {
+              "background-image":
+                "linear-gradient(in oklch to right, var(--tw-gradient-stops))",
+            },
         },
         ".bg-gradient-to-tl": {
           "background-image":
             "linear-gradient(to top left, var(--tw-gradient-stops))",
           "@supports (background: linear-gradient(in oklch to top left, black, white))":
-          {
-            "background-image":
-              "linear-gradient(in oklch to top left, var(--tw-gradient-stops))",
-          },
+            {
+              "background-image":
+                "linear-gradient(in oklch to top left, var(--tw-gradient-stops))",
+            },
         },
         ".bg-gradient-to-tr": {
           "background-image":
             "linear-gradient(to top right, var(--tw-gradient-stops))",
           "@supports (background: linear-gradient(in oklch to top right, black, white))":
-          {
-            "background-image":
-              "linear-gradient(in oklch to top right, var(--tw-gradient-stops))",
-          },
+            {
+              "background-image":
+                "linear-gradient(in oklch to top right, var(--tw-gradient-stops))",
+            },
         },
         ".bg-gradient-to-bl": {
           "background-image":
             "linear-gradient(to bottom left, var(--tw-gradient-stops))",
           "@supports (background: linear-gradient(in oklch to bottom left, black, white))":
-          {
-            "background-image":
-              "linear-gradient(in oklch to bottom left, var(--tw-gradient-stops))",
-          },
+            {
+              "background-image":
+                "linear-gradient(in oklch to bottom left, var(--tw-gradient-stops))",
+            },
         },
         ".bg-gradient-to-br": {
           "background-image":
             "linear-gradient(to bottom right, var(--tw-gradient-stops))",
           "@supports (background: linear-gradient(in oklch to bottom right, black, white))":
-          {
-            "background-image":
-              "linear-gradient(in oklch to bottom right, var(--tw-gradient-stops))",
-          },
+            {
+              "background-image":
+                "linear-gradient(in oklch to bottom right, var(--tw-gradient-stops))",
+            },
         },
       });
     }),
