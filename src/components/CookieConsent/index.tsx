@@ -31,9 +31,13 @@ interface CookiePolicy {
 export default function CookieConsent() {
   const [isOpen, setIsOpen] = useState(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("cookieConsent") === null;
+      try {
+        return localStorage.getItem("cookieConsent") === null;
+      } catch {
+        return true;
+      }
     }
-    return true;
+    return false;
   });
   const [preferences, setPreferences] = useState<CookiePreferences>({
     necessary: true,
@@ -45,9 +49,11 @@ export default function CookieConsent() {
   const t = useTranslations();
 
   useEffect(() => {
-    loadPreferences();
-    loadPolicy();
-  }, []);
+    if (isOpen) {
+      loadPreferences();
+      loadPolicy();
+    }
+  }, [isOpen]);
 
   const loadPreferences = async () => {
     try {
@@ -121,7 +127,6 @@ export default function CookieConsent() {
         <div className="flex items-center justify-between mb-2">
           <div className="flex-1">
             <h2 className="text-lg font-semibold">{t("Cookie Preferences")}</h2>
-            {/* <p className="text-sm text-gray-500">{t("cookie.consent.description")}</p> */}
           </div>
           <div className="flex items-center gap-x-2">
             <Button
