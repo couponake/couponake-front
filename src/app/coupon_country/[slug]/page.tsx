@@ -96,7 +96,7 @@ export default async function CouponCountry({
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}AlafdalNewLogo.webp`,
+          url: `${baseUrl}coupoonatLogo.webp`,
         },
       },
       {
@@ -114,7 +114,7 @@ export default async function CouponCountry({
           name: "الأفضل",
           logo: {
             "@type": "ImageObject",
-            url: `${baseUrl}AlafdalNewLogo.webp`,
+            url: `${baseUrl}coupoonatLogo.webp`,
           },
         },
         mainEntity: {

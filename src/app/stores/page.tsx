@@ -34,7 +34,7 @@ export async function generateMetadata() {
         : "Save on every online order with exclusive Saudi e-store coupons",
       images: [
         {
-          url: "https://couponalyom.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/coupoonatLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -49,7 +49,7 @@ export async function generateMetadata() {
         : "Save on every online order with exclusive Saudi e-store coupons",
       images: [
         {
-          url: "https://couponalyom.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/coupoonatLogo.webp",
           alt: "Alafdal Logo",
         },
       ],

@@ -119,7 +119,7 @@ const BlogDetails = async ({
       name: "الأفضل",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}AlafdalNewLogo.webp`,
+        url: `${baseUrl}coupoonatLogo.webp`,
         width: 600,
         height: 60,
       },

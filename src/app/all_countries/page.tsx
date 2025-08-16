@@ -36,7 +36,7 @@ export async function generateMetadata() {
         : "Select your country to unlock tailored discount codes for local stores",
       images: [
         {
-          url: "https://couponalyom.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/coupoonatLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -51,7 +51,7 @@ export async function generateMetadata() {
         : "Select your country to unlock tailored discount codes for local stores",
       images: [
         {
-          url: "https://couponalyom.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/coupoonatLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -89,7 +89,7 @@ const AllCountries = () => {
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}AlafdalNewLogo.webp`,
+          url: `${baseUrl}coupoonatLogo.webp`,
         },
       },
       {
@@ -102,7 +102,7 @@ const AllCountries = () => {
           name: "الأفضل",
           logo: {
             "@type": "ImageObject",
-            url: `${baseUrl}AlafdalNewLogo.webp`,
+            url: `${baseUrl}coupoonatLogo.webp`,
           },
         },
       },

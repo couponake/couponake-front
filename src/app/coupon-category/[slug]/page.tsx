@@ -123,7 +123,7 @@ const ShowBrandPage = async ({
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}AlafdalNewLogo.webp`,
+          url: `${baseUrl}coupoonatLogo.webp`,
         },
       },
       {
@@ -142,7 +142,7 @@ const ShowBrandPage = async ({
           name: "الأفضل",
           logo: {
             "@type": "ImageObject",
-            url: `${baseUrl}AlafdalNewLogo.webp`,
+            url: `${baseUrl}coupoonatLogo.webp`,
           },
         },
         mainEntity: {

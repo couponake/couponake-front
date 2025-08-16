@@ -63,7 +63,7 @@ export async function generateMetadata() {
 
 
   const fallbackTitle = "الأفضل";
-  const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}AlafdalNewLogo.webp`;
+  const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupoonatLogo.webp`;
 
   if (!seoData?.description || !seoData?.author) {
     return {

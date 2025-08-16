@@ -38,7 +38,7 @@ export async function generateMetadata() {
         : "Browse stores by category and spot the right coupon effortlessly",
       images: [
         {
-          url: "https://couponalyom.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/coupoonatLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -53,7 +53,7 @@ export async function generateMetadata() {
         : "Browse stores by category and spot the right coupon effortlessly",
       images: [
         {
-          url: "https://couponalyom.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/coupoonatLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -96,7 +96,7 @@ export default async function CategoriesPage({
     "@type": "Organization",
     name: "الأفضل",
     url: `${baseUrl}`,
-    logo: `${baseUrl}AlafdalNewLogo.webp`,
+    logo: `${baseUrl}coupoonatLogo.webp`,
   };
 
   const websiteSchema = {
@@ -110,7 +110,7 @@ export default async function CategoriesPage({
       name: "الأفضل",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}AlafdalNewLogo.webp`,
+        url: `${baseUrl}coupoonatLogo.webp`,
       },
     },
   };
