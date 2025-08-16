@@ -55,7 +55,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     <QueryProvider>
       <NuqsAdapter>
         <NextTopLoader
-          color="#e45090"
+          color="#7214d1"
           initialPosition={0.08}
           crawlSpeed={200}
           height={3.1}

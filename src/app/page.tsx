@@ -61,7 +61,7 @@ export default async function Home() {
     "@type": "Organization",
     name: "الأفضل",
     url: `${baseUrl}`,
-    logo: `${baseUrl}AlafdalNewLogo.webp`,
+    logo: `${baseUrl}coupoonatLogo.webp`,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: calculatingReviewsValue(),
@@ -83,7 +83,7 @@ export default async function Home() {
       name: "الأفضل",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}AlafdalNewLogo.webp`,
+        url: `${baseUrl}coupoonatLogo.webp`,
       },
     },
   };

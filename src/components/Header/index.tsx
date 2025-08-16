@@ -25,19 +25,19 @@ const Header = ({
         <nav className="flex flex-1 items-center gap-4 md:gap-0">
           {websiteLogo && (
             <Suspense>
-              <Link href="/" className="my-auto cursor-pointer md:px-2 bg-white rounded-lg">
+              <Link href="/" className="my-auto cursor-pointer bg-transparent rounded-lg">
                 <Image
-                  src="/AlafdalNewLogo.webp"
+                  src="/coupoonatLogo.webp"
                   alt="Website Logo"
                   width={144}
                   height={48}
-                  className="hidden md:inline-flex h-14 min-w-36 w-36 max-w-36 object-contain bg-white p-2 rounded-lg"
+                  className="hidden md:inline-flex h-16 min-w-39 w-39 max-w-39 object-contain bg-white p-2 rounded-lg"
                   priority
                   quality={100}
                   unoptimized
                 />
                 <Image
-                  src="/AlafdalNewLogo.webp"
+                  src="/coupoonatLogo.webp"
                   alt="Website Logo"
                   width={40}
                   height={40}

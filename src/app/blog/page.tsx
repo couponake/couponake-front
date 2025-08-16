@@ -35,7 +35,7 @@ export async function generateMetadata() {
         : "Stay updated with deals, store updates, and market insights in KSA",
       images: [
         {
-          url: "https://couponalyom.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/coupoonatLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -50,7 +50,7 @@ export async function generateMetadata() {
         : "Stay updated with deals, store updates, and market insights in KSA",
       images: [
         {
-          url: "https://couponalyom.com/AlafdalNewLogo.webp",
+          url: "https://couponalyom.com/coupoonatLogo.webp",
           alt: "Alafdal Logo",
         },
       ],
@@ -90,7 +90,7 @@ export default async function Home({
       },
       image: {
         "@type": "ImageObject",
-        url: post.image || `${baseUrl}AlafdalNewLogo.webp`,
+        url: post.image || `${baseUrl}coupoonatLogo.webp`,
       },
     })),
   };
@@ -119,7 +119,7 @@ export default async function Home({
     "@type": "Organization",
     name: "الأفضل",
     url: baseUrl,
-    logo: `${baseUrl}AlafdalNewLogo.webp`,
+    logo: `${baseUrl}coupoonatLogo.webp`,
   };
 
   return (

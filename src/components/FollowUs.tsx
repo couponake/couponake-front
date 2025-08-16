@@ -45,7 +45,7 @@ const FollowUs = ({
       key: "Instagram",
       label: "Instagram",
       href: settings?.find((item) => item.name === "instagram")?.val,
-      icon: <FaInstagram className="size-5 text-main-500" />,
+      icon: <FaInstagram className="size-5 text-[#e45090]" />,
     },
     {
       key: "Whatsapp",

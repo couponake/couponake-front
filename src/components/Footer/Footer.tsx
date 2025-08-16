@@ -68,7 +68,7 @@ const Footer = ({
                   aria-label="Instagram"
                   target="_blank"
                 >
-                  <FaInstagram className="h-5 w-5 text-pink-500" />
+                  <FaInstagram className="h-5 w-5 text-[#e45090]" />
                 </a>
               )}
               {telegram && (
