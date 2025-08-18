@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export function GET() {
   const content = `
 User-agent: *
-Disallow: /
+Allow: /
 Disallow: /api/
 Disallow: /_next/
 Disallow: /private/
