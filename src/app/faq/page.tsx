@@ -16,8 +16,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |الأفضل"
-      : "FAQ | Alafdal",
+      ? "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |كوبونات"
+      : "FAQ | Coupoonat",
     description: isArabic
       ? "أجوبة سريعة لأهم الأسئلة حول استخدام الكوبونات والتوفير"
       : "Quick answers to top questions on coupon use and saving money",
@@ -29,30 +29,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |الأفضل"
-        : "FAQ | Alafdal",
+        ? "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |كوبونات"
+        : "FAQ | Coupoonat",
       description: isArabic
         ? "أجوبة سريعة لأهم الأسئلة حول استخدام الكوبونات والتوفير"
         : "Quick answers to top questions on coupon use and saving money",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |الأفضل"
-        : "FAQ | Alafdal",
+        ? "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |كوبونات"
+        : "FAQ | Coupoonat",
       description: isArabic
         ? "أجوبة سريعة لأهم الأسئلة حول استخدام الكوبونات والتوفير"
         : "Quick answers to top questions on coupon use and saving money",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
@@ -65,13 +65,13 @@ const FAQ = async () => {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/#faqpage`,
-    name: "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |الأفضل",
+    name: "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |كوبونات",
     description: "أجوبة سريعة لأهم الأسئلة حول استخدام الكوبونات والتوفير",
     url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/`,
     image: "https://couponalyom.com/coupoonatLogo.webp",
     publisher: {
       "@type": "Organization",
-      name: "الأفضل",
+      name: "كوبونات",
       logo: {
         "@type": "ImageObject",
         url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -87,7 +87,7 @@ const FAQ = async () => {
       },
       author: {
         "@type": "Organization",
-        name: "الأفضل",
+        name: "كوبونات",
       },
     })),
   };

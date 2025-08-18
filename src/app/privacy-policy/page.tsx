@@ -16,8 +16,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |الأفضل"
-      : "Alafdal | Privacy Policy & Data Protection",
+      ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات"
+      : "Coupoonat | Privacy Policy & Data Protection",
     description: isArabic
       ? "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح"
       : "Learn how we protect your data and keep your information secure",
@@ -29,30 +29,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |الأفضل"
-        : "Alafdal | Privacy Policy & Data Protection",
+        ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات"
+        : "Coupoonat | Privacy Policy & Data Protection",
       description: isArabic
         ? "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح"
         : "Learn how we protect your data and keep your information secure",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |الأفضل"
-        : "Alafdal | Privacy Policy & Data Protection",
+        ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات"
+        : "Coupoonat | Privacy Policy & Data Protection",
       description: isArabic
         ? "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح"
         : "Learn how we protect your data and keep your information secure",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
@@ -71,7 +71,7 @@ const PrivacyPage = async () => {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#webpage`,
-    name: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |الأفضل",
+    name: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات",
     url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/`,
     description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
     datePublished: page.created_at
@@ -100,7 +100,7 @@ const PrivacyPage = async () => {
     mainEntity: {
       "@type": "Article",
       "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#article`,
-      headline: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |الأفضل",
+      headline: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات",
       description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
       datePublished: page.created_at
         ? new Date(page.created_at).toISOString()
@@ -111,12 +111,12 @@ const PrivacyPage = async () => {
       image: "https://couponalyom.com/coupoonatLogo.webp",
       author: {
         "@type": "Organization",
-        name: "الأفضل",
+        name: "كوبونات",
         url: process.env.NEXT_PUBLIC_WEBSITE_URL,
       },
       publisher: {
         "@type": "Organization",
-        name: "الأفضل",
+        name: "كوبونات",
         logo: {
           "@type": "ImageObject",
           url: "https://couponalyom.com/coupoonatLogo.webp",

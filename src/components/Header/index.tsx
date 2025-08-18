@@ -31,7 +31,7 @@ const Header = ({
                   alt="Website Logo"
                   width={144}
                   height={48}
-                  className="hidden md:inline-flex h-16 min-w-39 w-39 max-w-39 object-contain bg-white p-2 rounded-lg"
+                  className="hidden md:inline-flex h-14 min-w-36 w-36 max-w-36 object-contain bg-white p-2 rounded-lg"
                   priority
                   quality={100}
                   unoptimized
