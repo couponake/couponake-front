@@ -116,7 +116,7 @@ const BlogDetails = async ({
     },
     publisher: {
       "@type": "Organization",
-      name: "الأفضل",
+      name: "كوبونات",
       logo: {
         "@type": "ImageObject",
         url: `${baseUrl}coupoonatLogo.webp`,
@@ -180,7 +180,7 @@ const BlogDetails = async ({
     isPartOf: {
       "@type": "WebSite",
       "@id": baseUrl,
-      name: "الأفضل",
+      name: "كوبونات",
       url: baseUrl,
     },
     primaryImageOfPage: {

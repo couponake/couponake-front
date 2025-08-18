@@ -119,7 +119,7 @@ const ShowBrandPage = async ({
       },
       {
         "@type": "Organization",
-        name: "الأفضل",
+        name: "كوبونات",
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
@@ -134,12 +134,12 @@ const ShowBrandPage = async ({
         sameAs: `${baseUrl}coupon-category/${slug}/`,
         isPartOf: {
           "@type": "WebSite",
-          name: "الأفضل",
+          name: "كوبونات",
           url: baseUrl,
         },
         publisher: {
           "@type": "Organization",
-          name: "الأفضل",
+          name: "كوبونات",
           logo: {
             "@type": "ImageObject",
             url: `${baseUrl}coupoonatLogo.webp`,

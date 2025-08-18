@@ -16,8 +16,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |الأفضل"
-      : "Pick Discount Coupons by Your Country | Alafdal",
+      ? "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |كوبونات"
+      : "Pick Discount Coupons by Your Country | Coupoonat",
     description: isArabic
       ? "اختر دولتك لتحصل على أكواد خصم مخصصة لمتاجرك المحلية"
       : "Select your country to unlock tailored discount codes for local stores",
@@ -29,30 +29,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |الأفضل"
-        : "Pick Discount Coupons by Your Country | Alafdal",
+        ? "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |كوبونات"
+        : "Pick Discount Coupons by Your Country | Coupoonat",
       description: isArabic
         ? "اختر دولتك لتحصل على أكواد خصم مخصصة لمتاجرك المحلية"
         : "Select your country to unlock tailored discount codes for local stores",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |الأفضل"
-        : "Pick Discount Coupons by Your Country | Alafdal",
+        ? "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |كوبونات"
+        : "Pick Discount Coupons by Your Country | Coupoonat",
       description: isArabic
         ? "اختر دولتك لتحصل على أكواد خصم مخصصة لمتاجرك المحلية"
         : "Select your country to unlock tailored discount codes for local stores",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
@@ -85,7 +85,7 @@ const AllCountries = () => {
       },
       {
         "@type": "Organization",
-        name: "الأفضل",
+        name: "كوبونات",
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
@@ -94,12 +94,12 @@ const AllCountries = () => {
       },
       {
         "@type": "WebPage",
-        name: "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |الأفضل",
+        name: "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |كوبونات",
         description: "اختر دولتك لتحصل على أكواد خصم مخصصة لمتاجرك المحلية",
         url: `${baseUrl}all_countries/`,
         publisher: {
           "@type": "Organization",
-          name: "الأفضل",
+          name: "كوبونات",
           logo: {
             "@type": "ImageObject",
             url: `${baseUrl}coupoonatLogo.webp`,

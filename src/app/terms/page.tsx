@@ -17,8 +17,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع الأفضل"
-      : "Terms of Use | Alafdal",
+      ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات"
+      : "Terms of Use | Coupoonat",
     description: isArabic
       ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
       : "Review site rules, your rights, and obligations as a user",
@@ -30,30 +30,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع الأفضل"
-        : "Terms of Use | Alafdal",
+        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات"
+        : "Terms of Use | Coupoonat",
       description: isArabic
         ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
         : "Review site rules, your rights, and obligations as a user",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع الأفضل"
-        : "Terms of Use | Alafdal",
+        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات"
+        : "Terms of Use | Coupoonat",
       description: isArabic
         ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
         : "Review site rules, your rights, and obligations as a user",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
@@ -74,7 +74,7 @@ const TermsPage = async () => {
       {
         "@type": "WebPage",
         "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/#webpage`,
-        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع الأفضل",
+        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات",
         url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/`,
         description: "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم",
         datePublished: page.created_at
@@ -105,7 +105,7 @@ const TermsPage = async () => {
       {
         "@type": "Legislation",
         "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/#legislation`,
-        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع الأفضل",
+        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات",
         description: "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم",
         dateCreated: page.created_at
           ? new Date(page.created_at).toISOString()
@@ -122,7 +122,7 @@ const TermsPage = async () => {
         legislationType: "Terms of Use",
         publisher: {
           "@type": "Organization",
-          name: "الأفضل",
+          name: "كوبونات",
           logo: {
             "@type": "ImageObject",
             url: "https://couponalyom.com/coupoonatLogo.webp",

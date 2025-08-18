@@ -16,7 +16,7 @@ export default function StatisticsCard({ collection_count }: StatisticsProps) {
     <div className="w-full min-h-36 bg-gradient-to-br from-purple-100 to-main-100 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
       <div className="p-2 md:p-4 lg:p-6 xl:p-6">
         <h1 className="text-lg md:text-xl lg:text-3xl xl:text-3xl 2xl:text-4xl text-center font-bold text-gray-800 mb-11">
-          {t("Al Afdal discount coupons")}
+          {t("Coupoonat discount coupons")}
         </h1>
         <div className="grid grid-cols-3 gap-4 sm:gap-6 place-items-center">
           <StatItem
