@@ -14,8 +14,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |الأفضل"
-      : "Alafdal | Discount Coupons for Saudi Online Stores",
+      ? "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |كوبونات"
+      : "Coupoonat | Discount Coupons for Saudi Online Stores",
     description: isArabic
       ? "وفّر في كل عملية شراء عبر الإنترنت مع كوبونات حصرية لمتاجر السعودية"
       : "Save on every online order with exclusive Saudi e-store coupons",
@@ -27,30 +27,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |الأفضل"
-        : "Alafdal | Discount Coupons for Saudi Online Stores",
+        ? "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |كوبونات"
+        : "Coupoonat | Discount Coupons for Saudi Online Stores",
       description: isArabic
         ? "وفّر في كل عملية شراء عبر الإنترنت مع كوبونات حصرية لمتاجر السعودية"
         : "Save on every online order with exclusive Saudi e-store coupons",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |الأفضل"
-        : "Alafdal | Discount Coupons for Saudi Online Stores",
+        ? "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |كوبونات"
+        : "Coupoonat | Discount Coupons for Saudi Online Stores",
       description: isArabic
         ? "وفّر في كل عملية شراء عبر الإنترنت مع كوبونات حصرية لمتاجر السعودية"
         : "Save on every online order with exclusive Saudi e-store coupons",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
@@ -70,14 +70,14 @@ export default async function StoresPage({
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${baseUrl}stores/#webpage`,
-    name: "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |الأفضل",
+    name: "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |كوبونات",
     description:
       "وفّر في كل عملية شراء عبر الإنترنت مع كوبونات حصرية لمتاجر السعودية",
     url: `${baseUrl}stores/`,
     inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
-      name: "الأفضل",
+      name: "كوبونات",
       url: baseUrl,
     },
   };

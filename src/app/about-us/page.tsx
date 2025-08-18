@@ -16,8 +16,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "من نحن: تعرف على فريق عمل كوبونات الخصم |الأفضل"
-      : "About Us | Alafdal Coupons",
+      ? "من نحن: تعرف على فريق عمل كوبونات الخصم |كوبونات"
+      : "About Us | Coupoonat Coupons",
     description: isArabic
       ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء"
       : "Meet our vision and the experts delivering top shopping coupons",
@@ -29,30 +29,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "من نحن: تعرف على فريق عمل كوبونات الخصم |الأفضل"
-        : "About Us | Alafdal Coupons",
+        ? "من نحن: تعرف على فريق عمل كوبونات الخصم |كوبونات"
+        : "About Us | Coupoonat Coupons",
       description: isArabic
         ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء"
         : "Meet our vision and the experts delivering top shopping coupons",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "من نحن: تعرف على فريق عمل كوبونات الخصم |الأفضل"
-        : "About Us | Alafdal Coupons",
+        ? "من نحن: تعرف على فريق عمل كوبونات الخصم |كوبونات"
+        : "About Us | Coupoonat Coupons",
       description: isArabic
         ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء"
         : "Meet our vision and the experts delivering top shopping coupons",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
@@ -75,11 +75,11 @@ const AboutUsPage = async () => {
     image: "https://couponalyom.com/coupoonatLogo.webp",
     author: {
       "@type": "Organization",
-      name: "الأفضل",
+      name: "كوبونات",
     },
     publisher: {
       "@type": "Organization",
-      name: "الأفضل",
+      name: "كوبونات",
       logo: {
         "@type": "ImageObject",
         url: "https://couponalyom.com/coupoonatLogo.webp",

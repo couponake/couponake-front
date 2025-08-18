@@ -92,7 +92,7 @@ export default async function CouponCountry({
       },
       {
         "@type": "Organization",
-        name: "الأفضل",
+        name: "كوبونات",
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
@@ -106,12 +106,12 @@ export default async function CouponCountry({
         url: `${baseUrl}coupon_country/${slug}/`,
         isPartOf: {
           "@type": "WebSite",
-          name: "الأفضل",
+          name: "كوبونات",
           url: baseUrl,
         },
         publisher: {
           "@type": "Organization",
-          name: "الأفضل",
+          name: "كوبونات",
           logo: {
             "@type": "ImageObject",
             url: `${baseUrl}coupoonatLogo.webp`,

@@ -8,8 +8,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "تسجيل الدخول/انشاء حساب |الأفضل"
-      : "Login / Create Account | Alafdal",
+      ? "تسجيل الدخول/انشاء حساب |كوبونات"
+      : "Login / Create Account | Coupoonat",
     description: isArabic
       ? "أدخل حسابك أو سجّل لتتابع كوبوناتك وتحفظ المفضلة بسهولة"
       : "Log in or register to track and save your favorite coupons",
@@ -18,30 +18,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "تسجيل الدخول/انشاء حساب |الأفضل"
-        : "Login / Create Account | Alafdal",
+        ? "تسجيل الدخول/انشاء حساب |كوبونات"
+        : "Login / Create Account | Coupoonat",
       description: isArabic
         ? "أدخل حسابك أو سجّل لتتابع كوبوناتك وتحفظ المفضلة بسهولة"
         : "Log in or register to track and save your favorite coupons",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "تسجيل الدخول/انشاء حساب |الأفضل"
-        : "Login / Create Account | Alafdal",
+        ? "تسجيل الدخول/انشاء حساب |كوبونات"
+        : "Login / Create Account | Coupoonat",
       description: isArabic
         ? "أدخل حسابك أو سجّل لتتابع كوبوناتك وتحفظ المفضلة بسهولة"
         : "Log in or register to track and save your favorite coupons",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },

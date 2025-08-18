@@ -59,7 +59,7 @@ export default async function Home() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "الأفضل",
+    name: "كوبونات",
     url: `${baseUrl}`,
     logo: `${baseUrl}coupoonatLogo.webp`,
     aggregateRating: {
@@ -75,12 +75,12 @@ export default async function Home() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "الأفضل| كوبونات واكواد خصم لكل المنتجات والمتاجر في السعودية",
+    name: "كوبونات| كوبونات واكواد خصم لكل المنتجات والمتاجر في السعودية",
     description: "اقوى كوبونات واكواد وقسائم خصم وعروض جميع متاجر في السعودية",
     url: `${baseUrl}`,
     publisher: {
       "@type": "Organization",
-      name: "الأفضل",
+      name: "كوبونات",
       logo: {
         "@type": "ImageObject",
         url: `${baseUrl}coupoonatLogo.webp`,

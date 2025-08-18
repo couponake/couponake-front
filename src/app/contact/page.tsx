@@ -14,8 +14,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "تواصل معنا: لارسال الاقتراحات والشكاوى للكوبونات |الأفضل"
-      : "Contact Us | Alafdal Coupons",
+      ? "تواصل معنا: لارسال الاقتراحات والشكاوى للكوبونات |كوبونات"
+      : "Contact Us | Coupoonat Coupons",
     description: isArabic
       ? "نستقبل استفساراتك وملاحظاتك عن الكوبونات عبر جميع القنوات"
       : "Send your coupon questions or feedback through any channel",
@@ -27,30 +27,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "تواصل معنا: لارسال الاقتراحات والشكاوى للكوبونات |الأفضل"
-        : "Contact Us | Alafdal Coupons",
+        ? "تواصل معنا: لارسال الاقتراحات والشكاوى للكوبونات |كوبونات"
+        : "Contact Us | Coupoonat Coupons",
       description: isArabic
         ? "نستقبل استفساراتك وملاحظاتك عن الكوبونات عبر جميع القنوات"
         : "Send your coupon questions or feedback through any channel",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "تواصل معنا: لارسال الاقتراحات والشكاوى للكوبونات |الأفضل"
-        : "Contact Us | Alafdal Coupons",
+        ? "تواصل معنا: لارسال الاقتراحات والشكاوى للكوبونات |كوبونات"
+        : "Contact Us | Coupoonat Coupons",
       description: isArabic
         ? "نستقبل استفساراتك وملاحظاتك عن الكوبونات عبر جميع القنوات"
         : "Send your coupon questions or feedback through any channel",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },

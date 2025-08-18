@@ -15,8 +15,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "المدونة: احدث اخبار متاجر التسوق في السعودية |الافضل"
-      : "Blog: Latest News on Saudi Shopping Stores | Alafdal",
+      ? "المدونة: احدث اخبار متاجر التسوق في السعودية |كوبونات"
+      : "Blog: Latest News on Saudi Shopping Stores | Coupoonat",
     description: isArabic
       ? "تابع آخر العروض والتحديثات وتحليلات السوق للمتاجر السعودية"
       : "Stay updated with deals, store updates, and market insights in KSA",
@@ -28,30 +28,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "المدونة: احدث اخبار متاجر التسوق في السعودية |الافضل"
-        : "Blog: Latest News on Saudi Shopping Stores | Alafdal",
+        ? "المدونة: احدث اخبار متاجر التسوق في السعودية |كوبونات"
+        : "Blog: Latest News on Saudi Shopping Stores | Coupoonat",
       description: isArabic
         ? "تابع آخر العروض والتحديثات وتحليلات السوق للمتاجر السعودية"
         : "Stay updated with deals, store updates, and market insights in KSA",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "المدونة: احدث اخبار متاجر التسوق في السعودية |الافضل"
-        : "Blog: Latest News on Saudi Shopping Stores | Alafdal",
+        ? "المدونة: احدث اخبار متاجر التسوق في السعودية |كوبونات"
+        : "Blog: Latest News on Saudi Shopping Stores | Coupoonat",
       description: isArabic
         ? "تابع آخر العروض والتحديثات وتحليلات السوق للمتاجر السعودية"
         : "Stay updated with deals, store updates, and market insights in KSA",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
@@ -71,7 +71,7 @@ export default async function Home({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: "المدونة: احدث اخبار متاجر التسوق في السعودية |الافضل",
+    name: "المدونة: احدث اخبار متاجر التسوق في السعودية |كوبونات",
     description: "تابع آخر العروض والتحديثات وتحليلات السوق للمتاجر السعودية",
     url: `${baseUrl}blog/`,
     isPartOf: {
@@ -86,7 +86,7 @@ export default async function Home({
       dateModified: post.updated_at || post.created_at,
       author: {
         "@type": "Organization",
-        name: "الأفضل",
+        name: "كوبونات",
       },
       image: {
         "@type": "ImageObject",
@@ -117,7 +117,7 @@ export default async function Home({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "الأفضل",
+    name: "كوبونات",
     url: baseUrl,
     logo: `${baseUrl}coupoonatLogo.webp`,
   };

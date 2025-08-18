@@ -72,15 +72,15 @@ export async function generateMetadata({
     // Default values in case API fails
     if (!seoData) {
       return {
-        title: "الأفضل",
-        description: "الأفضل",
+        title: "كوبونات",
+        description: "كوبونات",
       };
     }
 
     return {
       // Basic metadata
-      title: seoData.title || "الأفضل",
-      description: seoData.description || "الأفضل",
+      title: seoData.title || "كوبونات",
+      description: seoData.description || "كوبونات",
       alternates: {
         canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
       },
@@ -89,8 +89,8 @@ export async function generateMetadata({
       },
       // OpenGraph metadata
       openGraph: {
-        title: seoData["og:title"] || seoData.title || "الأفضل",
-        description: seoData["og:description"] || seoData.description || "الأفضل",
+        title: seoData["og:title"] || seoData.title || "كوبونات",
+        description: seoData["og:description"] || seoData.description || "كوبونات",
         images: [
           {
             url: seoData["og:image"] || "",
@@ -102,8 +102,8 @@ export async function generateMetadata({
       // Twitter metadata
       twitter: {
         card: "summary_large_image",
-        title: seoData["twitter:title"] || seoData.title || "الأفضل",
-        description: seoData["twitter:description"] || seoData.description || "الأفضل",
+        title: seoData["twitter:title"] || seoData.title || "كوبونات",
+        description: seoData["twitter:description"] || seoData.description || "كوبونات",
         images: [
           {
             url: seoData["twitter:image"] || "",
@@ -219,7 +219,7 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
     isPartOf: {
       "@type": "WebSite",
       "@id": baseUrl,
-      name: "الأفضل",
+      name: "كوبونات",
       url: baseUrl,
     },
     primaryImageOfPage: {

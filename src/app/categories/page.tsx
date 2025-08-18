@@ -18,8 +18,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |الأفضل"
-      : "Store Categories for Easy Coupon Discovery | Alafdal",
+      ? "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |كوبونات"
+      : "Store Categories for Easy Coupon Discovery | Coupoonat",
     description: isArabic
       ? "استعرض المتاجر حسب الفئة وحدد الكوبون المناسب دون عناء"
       : "Browse stores by category and spot the right coupon effortlessly",
@@ -31,30 +31,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |الأفضل"
-        : "Store Categories for Easy Coupon Discovery | Alafdal",
+        ? "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |كوبونات"
+        : "Store Categories for Easy Coupon Discovery | Coupoonat",
       description: isArabic
         ? "استعرض المتاجر حسب الفئة وحدد الكوبون المناسب دون عناء"
         : "Browse stores by category and spot the right coupon effortlessly",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |الأفضل"
-        : "Store Categories for Easy Coupon Discovery | Alafdal",
+        ? "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |كوبونات"
+        : "Store Categories for Easy Coupon Discovery | Coupoonat",
       description: isArabic
         ? "استعرض المتاجر حسب الفئة وحدد الكوبون المناسب دون عناء"
         : "Browse stores by category and spot the right coupon effortlessly",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
-          alt: "Alafdal Logo",
+          alt: "Coupoonat Logo",
         },
       ],
     },
@@ -94,7 +94,7 @@ export default async function CategoriesPage({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "الأفضل",
+    name: "كوبونات",
     url: `${baseUrl}`,
     logo: `${baseUrl}coupoonatLogo.webp`,
   };
@@ -102,12 +102,12 @@ export default async function CategoriesPage({
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |الأفضل",
+    name: "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |كوبونات",
     description: "استعرض المتاجر حسب الفئة وحدد الكوبون المناسب دون عناء",
     url: `${baseUrl}categories/`,
     publisher: {
       "@type": "Organization",
-      name: "الأفضل",
+      name: "كوبونات",
       logo: {
         "@type": "ImageObject",
         url: `${baseUrl}coupoonatLogo.webp`,
