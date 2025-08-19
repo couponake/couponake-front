@@ -45,6 +45,7 @@ const nextConfig = {
 
   async rewrites() {
     return [
+      { source: "/robots.txt", destination: "/robots" },
       // Main sitemap index
       { source: "/sitemap.xml", destination: "/sitemap" },
 
