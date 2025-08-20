@@ -49,7 +49,7 @@ const Footer = ({
                   alt="logo"
                   width={136}
                   height={48}
-                  className="h-12 w-auto bg-main-600 p-2 rounded-lg"
+                  className="h-14 w-auto bg-transparent"
                   unoptimized
                 />
               )}
