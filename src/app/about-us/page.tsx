@@ -1,6 +1,7 @@
 import React from "react";
 import api from "@/lib/api";
 import moment from "moment";
+import "moment/locale/ar";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import { cookies } from "next/headers";
 import type { Article, BreadcrumbList } from "schema-dts";
@@ -60,7 +61,7 @@ export async function generateMetadata() {
 }
 
 const AboutUsPage = async () => {
-  const response: any = await api.dynamic(`home/page/mn-nhn`);
+  const response: any = await api.dynamic(`home/page/about`);
   const page = response.data as {
     title: string;
     content: string;
@@ -85,7 +86,7 @@ const AboutUsPage = async () => {
         url: "https://couponalyom.com/coupoonatLogo.webp",
       },
     },
-    datePublished: page.created_at || "2024-01-01",
+    datePublished: page.created_at,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/`,
@@ -120,7 +121,7 @@ const AboutUsPage = async () => {
           </h1>
           {page.created_at && (
             <div className="text-sm text-gray-500 dark:text-gray-400 mb-8">
-              {moment(page.created_at).format("MMMM D, YYYY")}
+              {moment(page.created_at).locale('ar').format("LL")}
             </div>
           )}
           <div

@@ -5,6 +5,7 @@ import { SettingsEnum } from "@/types/settingsEnum";
 import moment from "moment";
 import { cookies } from "next/headers";
 import React from "react";
+import "moment/locale/ar";
 
 export async function generateMetadata() {
   const cookieStore = await cookies();
@@ -61,7 +62,7 @@ export async function generateMetadata() {
 }
 
 const TermsPage = async () => {
-  const response: any = await api.dynamic(`home/page/shrot-alastkhdam`);
+  const response: any = await api.dynamic(`home/page/terms`);
   const page = response.data as {
     title: string;
     content: string;
@@ -151,7 +152,7 @@ const TermsPage = async () => {
             </h1>
             {page.created_at && (
               <div className="text-sm text-gray-500 dark:text-gray-400 mb-8">
-                {moment(page.created_at).format("MMMM D, YYYY")}
+                {moment(page.created_at).locale("ar").format("LL")}
               </div>
             )}
             <div
