@@ -112,11 +112,11 @@ const Footer = ({
                 <li key={link.id}>
                   <Link
                     href={
-                      link.url === "shrot-alastkhdam"
+                      link.url === "terms"
                         ? "/terms"
-                        : link.url === "syas-alkhsosy-alafdl"
+                        : link.url === "privacy-policy"
                           ? "/privacy-policy"
-                          : link.url === "mn-nhn"
+                          : link.url === "about"
                             ? "/about-us"
                             : `/${link.url}`
                     }
