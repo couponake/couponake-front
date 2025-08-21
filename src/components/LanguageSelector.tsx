@@ -9,11 +9,11 @@ const LanguageSelector = () => {
   const [isPending, startTransition] = useTransition();
   const handleLanguageChange = (locale: string) => {
     startTransition(() => setUserLocale(locale));
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag("event", "language_change", {
-        value: locale,
-      });
-    }
+    // if (typeof window !== 'undefined' && (window as any).gtag) {
+    //   (window as any).gtag("event", "language_change", {
+    //     value: locale,
+    //   });
+    // }
   };
 
   return (

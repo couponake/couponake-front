@@ -175,13 +175,13 @@ const AllCountriesPage = () => {
                   target="_self"
                   href={`/coupon_country/${country?.name}`}
                   className="p-6 flex flex-col items-center gap-2"
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && (window as any).gtag) {
-                      (window as any).gtag("event", "countries_click", {
-                        country_name: country.name
-                      });
-                    }
-                  }}
+                  // onClick={() => {
+                  //   if (typeof window !== 'undefined' && (window as any).gtag) {
+                  //     (window as any).gtag("event", "countries_click", {
+                  //       country_name: country.name
+                  //     });
+                  //   }
+                  // }}
                 >
                   <div className="w-20 aspect-video border border-gray-200">
                     <Image

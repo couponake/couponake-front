@@ -79,7 +79,7 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
 
   return (
     <>
-      <ScrollTracker event_name={`${blog.slug}_blog_view`} event_category={`${blog.slug}_Scroll`} />
+      {/* <ScrollTracker event_name={`${blog.slug}_blog_view`} event_category={`${blog.slug}_Scroll`} /> */}
       <main className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Blog Content */}
         <Card className="mb-8 shadow-lg border-none">

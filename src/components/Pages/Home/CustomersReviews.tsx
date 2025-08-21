@@ -67,13 +67,13 @@ export default function CustomersReviews({
             if (!seenReviewIds.current.has(id)) {
               seenReviewIds.current.add(id);
 
-              if (typeof window !== "undefined" && (window as any).gtag) {
-                (window as any).gtag("event", page === "home" ? "testimonials_seen" : `${page}_reviews_seen`, {
-                  event_category: page === "home" ? "testimonials" : `${page}_customer_reviews`,
-                  event_label: name,
-                  value: id,
-                });
-              }
+              // if (typeof window !== "undefined" && (window as any).gtag) {
+              //   (window as any).gtag("event", page === "home" ? "testimonials_seen" : `${page}_reviews_seen`, {
+              //     event_category: page === "home" ? "testimonials" : `${page}_customer_reviews`,
+              //     event_label: name,
+              //     value: id,
+              //   });
+              // }
             }
           }
         });
