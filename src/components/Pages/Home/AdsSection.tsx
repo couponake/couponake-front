@@ -36,12 +36,12 @@ const AdsSection = ({
           if (entry.isIntersecting && adId && !viewedAds.current.has(adId)) {
             viewedAds.current.add(adId);
 
-            if (typeof window !== "undefined" && (window as any).gtag) {
-                (window as any).gtag("event", "deal_view", {
-                  deal_id: adId,
-                  deal_title: ads.find(ad => ad.id === Number(adId))?.title,
-                });
-            }
+            // if (typeof window !== "undefined" && (window as any).gtag) {
+            //     (window as any).gtag("event", "deal_view", {
+            //       deal_id: adId,
+            //       deal_title: ads.find(ad => ad.id === Number(adId))?.title,
+            //     });
+            // }
           }
         });
       },

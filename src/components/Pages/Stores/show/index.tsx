@@ -149,7 +149,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
 
   return (
     <div id="show store" className="relative">
-      <ScrollTracker event_name={`${store?.slug}_page_depth`} />
+      {/* <ScrollTracker event_name={`${store?.slug}_page_depth`} /> */}
       <ShowCouponDetails storeName={store?.store_name} />
       <FollowStore links={store?.social_links} storeName={store?.slug} />
       <Author author={store?.responsible} storeName={store?.slug} />

@@ -20,13 +20,13 @@ const Author = ({ author, storeName }: { author: Responsibile, storeName: string
     setIsOpen(false)
     openResponsibleDrawer();
 
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", `${storeName}_responsible`, {
-        event_category: `${storeName}_responsible`,
-        author_id: author?.id,
-        author_name: author?.name,
-      });
-    }
+    // if (typeof window !== "undefined" && (window as any).gtag) {
+    //   (window as any).gtag("event", `${storeName}_responsible`, {
+    //     event_category: `${storeName}_responsible`,
+    //     author_id: author?.id,
+    //     author_name: author?.name,
+    //   });
+    // }
   }
 
   return (

@@ -56,15 +56,15 @@ export default function BlogCard({ blog }: BlogCardProps) {
     <Link
       target="_self"
       href={`/${blog?.slug}`}
-      onClick={() => {
-        if (typeof (window as any).gtag === "function") {
-          (window as any).gtag("event", "blog_click", {
-            blog_title: blog?.title,
-            blog_id: blog?.id,
-            event_category: "Blog",
-          });
-        }
-      }}
+      // onClick={() => {
+      //   if (typeof (window as any).gtag === "function") {
+      //     (window as any).gtag("event", "blog_click", {
+      //       blog_title: blog?.title,
+      //       blog_id: blog?.id,
+      //       event_category: "Blog",
+      //     });
+      //   }
+      // }}
     >
       <Card
         className="overflow-hidden h-full flex flex-col hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white border-none rounded-xl shadow-md"

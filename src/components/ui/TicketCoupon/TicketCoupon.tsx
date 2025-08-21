@@ -85,12 +85,12 @@ function TicketCoupon() {
 
   const filterCoupons = (category: { id: number, name: string, slug: string }) => {
     setSelectedCat(category.id);
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag("event", "best_coupons_category_click", {
-        category_id: category?.id,
-        category_name: category?.name,
-      });
-    }
+    // if (typeof window !== 'undefined' && (window as any).gtag) {
+    //   (window as any).gtag("event", "best_coupons_category_click", {
+    //     category_id: category?.id,
+    //     category_name: category?.name,
+    //   });
+    // }
     setFilteredCoupons(
       couponsData.filter(item =>
         item.category?.some(cat => cat.id === category.id)
@@ -101,13 +101,13 @@ function TicketCoupon() {
   const handelCopyCoupon = (coupon: LatestCoupons) => {
     copyToClipboard(coupon?.code);
     toast.success(t("Coupon copied successfully"));
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag("event", "best_coupons_click", {
-        coupon_id: coupon?.id,
-        coupon_title: coupon?.title,
-        coupon_store_id: coupon?.store_id,
-      });
-    }
+    // if (typeof window !== 'undefined' && (window as any).gtag) {
+    //   (window as any).gtag("event", "best_coupons_click", {
+    //     coupon_id: coupon?.id,
+    //     coupon_title: coupon?.title,
+    //     coupon_store_id: coupon?.store_id,
+    //   });
+    // }
     setTimeout(() => {
       const link = document.createElement("a");
       link.href = coupon?.url;
