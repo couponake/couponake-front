@@ -65,7 +65,7 @@ const AddToFavoriteBtn: React.FC<AddToFavoriteBtnProps> = ({
       onPress={toggleFavorite}
       isLoading={loading}
     >
-      <Heart className={isFavorite ? "fill-red-500" : "text-red-500"} />
+      <Heart className={isFavorite ? "fill-red-500" : "text-main-500"} />
     </Button>
   );
 };
