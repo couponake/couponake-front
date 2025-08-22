@@ -27,6 +27,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import "moment/locale/ar";
 
 import CompetitorsStores from '../../Home/CompetitorsStores';
 import Hero from '../../Home/Hero';
@@ -196,7 +197,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
                       )
                     }
                     <div className="flex items-center gap-2 text-white text-sm">
-                      <p>{t("Last updated")} {": "} {moment().format("D MMMM YYYY")} {" ( " + `${t("Today")}` + " ) "}</p>
+                      <p>{t("Last updated")} {": "} {moment().locale(locale === 'ar' ? 'ar' : 'en' ).format("LL")} {" ( " + `${t("Today")}` + " ) "}</p>
                     </div>
                   </div>
                 </div>

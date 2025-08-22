@@ -178,5 +178,5 @@
 }
 
 .gradient-btn{
-  @apply bg-gradient-to-r from-purple-300 via-pink-500 to-main-700 text-white hover:opacity-70 transition-all
+  @apply bg-gradient-to-r from-purple-300 via-purple-500 to-main-700 text-white hover:opacity-70 transition-all
 }
