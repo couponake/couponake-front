@@ -78,7 +78,7 @@ const AllCountries = () => {
           {
             "@type": "ListItem",
             position: 2,
-            name: "جميع الدول",
+            name: "كوبونات لبلدك",
             item: `${baseUrl}all_countries/`,
           },
         ],
