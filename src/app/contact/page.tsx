@@ -14,11 +14,11 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "تواصل معنا: لارسال الاقتراحات والشكاوى للكوبونات |كوبونات"
-      : "Contact Us | Coupoonat Coupons",
+      ? "اتصل بنا: تواصل مع ادارة موقع كوبونات من هنا بسهولة"
+      : "Contact Us: Easily contact the Couponat website administration here.",
     description: isArabic
-      ? "نستقبل استفساراتك وملاحظاتك عن الكوبونات عبر جميع القنوات"
-      : "Send your coupon questions or feedback through any channel",
+      ? "يمكنك الان التواصل مع ادارة موقع كوبونات من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
+      : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}contact/` || "",
     },
@@ -27,11 +27,11 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "تواصل معنا: لارسال الاقتراحات والشكاوى للكوبونات |كوبونات"
-        : "Contact Us | Coupoonat Coupons",
+        ? "اتصل بنا: تواصل مع ادارة موقع كوبونات من هنا بسهولة"
+        : "Contact Us: Easily contact the Couponat website administration here.",
       description: isArabic
-        ? "نستقبل استفساراتك وملاحظاتك عن الكوبونات عبر جميع القنوات"
-        : "Send your coupon questions or feedback through any channel",
+        ? "يمكنك الان التواصل مع ادارة موقع كوبونات من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
+        : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -42,11 +42,11 @@ export async function generateMetadata() {
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "تواصل معنا: لارسال الاقتراحات والشكاوى للكوبونات |كوبونات"
-        : "Contact Us | Coupoonat Coupons",
+        ? "اتصل بنا: تواصل مع ادارة موقع كوبونات من هنا بسهولة"
+        : "Contact Us: Easily contact the Couponat website administration here.",
       description: isArabic
-        ? "نستقبل استفساراتك وملاحظاتك عن الكوبونات عبر جميع القنوات"
-        : "Send your coupon questions or feedback through any channel",
+        ? "يمكنك الان التواصل مع ادارة موقع كوبونات من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
+        : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",

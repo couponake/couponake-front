@@ -18,11 +18,11 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |كوبونات"
-      : "Store Categories for Easy Coupon Discovery | Coupoonat",
+      ? "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات"
+      : "Categories: A page that categorizes coupons by product category",
     description: isArabic
-      ? "استعرض المتاجر حسب الفئة وحدد الكوبون المناسب دون عناء"
-      : "Browse stores by category and spot the right coupon effortlessly",
+      ? "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود"
+      : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}categories/` || "",
     },
@@ -31,11 +31,11 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |كوبونات"
-        : "Store Categories for Easy Coupon Discovery | Coupoonat",
+        ? "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات"
+        : "Categories: A page that categorizes coupons by product category",
       description: isArabic
-        ? "استعرض المتاجر حسب الفئة وحدد الكوبون المناسب دون عناء"
-        : "Browse stores by category and spot the right coupon effortlessly",
+        ? "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود"
+        : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -46,11 +46,11 @@ export async function generateMetadata() {
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |كوبونات"
-        : "Store Categories for Easy Coupon Discovery | Coupoonat",
+        ? "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات"
+        : "Categories: A page that categorizes coupons by product category",
       description: isArabic
-        ? "استعرض المتاجر حسب الفئة وحدد الكوبون المناسب دون عناء"
-        : "Browse stores by category and spot the right coupon effortlessly",
+        ? "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود"
+        : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -102,8 +102,8 @@ export default async function CategoriesPage({
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "تصنيفات المتاجر لفئات لسهولة الحصول على الكوبونات |كوبونات",
-    description: "استعرض المتاجر حسب الفئة وحدد الكوبون المناسب دون عناء",
+    name: "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات",
+    description: "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود",
     url: `${baseUrl}categories/`,
     publisher: {
       "@type": "Organization",

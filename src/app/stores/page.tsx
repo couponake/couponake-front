@@ -14,11 +14,11 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |كوبونات"
-      : "Coupoonat | Discount Coupons for Saudi Online Stores",
+      ? "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط"
+      : "All Stores: Discount coupons for all Middle Eastern shopping stores",
     description: isArabic
-      ? "وفّر في كل عملية شراء عبر الإنترنت مع كوبونات حصرية لمتاجر السعودية"
-      : "Save on every online order with exclusive Saudi e-store coupons",
+      ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً"
+      : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
     alternates: {
       canonical: "https://couponalyom.com/stores/",
     },
@@ -27,11 +27,11 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |كوبونات"
-        : "Coupoonat | Discount Coupons for Saudi Online Stores",
+        ? "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط"
+        : "All Stores: Discount coupons for all Middle Eastern shopping stores",
       description: isArabic
-        ? "وفّر في كل عملية شراء عبر الإنترنت مع كوبونات حصرية لمتاجر السعودية"
-        : "Save on every online order with exclusive Saudi e-store coupons",
+        ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً"
+        : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -42,11 +42,11 @@ export async function generateMetadata() {
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |كوبونات"
-        : "Coupoonat | Discount Coupons for Saudi Online Stores",
+        ? "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط"
+        : "All Stores: Discount coupons for all Middle Eastern shopping stores",
       description: isArabic
-        ? "وفّر في كل عملية شراء عبر الإنترنت مع كوبونات حصرية لمتاجر السعودية"
-        : "Save on every online order with exclusive Saudi e-store coupons",
+        ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً"
+        : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -70,9 +70,8 @@ export default async function StoresPage({
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${baseUrl}stores/#webpage`,
-    name: "كوبونات خصم لكل متاجر التسوق الالكتروني في السعودية |كوبونات",
-    description:
-      "وفّر في كل عملية شراء عبر الإنترنت مع كوبونات حصرية لمتاجر السعودية",
+    name: "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط",
+    description: "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً",
     url: `${baseUrl}stores/`,
     inLanguage: locale,
     isPartOf: {

@@ -16,11 +16,11 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |كوبونات"
-      : "Pick Discount Coupons by Your Country | Coupoonat",
+      ? "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك"
+      : "All Countries: A dedicated page for searching for coupons within your country",
     description: isArabic
-      ? "اختر دولتك لتحصل على أكواد خصم مخصصة لمتاجرك المحلية"
-      : "Select your country to unlock tailored discount codes for local stores",
+      ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب"
+      : "This page makes it easy for you to search and access discount coupons by selecting the country you prefer",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}all_countries/` || "",
     },
@@ -29,11 +29,11 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |كوبونات"
-        : "Pick Discount Coupons by Your Country | Coupoonat",
+        ? "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك"
+        : "All Countries: A dedicated page for searching for coupons within your country",
       description: isArabic
-        ? "اختر دولتك لتحصل على أكواد خصم مخصصة لمتاجرك المحلية"
-        : "Select your country to unlock tailored discount codes for local stores",
+        ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب"
+        : "This page makes it easy for you to search and access discount coupons by selecting the country you prefer",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -44,11 +44,11 @@ export async function generateMetadata() {
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |كوبونات"
-        : "Pick Discount Coupons by Your Country | Coupoonat",
+        ? "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك"
+        : "All Countries: A dedicated page for searching for coupons within your country",
       description: isArabic
-        ? "اختر دولتك لتحصل على أكواد خصم مخصصة لمتاجرك المحلية"
-        : "Select your country to unlock tailored discount codes for local stores",
+        ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب"
+        : "This page makes it easy for you to search and access discount coupons by selecting the country you prefer",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -94,8 +94,8 @@ const AllCountries = () => {
       },
       {
         "@type": "WebPage",
-        name: "اختار كوبونات الخصم وفق الدولة الخاصة بك من هنا |كوبونات",
-        description: "اختر دولتك لتحصل على أكواد خصم مخصصة لمتاجرك المحلية",
+        name: "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك",
+        description: "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب",
         url: `${baseUrl}all_countries/`,
         publisher: {
           "@type": "Organization",
