@@ -216,11 +216,6 @@ const Stores = () => {
                       "text-main-600 border-main-600"
                   )}
                 >
-                  <Avatar
-                    src={category?.image}
-                    name={category?.name}
-                    showFallback
-                  />
                   <div className="text-base font-medium ms-2.5 line-clamp-1">
                     {category?.name}
                   </div>
