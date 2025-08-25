@@ -21,7 +21,7 @@ export default async function CategoriesPage({
           <div className="flex items-center justify-between">
             <div className="text-white">
               <h2 className="mb-4 text-4xl font-bold sm:text-6xl sm:leading-[4rem]">
-                {t("common.categories")}
+                {t("common.blogCategories")}
               </h2>
             </div>
           </div>

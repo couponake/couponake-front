@@ -15,11 +15,11 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "المدونة: احدث اخبار متاجر التسوق في السعودية |كوبونات"
-      : "Blog: Latest News on Saudi Shopping Stores | Coupoonat",
+      ? "مدونة موقع كوبونات لجميع اخبار متاجر التسوق"
+      : "Couponat's blog for all the latest shopping news",
     description: isArabic
-      ? "تابع آخر العروض والتحديثات وتحليلات السوق للمتاجر السعودية"
-      : "Stay updated with deals, store updates, and market insights in KSA",
+      ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
+      : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}blog/` || "",
     },
@@ -28,11 +28,11 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "المدونة: احدث اخبار متاجر التسوق في السعودية |كوبونات"
-        : "Blog: Latest News on Saudi Shopping Stores | Coupoonat",
+        ? "مدونة موقع كوبونات لجميع اخبار متاجر التسوق"
+        : "Couponat's blog for all the latest shopping news",
       description: isArabic
-        ? "تابع آخر العروض والتحديثات وتحليلات السوق للمتاجر السعودية"
-        : "Stay updated with deals, store updates, and market insights in KSA",
+        ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
+        : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -43,11 +43,11 @@ export async function generateMetadata() {
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "المدونة: احدث اخبار متاجر التسوق في السعودية |كوبونات"
-        : "Blog: Latest News on Saudi Shopping Stores | Coupoonat",
+        ? "مدونة موقع كوبونات لجميع اخبار متاجر التسوق"
+        : "Couponat's blog for all the latest shopping news",
       description: isArabic
-        ? "تابع آخر العروض والتحديثات وتحليلات السوق للمتاجر السعودية"
-        : "Stay updated with deals, store updates, and market insights in KSA",
+        ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
+        : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -71,8 +71,8 @@ export default async function Home({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: "المدونة: احدث اخبار متاجر التسوق في السعودية |كوبونات",
-    description: "تابع آخر العروض والتحديثات وتحليلات السوق للمتاجر السعودية",
+    name: "مدونة موقع كوبونات لجميع اخبار متاجر التسوق",
+    description: "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم",
     url: `${baseUrl}blog/`,
     isPartOf: {
       "@type": "WebSite",

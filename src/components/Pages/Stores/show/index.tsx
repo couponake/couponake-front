@@ -50,9 +50,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
   const {
     store,
     expiredCoupons = [],
-    countries = [],
     store_brands = [],
-    store_categories = [],
     similarStores = [],
     store_reviews = [],
     store_banner = null,
@@ -75,13 +73,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
     popular_category: data?.popular_category ?? { count: 0, category: {} as CategoryItem },
     returned_visitors: data?.returned_visitors ?? "0%",
   }
-
-  ////// temp. removed to prevent the automatic selection of the first coupon
-  // useEffect(() => {
-  //   if (store && store?.coupons?.length > 0) {
-  //     setSelectedCoupon(store?.coupons[0]);
-  //   }
-  // }, [store, setSelectedCoupon]);
 
   const handleShowMore = () => {
     setVisibleCount((prev) => Math.min(prev + 2, store?.coupons?.length || 0));
@@ -269,46 +260,8 @@ const ShowStore = ({ slug }: { slug: string }) => {
               </Card>
             )
           }
-          <Card className="relative overflow-hidden max-sm:mt-4">
-            <div className="gradient absolute top-20 left-0  size-80 bg-main-500/30 blur-[100px]" />
-
-            <CardHeader className="py-0" />
-            <CardContent className="space-y-3 md:space-y-3 lg:space-y-5 xl:space-y-5 p-3">
-              <h2>{t("Stores from the same category")}</h2>
-              <div className="flex items-center gap-3 flex-wrap">
-                {store_categories?.map((category) => (
-                  <Link
-                    target="_self"
-                    href={`/coupon-category/${category?.slug}`}
-                    key={category?.id}
-                    className="py-1.5 text-sm px-2 rounded-xl bg-default-200 hover:bg-default-100 transition-all flex items-center gap-3"
-                  >
-                    {category?.name}
-                  </Link>
-                ))}
-              </div>
-              {countries?.length > 0 && (
-                <h2>{t("Stores from the same country")}</h2>
-              )}
-              <div className="flex items-center gap-3 flex-wrap">
-                {countries?.map((item, index) => (
-                  <Button
-                    as={Link}
-                    variant="faded"
-                    color="primary"
-                    href={`/coupon_country/${item?.country}`}
-                    key={index}
-                  >
-                    {item?.country}
-                  </Button>
-                ))}
-              </div>
-            </CardContent>
-            <CardFooter className="py-0" />
-          </Card>
           {store?.description && (
             <>
-              <Divider />
               <div className="prose max-w-none my-5">
                 <div
                   dangerouslySetInnerHTML={{

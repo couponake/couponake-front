@@ -84,7 +84,7 @@ function StoreCharts({
               className="text-main-500 text-base font-semibold border-1 border-main-500/0 "
               variant="bordered"
             >
-              {t("peopleLove")}
+              {t("storeRate")}
             </Chip>
             <CircularProgress
               classNames={{

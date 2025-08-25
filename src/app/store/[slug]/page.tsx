@@ -3,7 +3,6 @@ import { useSettingEnabled } from '@/hooks/useIndexingSettings';
 import { StoreResponse } from '@/hooks/useStoreData';
 import api from '@/lib/api';
 import { SettingsEnum } from '@/types/settingsEnum';
-import { HydrationBoundary } from '@tanstack/react-query';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import React from 'react';
@@ -169,18 +168,6 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
         (link) => typeof link === "string" && /^https?:\/\//.test(link)
       )
       : [],
-    address: store?.countries?.[0]?.country
-      ? {
-        "@type": "PostalAddress",
-        addressCountry: store?.countries[0].country,
-      }
-      : undefined,
-    areaServed: store?.countries?.length
-      ? store?.countries.map((c) => ({
-        "@type": "Country",
-        name: c.country,
-      }))
-      : undefined,
     ...(reviewsSchema.length > 0 && { review: reviewsSchema }),
   };
 

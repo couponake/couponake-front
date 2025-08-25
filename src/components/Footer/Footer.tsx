@@ -5,26 +5,26 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import type { SettingsItem } from "@/types";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
+
+interface footerLinkType {
+  id: number
+  title: string
+  url: string
+}
 
 const Footer = ({
   settings,
   footerLinks,
 }: {
   settings: SettingsItem[] | null | undefined;
-  footerLinks:
-  | {
-    id: number;
-    title: string;
-    url: string;
-  }[]
-  | null
-  | undefined;
+  footerLinks: footerLinkType[] | null | undefined;
 }) => {
   const t = useTranslations();
+  const locale = useLocale();
   const facebook = settings?.find((item) => item.name === "facebook")?.val;
   const instagram = settings?.find((item) => item.name === "instagram")?.val;
   const telegram = settings?.find((item) => item.name === "side_telegram")?.val;
@@ -108,7 +108,7 @@ const Footer = ({
               {t("Important Pages")}
             </h3>
             <ul className="space-y-2">
-              {footerLinks?.map((link) => (
+              {footerLinks?.map((link: footerLinkType) => (
                 <li key={link.id}>
                   <Link
                     href={
@@ -124,7 +124,14 @@ const Footer = ({
                     prefetch={false}
                     className="text-sm hover:underline"
                   >
-                    {link.title}
+                    {
+                      link.url === "terms"
+                        ? t('terms')
+                        : link.url === "privacy-policy"
+                          ? t('privacy-policy')
+                          : link.url === "about"
+                          && t('about')
+                    }
                   </Link>
                 </li>
               ))}
