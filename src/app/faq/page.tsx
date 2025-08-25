@@ -16,11 +16,11 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |كوبونات"
-      : "FAQ | Coupoonat",
+      ? "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا"
+      : "Frequently Asked Questions: All customer questions and answers here",
     description: isArabic
-      ? "أجوبة سريعة لأهم الأسئلة حول استخدام الكوبونات والتوفير"
-      : "Quick answers to top questions on coupon use and saving money",
+      ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
+      : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/` || "",
     },
@@ -29,11 +29,11 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |كوبونات"
-        : "FAQ | Coupoonat",
+        ? "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا"
+        : "Frequently Asked Questions: All customer questions and answers here",
       description: isArabic
-        ? "أجوبة سريعة لأهم الأسئلة حول استخدام الكوبونات والتوفير"
-        : "Quick answers to top questions on coupon use and saving money",
+        ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
+        : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -44,11 +44,11 @@ export async function generateMetadata() {
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |كوبونات"
-        : "FAQ | Coupoonat",
+        ? "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا"
+        : "Frequently Asked Questions: All customer questions and answers here",
       description: isArabic
-        ? "أجوبة سريعة لأهم الأسئلة حول استخدام الكوبونات والتوفير"
-        : "Quick answers to top questions on coupon use and saving money",
+        ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
+        : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
       images: [
         {
           url: "https://couponalyom.com/coupoonatLogo.webp",
@@ -65,8 +65,8 @@ const FAQ = async () => {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/#faqpage`,
-    name: "الأسئلة الشائعة: لجميع عملاء التسوق في السعودية |كوبونات",
-    description: "أجوبة سريعة لأهم الأسئلة حول استخدام الكوبونات والتوفير",
+    name: "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا",
+    description: "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها",
     url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/`,
     image: "https://couponalyom.com/coupoonatLogo.webp",
     publisher: {

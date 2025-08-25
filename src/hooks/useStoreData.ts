@@ -16,9 +16,7 @@ import api from "@/lib/api";
 export interface StoreResponse {
   store: StoreProps;
   expiredCoupons: CouponProps[] | [];
-  countries: Record<"country", string>[];
   store_brands: BrandProps[];
-  store_categories: CategoryItem[];
   similarStores: StoreProps[];
   // store_reviews: userReview[];
   store_table:

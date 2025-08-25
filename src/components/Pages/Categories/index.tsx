@@ -12,7 +12,6 @@ import { useSearchParams } from "next/navigation";
 import { parseAsString, useQueryState } from "nuqs";
 import { Pagination } from "@heroui/pagination";
 import { Button } from "@heroui/button";
-import axiosInstance from '@/lib/axios';
 import MyAxios from "@/components/MyAxios";
 
 const Categories = ({

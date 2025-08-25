@@ -95,13 +95,6 @@ const Stores = () => {
   const categories: HeaderCategory[] = allCategories;
   const paginateCategories = categoriesData?.pagination;
 
-  // Create ref that detects when element is visible
-  // This ref is not needed as we're using categoriesLoadMoreRef for infinite scrolling
-  // const { ref: categoriesRef, inView: categoriesInView } = useInView({
-  //   threshold: 0.1,
-  //   triggerOnce: false,
-  // });
-
   // Debounced search function
   const debouncedSearch = useCallback(
     debounce((value: string) => {
