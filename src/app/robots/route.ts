@@ -9,6 +9,10 @@ Disallow: /api/
 Disallow: /_next/
 Disallow: /private/
 Disallow: /*?couponID=
+Disallow: /*.css$
+Disallow: /*.js$
+Disallow: /*.woff$
+Disallow: /*.woff2$
 
 Sitemap: https://couponalyom.com/sitemap.xml
 `.trim();
