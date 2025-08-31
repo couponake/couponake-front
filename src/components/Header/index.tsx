@@ -27,7 +27,7 @@ const Header = ({
             <Suspense>
               <Link href="/" className="my-auto cursor-pointer bg-transparent rounded-lg">
                 <Image
-                  src="/coupoonatLogo.webp"
+                  src={websiteLogo}
                   alt="Website Logo"
                   width={144}
                   height={48}
@@ -37,7 +37,7 @@ const Header = ({
                   unoptimized
                 />
                 <Image
-                  src="/coupoonatLogo.webp"
+                  src={websiteLogo}
                   alt="Website Logo"
                   width={40}
                   height={40}
