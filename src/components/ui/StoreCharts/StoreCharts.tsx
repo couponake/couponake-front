@@ -99,6 +99,7 @@ function StoreCharts({
               aria-label="store_love"
               formatOptions={{
                 numberingSystem: "latn",
+                style: "percent",
               }}
             />
           </div>
@@ -122,6 +123,7 @@ function StoreCharts({
               aria-label="returned_visitors"
               formatOptions={{
                 numberingSystem: "latn",
+                style: "percent",
               }}
             />
           </div>
