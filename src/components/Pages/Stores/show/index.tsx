@@ -389,9 +389,9 @@ const ShowStore = ({ slug }: { slug: string }) => {
           )}
           {store_infos?.length > 0 && (
             <div className="space-y-5 mb-11">
-              <h3 className="text-lg font-semibold sm:text-xl">
+              <h2 className="text-lg font-semibold sm:text-xl">
                 {t("About The store")}
-              </h3>
+              </h2>
               <Accordion>
                 {store_infos?.map((faq) => (
                   <AccordionItem
