@@ -286,6 +286,9 @@ export type StoreProps = {
   orders_number: number;
   store_love: string;
   total_used_coupons: number;
+  coupon_peak_times: string;
+  popular_discounts: string;
+  coupon_share_rate: string;
 };
 
 export type featuredStores = {
@@ -314,6 +317,9 @@ export type statisticsType = {
   max_coupon_used: string;
   total_used_coupons: number;
   returned_visitors: string;
+  coupon_peak_times: string;
+  popular_discounts: string;
+  coupon_share_rate: string;
 };
 
 export type CouponReaction = {

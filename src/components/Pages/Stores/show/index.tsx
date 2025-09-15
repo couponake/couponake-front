@@ -1,38 +1,46 @@
-'use client';
-import AddToFavoriteBtn from '@/components/AddToFavoriteBtn';
-import Author from '@/components/Author';
-import FollowStore from '@/components/FollowStore';
-import CustomersReviews from '@/components/Pages/Home/CustomersReviews';
-import FAQ from '@/components/Pages/Home/FAQ';
-import RateThisComponent from '@/components/RateThisComponent';
-import ShowCouponDetails from '@/components/ShowCouponDetails';
-import SimilarCoupons from '@/components/SimilarCoupons';
-import StoreCoupon from '@/components/StoreCoupon';
-import StoreTable from '@/components/StoreTable';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import StoreSidePart from '@/components/ui/StoreSidePart';
-import ScrollTracker from '@/hooks/ScrollPageAnalytics';
-import useDetectMobile from '@/hooks/useDetectMobile';
-import { useStoreData } from '@/hooks/useStoreData';
-import { secureHtmlLinks } from '@/lib/htmlUtils';
-import { useStore } from '@/store';
-import { CategoryItem, statisticsType } from '@/types';
-import { Accordion, AccordionItem } from '@heroui/accordion';
-import { Button } from '@heroui/button';
-import { Divider } from '@heroui/divider';
-import { StarIcon } from 'lucide-react';
-import moment from 'moment';
-import { useLocale, useTranslations } from 'next-intl';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react';
+"use client";
+import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
+import Author from "@/components/Author";
+import FollowStore from "@/components/FollowStore";
+import CustomersReviews from "@/components/Pages/Home/CustomersReviews";
+import FAQ from "@/components/Pages/Home/FAQ";
+import RateThisComponent from "@/components/RateThisComponent";
+import ShowCouponDetails from "@/components/ShowCouponDetails";
+import SimilarCoupons from "@/components/SimilarCoupons";
+import StoreCoupon from "@/components/StoreCoupon";
+import StoreTable from "@/components/StoreTable";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import StoreSidePart from "@/components/ui/StoreSidePart";
+import ScrollTracker from "@/hooks/ScrollPageAnalytics";
+import useDetectMobile from "@/hooks/useDetectMobile";
+import { useStoreData } from "@/hooks/useStoreData";
+import { secureHtmlLinks } from "@/lib/htmlUtils";
+import { useStore } from "@/store";
+import { CategoryItem, statisticsType } from "@/types";
+import { Accordion, AccordionItem } from "@heroui/accordion";
+import { Button } from "@heroui/button";
+import { Divider } from "@heroui/divider";
+import { StarIcon } from "lucide-react";
+import moment from "moment";
+import { useLocale, useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
 import "moment/locale/ar";
 
-import CompetitorsStores from '../../Home/CompetitorsStores';
-import Hero from '../../Home/Hero';
+import CompetitorsStores from "../../Home/CompetitorsStores";
+import Hero from "../../Home/Hero";
 
-const StoreChartsPage = dynamic(() => import("@/components/ui/StoreCharts/StoreCharts"), { ssr: true });
+const StoreChartsPage = dynamic(
+  () => import("@/components/ui/StoreCharts/StoreCharts"),
+  { ssr: true }
+);
 
 declare module "react-window";
 
@@ -70,9 +78,15 @@ const ShowStore = ({ slug }: { slug: string }) => {
     total_used_coupons: store?.total_used_coupons ?? 0,
     max_coupon_discount: data?.max_coupon_discount ?? "null",
     max_coupon_used: data?.max_coupon_used ?? "null",
-    popular_category: data?.popular_category ?? { count: 0, category: {} as CategoryItem },
+    popular_category: data?.popular_category ?? {
+      count: 0,
+      category: {} as CategoryItem,
+    },
     returned_visitors: data?.returned_visitors ?? "0%",
-  }
+    coupon_peak_times: store?.coupon_peak_times ?? "null",
+    popular_discounts: store?.popular_discounts ?? "null",
+    coupon_share_rate: store?.coupon_share_rate ?? "0",
+  };
 
   const handleShowMore = () => {
     setVisibleCount((prev) => Math.min(prev + 2, store?.coupons?.length || 0));
@@ -168,45 +182,47 @@ const ShowStore = ({ slug }: { slug: string }) => {
                   <h1 className="text-sm sm:text-base md:text-xl lg:text-xl xl:text-2xl text-white font-bold">
                     {store?.title}
                   </h1>
-                  <div className='w-fit flex items-center gap-2'>
-                    {
-                      !isMobile && (
-                        <>
-                          <div className="flex items-center gap-2">
-                            <StarIcon className="text-yellow-400 fill-yellow-400 w-5 h-5" />
-                            <span className="text-white font-medium">
-                              {Math.round(Number(store?.rate))}
-                              <span className="text-white">/5</span>
-                            </span>
-                            <span className="text-white text-sm">
-                              ({store.voters} {t("Votes")})
-                            </span>
-                          </div>
+                  <div className="w-fit flex items-center gap-2">
+                    {!isMobile && (
+                      <>
+                        <div className="flex items-center gap-2">
+                          <StarIcon className="text-yellow-400 fill-yellow-400 w-5 h-5" />
+                          <span className="text-white font-medium">
+                            {Math.round(Number(store?.rate))}
+                            <span className="text-white">/5</span>
+                          </span>
+                          <span className="text-white text-sm">
+                            ({store.voters} {t("Votes")})
+                          </span>
+                        </div>
 
-                          <div className="h-4 w-px bg-gray-300 mx-1"></div>
-                        </>
-                      )
-                    }
+                        <div className="h-4 w-px bg-gray-300 mx-1"></div>
+                      </>
+                    )}
                     <div className="flex items-center gap-2 text-white text-sm">
-                      <p>{t("Last updated")} {": "} {moment().locale(locale === 'ar' ? 'ar' : 'en' ).format("LL")} {" ( " + `${t("Today")}` + " ) "}</p>
+                      <p>
+                        {t("Last updated")} {": "}{" "}
+                        {moment()
+                          .locale(locale === "ar" ? "ar" : "en")
+                          .format("LL")}{" "}
+                        {" ( " + `${t("Today")}` + " ) "}
+                      </p>
                     </div>
                   </div>
                 </div>
-                {
-                  !isMobile && (
-                    <div className="w-fit flex flex-wrap items-center justify-center gap-2 bg-green-500/0">
-                      <RateThisComponent
-                        title={`${t("Rate")} ${store?.title ?? ""}`}
-                        route={`stores/${store?.slug}/review`}
-                        data={{ store_id: store?.id ?? 0 }}
-                      />
-                      <AddToFavoriteBtn
-                        isFavoriteInitially={store?.isInFavorites}
-                        storeId={store?.id ?? 0}
-                      />
-                    </div>
-                  )
-                }
+                {!isMobile && (
+                  <div className="w-fit flex flex-wrap items-center justify-center gap-2 bg-green-500/0">
+                    <RateThisComponent
+                      title={`${t("Rate")} ${store?.title ?? ""}`}
+                      route={`stores/${store?.slug}/review`}
+                      data={{ store_id: store?.id ?? 0 }}
+                    />
+                    <AddToFavoriteBtn
+                      isFavoriteInitially={store?.isInFavorites}
+                      storeId={store?.id ?? 0}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -229,37 +245,35 @@ const ShowStore = ({ slug }: { slug: string }) => {
         </div>
         {/* main content */}
         <div className="w-full sm:w-full md:w-fit lg:w-fit xl:w-fit 2xl:w-fit min-h-150 h-fit flex-1 space-y-5 overflow-hidden">
-          {
-            isMobile && (
-              <Card className="relative overflow-hidden max-sm:mt-4 border-none shadow-md rounded-full">
-                <CardContent className="p-0">
-                  <div className="flex items-center justify-between p-2">
-                    <div className='flex items-center gap-2'>
-                      <StarIcon className="text-yellow-400 fill-yellow-400 w-5 h-5" />
-                      <span className="text-black font-medium">
-                        {Math.round(Number(store?.rate))}
-                        <span className="text-black">/5</span>
-                      </span>
-                      <span className="text-black text-sm">
-                        ({store.voters} {t("Votes")})
-                      </span>
-                    </div>
-                    <div className='flex items-center gap-2'>
-                      <RateThisComponent
-                        title={`${t("Rate")} ${store?.title ?? ""}`}
-                        route={`stores/${store?.slug}/review`}
-                        data={{ store_id: store?.id ?? 0 }}
-                      />
-                      <AddToFavoriteBtn
-                        isFavoriteInitially={store?.isInFavorites}
-                        storeId={store?.id ?? 0}
-                      />
-                    </div>
+          {isMobile && (
+            <Card className="relative overflow-hidden max-sm:mt-4 border-none shadow-md rounded-full">
+              <CardContent className="p-0">
+                <div className="flex items-center justify-between p-2">
+                  <div className="flex items-center gap-2">
+                    <StarIcon className="text-yellow-400 fill-yellow-400 w-5 h-5" />
+                    <span className="text-black font-medium">
+                      {Math.round(Number(store?.rate))}
+                      <span className="text-black">/5</span>
+                    </span>
+                    <span className="text-black text-sm">
+                      ({store.voters} {t("Votes")})
+                    </span>
                   </div>
-                </CardContent>
-              </Card>
-            )
-          }
+                  <div className="flex items-center gap-2">
+                    <RateThisComponent
+                      title={`${t("Rate")} ${store?.title ?? ""}`}
+                      route={`stores/${store?.slug}/review`}
+                      data={{ store_id: store?.id ?? 0 }}
+                    />
+                    <AddToFavoriteBtn
+                      isFavoriteInitially={store?.isInFavorites}
+                      storeId={store?.id ?? 0}
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
           {store?.description && (
             <>
               <div className="prose max-w-none my-5">
@@ -271,12 +285,16 @@ const ShowStore = ({ slug }: { slug: string }) => {
               </div>
             </>
           )}
-          {store_banner?.some((banner) => banner?.location === "coupon_block") && (
+          {store_banner?.some(
+            (banner) => banner?.location === "coupon_block"
+          ) && (
             <>
               <Hero
                 storeName={store.slug}
                 carouselItemClassName="basis-full md:basis-full lg:basis-full"
-                banners={store_banner?.filter((banner) => banner?.location === "coupon_block")}
+                banners={store_banner?.filter(
+                  (banner) => banner?.location === "coupon_block"
+                )}
                 location="coupon_block"
                 className="mt-7"
               />
@@ -284,12 +302,16 @@ const ShowStore = ({ slug }: { slug: string }) => {
             </>
           )}
           <div className="space-y-3 bg-red-400/0">
-            {
-              store?.coupons && store?.coupons.length > 0 &&
+            {store?.coupons && store?.coupons.length > 0 && (
               <>
-                {couponsToShow && couponsToShow.map((coupon) => (
-                  <StoreCoupon key={coupon?.id} coupon={coupon} store_image={store?.image} />
-                ))}
+                {couponsToShow &&
+                  couponsToShow.map((coupon) => (
+                    <StoreCoupon
+                      key={coupon?.id}
+                      coupon={coupon}
+                      store_image={store?.image}
+                    />
+                  ))}
 
                 <div className="pt-5">
                   {!allVisible ? (
@@ -313,9 +335,14 @@ const ShowStore = ({ slug }: { slug: string }) => {
                   )}
                 </div>
               </>
-            }
+            )}
           </div>
-          <StoreChartsPage statistics={statistics} t={t} locale={locale} storeName={store.slug} />
+          <StoreChartsPage
+            statistics={statistics}
+            t={t}
+            locale={locale}
+            storeName={store.slug}
+          />
           {related_stores && related_stores.length > 0 && (
             <CompetitorsStores
               title={store.store_name}
@@ -374,13 +401,17 @@ const ShowStore = ({ slug }: { slug: string }) => {
               page={store?.slug}
             />
           )}
-          {store_banner?.some((banner) => banner?.location === "above_texts") && (
+          {store_banner?.some(
+            (banner) => banner?.location === "above_texts"
+          ) && (
             <>
               <Divider />
               <Hero
                 storeName={store.slug}
                 carouselItemClassName="basis-full md:basis-full lg:basis-full"
-                banners={store_banner?.filter((banner) => banner?.location === "above_texts")}
+                banners={store_banner?.filter(
+                  (banner) => banner?.location === "above_texts"
+                )}
                 location="above_texts"
                 className="mt-7"
               />
@@ -421,7 +452,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
               )}
             />
           )}
-          <div className='w-full h-fit text-xs bg-white/75 p-4 rounded-lg'>
+          <div className="w-full h-fit text-xs bg-white/75 p-4 rounded-lg">
             {t("Affiliate links")}
           </div>
         </div>
