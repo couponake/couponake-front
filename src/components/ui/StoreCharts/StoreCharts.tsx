@@ -4,22 +4,23 @@ import { statisticsType } from "@/types";
 import { Card, CardBody, Chip, CircularProgress } from "@heroui/react";
 import { ChartPie, Copy, MoveUpRight, TrendingUp } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-
+import { CiDiscount1 } from "react-icons/ci";
 import { CardHeader } from "../card";
 import { useInView } from "react-intersection-observer";
+import { CgSandClock } from "react-icons/cg";
+import { GiSandsOfTime } from "react-icons/gi";
 
 function StoreCharts({
   statistics,
   t,
   locale,
-  storeName
+  storeName,
 }: {
   statistics: statisticsType;
   t: any;
   locale: string;
   storeName: string;
 }) {
-
   const sectionRef = useRef<HTMLElement | null>(null);
   const [hasFired, setHasFired] = useState<boolean>(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -119,7 +120,9 @@ function StoreCharts({
               }}
               showValueLabel={true}
               strokeWidth={3}
-              value={Math.round(parseFloat(statistics?.returned_visitors ?? "0"))}
+              value={Math.round(
+                parseFloat(statistics?.returned_visitors ?? "0")
+              )}
               aria-label="returned_visitors"
               formatOptions={{
                 numberingSystem: "latn",
@@ -147,7 +150,12 @@ function StoreCharts({
                 className="w-full h-fit text-3xl flex justify-center items-center gap-2"
               >
                 {statistics?.orders_number > 0 && (
-                  <MoveUpRight color="#1B59F8" size={35} aria-hidden="true" />
+                  <MoveUpRight
+                    color="#1B59F8"
+                    size={35}
+                    aria-hidden="true"
+                    className="animate-bell"
+                  />
                 )}
                 <p id="orders-label" className="sr-only">
                   Orders
@@ -172,7 +180,12 @@ function StoreCharts({
                 className="flex items-center gap-2 text-3xl"
               >
                 {statistics?.saved_price > 0 && (
-                  <TrendingUp color="#1B59F8" size={35} aria-hidden="true" />
+                  <TrendingUp
+                    color="#1B59F8"
+                    size={35}
+                    aria-hidden="true"
+                    className="animate-bounce"
+                  />
                 )}
                 <span id="saved-price-label" className="sr-only">
                   Amount Saved
@@ -197,7 +210,12 @@ function StoreCharts({
                 aria-labelledby="coupon-uses-label"
                 className="w-full h-fit text-3xl flex justify-center items-center gap-2"
               >
-                <Copy color="#1B59F8" size={25} aria-hidden="true" />
+                <Copy
+                  color="#1B59F8"
+                  size={25}
+                  aria-hidden="true"
+                  className="animate-pulse"
+                />
                 <span id="coupon-uses-label" className="sr-only">
                   Total Used Coupons
                 </span>
@@ -304,6 +322,99 @@ function StoreCharts({
                 </span>
               </CardBody>
             </Card>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full h-[700px] md:h-[228.75px] lg:h-[228.75px] xl:h-[228.75px] shadow-none rounded-md overflow-hidden">
+        <div className="w-full h-full shadow-md rounded-md overflow-hidden relative">
+          <div className="moneyPattern absolute w-full h-full"></div>
+          <div className="w-full h-full absolute grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 justify-center items-center gap-0">
+            <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-10">
+              <Chip
+                className="text-black text-base w-3/4 text-wrap text-center font-semibold border-1 border-main-500/0 "
+                variant="bordered"
+              >
+                {t("couponPeakTimes")}
+              </Chip>
+              <div
+                role="group"
+                aria-labelledby="coupon-peak-label"
+                className="w-full h-fit text-3xl flex justify-center items-center gap-2"
+              >
+                {statistics?.coupon_peak_times !== "null" && (
+                  <GiSandsOfTime
+                    color="#1B59F8"
+                    size={30}
+                    aria-hidden="true"
+                    className="animate-spinner-ease-spin"
+                  />
+                )}
+                <p id="coupon-peak-label" className="sr-only">
+                  Orders
+                </p>
+                <p>
+                  {statistics?.coupon_peak_times !== "null"
+                    ? statistics?.coupon_peak_times
+                    : " - "}
+                </p>
+              </div>
+            </div>
+            <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-10">
+              <Chip
+                className="text-black text-base font-semibold border-1 border-black/0"
+                variant="bordered"
+              >
+                {t("popularDiscounts")}
+              </Chip>
+              <div
+                role="group"
+                aria-labelledby="popular-discounts-label"
+                className="flex items-center gap-2 text-3xl"
+              >
+                {statistics?.popular_discounts !== "null" && (
+                  <CiDiscount1
+                    color="#1B59F8"
+                    size={35}
+                    aria-hidden="true"
+                    className="animate-blink"
+                  />
+                )}
+                <p>
+                  {statistics?.popular_discounts !== "null"
+                    ? statistics?.popular_discounts
+                    : " - "}
+                </p>
+              </div>
+            </div>
+            <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-10">
+              <Chip
+                className="text-black text-base font-semibold border-1 border-main-500/0 "
+                variant="bordered"
+              >
+                {t("couponShareRate")}
+              </Chip>
+              <div
+                role="group"
+                aria-labelledby="coupon-share-label"
+                className="w-full h-fit text-3xl flex justify-center items-center gap-2"
+              >
+                {Number(statistics?.coupon_share_rate) > 0 && (
+                  <MoveUpRight
+                    color="#1B59F8"
+                    size={35}
+                    aria-hidden="true"
+                    className="animate-bell"
+                  />
+                )}
+                <span id="coupon-share-label" className="sr-only">
+                  Coupon Share Rate
+                </span>
+                <p>
+                  {Math.round(Number(statistics?.coupon_share_rate) || 0) + "%"}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

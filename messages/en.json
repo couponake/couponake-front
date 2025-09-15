@@ -372,7 +372,10 @@
   "Emoji reaction edited successfully": "Emoji reaction edited successfully",
   "Error adding emoji reaction": "Error adding emoji reaction",
   "Get Offer": "Get Offer",
-  "terms": "Terms : Coupoonat" ,
+  "terms": "Terms : Coupoonat",
   "privacy-policy": "Privacy Policy : Coupoonat",
-  "about": "About : Coupoonat"
+  "about": "About : Coupoonat",
+  "popularDiscounts": "Popular Discounts",
+  "couponPeakTimes": "Coupon Peak Times",
+  "couponShareRate": "Coupon Share Rate"
 }
