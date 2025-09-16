@@ -1,41 +1,36 @@
 "use client";
-import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
-import Author from "@/components/Author";
-import FollowStore from "@/components/FollowStore";
-import CustomersReviews from "@/components/Pages/Home/CustomersReviews";
-import FAQ from "@/components/Pages/Home/FAQ";
-import RateThisComponent from "@/components/RateThisComponent";
-import ShowCouponDetails from "@/components/ShowCouponDetails";
-import SimilarCoupons from "@/components/SimilarCoupons";
-import StoreCoupon from "@/components/StoreCoupon";
-import StoreTable from "@/components/StoreTable";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import StoreSidePart from "@/components/ui/StoreSidePart";
-import ScrollTracker from "@/hooks/ScrollPageAnalytics";
-import useDetectMobile from "@/hooks/useDetectMobile";
-import { useStoreData } from "@/hooks/useStoreData";
-import { secureHtmlLinks } from "@/lib/htmlUtils";
-import { useStore } from "@/store";
-import { CategoryItem, statisticsType } from "@/types";
-import { Accordion, AccordionItem } from "@heroui/accordion";
-import { Button } from "@heroui/button";
-import { Divider } from "@heroui/divider";
-import { StarIcon } from "lucide-react";
-import moment from "moment";
-import { useLocale, useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
-import "moment/locale/ar";
+import 'moment/locale/ar';
 
-import CompetitorsStores from "../../Home/CompetitorsStores";
-import Hero from "../../Home/Hero";
+import AddToFavoriteBtn from '@/components/AddToFavoriteBtn';
+import Author from '@/components/Author';
+import FollowStore from '@/components/FollowStore';
+import CustomersReviews from '@/components/Pages/Home/CustomersReviews';
+import FAQ from '@/components/Pages/Home/FAQ';
+import RateThisComponent from '@/components/RateThisComponent';
+import ShowCouponDetails from '@/components/ShowCouponDetails';
+import SimilarCoupons from '@/components/SimilarCoupons';
+import StoreCoupon from '@/components/StoreCoupon';
+import StoreTable from '@/components/StoreTable';
+import { Card, CardContent } from '@/components/ui/card';
+import StoreSidePart from '@/components/ui/StoreSidePart';
+import useDetectMobile from '@/hooks/useDetectMobile';
+import { useStoreData } from '@/hooks/useStoreData';
+import { secureHtmlLinks } from '@/lib/htmlUtils';
+import { useStore } from '@/store';
+import { CategoryItem, statisticsType } from '@/types';
+import { Accordion, AccordionItem } from '@heroui/accordion';
+import { Button } from '@heroui/button';
+import { Divider } from '@heroui/divider';
+import { StarIcon } from 'lucide-react';
+import moment from 'moment';
+import { useLocale, useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useState } from 'react';
+
+import CompetitorsStores from '../../Home/CompetitorsStores';
+import Hero from '../../Home/Hero';
 
 const StoreChartsPage = dynamic(
   () => import("@/components/ui/StoreCharts/StoreCharts"),

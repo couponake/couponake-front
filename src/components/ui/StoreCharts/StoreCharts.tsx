@@ -133,13 +133,13 @@ function StoreCharts({
         </div>
       </div>
 
-      <div className="w-full h-[700px] md:h-[228.75px] lg:h-[228.75px] xl:h-[228.75px] shadow-none rounded-md overflow-hidden">
+      <div className="w-full h-[600px] md:h-[200px] lg:h-[200px] xl:h-[200px] shadow-none rounded-md overflow-hidden">
         <div className="w-full h-full shadow-md rounded-md overflow-hidden relative">
           <div className="moneyPattern absolute w-full h-full"></div>
           <div className="w-full h-full absolute grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 justify-center items-center gap-0">
-            <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
-                className="text-black text-base w-3/4 text-wrap text-center font-semibold border-1 border-main-500/0 "
+                className="text-black text-base w-3/4 text-wrap text-center font-bold border-1 border-main-500/0 "
                 variant="bordered"
               >
                 {t("Orders")}
@@ -147,12 +147,12 @@ function StoreCharts({
               <div
                 role="group"
                 aria-labelledby="orders-label"
-                className="w-full h-fit text-3xl flex justify-center items-center gap-2"
+                className="w-full h-fit text-2xl flex justify-center items-center gap-2"
               >
                 {statistics?.orders_number > 0 && (
                   <MoveUpRight
                     color="#1B59F8"
-                    size={35}
+                    size={30}
                     aria-hidden="true"
                     className="animate-bell"
                   />
@@ -167,9 +167,9 @@ function StoreCharts({
                 </p>
               </div>
             </div>
-            <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
-                className="text-black text-base font-semibold border-1 border-black/0"
+                className="text-black text-base font-bold border-1 border-black/0"
                 variant="bordered"
               >
                 {t("AmountsSaved")}
@@ -177,12 +177,12 @@ function StoreCharts({
               <div
                 role="group"
                 aria-labelledby="saved-price-label"
-                className="flex items-center gap-2 text-3xl"
+                className="flex items-center gap-2 text-2xl"
               >
                 {statistics?.saved_price > 0 && (
                   <TrendingUp
                     color="#1B59F8"
-                    size={35}
+                    size={30}
                     aria-hidden="true"
                     className="animate-bounce"
                   />
@@ -198,9 +198,9 @@ function StoreCharts({
                 </p>
               </div>
             </div>
-            <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
-                className="text-black text-base font-semibold border-1 border-main-500/0 "
+                className="text-black text-base font-bold border-1 border-main-500/0 "
                 variant="bordered"
               >
                 {t("CouponCopies")}
@@ -208,7 +208,7 @@ function StoreCharts({
               <div
                 role="group"
                 aria-labelledby="coupon-uses-label"
-                className="w-full h-fit text-3xl flex justify-center items-center gap-2"
+                className="w-full h-fit text-2xl flex justify-center items-center gap-2"
               >
                 <Copy
                   color="#1B59F8"
@@ -326,13 +326,13 @@ function StoreCharts({
         </div>
       </div>
 
-      <div className="w-full h-[700px] md:h-[228.75px] lg:h-[228.75px] xl:h-[228.75px] shadow-none rounded-md overflow-hidden">
+      <div className="w-full h-[600px] md:h-[200px] lg:h-[200px] xl:h-[200px] shadow-none rounded-md overflow-hidden">
         <div className="w-full h-full shadow-md rounded-md overflow-hidden relative">
           <div className="moneyPattern absolute w-full h-full"></div>
           <div className="w-full h-full absolute grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 justify-center items-center gap-0">
-            <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
-                className="text-black text-base w-3/4 text-wrap text-center font-semibold border-1 border-main-500/0 "
+                className="text-black text-base w-3/4t-wrap text-center font-semibold border-1 border-main-500/0 "
                 variant="bordered"
               >
                 {t("couponPeakTimes")}
@@ -340,12 +340,12 @@ function StoreCharts({
               <div
                 role="group"
                 aria-labelledby="coupon-peak-label"
-                className="w-full h-fit text-3xl flex justify-center items-center gap-2"
+                className="w-full h-fit text-2xl flex justify-center items-center gap-2"
               >
                 {statistics?.coupon_peak_times !== "null" && (
                   <GiSandsOfTime
                     color="#1B59F8"
-                    size={30}
+                    size={24}
                     aria-hidden="true"
                     className="animate-spinner-ease-spin"
                   />
@@ -360,9 +360,9 @@ function StoreCharts({
                 </p>
               </div>
             </div>
-            <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
-                className="text-black text-base font-semibold border-1 border-black/0"
+                className="text-black text-base font-bold border-1 border-black/0"
                 variant="bordered"
               >
                 {t("popularDiscounts")}
@@ -370,12 +370,12 @@ function StoreCharts({
               <div
                 role="group"
                 aria-labelledby="popular-discounts-label"
-                className="flex items-center gap-2 text-3xl"
+                className="flex items-center gap-2 text-2xl"
               >
                 {statistics?.popular_discounts !== "null" && (
                   <CiDiscount1
                     color="#1B59F8"
-                    size={35}
+                    size={32}
                     aria-hidden="true"
                     className="animate-blink"
                   />
@@ -387,9 +387,9 @@ function StoreCharts({
                 </p>
               </div>
             </div>
-            <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
-                className="text-black text-base font-semibold border-1 border-main-500/0 "
+                className="text-black text-base font-bold border-1 border-main-500/0 "
                 variant="bordered"
               >
                 {t("couponShareRate")}
@@ -397,12 +397,12 @@ function StoreCharts({
               <div
                 role="group"
                 aria-labelledby="coupon-share-label"
-                className="w-full h-fit text-3xl flex justify-center items-center gap-2"
+                className="w-full h-fit text-2xl flex justify-center items-center gap-2"
               >
                 {Number(statistics?.coupon_share_rate) > 0 && (
                   <MoveUpRight
                     color="#1B59F8"
-                    size={35}
+                    size={30}
                     aria-hidden="true"
                     className="animate-bell"
                   />
