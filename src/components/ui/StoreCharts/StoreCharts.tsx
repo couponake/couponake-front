@@ -133,11 +133,11 @@ function StoreCharts({
         </div>
       </div>
 
-      <div className="w-full h-[600px] md:h-[200px] lg:h-[200px] xl:h-[200px] shadow-none rounded-md overflow-hidden">
+      <div className="w-full h-[450px] md:h-[200px] lg:h-[200px] xl:h-[200px] shadow-none rounded-md overflow-hidden">
         <div className="w-full h-full shadow-md rounded-md overflow-hidden relative">
           <div className="moneyPattern absolute w-full h-full"></div>
           <div className="w-full h-full absolute grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 justify-center items-center gap-0">
-            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[150px] md:h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
                 className="text-black text-base w-3/4 text-wrap text-center font-bold border-1 border-main-500/0 "
                 variant="bordered"
@@ -167,7 +167,7 @@ function StoreCharts({
                 </p>
               </div>
             </div>
-            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[150px] md:h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
                 className="text-black text-base font-bold border-1 border-black/0"
                 variant="bordered"
@@ -198,7 +198,7 @@ function StoreCharts({
                 </p>
               </div>
             </div>
-            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[150px] md:h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
                 className="text-black text-base font-bold border-1 border-main-500/0 "
                 variant="bordered"
@@ -236,7 +236,7 @@ function StoreCharts({
             <Card className="w-full h-full p-0 bg-white/0 shadow-none">
               <CardHeader className="justify-center items-center pt-4 pb-0">
                 <Chip
-                  className="text-main-500 text-base  w-3/4 text-wrap text-center font-semibold border-1 border-main-500/0"
+                  className="text-main-500 text-base w-3/4 text-wrap text-center font-semibold border-1 border-main-500/0"
                   variant="bordered"
                 >
                   {t("MostUsedCoupon")}
@@ -247,7 +247,7 @@ function StoreCharts({
                 <div
                   role="group"
                   aria-labelledby="most-used-coupon-label"
-                  className="w-full h-full absolute text-3xl flex justify-center items-start gap-2 pt-10"
+                  className="w-full h-full absolute text-2xl flex justify-center items-start gap-2 pt-10"
                 >
                   <span id="most-used-coupon-label" className="sr-only">
                     Most Used Coupon
@@ -272,7 +272,7 @@ function StoreCharts({
               <CardBody className="w-full h-full flex justify-center items-center gap-2 p-0">
                 <p
                   id="biggest-code"
-                  className="text-main-500 text-3xl"
+                  className="text-main-500 text-2xl"
                   aria-label={`Biggest coupon code: ${statistics?.max_coupon_discount ?? "N/A"}`}
                 >
                   {statistics?.max_coupon_discount}
@@ -326,11 +326,11 @@ function StoreCharts({
         </div>
       </div>
 
-      <div className="w-full h-[600px] md:h-[200px] lg:h-[200px] xl:h-[200px] shadow-none rounded-md overflow-hidden">
+      <div className="w-full h-[450px] md:h-[200px] lg:h-[200px] xl:h-[200px] shadow-none rounded-md overflow-hidden">
         <div className="w-full h-full shadow-md rounded-md overflow-hidden relative">
           <div className="moneyPattern absolute w-full h-full"></div>
           <div className="w-full h-full absolute grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 justify-center items-center gap-0">
-            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[150px] md:h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
                 className="text-black text-base w-3/4t-wrap text-center font-semibold border-1 border-main-500/0 "
                 variant="bordered"
@@ -360,7 +360,7 @@ function StoreCharts({
                 </p>
               </div>
             </div>
-            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[150px] md:h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
                 className="text-black text-base font-bold border-1 border-black/0"
                 variant="bordered"
@@ -387,7 +387,7 @@ function StoreCharts({
                 </p>
               </div>
             </div>
-            <div className="w-full h-[200px] flex flex-col justify-center items-center gap-10">
+            <div className="w-full h-[150px] md:h-[200px] flex flex-col justify-center items-center gap-10">
               <Chip
                 className="text-black text-base font-bold border-1 border-main-500/0 "
                 variant="bordered"

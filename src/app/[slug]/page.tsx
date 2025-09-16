@@ -65,7 +65,6 @@ export async function generateMetadata({
         ],
       },
     };
-
   } catch (error) {
     return {
       title: "Error Loading Page",
@@ -87,7 +86,7 @@ const BlogDetails = async ({
     redirect(response.redirect_url);
   }
 
-  if (response?.status === 'error' || !response?.blog) {
+  if (response?.status === "error" || !response?.blog) {
     return NotFound();
   }
 
@@ -126,13 +125,6 @@ const BlogDetails = async ({
     },
     datePublished: blog?.created_at,
     dateModified: blog?.updated_at || blog?.created_at,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: parseFloat(blog.rate) || 1,
-      ratingCount: blog.voters || 1,
-      bestRating: 5,
-      worstRating: 1,
-    },
   };
 
   const breadcrumbSchema = {
@@ -191,6 +183,21 @@ const BlogDetails = async ({
     dateModified: blog?.updated_at || blog?.created_at,
   };
 
+  const ratingSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product", // you could also use "CreativeWork" but Google won’t show stars for it
+    name: blog?.title,
+    description: blog?.blog_seo?.description,
+    image: blog?.image || `${baseUrl}noPreview.webp`,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: parseFloat(blog.rate) || 1,
+      ratingCount: blog.voters || 1,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  };
+
   return (
     <>
       <script
@@ -217,10 +224,15 @@ const BlogDetails = async ({
           __html: JSON.stringify(webPageSchema),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(ratingSchema),
+        }}
+      />
       <ShowBlog blog={blog} />
     </>
   );
-
 };
 
 export default BlogDetails;
