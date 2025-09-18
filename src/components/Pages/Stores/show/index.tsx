@@ -1,36 +1,33 @@
 "use client";
-import 'moment/locale/ar';
+import "moment/locale/ar";
 
-import AddToFavoriteBtn from '@/components/AddToFavoriteBtn';
-import Author from '@/components/Author';
-import FollowStore from '@/components/FollowStore';
-import CustomersReviews from '@/components/Pages/Home/CustomersReviews';
-import FAQ from '@/components/Pages/Home/FAQ';
-import RateThisComponent from '@/components/RateThisComponent';
-import ShowCouponDetails from '@/components/ShowCouponDetails';
-import SimilarCoupons from '@/components/SimilarCoupons';
-import StoreCoupon from '@/components/StoreCoupon';
-import StoreTable from '@/components/StoreTable';
-import { Card, CardContent } from '@/components/ui/card';
-import StoreSidePart from '@/components/ui/StoreSidePart';
-import useDetectMobile from '@/hooks/useDetectMobile';
-import { useStoreData } from '@/hooks/useStoreData';
-import { secureHtmlLinks } from '@/lib/htmlUtils';
-import { useStore } from '@/store';
-import { CategoryItem, statisticsType } from '@/types';
-import { Accordion, AccordionItem } from '@heroui/accordion';
-import { Button } from '@heroui/button';
-import { Divider } from '@heroui/divider';
-import { StarIcon } from 'lucide-react';
-import moment from 'moment';
-import { useLocale, useTranslations } from 'next-intl';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react';
+import Author from "@/components/Author";
+import FollowStore from "@/components/FollowStore";
+import CustomersReviews from "@/components/Pages/Home/CustomersReviews";
+import FAQ from "@/components/Pages/Home/FAQ";
+import ShowCouponDetails from "@/components/ShowCouponDetails";
+import SimilarCoupons from "@/components/SimilarCoupons";
+import StoreCoupon from "@/components/StoreCoupon";
+import StoreTable from "@/components/StoreTable";
+import StoreCoupons from "@/components/ui/StoreCoupons/StoreCoupons";
+import StoreHeader from "@/components/ui/StoreHeader/StoreHeader";
+import StoreRatingCard from "@/components/ui/StoreRatingCard/StoreRatingCard";
+import StoreSidePart from "@/components/ui/StoreSidePart";
+import useDetectMobile from "@/hooks/useDetectMobile";
+import { useStoreData } from "@/hooks/useStoreData";
+import { secureHtmlLinks } from "@/lib/htmlUtils";
+import { useStore } from "@/store";
+import { CategoryItem, statisticsType } from "@/types";
+import { Accordion, AccordionItem } from "@heroui/accordion";
+import { Button } from "@heroui/button";
+import { Divider } from "@heroui/divider";
+import { useLocale, useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import React from "react";
 
-import CompetitorsStores from '../../Home/CompetitorsStores';
-import Hero from '../../Home/Hero';
+import CompetitorsStores from "../../Home/CompetitorsStores";
+import Hero from "../../Home/Hero";
 
 const StoreChartsPage = dynamic(
   () => import("@/components/ui/StoreCharts/StoreCharts"),
@@ -46,8 +43,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
   const setSelectedCoupon = useStore((store) => store.setSelectedCoupon);
   // Fetch store data using React Query
   const { data, isLoading, isError } = useStoreData(slug);
-  // Coupons Pagination
-  const [visibleCount, setVisibleCount] = useState<number>(2);
 
   // Destructure data for easier access
   const {
@@ -82,16 +77,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
     popular_discounts: store?.popular_discounts ?? "null",
     coupon_share_rate: store?.coupon_share_rate ?? "0",
   };
-
-  const handleShowMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 2, store?.coupons?.length || 0));
-  };
-  const handleShowLess = () => {
-    setVisibleCount(2);
-  };
-
-  const couponsToShow = store?.coupons?.slice(0, visibleCount);
-  const allVisible = visibleCount >= (store?.coupons?.length || 0);
 
   // Show loading state
   if (isLoading) {
@@ -148,81 +133,28 @@ const ShowStore = ({ slug }: { slug: string }) => {
     );
   }
 
+  function makeSafeHtml(content: string | null): { __html: string } {
+    return { __html: secureHtmlLinks(content ?? "") };
+  }
+
   return (
     <div id="show store" className="relative">
       {/* <ScrollTracker event_name={`${store?.slug}_page_depth`} /> */}
       <ShowCouponDetails storeName={store?.store_name} />
       <FollowStore links={store?.social_links} storeName={store?.slug} />
       <Author author={store?.responsible} storeName={store?.slug} />
-      <header className="fixed z-[90] w-full top-7 md:top-3 pt-16 sm:pt-20">
-        <div className="bg-gradient-to-r from-main-700 to-main-600 shadow-lg">
-          <div className="container mx-auto px-4 py-2">
-            <div className="flex flex-row items-center sm:items-start md:items-start lg:items-start gap-3">
-              {store?.image && (
-                <div className="shrink-0">
-                  <Image
-                    src={store?.image}
-                    alt={store?.title}
-                    title={store?.title}
-                    width={!isMobile ? 106 : 71}
-                    height={!isMobile ? 60 : 40}
-                    priority
-                    className="rounded-lg shadow-md object-cover"
-                    unoptimized
-                  />
-                </div>
-              )}
-              <div className="flex-1 flex flex-row items-center justify-between gap-2 min-w-0 bg-purple-500/0">
-                <div className="flex flex-col items-start justify-center gap-1">
-                  <h1 className="text-sm sm:text-base md:text-xl lg:text-xl xl:text-2xl text-white font-bold">
-                    {store?.title}
-                  </h1>
-                  <div className="w-fit flex items-center gap-2">
-                    {!isMobile && (
-                      <>
-                        <div className="flex items-center gap-2">
-                          <StarIcon className="text-yellow-400 fill-yellow-400 w-5 h-5" />
-                          <span className="text-white font-medium">
-                            {Math.round(Number(store?.rate))}
-                            <span className="text-white">/5</span>
-                          </span>
-                          <span className="text-white text-sm">
-                            ({store.voters} {t("Votes")})
-                          </span>
-                        </div>
-
-                        <div className="h-4 w-px bg-gray-300 mx-1"></div>
-                      </>
-                    )}
-                    <div className="flex items-center gap-2 text-white text-sm">
-                      <p>
-                        {t("Last updated")} {": "}{" "}
-                        {moment()
-                          .locale(locale === "ar" ? "ar" : "en")
-                          .format("LL")}{" "}
-                        {" ( " + `${t("Today")}` + " ) "}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                {!isMobile && (
-                  <div className="w-fit flex flex-wrap items-center justify-center gap-2 bg-green-500/0">
-                    <RateThisComponent
-                      title={`${t("Rate")} ${store?.title ?? ""}`}
-                      route={`stores/${store?.slug}/review`}
-                      data={{ store_id: store?.id ?? 0 }}
-                    />
-                    <AddToFavoriteBtn
-                      isFavoriteInitially={store?.isInFavorites}
-                      storeId={store?.id ?? 0}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <StoreHeader
+        store_id={store.id as number}
+        store_slug={store.slug}
+        store_image={store.image}
+        store_title={store.title}
+        isMobile={isMobile}
+        store_rate={store.rate}
+        store_voters={store.voters}
+        store_isInFavorites={store.isInFavorites}
+        locale={locale}
+        t={t}
+      />
       <section className="container flex flex-col-reverse sm:flex-col-reverse md:flex-row lg:flex-row xl:flex-row 2xl:flex-row gap-10 pt-20 sm:pt-40 md:pt-30 lg:pt-24 pb-5">
         {/* sidebar */}
         <div className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
@@ -240,45 +172,21 @@ const ShowStore = ({ slug }: { slug: string }) => {
         </div>
         {/* main content */}
         <div className="w-full sm:w-full md:w-fit lg:w-fit xl:w-fit 2xl:w-fit min-h-150 h-fit flex-1 space-y-5 overflow-hidden">
-          {isMobile && (
-            <Card className="relative overflow-hidden max-sm:mt-4 border-none shadow-md rounded-full">
-              <CardContent className="p-0">
-                <div className="flex items-center justify-between p-2">
-                  <div className="flex items-center gap-2">
-                    <StarIcon className="text-yellow-400 fill-yellow-400 w-5 h-5" />
-                    <span className="text-black font-medium">
-                      {Math.round(Number(store?.rate))}
-                      <span className="text-black">/5</span>
-                    </span>
-                    <span className="text-black text-sm">
-                      ({store.voters} {t("Votes")})
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <RateThisComponent
-                      title={`${t("Rate")} ${store?.title ?? ""}`}
-                      route={`stores/${store?.slug}/review`}
-                      data={{ store_id: store?.id ?? 0 }}
-                    />
-                    <AddToFavoriteBtn
-                      isFavoriteInitially={store?.isInFavorites}
-                      storeId={store?.id ?? 0}
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          )}
+          <StoreRatingCard
+            store_id={store?.id as number}
+            store_slug={store?.slug}
+            store_title={store?.title}
+            store_rate={store?.rate}
+            store_voters={store?.voters}
+            store_isInFavorites={store?.isInFavorites}
+            isMobile={isMobile}
+            t={t}
+          />
           {store?.description && (
-            <>
-              <div className="prose max-w-none my-5">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: secureHtmlLinks(store?.description),
-                  }}
-                />
-              </div>
-            </>
+            <div
+              className="prose max-w-none my-5"
+              dangerouslySetInnerHTML={makeSafeHtml(store?.description)}
+            />
           )}
           {store_banner?.some(
             (banner) => banner?.location === "coupon_block"
@@ -296,42 +204,11 @@ const ShowStore = ({ slug }: { slug: string }) => {
               <Divider />
             </>
           )}
-          <div className="space-y-3 bg-red-400/0">
-            {store?.coupons && store?.coupons.length > 0 && (
-              <>
-                {couponsToShow &&
-                  couponsToShow.map((coupon) => (
-                    <StoreCoupon
-                      key={coupon?.id}
-                      coupon={coupon}
-                      store_image={store?.image}
-                    />
-                  ))}
-
-                <div className="pt-5">
-                  {!allVisible ? (
-                    <Button
-                      variant="light"
-                      color="primary"
-                      className="w-full border-1 border-main-200"
-                      onPress={handleShowMore}
-                    >
-                      {t("More Coupons")}
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="light"
-                      color="primary"
-                      className="w-full border-1 border-main-200"
-                      onPress={handleShowLess}
-                    >
-                      {t("Less Coupons")}
-                    </Button>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
+          <StoreCoupons
+            store_coupons={store?.coupons}
+            store_image={store?.image}
+            t={t}
+          />
           <StoreChartsPage
             statistics={statistics}
             t={t}
@@ -428,9 +305,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
                   >
                     <div
                       className="prose max-w-none"
-                      dangerouslySetInnerHTML={{
-                        __html: secureHtmlLinks(faq?.description),
-                      }}
+                      dangerouslySetInnerHTML={makeSafeHtml(faq?.description)}
                     />
                   </AccordionItem>
                 ))}
