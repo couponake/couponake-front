@@ -151,7 +151,7 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
     "@context": "https://schema.org",
     "@type": "Store",
     name: store?.store?.title,
-    image: store?.store?.image || `${baseUrl}noPreview.webp`,
+    image: (store?.store?.coupon_image ? store?.store?.coupon_image : store?.store?.image)  || `${baseUrl}noPreview.webp`,
     description: store?.store_seo.description,
     slogan: stripHtml(store?.store?.description ? store?.store?.description : ""),
     url: `${baseUrl}store/${store?.store?.slug}/`,
@@ -184,12 +184,6 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
       {
         "@type": "ListItem",
         position: 2,
-        name: "المتاجر",
-        item: `${baseUrl}stores/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
         name: store.store.title,
         item: `${baseUrl}store/${store.store.slug}/`,
       },
