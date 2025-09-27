@@ -1,11 +1,16 @@
-import ShowStore from '@/components/Pages/Stores/show';
-import { useSettingEnabled } from '@/hooks/useIndexingSettings';
-import { StoreResponse } from '@/hooks/useStoreData';
-import api from '@/lib/api';
-import { SettingsEnum } from '@/types/settingsEnum';
-import { headers } from 'next/headers';
-import { redirect } from 'next/navigation';
-import React from 'react';
+import ShowStore from "@/components/Pages/Stores/show";
+import { useSettingEnabled } from "@/hooks/useIndexingSettings";
+import { StoreResponse } from "@/hooks/useStoreData";
+import api from "@/lib/api";
+import { SettingsEnum } from "@/types/settingsEnum";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import React from "react";
 
 const stripHtml = (html: string) => {
   if (!html) return "";
@@ -22,6 +27,11 @@ interface storeSeoType {
   "og:title": string;
   "og:description": string;
   "og:image": string;
+}
+
+async function getStore(slug: string) {
+  const data = await api.request.get<StoreResponse>(`/stores/store/${slug}`);
+  return data;
 }
 
 export async function generateMetadata({
@@ -48,7 +58,9 @@ export async function generateMetadata({
   }
 
   try {
-    const response: { store_seo: storeSeoType } = await api.static(`stores/seo/${slug}`);
+    const response: { store_seo: storeSeoType } = await api.static(
+      `stores/seo/${slug}`
+    );
 
     if ((response as any).redirect_url) {
       return {
@@ -84,12 +96,13 @@ export async function generateMetadata({
         canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
       },
       robots: {
-        index: indexingStore
+        index: indexingStore,
       },
       // OpenGraph metadata
       openGraph: {
         title: seoData["og:title"] || seoData.title || "كوبونات",
-        description: seoData["og:description"] || seoData.description || "كوبونات",
+        description:
+          seoData["og:description"] || seoData.description || "كوبونات",
         images: [
           {
             url: seoData["og:image"] || "",
@@ -102,7 +115,8 @@ export async function generateMetadata({
       twitter: {
         card: "summary_large_image",
         title: seoData["twitter:title"] || seoData.title || "كوبونات",
-        description: seoData["twitter:description"] || seoData.description || "كوبونات",
+        description:
+          seoData["twitter:description"] || seoData.description || "كوبونات",
         images: [
           {
             url: seoData["twitter:image"] || "",
@@ -125,35 +139,40 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
   const reviewsSchema =
     Array.isArray(store.store_reviews) && store.store_reviews.length > 0
       ? store.store_reviews.slice(0, 20).map((review) => {
-        const cleanDescription = review.description
-          ? review.description.replace(/https?:\/\/[^\s]+/g, "").trim()
-          : "";
+          const cleanDescription = review.description
+            ? review.description.replace(/https?:\/\/[^\s]+/g, "").trim()
+            : "";
 
-        return {
-          "@type": "Review",
-          author: {
-            "@type": "Person",
-            name: review.name || "مستخدم",
-          },
-          reviewBody: review?.description || "No review text provided",
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: parseFloat(review.rate) || 1,
-            bestRating: "5",
-            worstRating: "1",
-          },
-          datePublished: review.created_at,
-        };
-      })
+          return {
+            "@type": "Review",
+            author: {
+              "@type": "Person",
+              name: review.name || "مستخدم",
+            },
+            reviewBody: review?.description || "No review text provided",
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: parseFloat(review.rate) || 1,
+              bestRating: "5",
+              worstRating: "1",
+            },
+            datePublished: review.created_at,
+          };
+        })
       : [];
 
   const storeSchema = {
     "@context": "https://schema.org",
     "@type": "Store",
     name: store?.store?.title,
-    image: (store?.store?.coupon_image ? store?.store?.coupon_image : store?.store?.image)  || `${baseUrl}noPreview.webp`,
+    image:
+      (store?.store?.coupon_image
+        ? store?.store?.coupon_image
+        : store?.store?.image) || `${baseUrl}noPreview.webp`,
     description: store?.store_seo.description,
-    slogan: stripHtml(store?.store?.description ? store?.store?.description : ""),
+    slogan: stripHtml(
+      store?.store?.description ? store?.store?.description : ""
+    ),
     url: `${baseUrl}store/${store?.store?.slug}/`,
     "@id": `${baseUrl}store/${store?.store?.slug}/#store`,
     aggregateRating: {
@@ -165,8 +184,8 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
     },
     sameAs: Array.isArray(store?.store?.social_links)
       ? store?.store?.social_links.filter(
-        (link) => typeof link === "string" && /^https?:\/\//.test(link)
-      )
+          (link) => typeof link === "string" && /^https?:\/\//.test(link)
+        )
       : [],
     ...(reviewsSchema.length > 0 && { review: reviewsSchema }),
   };
@@ -217,53 +236,53 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
   const faqItems =
     Array.isArray(store?.store_faqs) && store?.store_faqs.length > 0
       ? store?.store_faqs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: stripHtml(faq.answer),
-        },
-      }))
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: stripHtml(faq.answer),
+          },
+        }))
       : [];
 
   const faqSchema =
     faqItems.length > 0
       ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: faqItems,
-      }
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqItems,
+        }
       : null;
 
   const couponsSchema =
     Array.isArray(store?.store?.coupons) && store?.store?.coupons.length > 0
       ? store?.store?.coupons.slice(0, 3).map((coupon, index) => ({
-        "@context": "https://schema.org",
-        "@type": "Offer",
-        "@id": `${baseUrl}store/${store?.store?.slug}/#coupon-${index}`,
-        name: coupon.title,
-        description: stripHtml(coupon.description || ""),
-        url: coupon.url || `${baseUrl}store/${store?.store?.slug}/`,
-        validFrom: coupon.created_at,
-        validThrough: coupon.expire_date || coupon.updated_at,
-        availability: "https://schema.org/InStock",
-        identifier: coupon.code,
-        seller: {
-          "@id": `${baseUrl}store/${store?.store?.slug}/#store`,
-        },
-        image:
-          coupon?.store_image ||
-          store?.store?.image ||
-          `${baseUrl}noPreview.webp`,
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          description: `خصم بقيمة ${coupon?.discount_value}`,
-          eligibleQuantity: {
-            "@type": "QuantitativeValue",
-            value: coupon?.discount_value,
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "@id": `${baseUrl}store/${store?.store?.slug}/#coupon-${index}`,
+          name: coupon.title,
+          description: stripHtml(coupon.description || ""),
+          url: coupon.url || `${baseUrl}store/${store?.store?.slug}/`,
+          validFrom: coupon.created_at,
+          validThrough: coupon.expire_date || coupon.updated_at,
+          availability: "https://schema.org/InStock",
+          identifier: coupon.code,
+          seller: {
+            "@id": `${baseUrl}store/${store?.store?.slug}/#store`,
           },
-        },
-      }))
+          image:
+            coupon?.store_image ||
+            store?.store?.image ||
+            `${baseUrl}noPreview.webp`,
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            description: `خصم بقيمة ${coupon?.discount_value}`,
+            eligibleQuantity: {
+              "@type": "QuantitativeValue",
+              value: coupon?.discount_value,
+            },
+          },
+        }))
       : [];
 
   const statisticsSchema = {
@@ -316,17 +335,22 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
     ],
   };
 
-
   return faqSchema
     ? [
-      storeSchema,
-      breadcrumbSchema,
-      faqSchema,
-      webPageSchema,
-      ...couponsSchema,
-      statisticsSchema
-    ]
-    : [storeSchema, breadcrumbSchema, webPageSchema, ...couponsSchema, statisticsSchema];
+        storeSchema,
+        breadcrumbSchema,
+        faqSchema,
+        webPageSchema,
+        ...couponsSchema,
+        statisticsSchema,
+      ]
+    : [
+        storeSchema,
+        breadcrumbSchema,
+        webPageSchema,
+        ...couponsSchema,
+        statisticsSchema,
+      ];
 };
 
 const ShowStorePage = async ({
@@ -337,14 +361,21 @@ const ShowStorePage = async ({
   const slug = (await params).slug;
   let schemas: any = [];
 
-  const storeData = await api.request.get(`stores/store/${slug}`);
+  const queryClient = new QueryClient();
+
+  // fetch store once
+  const storeData = await getStore(slug);
+
+  await queryClient.prefetchQuery({
+    queryKey: ["store", slug],
+    queryFn: () => Promise.resolve(storeData),
+  });
 
   if ((storeData as any)?.redirect_url) {
     redirect((storeData as any).redirect_url);
   } else if (storeData && storeData.store) {
     schemas = getStructuredDataSchemas(storeData);
   }
-
 
   return (
     <>
@@ -354,7 +385,9 @@ const ShowStorePage = async ({
           __html: JSON.stringify(schemas),
         }}
       />
-      <ShowStore slug={slug} />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ShowStore slug={slug} />
+      </HydrationBoundary>
     </>
   );
 };
