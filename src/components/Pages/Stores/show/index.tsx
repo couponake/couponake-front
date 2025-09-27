@@ -40,7 +40,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
   const isMobile = useDetectMobile();
   const t = useTranslations();
   const locale = useLocale();
-  const setSelectedCoupon = useStore((store) => store.setSelectedCoupon);
+  // const setSelectedCoupon = useStore((store) => store.setSelectedCoupon);
   // Fetch store data using React Query
   const { data, isLoading, isError } = useStoreData(slug);
 

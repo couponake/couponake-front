@@ -3,14 +3,11 @@ import {
   StoreProps,
   CouponProps,
   BrandProps,
-  CategoryItem,
   BannerItem,
   FaqItem,
   InfoItem,
-  userReview,
   userReviewType,
 } from "@/types";
-import { useStore } from "@/store";
 import api from "@/lib/api";
 
 export interface StoreResponse {
@@ -51,10 +48,11 @@ export interface StoreResponse {
 }
 
 export const useStoreData = (slug: string) => {
-  const { user } = useStore((store) => store);
+  // const { user } = useStore((store) => store);
 
   return useQuery<StoreResponse>({
-    queryKey: ["store", slug, user?.token],
+    // queryKey: ["store", slug, user?.token],
+    queryKey: ["store", slug],
     queryFn: async () => {
       // const endpoint = user?.token ? `stores/${slug}` : `stores/store/${slug}`;
       const endpoint = `stores/store/${slug}`;
