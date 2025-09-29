@@ -21,7 +21,7 @@ const schema = yup.object({
   description: yup.string().nullable(),
 });
 
-type formData = yup.InferType<typeof schema>
+type formData = yup.InferType<typeof schema>;
 
 const RateThisComponent = ({
   data,
@@ -37,7 +37,8 @@ const RateThisComponent = ({
   const t = useTranslations();
   const [isLoading, setIsLoading] = useState(false);
   const {
-    control,register,
+    control,
+    register,
     handleSubmit,
     reset,
     formState: { errors },
@@ -54,14 +55,14 @@ const RateThisComponent = ({
     try {
       setIsLoading(true);
       await MyAxios.post(route, { ...formData, ...data });
-      toast.success(t("Review submitted successfully"))
+      toast.success(t("Review submitted successfully"));
       reset({
         rate: 0,
-        description: ""
-      })
+        description: "",
+      });
     } catch (error) {
       console.log(error);
-      toast.error(t("Something went wrong please try again later"))
+      toast.error(t("Something went wrong please try again later"));
     } finally {
       setIsLoading(false);
     }
@@ -80,39 +81,38 @@ const RateThisComponent = ({
           {title ?? t("Rate this")}
         </h1>
 
-
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4 min-w-64"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 min-w-64">
           <Controller
             name="rate"
             control={control}
             render={({ field }) => (
               <div>
                 <Rate {...field} onChange={field.onChange} />
-                {errors.rate && (
-                  <p className="error">{errors.rate.message}</p>
-                )}
+                {errors.rate && <p className="error">{errors.rate.message}</p>}
               </div>
             )}
           />
-         
-                <Textarea {...register("description")} placeholder={t("Write your review")} description={errors.description && (
-                  <p className="error">{errors.description.message}</p>
-                )}  />
-                
-           
+
+          <Textarea
+            {...register("description")}
+            placeholder={t("Write your review")}
+            description={
+              errors.description && (
+                <p className="error">{errors.description.message}</p>
+              )
+            }
+          />
+
           <Button
             isLoading={isLoading}
             color="primary"
             type="submit"
             className="w-full"
+            name="submit"
           >
             {t("Submit")}
           </Button>
         </form>
-
       </PopoverContent>
     </Popover>
   );

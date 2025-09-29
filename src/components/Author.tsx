@@ -1,13 +1,19 @@
 "use client";
-import { cn } from '@/lib/utils';
-import { Responsibile } from '@/types';
-import { CircleUser } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import { cn } from "@/lib/utils";
+import { Responsibile } from "@/types";
+import { CircleUser } from "lucide-react";
+import { useTranslations } from "next-intl";
+import React, { useState } from "react";
 
-import ShowAuthorDetails from './ShowAuthorDetails';
+import ShowAuthorDetails from "./ShowAuthorDetails";
 
-const Author = ({ author, storeName }: { author: Responsibile, storeName: string }) => {
+const Author = ({
+  author,
+  storeName,
+}: {
+  author: Responsibile;
+  storeName: string;
+}) => {
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
@@ -17,7 +23,7 @@ const Author = ({ author, storeName }: { author: Responsibile, storeName: string
   };
 
   const getResponseDrawer = () => {
-    setIsOpen(false)
+    setIsOpen(false);
     openResponsibleDrawer();
 
     // if (typeof window !== "undefined" && (window as any).gtag) {
@@ -27,11 +33,13 @@ const Author = ({ author, storeName }: { author: Responsibile, storeName: string
     //     author_name: author?.name,
     //   });
     // }
-  }
+  };
 
   return (
     <>
       <button
+        name="author"
+        title="author"
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
         onClick={getResponseDrawer}
@@ -41,9 +49,7 @@ const Author = ({ author, storeName }: { author: Responsibile, storeName: string
         )}
       >
         <CircleUser className="size-7" />
-        {
-          isOpen ? <p>{author?.name}</p> : ""
-        }
+        {isOpen ? <p>{author?.name}</p> : ""}
       </button>
 
       <ShowAuthorDetails

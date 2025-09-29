@@ -1,28 +1,33 @@
 "use client";
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { toast } from '@/components/ui/custom-toast';
-import api from '@/lib/api';
-import { secureHtmlLinks } from '@/lib/htmlUtils';
-import { cn } from '@/lib/utils';
-import { useStore } from '@/store';
-import { CouponProps } from '@/types';
-import { Avatar, AvatarGroup } from '@heroui/avatar';
-import { Button } from '@heroui/button';
-import { useCopyToClipboard } from '@uidotdev/usehooks';
-import { ChevronDown, CopyIcon, ScissorsIcon, ThumbsUpIcon, XCircleIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-
-import FacebookReactions from './FacebookReactions';
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { toast } from "@/components/ui/custom-toast";
+import api from "@/lib/api";
+import { secureHtmlLinks } from "@/lib/htmlUtils";
+import { cn } from "@/lib/utils";
+import { useStore } from "@/store";
+import { CouponProps } from "@/types";
+import { Avatar, AvatarGroup } from "@heroui/avatar";
+import { Button } from "@heroui/button";
+import { useCopyToClipboard } from "@uidotdev/usehooks";
+import {
+  ChevronDown,
+  CopyIcon,
+  ScissorsIcon,
+  ThumbsUpIcon,
+  XCircleIcon,
+} from "lucide-react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import FacebookReactions from "./FacebookReactions";
 
 interface emojiType {
-  id: number
-  coupon_id: number
-  user_id: any
-  emoji: string
-  created_at: string
-  updated_at: string
+  id: number;
+  coupon_id: number;
+  user_id: any;
+  emoji: string;
+  created_at: string;
+  updated_at: string;
 }
 
 const reactionEmojis = {
@@ -74,7 +79,7 @@ const StoreCoupon = ({
   coupon,
   isExpired,
   className,
-  store_image
+  store_image,
 }: {
   coupon: CouponProps;
   isExpired?: boolean;
@@ -86,11 +91,17 @@ const StoreCoupon = ({
   const [, copyToClipboard] = useCopyToClipboard();
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [couponEmojisLocally, setCouponEmojisLocally] = useState<emojiType[]>([])
+  const [couponEmojisLocally, setCouponEmojisLocally] = useState<emojiType[]>(
+    []
+  );
 
   useEffect(() => {
     if (user) {
-      setCouponEmojisLocally(coupon?.emojis?.filter((emoji: emojiType) => emoji?.user_id === user?.id) || []);
+      setCouponEmojisLocally(
+        coupon?.emojis?.filter(
+          (emoji: emojiType) => emoji?.user_id === user?.id
+        ) || []
+      );
     } else {
       setCouponEmojisLocally([] as emojiType[]);
     }
@@ -104,15 +115,28 @@ const StoreCoupon = ({
     if (user) {
       try {
         setIsLoading(true);
-        if (couponEmojisLocally?.find((emoji: emojiType) => (emoji?.user_id === user?.id && emoji?.emoji === value))) {
+        if (
+          couponEmojisLocally?.find(
+            (emoji: emojiType) =>
+              emoji?.user_id === user?.id && emoji?.emoji === value
+          )
+        ) {
           toast.info(t("You Already Reacted"));
-        } else if (couponEmojisLocally?.find((emoji: emojiType) => emoji?.user_id === user?.id && emoji?.emoji !== value)) {
+        } else if (
+          couponEmojisLocally?.find(
+            (emoji: emojiType) =>
+              emoji?.user_id === user?.id && emoji?.emoji !== value
+          )
+        ) {
           const data = await api.request.post("stores/coupon/emoji", {
             emoji: value,
             coupon_id: coupon?.id,
           });
           toast.success(t("Emoji reaction edited successfully"));
-          let editedEmoji = couponEmojisLocally?.find((emoji: emojiType) => emoji?.user_id === user?.id && emoji?.emoji !== value);
+          let editedEmoji = couponEmojisLocally?.find(
+            (emoji: emojiType) =>
+              emoji?.user_id === user?.id && emoji?.emoji !== value
+          );
           if (editedEmoji) {
             editedEmoji.emoji = value;
           }
@@ -123,14 +147,17 @@ const StoreCoupon = ({
             coupon_id: coupon?.id,
           });
           toast.success(t("Emoji reaction added successfully"));
-          setCouponEmojisLocally([...couponEmojisLocally, {
-            id: Date.now(),
-            emoji: value,
-            coupon_id: coupon?.id,
-            user_id: user?.id,
-            created_at: Date.now().toString(),
-            updated_at: Date.now().toString(),
-          }]);
+          setCouponEmojisLocally([
+            ...couponEmojisLocally,
+            {
+              id: Date.now(),
+              emoji: value,
+              coupon_id: coupon?.id,
+              user_id: user?.id,
+              created_at: Date.now().toString(),
+              updated_at: Date.now().toString(),
+            },
+          ]);
         }
       } catch (error) {
         toast.error(t("Error adding emoji reaction"));
@@ -138,28 +165,39 @@ const StoreCoupon = ({
         setIsLoading(false);
       }
     } else {
-      if (couponEmojisLocally?.length > 0 && couponEmojisLocally?.find((emoji: emojiType) => emoji?.emoji === value)) {
+      if (
+        couponEmojisLocally?.length > 0 &&
+        couponEmojisLocally?.find((emoji: emojiType) => emoji?.emoji === value)
+      ) {
         toast.info(t("You Already Reacted"));
-      } else if (couponEmojisLocally?.length > 0 && couponEmojisLocally?.find((emoji: emojiType) => emoji?.emoji !== value)) {
+      } else if (
+        couponEmojisLocally?.length > 0 &&
+        couponEmojisLocally?.find((emoji: emojiType) => emoji?.emoji !== value)
+      ) {
         toast.success(t("Emoji reaction edited successfully"));
-        setCouponEmojisLocally([{
-          id: Date.now(),
-          emoji: value,
-          coupon_id: coupon?.id,
-          user_id: null,
-          created_at: Date.now().toString(),
-          updated_at: Date.now().toString(),
-        }]);
+        setCouponEmojisLocally([
+          {
+            id: Date.now(),
+            emoji: value,
+            coupon_id: coupon?.id,
+            user_id: null,
+            created_at: Date.now().toString(),
+            updated_at: Date.now().toString(),
+          },
+        ]);
       } else {
         toast.success(t("Emoji reaction added successfully"));
-        setCouponEmojisLocally([...couponEmojisLocally, {
-          id: Date.now(),
-          emoji: value,
-          coupon_id: coupon?.id,
-          user_id: null,
-          created_at: Date.now().toString(),
-          updated_at: Date.now().toString(),
-        }]);
+        setCouponEmojisLocally([
+          ...couponEmojisLocally,
+          {
+            id: Date.now(),
+            emoji: value,
+            coupon_id: coupon?.id,
+            user_id: null,
+            created_at: Date.now().toString(),
+            updated_at: Date.now().toString(),
+          },
+        ]);
       }
     }
   };
@@ -194,9 +232,9 @@ const StoreCoupon = ({
         <div className="w-full h-fit flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row 2xl:flex-row items-center justify-between gap-5 md:gap-0 lg:gap-0 xl:gap-0 2xl:gap-0">
           <div className="w-fit h-fit flex flex-col items-start justify-start gap-3 md:gap-5 lg:gap-5 xl:gap-5 2xl:gap-5">
             <div className="w-fit h-fit flex items-center justify-center gap-3">
-              <div className='w-[52px] aspect-square'>
+              <div className="w-[52px] aspect-square">
                 <Image
-                  src={store_image ? store_image : '/noPreview.webp'}
+                  src={store_image ? store_image : "/noPreview.webp"}
                   alt={coupon?.title || "Coupon Image"}
                   title={coupon?.title || "Coupon"}
                   width={52}
@@ -216,9 +254,7 @@ const StoreCoupon = ({
             </div>
             <div className="w-fit h-fit flex flex-wrap items-start justify-center gap-3">
               <span className="inline-flex gap-1 items-center rounded-full bg-gray-200 px-2 py-1 text-[10px] md:text-xs lg:text-xs xl:text-xs font-medium text-gray-600 ring-1 ring-gray-500/0 ring-inset">
-                <p>
-                  {t("Verified")}
-                </p>
+                <p>{t("Verified")}</p>
               </span>
               <span className="inline-flex gap-1 items-center rounded-full bg-gray-200 px-2 py-1 text-[10px] md:text-xs lg:text-xs xl:text-xs font-medium text-gray-600 ring-1 ring-gray-500/0 ring-inset">
                 <p>
@@ -255,7 +291,9 @@ const StoreCoupon = ({
                 color="primary"
                 size="lg"
                 className="text-primary text-sm md:text-base lg:text-base xl:text-base"
-                startContent={<CopyIcon className="size-4 md:size-5 lg:size-5 xl:size-5" />}
+                startContent={
+                  <CopyIcon className="size-4 md:size-5 lg:size-5 xl:size-5" />
+                }
                 onPress={() => setSelectedCoupon(coupon)}
               >
                 {t("Copy Coupon")}
@@ -267,9 +305,16 @@ const StoreCoupon = ({
       <CardFooter className="grid gap-2 border-t p-2">
         <div className="flex items-center justify-between flex-1">
           {coupon?.description && (
-            <Button variant="light" color="primary" onPress={handleViewDetails} className="flex justify-center items-center gap-1">
+            <Button
+              variant="light"
+              color="primary"
+              onPress={handleViewDetails}
+              className="flex justify-center items-center gap-1"
+            >
               {t("View Details")}
-              <ChevronDown className={`size-4 transition-all ${!isDescriptionVisible ? " rotate-0" : " rotate-180"}`} />
+              <ChevronDown
+                className={`size-4 transition-all ${!isDescriptionVisible ? " rotate-0" : " rotate-180"}`}
+              />
             </Button>
           )}
           <span className="w-fit inline-flex gap-1 items-center rounded-none bg-gray-200/0 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/0 ring-inset">
@@ -284,8 +329,12 @@ const StoreCoupon = ({
                 couponEmojisLocally.map((reaction: emojiType) => (
                   <Avatar
                     key={reaction.id}
-                    className="size-5 sm:size-7"
-                    fallback={reactionEmojis[reaction.emoji as keyof typeof reactionEmojis]}
+                    className="size-5 sm:size-7 bg-red-500"
+                    fallback={
+                      reactionEmojis[
+                        reaction.emoji as keyof typeof reactionEmojis
+                      ]
+                    }
                   />
                 ))}
             </AvatarGroup>
@@ -302,7 +351,9 @@ const StoreCoupon = ({
         {isDescriptionVisible && coupon?.description && (
           <div
             className="text-sm text-gray-700 prose max-w-none pb-1"
-            dangerouslySetInnerHTML={{ __html: secureHtmlLinks(coupon?.description) }}
+            dangerouslySetInnerHTML={{
+              __html: secureHtmlLinks(coupon?.description),
+            }}
           />
         )}
       </CardFooter>

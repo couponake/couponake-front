@@ -1,14 +1,14 @@
-import "./store.css";
+'use client';
+import './store.css';
 
-import { statisticsType } from "@/types";
-import { Card, CardBody, Chip, CircularProgress } from "@heroui/react";
-import { ChartPie, Copy, MoveUpRight, TrendingUp } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
-import { CiDiscount1 } from "react-icons/ci";
-import { CardHeader } from "../card";
-import { useInView } from "react-intersection-observer";
-import { CgSandClock } from "react-icons/cg";
-import { GiSandsOfTime } from "react-icons/gi";
+import { statisticsType } from '@/types';
+import { Card, CardBody, Chip, CircularProgress } from '@heroui/react';
+import { ChartPie, Copy, MoveUpRight, TrendingUp } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { CiDiscount1 } from 'react-icons/ci';
+import { GiSandsOfTime } from 'react-icons/gi';
+
+import { CardHeader } from '../card';
 
 function StoreCharts({
   statistics,

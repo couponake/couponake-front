@@ -59,6 +59,8 @@ const AddToFavoriteBtn: React.FC<AddToFavoriteBtnProps> = ({
 
   return (
     <Button
+      name="favorite"
+      title="Favorite"
       color={isFavorite ? "primary" : "default"}
       isIconOnly
       radius="full"
