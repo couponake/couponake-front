@@ -224,7 +224,10 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
     },
     primaryImageOfPage: {
       "@type": "ImageObject",
-      url: store?.store?.image || `${baseUrl}noPreview.webp`,
+      url:
+        (store?.store?.coupon_image
+          ? store?.store?.coupon_image
+          : store?.store?.image) || `${baseUrl}noPreview.webp`,
     },
     datePublished: store?.store?.created_at,
     dateModified: store?.store?.updated_at || store?.store?.created_at,
@@ -271,9 +274,9 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
             "@id": `${baseUrl}store/${store?.store?.slug}/#store`,
           },
           image:
-            coupon?.store_image ||
-            store?.store?.image ||
-            `${baseUrl}noPreview.webp`,
+            (store?.store?.coupon_image
+              ? store?.store?.coupon_image
+              : store?.store?.image) || `${baseUrl}noPreview.webp`,
           priceSpecification: {
             "@type": "UnitPriceSpecification",
             description: `خصم بقيمة ${coupon?.discount_value}`,
