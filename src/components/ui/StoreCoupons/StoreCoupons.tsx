@@ -2,15 +2,16 @@
 import StoreCoupon from "@/components/StoreCoupon";
 import { CouponProps } from "@/types";
 import { Button } from "@heroui/button";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 interface StoreCouponsProps {
   store_coupons: CouponProps[];
   store_image: string;
-  t: any;
 }
 
-function StoreCoupons({ store_coupons, store_image, t }: StoreCouponsProps) {
+function StoreCoupons({ store_coupons, store_image }: StoreCouponsProps) {
+  const t = useTranslations();
   const [visibleCount, setVisibleCount] = useState<number>(2);
 
   const handleShowMore = () => {

@@ -207,7 +207,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
           <StoreCoupons
             store_coupons={store?.coupons}
             store_image={store?.image}
-            t={t}
           />
           <StoreChartsPage
             statistics={statistics}
