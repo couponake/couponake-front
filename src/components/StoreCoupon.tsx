@@ -290,13 +290,14 @@ const StoreCoupon = ({
                 variant="flat"
                 color="primary"
                 size="lg"
-                className="text-primary text-sm md:text-base lg:text-base xl:text-base"
+                className="relative text-primary text-sm md:text-base lg:text-base xl:text-base overflow-visible"
                 startContent={
                   <CopyIcon className="size-4 md:size-5 lg:size-5 xl:size-5" />
                 }
                 onPress={() => setSelectedCoupon(coupon)}
               >
                 {t("Copy Coupon")}
+                <div className="absolute top-1 left-1 hover:inset-0 focus:inset-0 active:inset-0 w-[150px] md:w-[165px] lg:w-[165px] h-[48px] border border-main-500 rounded-[14px]" />
               </Button>
             )}
           </div>
@@ -332,7 +333,7 @@ const StoreCoupon = ({
                     className="size-5 sm:size-7 bg-red-500"
                     fallback={
                       reactionEmojis[
-                        reaction.emoji as keyof typeof reactionEmojis
+                      reaction.emoji as keyof typeof reactionEmojis
                       ]
                     }
                   />
