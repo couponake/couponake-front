@@ -59,7 +59,7 @@ const BestStores = ({
 
   if (isLoading) {
     return (
-      <div className="w-full h-fit bg-[#fafafa] flex flex-col items-center gap-5 shadow-lg p-5 relative my-12 md:my-24 container">
+      <div className="w-full h-fit bg-[#fafafa] flex flex-col items-center gap-5 shadow-lg p-5 relative my-10 md:my-16 container">
         <Spinner />
       </div>
     );
@@ -77,7 +77,7 @@ const BestStores = ({
 
   return (
     <Fragment>
-      <div className="w-full min-h-125 bg-[#fafafa] flex flex-col items-center gap-5 shadow-lg p-5 relative my-12 md:my-24 container">
+      <div className="w-full min-h-125 bg-[#fafafa] flex flex-col items-center gap-5 shadow-lg p-3 md:p-5 relative my-10 md:my-16 container">
         <div className="w-full h-fit overflow-hidden flex flex-wrap items-center justify-between gap-8 bg-green-250/0">
           <h2 className="text-lg font-semibold text-neutral-900 sm:text-xl md:text-2xl">
             {t("Best Stores")}
@@ -105,25 +105,25 @@ const BestStores = ({
               ))}
           </ScrollContainer>
         </div>
-        <div className="w-full h-fit flex flex-wrap items-center justify-center sm:justify-start md:justify-start lg:justify-start xl:justify-start gap-5 bg-green-250/0 p-0">
+        <div className="w-full h-fit flex flex-wrap items-center justify-center sm:justify-start md:justify-start lg:justify-start xl:justify-start gap-3 md:gap-5 bg-transparent p-0">
           {filteredStores?.length > 0 ? (
             filteredStores?.map((store) => (
               <Link
                 target="_self"
                 key={store?.id}
                 href={`/store/${store?.slug}`}
-                // onClick={() => {
-                //   if (typeof window !== 'undefined' && (window as any).gtag) {
-                //     (window as any).gtag("event", "featured_store_click", {
-                //       store_id: store?.id,
-                //       store_name: store?.slug,
-                //     });
-                //   }
-                // }}
+              // onClick={() => {
+              //   if (typeof window !== 'undefined' && (window as any).gtag) {
+              //     (window as any).gtag("event", "featured_store_click", {
+              //       store_id: store?.id,
+              //       store_name: store?.slug,
+              //     });
+              //   }
+              // }}
               >
-                <Card className="w-32 h-fit p-1 rounded-b-3xl bg-[#F0F0F0]/75 hover:bg-main-500 text-black hover:text-white shadow-none rounded-t-full overflow-hidden border-none flex flex-col items-center justify-start duro">
+                <Card className="w-26 md:w-32 h-fit p-1 rounded-b-3xl bg-[#F0F0F0]/75 hover:bg-main-500 text-black hover:text-white shadow-none rounded-t-full overflow-hidden border-none flex flex-col items-center justify-start duro">
                   <CardContent className="p-0 rounded-full bg-white shadow-lg">
-                    <div className="w-30 aspect-square">
+                    <div className="w-24 md:w-30 aspect-square">
                       <Image
                         src={store?.image || "noPreview.webp"}
                         alt={store?.slug || "Store Image"}
@@ -135,7 +135,7 @@ const BestStores = ({
                       />
                     </div>
                   </CardContent>
-                  <CardFooter className="w-full h-fit p-0 py-1 flex justify-center">
+                  <CardFooter className="w-full h-fit p-0 pt-2 pb-1 flex justify-center">
                     <p className="text-xs font-medium text-center sm:text-sm w-fit">
                       {store?.coupons_count} {t("Coupons")}
                     </p>
