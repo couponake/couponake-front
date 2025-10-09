@@ -141,7 +141,7 @@ const Hero = ({
           ...(autoplay ? [Autoplay({ delay: 4000 })] : []),
           // ClassNames(),
         ]}
-        className="mx-auto w-full max-w-[90%] relative"
+        className="mx-auto container relative"
         setApi={setApi}
       >
         <CarouselPrevious className="z-40 absolute size-6 sm:size-7 md:size-8 lg:size-10 xl:size-10 2xl:size-10 left-4 sm:left-5 md:left-6 lg:left-8 xl:left-8 2xl:left-8 top-1/2 transform -translate-y-1/2 bg-white/30 border-none" />
