@@ -28,6 +28,7 @@ import React from "react";
 
 import CompetitorsStores from "../../Home/CompetitorsStores";
 import Hero from "../../Home/Hero";
+import ScrollTracker from "@/hooks/ScrollPageAnalytics";
 
 const StoreChartsPage = dynamic(
   () => import("@/components/ui/StoreCharts/StoreCharts"),
@@ -139,7 +140,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
 
   return (
     <div id="show store" className="relative">
-      {/* <ScrollTracker event_name={`${store?.slug}_page_depth`} /> */}
+      <ScrollTracker event_name={`${store?.slug}_page_depth`} />
       <ShowCouponDetails storeName={store?.store_name} />
       <FollowStore links={store?.social_links} storeName={store?.slug} />
       <Author author={store?.responsible} storeName={store?.slug} />
@@ -191,19 +192,19 @@ const ShowStore = ({ slug }: { slug: string }) => {
           {store_banner?.some(
             (banner) => banner?.location === "coupon_block"
           ) && (
-            <>
-              <Hero
-                storeName={store.slug}
-                carouselItemClassName="basis-full md:basis-full lg:basis-full"
-                banners={store_banner?.filter(
-                  (banner) => banner?.location === "coupon_block"
-                )}
-                location="coupon_block"
-                className="mt-7"
-              />
-              <Divider />
-            </>
-          )}
+              <>
+                <Hero
+                  storeName={store.slug}
+                  carouselItemClassName="basis-full md:basis-full lg:basis-full"
+                  banners={store_banner?.filter(
+                    (banner) => banner?.location === "coupon_block"
+                  )}
+                  location="coupon_block"
+                  className="mt-7"
+                />
+                <Divider />
+              </>
+            )}
           <StoreCoupons
             store_coupons={store?.coupons}
             store_image={store?.image}
@@ -275,20 +276,20 @@ const ShowStore = ({ slug }: { slug: string }) => {
           {store_banner?.some(
             (banner) => banner?.location === "above_texts"
           ) && (
-            <>
-              <Divider />
-              <Hero
-                storeName={store.slug}
-                carouselItemClassName="basis-full md:basis-full lg:basis-full"
-                banners={store_banner?.filter(
-                  (banner) => banner?.location === "above_texts"
-                )}
-                location="above_texts"
-                className="mt-7"
-              />
-              <Divider />
-            </>
-          )}
+              <>
+                <Divider />
+                <Hero
+                  storeName={store.slug}
+                  carouselItemClassName="basis-full md:basis-full lg:basis-full"
+                  banners={store_banner?.filter(
+                    (banner) => banner?.location === "above_texts"
+                  )}
+                  location="above_texts"
+                  className="mt-7"
+                />
+                <Divider />
+              </>
+            )}
           {store_infos?.length > 0 && (
             <div className="space-y-5 mb-11">
               <h2 className="text-lg font-semibold sm:text-xl">

@@ -121,12 +121,12 @@ const Categories = ({
               key={category.id}
               className="group block"
               onClick={() => {
-                // if (typeof window !== 'undefined' && (window as any).gtag) {
-                //   (window as any).gtag("event", "categories_click", {
-                //     category_name: category.name,
-                //     category_id: category.id,
-                //   });
-                // }
+                if (typeof window !== 'undefined' && (window as any).gtag) {
+                  (window as any).gtag("event", "categories_click", {
+                    category_name: category.name,
+                    category_id: category.id,
+                  });
+                }
               }}
             >
               <div className="bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">

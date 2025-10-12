@@ -51,12 +51,12 @@ const FAQ = ({
                 const item = document.getElementById(`faq-body-${faq.id}`);
                 const isCurrentlyOpen = item?.getAttribute("data-open") === "true";
 
-                // if (!isCurrentlyOpen && typeof window !== "undefined" && (window as any).gtag) {
-                //   (window as any).gtag("event", `${storeName}_faq_click`, {
-                //     faq_id: faq?.id,
-                //     faq_question: faq?.question,
-                //   });
-                // }
+                if (!isCurrentlyOpen && typeof window !== "undefined" && (window as any).gtag) {
+                  (window as any).gtag("event", `${storeName}_faq_click`, {
+                    faq_id: faq?.id,
+                    faq_question: faq?.question,
+                  });
+                }
 
                 // Mark item as opened (simple workaround)
                 if (item) {

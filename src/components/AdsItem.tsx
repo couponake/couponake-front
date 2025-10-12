@@ -21,12 +21,12 @@ export default function AdsItem({ item }: { item: AdItem }) {
       href={item?.url === null ? "" : item?.url}
       rel='nofollow noopener noreferrer'
       onClick={() => {
-        // if (typeof window !== 'undefined' && (window as any).gtag) {
-        //   (window as any).gtag("event", "deal_click", {
-        //     deal_id: item?.id,
-        //     deal_title: item?.title,
-        //   });
-        // }
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag("event", "deal_click", {
+            deal_id: item?.id,
+            deal_title: item?.title,
+          });
+        }
 
         if (item?.code) {
           copyToClipboard(item?.code);
