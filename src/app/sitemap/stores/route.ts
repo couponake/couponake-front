@@ -3,7 +3,7 @@ import { getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://couponalyom.com/sitemap/";
+  const baseURL = "https://coupoonat.com/sitemap/";
   //get Settings
   const storesSettings = await useSitemapSettingEnabled();
   if (!storesSettings.stores || !storesSettings.superSite) {

@@ -35,7 +35,7 @@ export async function generateMetadata() {
         : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -50,7 +50,7 @@ export async function generateMetadata() {
         : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],

@@ -38,7 +38,7 @@ export async function generateMetadata() {
         : "Review site rules, your rights, and obligations as a user",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -53,7 +53,7 @@ export async function generateMetadata() {
         : "Review site rules, your rights, and obligations as a user",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -84,7 +84,7 @@ const TermsPage = async () => {
         dateModified: page.created_at
           ? new Date(page.created_at).toISOString()
           : undefined,
-        image: "https://couponalyom.com/coupoonatLogo.webp",
+        image: "https://coupoonat.com/coupoonatLogo.webp",
         breadcrumb: {
           "@type": "BreadcrumbList",
           itemListElement: [
@@ -126,7 +126,7 @@ const TermsPage = async () => {
           name: "كوبونات",
           logo: {
             "@type": "ImageObject",
-            url: "https://couponalyom.com/coupoonatLogo.webp",
+            url: "https://coupoonat.com/coupoonatLogo.webp",
           },
         },
         isPartOf: {

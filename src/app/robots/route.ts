@@ -14,7 +14,7 @@ Disallow: /*.js$
 Disallow: /*.woff$
 Disallow: /*.woff2$
 
-Sitemap: https://couponalyom.com/sitemap.xml
+Sitemap: https://coupoonat.com/sitemap.xml
 `.trim();
 
   return new NextResponse(content, {

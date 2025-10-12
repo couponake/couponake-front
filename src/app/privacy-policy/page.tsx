@@ -37,7 +37,7 @@ export async function generateMetadata() {
         : "Learn how we protect your data and keep your information secure",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -52,7 +52,7 @@ export async function generateMetadata() {
         : "Learn how we protect your data and keep your information secure",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -109,7 +109,7 @@ const PrivacyPage = async () => {
       dateModified: page.created_at
         ? new Date(page.created_at).toISOString()
         : undefined,
-      image: "https://couponalyom.com/coupoonatLogo.webp",
+      image: "https://coupoonat.com/coupoonatLogo.webp",
       author: {
         "@type": "Organization",
         name: "كوبونات",
@@ -120,7 +120,7 @@ const PrivacyPage = async () => {
         name: "كوبونات",
         logo: {
           "@type": "ImageObject",
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
         },
       },
       articleBody: secureHtmlLinks(page.content as string),

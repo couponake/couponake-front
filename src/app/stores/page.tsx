@@ -20,7 +20,7 @@ export async function generateMetadata() {
       ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً"
       : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
     alternates: {
-      canonical: "https://couponalyom.com/stores/",
+      canonical: "https://coupoonat.com/stores/",
     },
     robots: {
       index: indexingStores,
@@ -34,7 +34,7 @@ export async function generateMetadata() {
         : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -49,7 +49,7 @@ export async function generateMetadata() {
         : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],

@@ -8,12 +8,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "api.couponalyom.com",
+        hostname: "api.coupoonat.com",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "couponalyom.com",
+        hostname: "coupoonat.com",
         pathname: "/**",
       },
       {
