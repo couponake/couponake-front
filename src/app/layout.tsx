@@ -14,7 +14,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { Cairo, Poppins } from 'next/font/google';
 import Script from 'next/script';
-import { cache } from 'react';
 
 interface homeSeoType {
   author: string;
@@ -129,18 +128,18 @@ export default async function LocaleLayout({
       dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <head>
-        {/* <Script id="google-tag-manager" strategy="afterInteractive">
+        <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-WWJH6F2R');
+            })(window,document,'script','dataLayer','GTM-WVTK3W7B');
           `}
         </Script>
         <Script
           strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-P8V7VBR3B9`}
+          src={`https://www.googletagmanager.com/gtag/js?id=G-NWJT32SKJ7`}
         />
         <Script
           id="google-analytics"
@@ -150,22 +149,22 @@ export default async function LocaleLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-P8V7VBR3B9', {
+              gtag('config', 'G-NWJT32SKJ7', {
                 page_path: window.location.pathname,
               });
             `,
           }}
-        /> */}
+        />
       </head>
       <body className={`${cairo.variable} ${poppins.variable} font-inherit`}>
-        {/* <noscript>
+        <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WWJH6F2R"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WVTK3W7B"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
           />
-        </noscript> */}
+        </noscript>
         <SessionProvider>
           <Analytics />
           <NextIntlClientProvider locale={locale} messages={messages}>

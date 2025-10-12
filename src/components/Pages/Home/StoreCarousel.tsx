@@ -28,16 +28,16 @@ const StoreCarousel = ({
     return null;
   }
 
-  // const HandleClickStore = (store: StoreProps) => {
-  //   if (title === "Latest Stores") {
-  //     if (typeof window !== 'undefined' && (window as any).gtag) {
-  //       (window as any).gtag("event", "latest_stores_click", {
-  //         store_id: store?.id,
-  //         store_name: store?.slug,
-  //       });
-  //     }
-  //   }
-  // }
+  const HandleClickStore = (store: StoreProps) => {
+    if (title === "Latest Stores") {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag("event", "latest_stores_click", {
+          store_id: store?.id,
+          store_name: store?.slug,
+        });
+      }
+    }
+  }
 
   return (
     <Carousel
@@ -83,7 +83,7 @@ const StoreCarousel = ({
             <Link
               target="_self"
               href={`/store/${store?.slug}`}
-              // onClick={() => HandleClickStore(store)}
+            // onClick={() => HandleClickStore(store)}
             >
               <Card className="w-32 h-fit p-1 rounded-b-3xl bg-[#F0F0F0]/50 hover:bg-main-500 text-black hover:text-white shadow-none rounded-full overflow-hidden border-none flex flex-col items-center justify-start">
                 <CardContent className="p-0 rounded-full bg-white shadow-none">

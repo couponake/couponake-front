@@ -25,48 +25,48 @@ function StoreCharts({
   const [hasFired, setHasFired] = useState<boolean>(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(
-  //     ([entry]) => {
-  //       if (entry.isIntersecting && !hasFired) {
-  //         // Start the 2-second timer
-  //         timeoutRef.current = setTimeout(() => {
-  //           if (typeof window !== 'undefined' && (window as any).gtag) {
-  //             (window as any).gtag("event", `${storeName}_statistics_view`, {
-  //               event_category: "store_statistics",
-  //               event_label: storeName,
-  //               value: `Store Love: ${statistics?.store_love || 0}%`,
-  //               currency: statistics?.currency || "SAR",
-  //             });
-  //           }
-  //           setHasFired(true); // prevent future triggers
-  //         }, 2000);
-  //       } else {
-  //         // If user scrolls away before 2 seconds, clear the timer
-  //         if (timeoutRef.current) {
-  //           clearTimeout(timeoutRef.current);
-  //           timeoutRef.current = null;
-  //         }
-  //       }
-  //     },
-  //     {
-  //       threshold: 0.5, // at least 50% visible
-  //     }
-  //   );
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasFired) {
+          // Start the 2-second timer
+          timeoutRef.current = setTimeout(() => {
+            if (typeof window !== 'undefined' && (window as any).gtag) {
+              (window as any).gtag("event", `${storeName}_statistics_view`, {
+                event_category: "store_statistics",
+                event_label: storeName,
+                value: `Store Love: ${statistics?.store_love || 0}%`,
+                currency: statistics?.currency || "SAR",
+              });
+            }
+            setHasFired(true); // prevent future triggers
+          }, 2000);
+        } else {
+          // If user scrolls away before 2 seconds, clear the timer
+          if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+            timeoutRef.current = null;
+          }
+        }
+      },
+      {
+        threshold: 0.5, // at least 50% visible
+      }
+    );
 
-  //   if (sectionRef.current) {
-  //     observer.observe(sectionRef.current);
-  //   }
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-  //   return () => {
-  //     if (sectionRef.current) {
-  //       observer.unobserve(sectionRef.current);
-  //     }
-  //     if (timeoutRef.current) {
-  //       clearTimeout(timeoutRef.current);
-  //     }
-  //   };
-  // }, [hasFired, storeName]);
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [hasFired, storeName]);
 
   return (
     <section

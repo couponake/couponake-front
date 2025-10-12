@@ -65,22 +65,22 @@ const Hero = ({
         location ? b?.location === location : true
       )[selectedIndex];
 
-      // if (storeName) {
-      //   if (visibleBanner && typeof window !== 'undefined' && (window as any).gtag) {
-      //     (window as any).gtag("event", `${storeName}_banner_view`, {
-      //       banner_id: visibleBanner.id,
-      //       banner_title: visibleBanner.title,
-      //       banner_location: visibleBanner?.location
-      //     });
-      //   }
-      // } else {
-      //   if (visibleBanner && typeof window !== 'undefined' && (window as any).gtag) {
-      //     (window as any).gtag("event", "banner_view", {
-      //       banner_id: visibleBanner.id,
-      //       banner_title: visibleBanner.title,
-      //     });
-      //   }
-      // }
+      if (storeName) {
+        if (visibleBanner && typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag("event", `${storeName}_banner_view`, {
+            banner_id: visibleBanner.id,
+            banner_title: visibleBanner.title,
+            banner_location: visibleBanner?.location
+          });
+        }
+      } else {
+        if (visibleBanner && typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag("event", "banner_view", {
+            banner_id: visibleBanner.id,
+            banner_title: visibleBanner.title,
+          });
+        }
+      }
     };
 
     onSelect();
@@ -97,22 +97,22 @@ const Hero = ({
   }
 
   const handleBannerClick = (banner: BannerItem) => {
-    // if (storeName) {
-    //   if (typeof window !== 'undefined' && (window as any).gtag) {
-    //     (window as any).gtag("event", `${storeName}_banner_click`, {
-    //       banner_id: banner?.id,
-    //       banner_title: banner?.title,
-    //       banner_location: banner?.location
-    //     });
-    //   }
-    // } else {
-    //   if (typeof window !== 'undefined' && (window as any).gtag) {
-    //     (window as any).gtag("event", "banner_click", {
-    //       banner_id: banner?.id,
-    //       banner_title: banner?.title,
-    //     });
-    //   }
-    // }
+    if (storeName) {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag("event", `${storeName}_banner_click`, {
+          banner_id: banner?.id,
+          banner_title: banner?.title,
+          banner_location: banner?.location
+        });
+      }
+    } else {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag("event", "banner_click", {
+          banner_id: banner?.id,
+          banner_title: banner?.title,
+        });
+      }
+    }
 
     if (banner?.code) {
       toast.success(t("Coupon copied successfully and will be redirected to the store"));
