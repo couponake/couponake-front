@@ -57,11 +57,11 @@ const FollowStore = ({ links, storeName }: { links: string | { key: string, valu
   useEffect(() => {
     if (isOpen && !hasTrackedOpen.current) {
       hasTrackedOpen.current = true;
-      // if (typeof window !== "undefined" && (window as any).gtag) {
-      //   (window as any).gtag("event", `${storeName}_support`, {
-      //     event_category: `${storeName}_support`,
-      //   });
-      // }
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", `${storeName}_support`, {
+          event_category: `${storeName}_support`,
+        });
+      }
     }
   }, [isOpen]);
 

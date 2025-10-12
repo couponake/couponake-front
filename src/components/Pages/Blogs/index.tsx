@@ -82,7 +82,7 @@ export default function BlogsList({
       {
         !isLoading ? (
           <>
-            {/* {trackScroll && <ScrollTracker event_name="blogs_scroll_depth" event_category="Blogs_Scroll" />} */}
+            {trackScroll && <ScrollTracker event_name="blogs_scroll_depth" event_category="Blogs_Scroll" />}
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               variants={container}

@@ -66,12 +66,12 @@ const BestStores = ({
   }
 
   const filterStores = (category: FeaturedStoresCategoryItem) => {
-    // if (typeof window !== 'undefined' && (window as any).gtag) {
-    //   (window as any).gtag("event", "featured_category_click", {
-    //     category_id: category?.id,
-    //     category_title: category?.name,
-    //   });
-    // }
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag("event", "featured_category_click", {
+        category_id: category?.id,
+        category_title: category?.name,
+      });
+    }
     setSelectedCat(category.id);
   };
 
@@ -112,14 +112,14 @@ const BestStores = ({
                 target="_self"
                 key={store?.id}
                 href={`/store/${store?.slug}`}
-              // onClick={() => {
-              //   if (typeof window !== 'undefined' && (window as any).gtag) {
-              //     (window as any).gtag("event", "featured_store_click", {
-              //       store_id: store?.id,
-              //       store_name: store?.slug,
-              //     });
-              //   }
-              // }}
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag("event", "featured_store_click", {
+                      store_id: store?.id,
+                      store_name: store?.slug,
+                    });
+                  }
+                }}
               >
                 <Card className="w-26 md:w-32 h-fit p-1 rounded-b-3xl bg-[#F0F0F0]/75 hover:bg-main-500 text-black hover:text-white shadow-none rounded-t-full overflow-hidden border-none flex flex-col items-center justify-start duro">
                   <CardContent className="p-0 rounded-full bg-white shadow-lg">

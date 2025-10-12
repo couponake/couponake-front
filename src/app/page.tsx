@@ -95,7 +95,7 @@ export default async function Home() {
 
   return (
     <>
-      {/* <ScrollTracker event_name="home_scroll_depth" /> */}
+      <ScrollTracker event_name="home_scroll_depth" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
