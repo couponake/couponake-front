@@ -37,7 +37,7 @@ export async function generateMetadata() {
         : "Meet our vision and the experts delivering top shopping coupons",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -52,7 +52,7 @@ export async function generateMetadata() {
         : "Meet our vision and the experts delivering top shopping coupons",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -73,7 +73,7 @@ const AboutUsPage = async () => {
     "@type": "Article",
     headline: page.title,
     description: "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء",
-    image: "https://couponalyom.com/coupoonatLogo.webp",
+    image: "https://coupoonat.com/coupoonatLogo.webp",
     author: {
       "@type": "Organization",
       name: "كوبونات",
@@ -83,7 +83,7 @@ const AboutUsPage = async () => {
       name: "كوبونات",
       logo: {
         "@type": "ImageObject",
-        url: "https://couponalyom.com/coupoonatLogo.webp",
+        url: "https://coupoonat.com/coupoonatLogo.webp",
       },
     },
     datePublished: page.created_at,
