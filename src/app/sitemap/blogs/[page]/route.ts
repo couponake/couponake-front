@@ -16,7 +16,7 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const blogs = await getAllBlogsData(pageNumber);
-  const baseURL = "https://couponalyom.com/";
+  const baseURL = "https://coupoonat.com/";
 
   const urls = blogs.slugs
     .map((slug) => {

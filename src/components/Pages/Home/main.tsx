@@ -47,7 +47,7 @@ const Main = ({
       <BestStoresWrapperClientSide stores={featured_stores} />
 
       {latest_stores?.length > 0 ? (
-        <div className="relative my-12 md:my-24 container">
+        <div className="relative my-10 md:my-16 container">
           <StoreCarousel
             className="max-w-full min-h-30"
             title="Latest Stores"

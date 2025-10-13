@@ -34,7 +34,7 @@ export async function generateMetadata() {
         : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -49,7 +49,7 @@ export async function generateMetadata() {
         : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],

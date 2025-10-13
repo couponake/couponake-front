@@ -38,7 +38,7 @@ export async function generateMetadata() {
         : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -53,7 +53,7 @@ export async function generateMetadata() {
         : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],

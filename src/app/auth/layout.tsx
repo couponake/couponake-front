@@ -25,7 +25,7 @@ export async function generateMetadata() {
         : "Log in or register to track and save your favorite coupons",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -40,7 +40,7 @@ export async function generateMetadata() {
         : "Log in or register to track and save your favorite coupons",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],

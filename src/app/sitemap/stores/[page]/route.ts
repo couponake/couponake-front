@@ -16,7 +16,7 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const stores = await getAllStoresData(pageNumber);
-  const baseURL = "https://couponalyom.com/";
+  const baseURL = "https://coupoonat.com/";
 
   const urls = stores.storesSlugs
     .map((slug) => {

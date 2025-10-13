@@ -36,7 +36,7 @@ export async function generateMetadata() {
         : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -51,7 +51,7 @@ export async function generateMetadata() {
         : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -68,13 +68,13 @@ const FAQ = async () => {
     name: "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا",
     description: "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها",
     url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/`,
-    image: "https://couponalyom.com/coupoonatLogo.webp",
+    image: "https://coupoonat.com/coupoonatLogo.webp",
     publisher: {
       "@type": "Organization",
       name: "كوبونات",
       logo: {
         "@type": "ImageObject",
-        url: "https://couponalyom.com/coupoonatLogo.webp",
+        url: "https://coupoonat.com/coupoonatLogo.webp",
       },
     },
     mainEntity: data?.data.map((faq) => ({

@@ -31,7 +31,7 @@ export default function LatestCoupons() {
 
   if (isLoading) {
     return (
-      <div className="relative my-12 md:my-24 container">
+      <div className="relative my-10 md:my-16 container">
         <Carousel
           opts={{
             align: "center",
@@ -98,7 +98,7 @@ export default function LatestCoupons() {
   if (!latest_coupons || latest_coupons?.length === 0) return null;
 
   return (
-    <div className="relative my-12 md:my-24 container">
+    <div className="relative my-10 md:my-16 container">
       <Carousel
         opts={{
           align: "center",

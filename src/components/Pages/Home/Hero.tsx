@@ -10,6 +10,7 @@ import {
 import { toast } from '@/components/ui/custom-toast';
 import { cn } from '@/lib/utils';
 import { BannerItem } from '@/types';
+import { Spinner } from '@heroui/spinner';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import Autoplay from 'embla-carousel-autoplay';
 import { useLocale, useTranslations } from 'next-intl';
@@ -53,6 +54,7 @@ const Hero = ({
   const locale = useLocale();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!api) return;
@@ -91,9 +93,23 @@ const Hero = ({
     };
   }, [api, banners]);
 
+  useEffect(() => {
+    if (banners && banners.length > 0) {
+      setIsLoading(false);
+    }
+  }, [banners]);
+
 
   if (!banners || banners.length === 0) {
     return null;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="h-full min-h-24 md:min-h-64 min-w-80 overflow-x-hidden mx-auto container mb-7 md:mb-14 w-full rounded-2xl bg-[#efefef] flex justify-center items-center">
+        <Spinner />
+      </div>
+    )
   }
 
   const handleBannerClick = (banner: BannerItem) => {
@@ -129,8 +145,7 @@ const Hero = ({
     }
   }
   return (
-    <div className={cn("mb-7 md:mb-16", className)}>
-      {/* {loading && <HeroLoadingUi />} */}
+    <div className={cn("mb-7 md:mb-14", className)}>
       <Carousel
         opts={{
           align: "center",
@@ -141,7 +156,7 @@ const Hero = ({
           ...(autoplay ? [Autoplay({ delay: 4000 })] : []),
           // ClassNames(),
         ]}
-        className="mx-auto w-full max-w-[90%] relative"
+        className="mx-auto container relative"
         setApi={setApi}
       >
         <CarouselPrevious className="z-40 absolute size-6 sm:size-7 md:size-8 lg:size-10 xl:size-10 2xl:size-10 left-4 sm:left-5 md:left-6 lg:left-8 xl:left-8 2xl:left-8 top-1/2 transform -translate-y-1/2 bg-white/30 border-none" />

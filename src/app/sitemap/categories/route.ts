@@ -3,7 +3,7 @@ import { getAllCategories } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://couponalyom.com/";
+  const baseURL = "https://coupoonat.com/";
   //get Settings
   const categoriesSettings = await useSitemapSettingEnabled();
   if (!categoriesSettings.categories || !categoriesSettings.superSite) {

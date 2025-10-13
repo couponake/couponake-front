@@ -36,7 +36,7 @@ export async function generateMetadata() {
         : "This page makes it easy for you to search and access discount coupons by selecting the country you prefer",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
@@ -51,7 +51,7 @@ export async function generateMetadata() {
         : "This page makes it easy for you to search and access discount coupons by selecting the country you prefer",
       images: [
         {
-          url: "https://couponalyom.com/coupoonatLogo.webp",
+          url: "https://coupoonat.com/coupoonatLogo.webp",
           alt: "Coupoonat Logo",
         },
       ],
