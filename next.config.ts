@@ -93,8 +93,8 @@ const nextConfig = {
     return [
       ...redirectsList.flatMap((redirect: any) => [
         {
-          source: redirect,
-          destination: "/",
+          source: redirect.from,
+          destination: redirect.to,
           permanent: true,
         },
       ]),
