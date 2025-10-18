@@ -16,19 +16,19 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const stores = await getAllStoresData(pageNumber);
-  const baseURL = "https://coupoonat.com/";
+  const baseURL = "https://coupoonat.com/store/";
 
   const urls = stores.storesSlugs
     .map((slug) => {
       return `
     <url>
-      <loc>${baseURL}/store/${slug}/</loc>
+      <loc>${baseURL}${slug}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
       <xhtml:link 
         rel="canonical" 
-        href="${baseURL}store/${slug}/"
+        href="${baseURL}${slug}/"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
       />
     </url>
