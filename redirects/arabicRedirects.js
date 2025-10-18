@@ -1,0 +1,96 @@
+const encode = (path) => encodeURI(path);
+
+//stores
+const storeRedirects = [
+  { from: '/فروع-عطور-بازل-2/', to: '/store/bazil-store/' },
+];
+
+//blogs
+const blogRedirects = [
+  { from: '/فروع-عطور-اوسما/', to: '/blog/' },
+  { from: '/موقع-بازل/', to: '/blog/' },
+  { from: '/موقع-مجوهـرات-الريفان/', to: '/blog/' },
+  { from: '/موقع-ون-كارد/', to: '/blog/' },
+  { from: '/طرق-توفير-المال/', to: '/blog/' },
+  { from: '/موقع-وست-ال/', to: '/blog/' },
+  { from: '/موقع-تو-بي/', to: '/blog/' },
+  { from: '/عروض-متجر-زرافة/', to: '/blog/' },
+  { from: '/موقع-basharacare/', to: '/blog/' },
+  { from: '/موقع-fordeal/', to: '/blog/' },
+  { from: '/موقع-لايك-كارد/', to: '/blog/' },
+  { from: '/جميع-معلومات-موقع-ستايل/', to: '/blog/' },
+  { from: '/موقع-نايس-وان/', to: '/blog/' },
+  { from: '/موقع-هومز-مارت/', to: '/blog/' },
+  { from: '/موقع-عبد-الصمد-القرشي/', to: '/blog/' },
+  { from: '/موقع-nayomi/', to: '/blog/' },
+  { from: '/mothercare/', to: '/blog/' },
+  { from: '/avokado/', to: '/blog/' },
+  { from: '/qa/', to: '/blog/' },
+  { from: '/موقع-puma/', to: '/blog/' },
+  { from: '/eya-clean/', to: '/blog/' },
+  { from: '/موقع-voga/', to: '/blog/' },
+  { from: '/موقع-امازون/', to: '/blog/' },
+  { from: '/موقع-باريس-غالر/', to: '/blog/' },
+  { from: '/موقع-صيدلية-النهدي/', to: '/blog/' },
+  { from: '/موقع-اريكا/', to: '/blog/' },
+  { from: '/موقع-ايوا/', to: '/blog/' },
+  { from: '/موقع-نون/', to: '/blog/' },
+  { from: '/موقع-هومز-ار-اس/', to: '/blog/' },
+  { from: '/موقع-sivvi/', to: '/blog/' },
+  { from: '/lyle-and-scott/', to: '/blog/' },
+  { from: '/موقع-اندر-ارمر/', to: '/blog/' },
+  { from: '/موقع-مودانيسا/', to: '/blog/' },
+  { from: '/موقع-اناس/', to: '/blog/' },
+  { from: '/وسادة-ظهر-للكرسي/', to: '/blog/' },
+  { from: '/موقع-جيس/', to: '/blog/' },
+  { from: '/hm/', to: '/blog/' },
+  { from: '/موقع-ليفيل-شوز/', to: '/blog/' },
+  { from: '/موقع-سيترس/', to: '/blog/' },
+  { from: '/موقع-كارفور/', to: '/blog/' },
+  { from: '/aldakheeloud/', to: '/blog/' },
+  { from: '/موقع-riva/', to: '/blog/' },
+  { from: '/موقع-فيرست-كراي/', to: '/blog/' },
+  { from: '/موقع-نمشي/', to: '/blog/' },
+  { from: '/albdah/', to: '/blog/' },
+  { from: '/موقع-لولوليمون/', to: '/blog/' },
+  { from: '/كرسي-الصلاة-نون/', to: '/blog/' },
+  { from: '/موقع-ريك-راك/', to: '/blog/' },
+  { from: '/store/', to: '/blog/' },
+  { from: '/موقع-ديكاتلون/', to: '/blog/' },
+  { from: '/موقع-الاصيل-اونلاين/', to: '/blog/' },
+  { from: '/موقع-starzplay/', to: '/blog/' },
+  { from: '/موقع-alsaif-gallery/', to: '/blog/' },
+  { from: '/موقع-ايهيرب/', to: '/blog/' },
+  { from: '/ghazi-boutique/', to: '/blog/' },
+  { from: '/موقع-ذا-بودي-شوب/', to: '/blog/' },
+  { from: '/ارخص-مواقع-التسوق-في-السعودية/', to: '/blog/' },
+  { from: '/موقع-cos/', to: '/blog/' },
+  { from: '/موقع-metro-brazil/', to: '/blog/' },
+  { from: '/chatbot/', to: '/blog/' },
+  { from: '/موقع-نينجا/', to: '/blog/' },
+  { from: '/موقع-waffarha/', to: '/blog/' },
+  { from: '/موقع-ماماز-اند-باباز/', to: '/blog/' },
+  { from: '/americaneagle/', to: '/blog/' },
+  { from: '/أفضل-الطرق-لاستخدام-كوبونات-الخصم/', to: '/blog/' },
+  { from: '/موقع-دبدوب/', to: '/blog/' },
+  { from: '/موقع-ايزيل/', to: '/blog/' },
+  { from: '/موقع-قصر-الأواني/', to: '/blog/' },
+];
+
+const storesRedirects = (list) =>
+  list.flatMap(({ from, to }) => [
+    { source: from, destination: to, permanent: true },
+    { source: encode(from), destination: to, permanent: true },
+  ]);
+
+const blogsRedirects = (list) =>
+  list.flatMap(({ from, to }) => [
+    { source: from + ':path*', destination: to, permanent: true },
+    { source: encode(from) + ':path*', destination: to, permanent: true },
+  ]);
+
+// Combine, with stores first to ensure priority
+module.exports = [
+  ...storesRedirects(storeRedirects),
+  ...blogsRedirects(blogRedirects),
+];

@@ -1,5 +1,6 @@
 const createNextIntlPlugin = require("next-intl/plugin");
-const redirectsList = require("./redirects");
+const baseRedirects = require('./redirects/baseRedirects');
+const arabicRedirects = require('./redirects/arabicRedirects');
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
@@ -91,13 +92,8 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      ...redirectsList.flatMap((url: { source: string; destination: string }) => [
-        {
-          source: url.source,
-          destination: url.destination,
-          permanent: true,
-        },
-      ]),
+      ...baseRedirects,
+      ...arabicRedirects,
 
       // Comprehensive pattern matching
       {
