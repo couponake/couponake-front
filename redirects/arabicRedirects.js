@@ -74,8 +74,8 @@ const blogRedirects = [
 
 const blogsRedirects = (list) =>
   list.flatMap(({ from, to }) => [
-    { source: from + ':path*', destination: to, permanent: true },
-    { source: encode(from) + ':path*', destination: to, permanent: true },
+    { source: from, destination: to, permanent: true },
+    { source: encode(from), destination: to, permanent: true },
   ]);
 
 module.exports = [
