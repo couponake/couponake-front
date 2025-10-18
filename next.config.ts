@@ -91,10 +91,10 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      ...redirectsList.flatMap((redirect: any) => [
+      ...redirectsList.flatMap((url: { source: string; destination: string }) => [
         {
-          source: redirect.from,
-          destination: redirect.to,
+          source: url.source,
+          destination: url.destination,
           permanent: true,
         },
       ]),
