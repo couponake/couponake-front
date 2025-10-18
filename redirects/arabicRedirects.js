@@ -1,10 +1,5 @@
 const encode = (path) => encodeURI(path);
 
-//stores
-const storeRedirects = [
-  { from: '/فروع-عطور-بازل-2/', to: '/store/bazil-store/' },
-];
-
 //blogs
 const blogRedirects = [
   { from: '/فروع-عطور-اوسما/', to: '/blog/' },
@@ -77,20 +72,12 @@ const blogRedirects = [
   { from: '/موقع-قصر-الأواني/', to: '/blog/' },
 ];
 
-const storesRedirects = (list) =>
-  list.flatMap(({ from, to }) => [
-    { source: from, destination: to, permanent: true },
-    { source: encode(from), destination: to, permanent: true },
-  ]);
-
 const blogsRedirects = (list) =>
   list.flatMap(({ from, to }) => [
     { source: from + ':path*', destination: to, permanent: true },
     { source: encode(from) + ':path*', destination: to, permanent: true },
   ]);
 
-// Combine, with stores first to ensure priority
 module.exports = [
-  ...storesRedirects(storeRedirects),
   ...blogsRedirects(blogRedirects),
 ];
