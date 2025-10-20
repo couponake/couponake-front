@@ -144,6 +144,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/store/:slug([a-zA-Z0-9-]+)/:path+",
+        destination: "/store/:slug/",
+        permanent: true,
+      },
+      {
         source: "/author/:slug*",
         destination: "/",
         permanent: true,
@@ -155,6 +160,17 @@ const nextConfig = {
       },
       {
         source: "/:protocol(http|https)/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/category/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        // Redirect paginated URLs like /something/page/2/
+        source: "/:slug*/page/:page(\\d+)/",
         destination: "/",
         permanent: true,
       },
