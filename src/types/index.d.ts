@@ -172,18 +172,18 @@ export type FaqItem = {
 export type SettingsItem = {
   id: number;
   name:
-    | "_token"
-    | "site_name"
-    | "footer_description"
-    | "facebook"
-    | "side_whatsapp"
-    | "side_telegram"
-    | "instagram"
-    | "image"
-    | "footer_logo"
-    | "popup_url"
-    | "popup_location"
-    | "popup_image";
+  | "_token"
+  | "site_name"
+  | "footer_description"
+  | "facebook"
+  | "side_whatsapp"
+  | "side_telegram"
+  | "instagram"
+  | "image"
+  | "footer_logo"
+  | "popup_url"
+  | "popup_location"
+  | "popup_image";
   val: string;
 };
 
@@ -246,6 +246,8 @@ export type BannerItem = {
   title?: string;
   code?: string;
   image?: string;
+  image_small: string;
+  image_medium: string;
   slug: string;
   url: string;
   type: "general" | "banner";
@@ -279,8 +281,8 @@ export type StoreProps = {
   category?: { id: number; name: string; slug: string }[];
   responsible: Responsibile;
   store_table:
-    | { id: number; code: string; title: string; description: string }[]
-    | [];
+  | { id: number; code: string; title: string; description: string }[]
+  | [];
   currency: string;
   saved_price: string;
   orders_number: number;
