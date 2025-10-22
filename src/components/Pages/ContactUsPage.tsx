@@ -1,19 +1,19 @@
 "use client";
-import 'react-international-phone/style.css';
+import "react-international-phone/style.css";
 
-import { toast } from '@/components/ui/custom-toast';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import api from '@/lib/api';
-import { Button } from '@heroui/button';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { PhoneInput } from 'react-international-phone';
-import { BreadcrumbList, ContactPage } from 'schema-dts';
-import { InferType, object, string } from 'yup';
+import { toast } from "@/components/ui/custom-toast";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import api from "@/lib/api";
+import { Button } from "@heroui/button";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslations } from "next-intl";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { PhoneInput } from "react-international-phone";
+import { BreadcrumbList, ContactPage } from "schema-dts";
+import { InferType, object, string } from "yup";
 const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
 // Contact form validation schema
@@ -30,6 +30,7 @@ const contactSchema = object().shape({
     .required("validation.subject_required")
     .max(255, "validation.subject_max"),
   message: string().required("validation.message_required"),
+  website: string().nullable(),
 });
 
 type ContactFormData = InferType<typeof contactSchema>;
@@ -53,12 +54,31 @@ const ContactUsPage = () => {
       phone: "",
       subject: "",
       message: "",
+      website: "",
     },
   });
 
   const onSubmit = async (formData: ContactFormData) => {
+    if (formData.website) {
+      // console.warn("Spam detected - honeypot triggered");
+      return; // 👈 Do nothing or optionally show a fake success message
+    }
+
     setIsSubmitting(true);
     try {
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value === null || value === "" || value === undefined) {
+          delete formData[key as keyof typeof formData];
+        }
+
+        if (
+          key === "phone" &&
+          (value === null || value?.toString().length <= 3)
+        ) {
+          delete formData[key as keyof typeof formData];
+        }
+      });
+
       const data = await api.request.post("home/send/contact", formData);
       toast.success(t("Your message has been sent successfully"));
       setSubmitted(true);
@@ -146,6 +166,13 @@ const ContactUsPage = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <input
+                  type="text"
+                  {...register("website")}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  style={{ display: "none" }}
+                />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <Input
