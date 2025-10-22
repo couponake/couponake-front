@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { toast } from '@/components/ui/custom-toast';
+import useDetectMobile from '@/hooks/useDetectMobile';
 import { cn } from '@/lib/utils';
 import { BannerItem } from '@/types';
 import { Spinner } from '@heroui/spinner';
@@ -55,6 +56,7 @@ const Hero = ({
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const mobileScreen = useDetectMobile();
 
   useEffect(() => {
     if (!api) return;
@@ -192,7 +194,7 @@ const Hero = ({
                               quality={100}
                               priority
                               alt={banner?.title ?? "Banner"}
-                              src={banner?.image}
+                              src={mobileScreen && !storeName ? banner?.image_small : banner?.image}
                               unoptimized
                             />
                           </div>
