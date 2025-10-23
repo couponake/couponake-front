@@ -2,7 +2,17 @@ const encode = (path) => encodeURI(path);
 
 //stores
 const storeRedirects = [
-  { from: '/فروع-عطور-بازل-2/', to: '/store/bazil-store/' }
+  { from: '/فروع-عطور-بازل-2/', to: '/store/bazil-store/' },
+  { from: '/store/azadea/', to: '/store/azadea-ازاديا/' },
+  { from: '/store/ibrand/', to: '/store/ibrand-online/' },
+  { from: '/store/namshi/', to: '/store/namshi-نمشي/' },
+  { from: '/store/noon/', to: '/store/noon-نون/' },
+  { from: '/store/new-balance/', to: '/store/نيو-بالانس-new-balance/' },
+  { from: '/store/qa-cosmetics/', to: '/store/qa/' },
+  { from: '/store/كود-خصم-كيوي/', to: '/store/kiwi-store/' },
+  { from: '/store/carrefour/', to: '/store/كارفور-carrefour/' },
+  { from: '/store/زورا-zura/', to: '/store/zura/' },
+  { from: '/store/كود-خصم-تريجر-ايلاند/', to: '/store/treasure-island/' },
 ]
 
 //blogs
