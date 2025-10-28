@@ -377,5 +377,6 @@
   "about": "About : Coupoonat",
   "popularDiscounts": "Popular Discounts",
   "couponPeakTimes": "Coupon Peak Times",
-  "couponShareRate": "Coupon Share Rate"
+  "couponShareRate": "Coupon Share Rate",
+  "robotVerification": "Please verify you are not a robot"
 }
