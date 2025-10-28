@@ -1,6 +1,5 @@
 "use client";
 import "react-international-phone/style.css";
-
 import { toast } from "@/components/ui/custom-toast";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { PhoneInput } from "react-international-phone";
 import { BreadcrumbList, ContactPage } from "schema-dts";
 import { InferType, object, string } from "yup";
+import ReCAPTCHA from "react-google-recaptcha";
 const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
 // Contact form validation schema
@@ -39,6 +39,7 @@ const ContactUsPage = () => {
   const t = useTranslations();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const {
     register,
@@ -64,6 +65,12 @@ const ContactUsPage = () => {
       return; // 👈 Do nothing or optionally show a fake success message
     }
 
+    // 2️⃣ reCAPTCHA check
+    if (!captchaToken) {
+      toast.error(t("robotVerification"));
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       Object.entries(formData).forEach(([key, value]) => {
@@ -79,10 +86,14 @@ const ContactUsPage = () => {
         }
       });
 
-      const data = await api.request.post("home/send/contact", formData);
+      const data = await api.request.post("home/send/contact", {
+        ...formData,
+        recaptcha: captchaToken,
+      });
       toast.success(t("Your message has been sent successfully"));
       setSubmitted(true);
       reset();
+      setCaptchaToken(null); // reset reCAPTCHA token
     } catch (error) {
       console.error(t("Error submitting contact form:"), error);
       toast.error(t("Failed to send your message"));
@@ -254,6 +265,11 @@ const ContactUsPage = () => {
                   />
                 </div>
 
+                <ReCAPTCHA
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                  onChange={(token: string | null) => setCaptchaToken(token)}
+                />
+
                 <div className="flex justify-center mt-8">
                   <Button
                     type="submit"
@@ -261,6 +277,10 @@ const ContactUsPage = () => {
                     className="gradient-btn px-8 py-6 text-lg"
                     size="lg"
                     isLoading={isSubmitting}
+                    disabled={captchaToken === null}
+                    style={{
+                      cursor: captchaToken === null ? "not-allowed" : "pointer",
+                    }}
                   >
                     {t("Send Message")}
                   </Button>
