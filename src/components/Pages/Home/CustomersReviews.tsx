@@ -1,14 +1,21 @@
 "use client";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Rate } from '@/components/ui/rate';
-import { Skeleton } from '@/components/ui/skeleton';
-import { cn } from '@/lib/utils';
-import { testimonialType, userReviewType } from '@/types';
-import { Avatar } from '@heroui/avatar';
-import Autoplay from 'embla-carousel-autoplay';
-import { QuoteIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useEffect, useRef } from 'react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Rate } from "@/components/ui/rate";
+import { Skeleton } from "@/components/ui/skeleton";
+import { secureHtmlLinks } from "@/lib/htmlUtils";
+import { cn } from "@/lib/utils";
+import { testimonialType, userReviewType } from "@/types";
+import { Avatar } from "@heroui/avatar";
+import Autoplay from "embla-carousel-autoplay";
+import { QuoteIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useEffect, useRef } from "react";
 
 interface generalType {
   id: number;
@@ -17,13 +24,17 @@ interface generalType {
   description: string;
   image?: string;
   store_id?: number;
-};
+}
+
+function makeSafeHtml(content: string | null): { __html: string } {
+  return { __html: secureHtmlLinks(content ?? "") };
+}
 
 export default function CustomersReviews({
   reviews,
   className,
   isLoading,
-  page
+  page,
 }: {
   reviews: testimonialType[] | userReviewType[];
   className?: string;
@@ -34,7 +45,7 @@ export default function CustomersReviews({
   const seenReviewIds = useRef<Set<number>>(new Set());
   const reviewRefs = useRef<Record<number, HTMLElement | null>>({});
 
-  const reviewsReformat: generalType[] = reviews?.map(review => {
+  const reviewsReformat: generalType[] = reviews?.map((review) => {
     if ("stars" in review) {
       return {
         id: Number(review.id),
@@ -42,7 +53,7 @@ export default function CustomersReviews({
         image: review.image,
         rate: review.stars,
         description: review.description,
-      }
+      };
     }
     return {
       id: Number(review.id),
@@ -50,8 +61,8 @@ export default function CustomersReviews({
       rate: review.rate,
       description: review.description,
       store_id: review.store_id,
-    }
-  })
+    };
+  });
 
   useEffect(() => {
     if (!reviewsReformat || reviewsReformat.length === 0) return;
@@ -68,11 +79,20 @@ export default function CustomersReviews({
               seenReviewIds.current.add(id);
 
               if (typeof window !== "undefined" && (window as any).gtag) {
-                (window as any).gtag("event", page === "home" ? "testimonials_seen" : `${page}_reviews_seen`, {
-                  event_category: page === "home" ? "testimonials" : `${page}_customer_reviews`,
-                  event_label: name,
-                  value: id,
-                });
+                (window as any).gtag(
+                  "event",
+                  page === "home"
+                    ? "testimonials_seen"
+                    : `${page}_reviews_seen`,
+                  {
+                    event_category:
+                      page === "home"
+                        ? "testimonials"
+                        : `${page}_customer_reviews`,
+                    event_label: name,
+                    value: id,
+                  }
+                );
               }
             }
           }
@@ -91,7 +111,6 @@ export default function CustomersReviews({
       observer.disconnect();
     };
   }, [reviewsReformat]);
-
 
   return (
     <div className={cn("mx-auto w-full max-w-6xl px-4 py-12", className)}>
@@ -152,47 +171,56 @@ export default function CustomersReviews({
                 </CarouselItem>
               ))
               : // Actual content
-              reviewsReformat?.map((review: generalType) => (
-                review?.description !== null && (
-                  <CarouselItem
-                    key={review.id}
-                    className="z-10 my-5 md:basis-1/2 md:pl-4 lg:basis-1/3"
-                  >
-                    <div
-                      ref={(el) => { reviewRefs.current[review.id] = el; }}
-                      data-review-id={review.id}
-                      data-reviewer-name={review.name}
-                      className="bg-white relative flex h-full w-full flex-col justify-between rounded-md p-[1.4rem] shadow-lg"
-                      dir="auto"
+              reviewsReformat?.map(
+                (review: generalType) =>
+                  review?.description !== null && (
+                    <CarouselItem
+                      key={review.id}
+                      className="z-10 my-5 md:basis-1/2 md:pl-4 lg:basis-1/3"
                     >
                       <div
-                        className="text-store-text-secondary relative break-words"
-                        id="item-text"
+                        ref={(el) => {
+                          reviewRefs.current[review.id] = el;
+                        }}
+                        data-review-id={review.id}
+                        data-reviewer-name={review.name}
+                        className="bg-white relative flex h-full w-full flex-col justify-between rounded-md p-[1.4rem] shadow-lg"
+                        dir="auto"
                       >
-                        <p className="mb-2 mt-2.5 text-sm line-clamp-3 leading-6 text-main-600 md:mt-4">
-                          {review?.description}
-                        </p>
-                      </div>
-
-                      <div className="-mx-2 mt-6 flex items-center">
-                        <Avatar
-                          showFallback
-                          src={review?.image ?? ""}
-                          name={review?.name ?? "User"}
-                          className="mx-2 h-10 w-10 rounded-full"
-                        />
-                        <div className="mx-2">
-                          <p className="mb-2 text-base text-main-600">
-                            {review?.name}
-                          </p>
-                          <Rate readOnly defaultValue={Number(review?.rate)} />
+                        <div
+                          className="text-store-text-secondary relative break-words"
+                          id="item-text"
+                        >
+                          <p
+                            className="mb-2 mt-2.5 text-sm line-clamp-3 leading-6 text-main-600 md:mt-4"
+                            dangerouslySetInnerHTML={makeSafeHtml(
+                              review?.description
+                            )}
+                          />
                         </div>
+
+                        <div className="-mx-2 mt-6 flex items-center">
+                          <Avatar
+                            showFallback
+                            src={review?.image ?? ""}
+                            name={review?.name ?? "User"}
+                            className="mx-2 h-10 w-10 rounded-full"
+                          />
+                          <div className="mx-2">
+                            <p className="mb-2 text-base text-main-600">
+                              {review?.name}
+                            </p>
+                            <Rate
+                              readOnly
+                              defaultValue={Number(review?.rate)}
+                            />
+                          </div>
+                        </div>
+                        <QuoteIcon className="absolute end-4 top-4 -scale-x-100 -scale-y-100 text-3xl text-main-600 opacity-10" />
                       </div>
-                      <QuoteIcon className="absolute end-4 top-4 -scale-x-100 -scale-y-100 text-3xl text-main-600 opacity-10" />
-                    </div>
-                  </CarouselItem>
-                )
-              ))}
+                    </CarouselItem>
+                  )
+              )}
           </CarouselContent>
           <div className="max-lg:hidden">
             <CarouselPrevious />
