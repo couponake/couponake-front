@@ -1,34 +1,33 @@
 "use client";
-import "moment/locale/ar";
+import 'moment/locale/ar';
 
-import Author from "@/components/Author";
-import FollowStore from "@/components/FollowStore";
-import CustomersReviews from "@/components/Pages/Home/CustomersReviews";
-import FAQ from "@/components/Pages/Home/FAQ";
-import ShowCouponDetails from "@/components/ShowCouponDetails";
-import SimilarCoupons from "@/components/SimilarCoupons";
-import StoreCoupon from "@/components/StoreCoupon";
-import StoreTable from "@/components/StoreTable";
-import StoreCoupons from "@/components/ui/StoreCoupons/StoreCoupons";
-import StoreHeader from "@/components/ui/StoreHeader/StoreHeader";
-import StoreRatingCard from "@/components/ui/StoreRatingCard/StoreRatingCard";
-import StoreSidePart from "@/components/ui/StoreSidePart";
-import useDetectMobile from "@/hooks/useDetectMobile";
-import { useStoreData } from "@/hooks/useStoreData";
-import { secureHtmlLinks } from "@/lib/htmlUtils";
-import { useStore } from "@/store";
-import { CategoryItem, statisticsType } from "@/types";
-import { Accordion, AccordionItem } from "@heroui/accordion";
-import { Button } from "@heroui/button";
-import { Divider } from "@heroui/divider";
-import { useLocale, useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import React from "react";
+import Author from '@/components/Author';
+import FollowStore from '@/components/FollowStore';
+import CustomersReviews from '@/components/Pages/Home/CustomersReviews';
+import FAQ from '@/components/Pages/Home/FAQ';
+import ShowCouponDetails from '@/components/ShowCouponDetails';
+import SimilarCoupons from '@/components/SimilarCoupons';
+import StoreCoupon from '@/components/StoreCoupon';
+import StoreTable from '@/components/StoreTable';
+import StoreCoupons from '@/components/ui/StoreCoupons/StoreCoupons';
+import StoreHeader from '@/components/ui/StoreHeader/StoreHeader';
+import StoreRatingCard from '@/components/ui/StoreRatingCard/StoreRatingCard';
+import StoreSidePart from '@/components/ui/StoreSidePart';
+import ScrollTracker from '@/hooks/ScrollPageAnalytics';
+import useDetectMobile from '@/hooks/useDetectMobile';
+import { useStoreData } from '@/hooks/useStoreData';
+import { secureHtmlLinks } from '@/lib/htmlUtils';
+import { CategoryItem, statisticsType } from '@/types';
+import { Accordion, AccordionItem } from '@heroui/accordion';
+import { Button } from '@heroui/button';
+import { Divider } from '@heroui/divider';
+import { useLocale, useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import React from 'react';
 
-import CompetitorsStores from "../../Home/CompetitorsStores";
-import Hero from "../../Home/Hero";
-import ScrollTracker from "@/hooks/ScrollPageAnalytics";
+import CompetitorsStores from '../../Home/CompetitorsStores';
+import Hero from '../../Home/Hero';
 
 const StoreChartsPage = dynamic(
   () => import("@/components/ui/StoreCharts/StoreCharts"),
