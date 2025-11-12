@@ -1,27 +1,27 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import {
   Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
   DropdownItem,
+  DropdownMenu,
+  DropdownSection,
+  DropdownTrigger,
 } from "@heroui/dropdown";
+import { Headset } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { cn } from "@/lib/utils";
-import { TbShoppingBagPlus } from "react-icons/tb";
+import React, { useState } from "react";
 import {
   FaFacebook,
   FaInstagram,
-  FaTelegram,
-  FaWhatsapp,
-  FaPhone,
-  FaTiktok,
   FaLinkedin,
+  FaPhone,
+  FaSnapchatSquare,
+  FaTelegram,
+  FaTiktok,
+  FaWhatsapp,
   FaYoutube,
-  FaSnapchatSquare
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-
 
 type SocialLinks = {
   facebook?: string;
@@ -49,32 +49,33 @@ const ICONS_MAP: Record<keyof SocialLinks, React.ReactNode> = {
   snapchat: <FaSnapchatSquare className="size-5 text-[#fffc00]" />,
 };
 
-const FollowStore = ({ links, storeName }: { links: string | { key: string, value: string }[], storeName: string }) => {
+const FollowStore = ({
+  links,
+  storeName,
+}: {
+  links: string | { key: string; value: string }[];
+  storeName: string;
+}) => {
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
-  const hasTrackedOpen = useRef<boolean>(false);
-
-  useEffect(() => {
-    if (isOpen && !hasTrackedOpen.current) {
-      hasTrackedOpen.current = true;
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", `${storeName}_support`, {
-          event_category: `${storeName}_support`,
-        });
-      }
-    }
-  }, [isOpen]);
-
 
   const toggleIsOpen = () => {
     setIsOpen(!isOpen);
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", `${storeName}_support`, {
+        event_category: `${storeName}_support`,
+      });
+    }
   };
 
   const menuItems = Object.entries(links)
     .filter(([key, value]) => value && ICONS_MAP[key as keyof SocialLinks])
     .map(([key, value]) => ({
       key,
-      label: key.charAt(0).toUpperCase() + key.slice(1) === "Twitter" ? "X" : key.charAt(0).toUpperCase() + key.slice(1),
+      label:
+        key.charAt(0).toUpperCase() + key.slice(1) === "Twitter"
+          ? "X"
+          : key.charAt(0).toUpperCase() + key.slice(1),
       href: value,
       icon: ICONS_MAP[key as keyof SocialLinks],
     }));
@@ -82,21 +83,32 @@ const FollowStore = ({ links, storeName }: { links: string | { key: string, valu
   if (menuItems.length === 0) return null;
 
   return (
-    <>
-      <Dropdown isOpen={isOpen} onOpenChange={setIsOpen} placement={"left-start"}>
-        <DropdownTrigger>
-          <button
-            onMouseEnter={toggleIsOpen}
-            className={cn(
-              "bg-main-500 rtl:max-w-44 shadow fixed top-60 flex-row-reverse z-[100] ltr:-left-12 rtl:-right-9 rotate-90 ltr:hover:-left-12 rtl:hover:-right-9 rounded-md transition-all ease-in-out duration-300 text-white py-2 px-3 flex items-center gap-3",
-              isOpen && "rtl:-right-9 ltr:-left-12"
-            )}
-          >
-            {/* <TbShoppingBagPlus className="size-7" /> */}
-            <p>{t("Follow this store")} </p>
-          </button>
-        </DropdownTrigger>
-        <DropdownMenu aria-label="Static Actions">
+    <Dropdown
+      onOpenChange={setIsOpen}
+      placement={"left-start"}
+      shouldBlockScroll={false}
+    >
+      <DropdownTrigger>
+        <button
+          onClick={toggleIsOpen}
+          className={cn(
+            "bg-white/35 w-max shadow fixed top-90 rtl:right-0 ltr:left-0 z-[100] rounded-e-md outline-none border-none text-main-500 py-2 px-3"
+          )}
+        >
+          <Headset className="size-10" />
+        </button>
+      </DropdownTrigger>
+      <DropdownMenu aria-label="Static Actions">
+        <DropdownSection
+          showDivider={false}
+          title={
+            (
+              <span className="text-main-500 text-base rtl:font-semibold ltr:font-normal">
+                {t("Follow this store")}
+              </span>
+            ) as unknown as string
+          }
+        >
           {menuItems?.map((item) => (
             <DropdownItem
               key={item.key}
@@ -110,9 +122,9 @@ const FollowStore = ({ links, storeName }: { links: string | { key: string, valu
               {item.label}
             </DropdownItem>
           ))}
-        </DropdownMenu>
-      </Dropdown>
-    </>
+        </DropdownSection>
+      </DropdownMenu>
+    </Dropdown>
   );
 };
 

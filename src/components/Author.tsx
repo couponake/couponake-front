@@ -44,7 +44,7 @@ const Author = ({
         onMouseLeave={() => setIsOpen(false)}
         onClick={getResponseDrawer}
         className={cn(
-          "bg-white w-max shadow fixed top-90 flex-row-reverse z-[100] rounded-e-md transition-all ease-in-out duration-300 text-main-500 py-2 px-3 flex items-center gap-3",
+          "bg-white w-max shadow fixed top-40 flex-row-reverse z-[100] rounded-e-md transition-all ease-in-out duration-300 text-main-500 py-2 px-3 flex items-center gap-3",
           isOpen && "rtl:!right-0 ltr:!left-0"
         )}
       >
