@@ -75,7 +75,7 @@ const ShowCouponDetails = ({ storeName }: Props) => {
         <Button
           onPress={toggleIsOpen}
           isIconOnly
-          className="absolute top-2 start-4 rounded-full hover:bg-red-100 transition-colors duration-200"
+          className="absolute top-2 end-4 rounded-full hover:bg-red-100 transition-colors duration-200"
           aria-label={t("Close")}
         >
           <X className="size-4" />
