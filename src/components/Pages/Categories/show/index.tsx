@@ -21,7 +21,7 @@ const ShowCategory = ({ category }: { category: CategoryItem }) => {
                 <Image
                   height={240}
                   width={300}
-                  src={category?.image ? encodeURI(category?.image) : "noPreview.webp"}
+                  src={category?.image || "noPreview.webp"}
                   alt={category?.name}
                   title={category?.name}
                   quality={100}
