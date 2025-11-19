@@ -168,7 +168,7 @@ export default async function CouponCountry({
                     className="flex items-center w-full gap-4 flex-grow max-sm:flex-col max-sm:justify-center"
                   >
                     <Avatar
-                      src={store?.image}
+                      src={store?.image ? encodeURI(store?.image) : "noPreview.webp"}
                       name={store?.store_name}
                       className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0"
                     />
