@@ -15,6 +15,22 @@ const storeRedirects = [
   { from: '/store/كود-خصم-تريجر-ايلاند/', to: '/store/treasure-island/' },
 ]
 
+//cutom redirects
+const customRedirects = [
+  { from: '/كود-خصم-اروشي/', to: '/' },
+  { from: '/كود-خصم-مكتبة-الشرق/', to: '/' },
+  { from: '/كود-خصم-بلدنا/', to: '/' },
+  { from: '/كود-خصم-تريجر-ايلاند/', to: '/' },
+  { from: '/كود-خصم-فرنش-فراجرانس/', to: '/' },
+  { from: '/كود-خصم-الحمد-للحقائب/', to: '/' },
+  { from: '/كود-خصم-الركن-السويسري/', to: '/' },
+  { from: '/كود-خصم-سوكير/', to: '/' },
+  { from: '/كود-خصم-اديلر/', to: '/' },
+  { from: '/thrillark-promo-code/', to: '/' },
+  { from: '/كود-خصم-خرابيط/', to: '/' },
+  { from: '/كود-خصم-دومينوز/', to: '/' },
+]
+
 //blogs
 const blogRedirects = [
   { from: '/فروع-عطور-اوسما/', to: '/blog/' },
@@ -93,6 +109,12 @@ const storesRedirects = (list) =>
     { source: encode(from), destination: to, permanent: true },
   ]);
 
+const customRedirectsList = (list) =>
+  list.flatMap(({ from, to }) => [
+    { source: from, destination: to, permanent: true },
+    { source: encode(from), destination: to, permanent: true },
+  ]);
+
 const blogsRedirects = (list) =>
   list.flatMap(({ from, to }) => [
     { source: from, destination: to, permanent: true },
@@ -101,5 +123,6 @@ const blogsRedirects = (list) =>
 
 module.exports = [
   ...storesRedirects(storeRedirects),
+  ...customRedirectsList(customRedirects),
   ...blogsRedirects(blogRedirects),
 ];
