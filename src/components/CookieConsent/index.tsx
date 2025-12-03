@@ -126,7 +126,7 @@ export default function CookieConsent() {
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between mb-2">
           <div className="flex-1">
-            <h2 className="text-lg font-semibold">{t("Cookie Preferences")}</h2>
+            <p className="text-lg font-semibold">{t("Cookie Preferences")}</p>
           </div>
           <div className="flex items-center gap-x-2">
             <Button
@@ -164,7 +164,7 @@ export default function CookieConsent() {
                 className="flex items-center justify-between py-2"
               >
                 <div>
-                  <h3 className="text-lg font-medium capitalize">{key}</h3>
+                  <p className="text-lg font-medium capitalize">{key}</p>
                   <p className="text-sm text-gray-500">
                     {t(`cookie.${key}.description`)}
                   </p>
@@ -180,18 +180,18 @@ export default function CookieConsent() {
             ))}
             {policy && (
               <div className="mt-4 pt-4 border-t dark:border-gray-700">
-                <h3 className="text-lg font-medium mb-2">{t("Cookie Policy")}</h3>
+                <p className="text-lg font-medium mb-2">{t("Cookie Policy")}</p>
                 <p className="text-sm text-gray-500 mb-4">
                   {t("Last updated")}: {policy.last_updated}
                 </p>
                 {policy.categories.map((category, index) => (
                   <div key={index} className="mb-4">
-                    <h4 className="text-md font-medium">{category.name}</h4>
+                    <p className="text-md font-medium">{category.name}</p>
                     <p className="text-sm text-gray-500 mb-2">{category.description}</p>
                     <div className="ml-4">
                       {category.cookies.map((cookie, cookieIndex) => (
                         <div key={cookieIndex} className="mb-2">
-                          <h5 className="text-sm font-medium">{cookie.name}</h5>
+                          <p className="text-sm font-medium">{cookie.name}</p>
                           <p className="text-xs text-gray-500">{cookie.purpose}</p>
                           <p className="text-xs text-gray-500">{t("Duration")}: {cookie.duration}</p>
                         </div>
