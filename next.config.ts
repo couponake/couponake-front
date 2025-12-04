@@ -118,11 +118,11 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
-      {
-        source: "/:path*%20:pathAfter*",
-        destination: "/",
-        permanent: true,
-      },
+      // {
+      //   source: "/:path*%20:pathAfter*",
+      //   destination: "/",
+      //   permanent: true,
+      // },
       {
         source: "/coupon/:slug*",
         destination: "/",
