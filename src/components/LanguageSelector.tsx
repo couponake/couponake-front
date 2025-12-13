@@ -19,7 +19,7 @@ const LanguageSelector = () => {
   return (
     <button
       disabled={isPending}
-      className="disabled:opacity-75 flex items-center gap-3 disabled:cursor-wait"
+      className="disabled:opacity-75 flex items-center gap-3 disabled:cursor-wait font-semibold"
       onClick={() => handleLanguageChange(currentLocale === "en" ? "ar" : "en")}
     >
       {currentLocale === "en" ? "العربية" : "English"}

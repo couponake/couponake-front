@@ -4,9 +4,8 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import UserDropDown from "../UserDropDown";
 import Link from "next/link";
-import UserNotifications from "../UserNotifications";
 import { NotificationProps } from "@/types";
-import { Menu } from "lucide-react";
+import { Globe, Menu } from "lucide-react";
 import LanguageSelector from "../LanguageSelector";
 import { useStore } from "@/store";
 import {
@@ -66,33 +65,40 @@ const MobileDrawer = ({
                 )}
               </DrawerHeader>
               <DrawerBody>
-                <div className="flex w-full flex-col pb-20">
+                <div className="flex w-full flex-col pb-0">
                   <div className="relative flex h-fit w-full">
                     <div className="container relative z-10 flex w-full flex-col gap-6">
-                      <div className="xxs:px-8 container px-5 py-6 xs:px-8" />
-                      <div className="xxs:px-8 mb-3 px-5 xs:px-8">
-                        <p className="text-neutral-900 mb-2 text-2xl font-bold">
-                          {t("common.welcome")}
-                        </p>
-                        <p className="text-neutral-800">
-                          {t("common.login_or_create")}
-                        </p>
+                      <div dir={local === "ar" ? "ltr" : "rtl"} className="xxs:px-8 container px-5 py-4 xs:px-8 flex items-center gap-2">
+                        <Globe size={20} />
+                        <LanguageSelector />
                       </div>
-                      <div className="xxs:px-8 px-5 pb-6 xs:px-8">
-                        {user ? (
+                      {
+                        user ? (
                           <UserDropDown />
                         ) : (
-                          <Link
-                            target="_self"
-                            href="/auth"
-                            onClick={onClose}
-                          >
-                            <button className="sm:text-lg rounded-xl px-3 py-2 bg-main-500 text-white hover:opacity-70 transition-all">
-                              {t("Login / Register")}
-                            </button>
-                          </Link>
-                        )}
-                      </div>
+                          <>
+                            <div className="xxs:px-8 mb-3 px-5 xs:px-8">
+                              <p className="text-neutral-900 mb-2 text-2xl font-bold">
+                                {t("common.welcome")}
+                              </p>
+                              <p className="text-neutral-800">
+                                {t("common.login_or_create")}
+                              </p>
+                            </div>
+                            <div className="xxs:px-8 px-5 pb-6 xs:px-8">
+                              <Link
+                                target="_self"
+                                href="/auth"
+                                onClick={onClose}
+                              >
+                                <button className="sm:text-lg rounded-xl px-3 py-2 bg-main-500 text-white hover:opacity-70 transition-all">
+                                  {t("Login / Register")}
+                                </button>
+                              </Link>
+                            </div>
+                          </>
+                        )
+                      }
                     </div>
                   </div>
                   <div className="xxs:ps-8 container flex-1 py-4 ps-5 xs:ps-8">
@@ -158,16 +164,10 @@ const MobileDrawer = ({
                       >
                         {t("All Countries")}
                       </Link>
-                      <div className="max-w-10">
-                        <UserNotifications notifications={notifications} />
-                      </div>
                     </div>
                   </div>
                 </div>
               </DrawerBody>
-              <DrawerFooter>
-                <LanguageSelector />
-              </DrawerFooter>
             </>
           )}
         </DrawerContent>
