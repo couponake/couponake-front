@@ -9,7 +9,6 @@ import { toast } from "@/components/ui/custom-toast";
 import { SearchResult } from "@/types";
 import { Button } from "@heroui/button";
 import { useTranslations } from "next-intl";
-import axiosInstance from '@/lib/axios';
 import api from "@/lib/api";
 
 const SearchInput = () => {
@@ -32,6 +31,10 @@ const SearchInput = () => {
       });
       if (data.success) {
         setResults(data.results);
+         trackSearch(
+          debouncedSearchTerm as string,
+          data.results?.length ?? 0
+        );
       }
     } catch (error: any) {
       if (error.response) {
@@ -61,6 +64,19 @@ const SearchInput = () => {
 
     searchHN();
   }, [debouncedSearchTerm]);
+
+    const trackSearch = (
+    term: string,
+    resultsCount: number
+  ) => {
+    if (typeof window === "undefined") return;
+
+    (window as any).gtag?.("event", "view_search_result", {
+      search_term: term,
+      results_count: resultsCount,
+      search_location: "header",
+    });
+  };
 
   return (
     <>
