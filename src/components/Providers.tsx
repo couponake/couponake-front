@@ -18,9 +18,8 @@ const Toaster = lazy(() => import("@/components/ui/custom-toast").then(mod => ({
 
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  const locale = useLocale();
   const router = useRouter();
-  const { data: session, update } = useSession();
+  const { data: session } = useSession();
   const { user, setUser } = useStore((store) => store);
   const local = useLocale();
   moment.locale(local);

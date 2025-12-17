@@ -103,6 +103,7 @@ export default function CustomersReviews({
       }
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     Object.entries(reviewRefs.current).forEach(([id, el]) => {
       if (el) observer.observe(el);
     });

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance from '@/lib/axios';
 import { useLocale, useTranslations } from "next-intl";
 import { CouponProps } from "@/types";
 import {

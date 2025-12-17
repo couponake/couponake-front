@@ -2,7 +2,6 @@
 import { cn } from "@/lib/utils";
 import { Responsibile } from "@/types";
 import { CircleUser } from "lucide-react";
-import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 import ShowAuthorDetails from "./ShowAuthorDetails";
@@ -14,7 +13,6 @@ const Author = ({
   author: Responsibile;
   storeName: string;
 }) => {
-  const t = useTranslations();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
 

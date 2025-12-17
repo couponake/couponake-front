@@ -14,7 +14,6 @@ import { toast } from "@/components/ui/custom-toast";
 import { Spinner } from "@heroui/spinner";
 import { Pagination } from "@heroui/pagination";
 import Link from "next/link";
-import axiosInstance from '@/lib/axios';
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import api from "@/lib/api";
@@ -49,7 +48,7 @@ const Blogs = () => {
     try {
       await fetchBlogs(page);
       refetch();
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch blogs. Please try again.");
     }
   };

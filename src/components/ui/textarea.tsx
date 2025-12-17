@@ -28,6 +28,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       className,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       type,
       startContent,
       label,

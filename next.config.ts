@@ -1,10 +1,13 @@
-const createNextIntlPlugin = require("next-intl/plugin");
-const baseRedirects = require('./redirects/baseRedirects');
-const arabicRedirects = require('./redirects/arabicRedirects');
+import { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+import arabicRedirects from './redirects/arabicRedirects';
+import baseRedirects from './redirects/baseRedirects';
+
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {

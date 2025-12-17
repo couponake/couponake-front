@@ -1,12 +1,12 @@
 // app/sitemap.xml/route.ts
-import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
 import { getAllBlogsData, getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   const baseURL = "https://coupoonat.com/sitemap/";
   //get Settings
-  const settings = await useSitemapSettingEnabled();
+  const settings = await getSitemapSettingEnabled();
   if (!settings.superSite) {
     return new NextResponse("", { status: 404 });
   }

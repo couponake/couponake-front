@@ -8,7 +8,7 @@ type itemSetting = {
   val: string;
 };
 
-export const useSettingEnabled = async (
+export const getSettingEnabled = async (
   settingName: string
 ): Promise<boolean> => {
   try {

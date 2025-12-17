@@ -1,27 +1,26 @@
 "use client";
-import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
-import Empty from "@/components/Empty";
-import { toast } from "@/components/ui/custom-toast";
-import { Input } from "@/components/ui/input";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useCategoriesData, useStoresData } from "@/hooks/useStoresData";
-import api from "@/lib/api";
-import debounce from "@/lib/debounce";
-import { cn } from "@/lib/utils";
-import { useStore } from "@/store";
-import { HeaderCategory } from "@/types";
-import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
-import { Avatar } from "@heroui/avatar";
-import { Button } from "@heroui/button";
-import { Pagination } from "@heroui/pagination";
-import { LayoutGrid, XIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { parseAsString, useQueryState } from "nuqs";
-import React, { useCallback, useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import Image from "next/image";
+import AddToFavoriteBtn from '@/components/AddToFavoriteBtn';
+import Empty from '@/components/Empty';
+import { toast } from '@/components/ui/custom-toast';
+import { Input } from '@/components/ui/input';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useCategoriesData, useStoresData } from '@/hooks/useStoresData';
+import api from '@/lib/api';
+import debounce from '@/lib/debounce';
+import { cn } from '@/lib/utils';
+import { useStore } from '@/store';
+import { HeaderCategory } from '@/types';
+import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
+import { Button } from '@heroui/button';
+import { Pagination } from '@heroui/pagination';
+import { LayoutGrid, XIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { parseAsString, useQueryState } from 'nuqs';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const Stores = () => {
   const t = useTranslations();
@@ -70,7 +69,7 @@ const Stores = () => {
   // Update allCategories when new data is fetched
   useEffect(() => {
     if (categoriesData?.data) {
-      let categoriesDataArray = categoriesData?.data?.sort(
+      const categoriesDataArray = categoriesData?.data?.sort(
         (a, b) => a.id - b.id
       );
       if (categoriesPage === 1) {
@@ -97,6 +96,7 @@ const Stores = () => {
 
   // Debounced search function
   const debouncedSearch = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     debounce((value: string) => {
       setIsSearching(false);
     }, 500),
@@ -140,7 +140,7 @@ const Stores = () => {
     try {
       const data = await api.request.get("home/countries?per_page=-1");
       return data?.data;
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch countries. Please try again.");
       return [];
     }

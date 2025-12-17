@@ -5,7 +5,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import type { SettingsItem } from "@/types";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
@@ -24,7 +24,6 @@ const Footer = ({
   footerLinks: footerLinkType[] | null | undefined;
 }) => {
   const t = useTranslations();
-  const locale = useLocale();
   const facebook = settings?.find((item) => item.name === "facebook")?.val;
   const instagram = settings?.find((item) => item.name === "instagram")?.val;
   const telegram = settings?.find((item) => item.name === "side_telegram")?.val;

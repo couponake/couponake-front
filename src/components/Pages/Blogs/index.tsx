@@ -36,7 +36,7 @@ export default function BlogsList({
 
       // Scroll to top smoothly
       window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch infos. Please try again.");
     } finally {
       setLoading(false);

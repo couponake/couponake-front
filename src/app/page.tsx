@@ -2,7 +2,6 @@ import Main from "@/components/Pages/Home/main";
 import { getData } from "@/lib/actions";
 import React from "react";
 import ClientSideComponents from "../components/Pages/Home/ClientSideComponents";
-import { getLocale, getTranslations } from "next-intl/server";
 import ScrollTracker from "@/hooks/ScrollPageAnalytics";
 
 export const experimental_ppr = true;
@@ -10,8 +9,6 @@ export const runtime = "nodejs";
 
 export default async function Home() {
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-  const t = await getTranslations();
-  const locale = await getLocale();
 
   const [
     generalBanners = [],

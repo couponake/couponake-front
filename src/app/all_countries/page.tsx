@@ -1,7 +1,6 @@
 import AllCountriesPage from "@/components/Pages/AllCountriesPage";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
+import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
-import { useTranslations } from "next-intl";
 import { cookies } from "next/headers";
 import React from "react";
 
@@ -11,7 +10,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the all-countries page
-  const indexingCountries = await useSettingEnabled(SettingsEnum.Countries);
+  const indexingCountries = await getSettingEnabled(SettingsEnum.Countries);
 
 
   return {
@@ -61,7 +60,6 @@ export async function generateMetadata() {
 
 const AllCountries = () => {
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-  const t = useTranslations();
 
   const graph = {
     "@context": "https://schema.org",

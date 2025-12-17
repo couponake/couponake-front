@@ -1,4 +1,4 @@
-import { CouponProps, HeaderCategory, profileTabsValues, User } from "@/types";
+import { CouponProps, HeaderCategory, User } from "@/types";
 import { create } from "zustand";
 
 interface StoreProps {

@@ -1,25 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import { BellIcon } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import moment from "moment";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { NotificationProps } from "@/types";
-import { useStore } from "@/store";
-import { Spinner } from "@heroui/spinner";
-import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
-import { Badge } from "@heroui/badge";
-import { Switch } from "@heroui/switch";
-import { toast } from "@/components/ui/custom-toast";
-import axiosInstance from '@/lib/axios';
-import api from "@/lib/api";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { toast } from '@/components/ui/custom-toast';
+import api from '@/lib/api';
+import { cn } from '@/lib/utils';
+import { useStore } from '@/store';
+import { NotificationProps } from '@/types';
+import { Badge } from '@heroui/badge';
+import { Popover, PopoverContent, PopoverTrigger } from '@heroui/popover';
+import { Spinner } from '@heroui/spinner';
+import { Switch } from '@heroui/switch';
+import { BellIcon } from 'lucide-react';
+import moment from 'moment';
+import { useLocale, useTranslations } from 'next-intl';
+import { useState } from 'react';
 
 export default function UserNotifications({
   notifications,
@@ -65,7 +59,7 @@ export default function UserNotifications({
           ? t("Subscribed to notifications")
           : t("Unsubscribed from notifications")
       );
-    } catch (error) {
+    } catch {
       toast.error(t("Failed to update notification preferences"));
     } finally {
       setIsToggling(false);

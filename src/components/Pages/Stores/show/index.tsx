@@ -102,13 +102,13 @@ const ShowStore = ({ slug }: { slug: string }) => {
     return (
       <div className="container pt-24 pb-10 text-center">
         <h2 className="text-2xl font-bold text-red-600 mb-4">
-          Error Loading Store
+          {'Error Loading Store'}
         </h2>
         <p className="text-gray-700 mb-4">
-          We couldn't load the store information. Please try again later.
+          {'We couldn\'t load the store information. Please try again later.'}
         </p>
         <Button color="primary" as={Link} href="/stores">
-          Browse All Stores
+          {'Browse All Stores'}
         </Button>
       </div>
     );
@@ -210,8 +210,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
           />
           <StoreChartsPage
             statistics={statistics}
-            t={t}
-            locale={locale}
             storeName={store.slug}
           />
           {related_stores && related_stores.length > 0 && (

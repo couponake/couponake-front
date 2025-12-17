@@ -1,5 +1,5 @@
 import FAQPage from '@/components/Pages/FAQ';
-import { useSettingEnabled } from '@/hooks/useIndexingSettings';
+import { getSettingEnabled } from '@/hooks/useIndexingSettings';
 import api from '@/lib/api';
 import { FaqItem } from '@/types';
 import { SettingsEnum } from '@/types/settingsEnum';
@@ -12,7 +12,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the FAQs page
-  const indexingFAQ = await useSettingEnabled(SettingsEnum.FAQ);
+  const indexingFAQ = await getSettingEnabled(SettingsEnum.FAQ);
 
   return {
     title: isArabic

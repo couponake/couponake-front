@@ -1,11 +1,11 @@
-import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
 import { getAllBlogsData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   const baseURL = "https://coupoonat.com/sitemap/";
   //get Settings
-  const blogSettings = await useSitemapSettingEnabled();
+  const blogSettings = await getSitemapSettingEnabled();
   if (!blogSettings.blogs || !blogSettings.superSite) {
     return new NextResponse("Sitemap disabled", { status: 404 });
   }

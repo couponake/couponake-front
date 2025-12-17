@@ -1,4 +1,4 @@
-import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
 import { NextResponse } from "next/server";
 
 type SitemapEntry = {
@@ -11,7 +11,7 @@ type SitemapEntry = {
 export async function GET() {
   const baseURL = "https://coupoonat.com/";
   //get Settings
-  const settings = await useSitemapSettingEnabled();
+  const settings = await getSitemapSettingEnabled();
   if (!settings.superSite) {
     return new NextResponse("", { status: 404 });
   }

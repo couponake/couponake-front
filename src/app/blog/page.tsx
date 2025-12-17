@@ -1,5 +1,5 @@
 import BlogsList from "@/components/Pages/Blogs";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
+import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import api from "@/lib/api";
 import { Blog } from "@/types";
 import { SettingsEnum } from "@/types/settingsEnum";
@@ -11,7 +11,7 @@ export async function generateMetadata() {
   const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
   const isArabic = locale === "ar";
   //get the indexing settings of the Blogs page
-  const indexingBlogs = await useSettingEnabled(SettingsEnum.Blogs);
+  const indexingBlogs = await getSettingEnabled(SettingsEnum.Blogs);
 
   return {
     title: isArabic

@@ -88,6 +88,7 @@ const StoreCoupon = ({
 }) => {
   const t = useTranslations();
   const { user, setSelectedCoupon } = useStore((store) => store);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [, copyToClipboard] = useCopyToClipboard();
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -128,12 +129,13 @@ const StoreCoupon = ({
               emoji?.user_id === user?.id && emoji?.emoji !== value
           )
         ) {
-          const data = await api.request.post("stores/coupon/emoji", {
+           await api.request.post("stores/coupon/emoji", {
             emoji: value,
             coupon_id: coupon?.id,
+          }).then(() => {
+            toast.success(t("Emoji reaction edited successfully"));
           });
-          toast.success(t("Emoji reaction edited successfully"));
-          let editedEmoji = couponEmojisLocally?.find(
+          const editedEmoji = couponEmojisLocally?.find(
             (emoji: emojiType) =>
               emoji?.user_id === user?.id && emoji?.emoji !== value
           );
@@ -142,11 +144,12 @@ const StoreCoupon = ({
           }
           setCouponEmojisLocally([...couponEmojisLocally]);
         } else {
-          const data = await api.request.post("stores/coupon/emoji", {
+          await api.request.post("stores/coupon/emoji", {
             emoji: value,
             coupon_id: coupon?.id,
+          }).then(() => {
+            toast.success(t("Emoji reaction added successfully"));
           });
-          toast.success(t("Emoji reaction added successfully"));
           setCouponEmojisLocally([
             ...couponEmojisLocally,
             {
@@ -159,7 +162,7 @@ const StoreCoupon = ({
             },
           ]);
         }
-      } catch (error) {
+      } catch {
         toast.error(t("Error adding emoji reaction"));
       } finally {
         setIsLoading(false);

@@ -2,10 +2,9 @@ import React from "react";
 import api from "@/lib/api";
 import ShowCategory from "@/components/Pages/Categories/show";
 import { CategoryItem } from "@/types";
-import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import NotFound from "@/app/not-found";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
+import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata({
@@ -33,7 +32,7 @@ export async function generateMetadata({
 
     const category = response.category as CategoryItem;
     //get the indexing settings of the Category page
-    const indexingCategory = await useSettingEnabled(SettingsEnum.Categories);
+    const indexingCategory = await getSettingEnabled(SettingsEnum.Categories);
 
 
     return {
@@ -68,7 +67,7 @@ export async function generateMetadata({
         ],
       },
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Error Loading Page",
       description: "An error occurred while loading this page",
@@ -92,8 +91,6 @@ const ShowBrandPage = async ({
     return NotFound();
   }
 
-  const locale = (await params).locale;
-  const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
   const categoryData = category?.category as CategoryItem;
 

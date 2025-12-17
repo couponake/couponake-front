@@ -5,7 +5,7 @@ import "moment/locale/ar";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import { cookies } from "next/headers";
 import type { Article, BreadcrumbList } from "schema-dts";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
+import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata() {
@@ -13,7 +13,7 @@ export async function generateMetadata() {
   const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
   const isArabic = locale === "ar";
   //get the indexing settings of the ABOUT page
-  const indexingAbout = await useSettingEnabled(SettingsEnum.About);
+  const indexingAbout = await getSettingEnabled(SettingsEnum.About);
 
   return {
     title: isArabic

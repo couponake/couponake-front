@@ -1,5 +1,5 @@
 import ShowStore from "@/components/Pages/Stores/show";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
+import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import { StoreResponse } from "@/hooks/useStoreData";
 import api from "@/lib/api";
 import { SettingsEnum } from "@/types/settingsEnum";
@@ -78,7 +78,7 @@ export async function generateMetadata({
 
     const seoData: storeSeoType = response?.store_seo;
     //get the indexing settings of the Store page
-    const indexingStore = await useSettingEnabled(SettingsEnum.Stores);
+    const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
 
     // Default values in case API fails
     if (!seoData) {
@@ -125,7 +125,7 @@ export async function generateMetadata({
         ],
       },
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Error Loading Page",
       description: "An error occurred while loading this page",
@@ -149,7 +149,7 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
               "@type": "Person",
               name: review.name || "مستخدم",
             },
-            reviewBody: review?.description || "No review text provided",
+            reviewBody: cleanDescription || "No review text provided",
             reviewRating: {
               "@type": "Rating",
               ratingValue: parseFloat(review.rate) || 1,

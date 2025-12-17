@@ -238,9 +238,9 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
                     name="description"
                     control={control}
                     render={({ field }) => (
-                      //@ts-ignore
                       <Textarea
                         {...field}
+                        value={field.value ?? ''}
                         minRows={3}
                         variant="bordered"
                         className="w-full"

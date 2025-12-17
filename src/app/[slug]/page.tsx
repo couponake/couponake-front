@@ -4,7 +4,7 @@ import { Blog } from "@/types";
 import ShowBlog from "@/components/Pages/Blogs/show";
 import { redirect } from "next/navigation";
 import NotFound from "../not-found";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
+import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata({
@@ -32,7 +32,7 @@ export async function generateMetadata({
 
     const blog = response.blog as Blog;
     //get the indexing settings of the Blog page
-    const indexingBlog = await useSettingEnabled(SettingsEnum.Blogs);
+    const indexingBlog = await getSettingEnabled(SettingsEnum.Blogs);
 
     return {
       title: blog?.blog_seo?.title,
@@ -65,7 +65,7 @@ export async function generateMetadata({
         ],
       },
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Error Loading Page",
       description: "An error occurred while loading this page",

@@ -49,7 +49,7 @@ const Infos = () => {
     try {
       await fetchInfos(page);
       refetch();
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch blogs. Please try again.");
     }
   };

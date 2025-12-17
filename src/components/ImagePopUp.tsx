@@ -93,6 +93,7 @@ const ImagePopUp = ({
                 referrerPolicy="no-referrer"
                 rel="nofollow"
                 className="block"
+                onClick={onClose}
               >
                 <Image
                   src={popup_image ?? ""}

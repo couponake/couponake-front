@@ -1,6 +1,6 @@
 import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
 import Empty from "@/components/Empty";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
+import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import api from "@/lib/api";
 import { StoreProps } from "@/types";
 import { SettingsEnum } from "@/types/settingsEnum";
@@ -16,11 +16,11 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug, locale } = await params;
+  const { slug } = await params;
   const response: any = await api.dynamic(`home/country/${slug}`);
   const country_seo: any = response?.data?.country_seo;
   //get the indexing settings of the Country page
-  const indexingCountry = await useSettingEnabled(SettingsEnum.Countries);
+  const indexingCountry = await getSettingEnabled(SettingsEnum.Countries);
 
 
   return {
@@ -68,7 +68,6 @@ export default async function CouponCountry({
   const stores: StoreProps[] = response?.data?.stores;
   const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-  const isArabic = locale === "ar";
 
   const graph = {
     "@context": "https://schema.org",

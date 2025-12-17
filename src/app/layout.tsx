@@ -2,7 +2,7 @@ import '@/styles/globals.css';
 
 import Providers from '@/components/Providers';
 import SessionProvider from '@/components/SessionProvider';
-import { useSettingEnabled } from '@/hooks/useIndexingSettings';
+import { getSettingEnabled } from '@/hooks/useIndexingSettings';
 import { routing } from '@/i18n/routing';
 import HomeLayout from '@/Layouts/HomeLayout';
 import api from '@/lib/api';
@@ -58,7 +58,7 @@ export async function generateMetadata() {
   // Fetch SEO data
   const seoData: homeSeoType = await getSeo();
   //get the indexing settings of the FAQs page
-  const indexingSite = await useSettingEnabled(SettingsEnum.SuperSite);
+  const indexingSite = await getSettingEnabled(SettingsEnum.SuperSite);
 
 
   const fallbackTitle = "كوبونات";

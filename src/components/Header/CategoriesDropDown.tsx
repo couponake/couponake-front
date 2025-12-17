@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { Suspense, useEffect, useState, useCallback } from "react";
 import { toast } from "sonner";
 import MyAxios from "../MyAxios";
+import { Spinner } from "@heroui/spinner";
 
 const CategoriesDropDown = () => {
   const t = useTranslations();
@@ -25,7 +26,7 @@ const CategoriesDropDown = () => {
         (a: HeaderCategory, b: HeaderCategory) => a.id - b.id
       );
       setCategories(sorted);
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch categories data.");
     } finally {
       setLoading(false);
@@ -56,7 +57,14 @@ const CategoriesDropDown = () => {
           >
             <div className="absolute ltr:md:left-25 ltr:lg:left-35 rtl:md:right-25 rtl:lg:right-20 top-0 -z-[1] h-10 w-10 translate-x-0 rotate-45 transform rounded-sm bg-main-500 transition-transform duration-500 ease-in-out"></div>
             <ul className="relative z-10 grid grid-cols-3 gap-4 max-h-[73vh] scrollbar overflow-y-auto overflow-x-hidden">
-              {categories?.map((category) => (
+              {
+                isLoading && (
+                  <div className="w-fit h-fit bg-[#fafafa]">
+                    <Spinner />
+                  </div>
+                )
+              }
+              {!isLoading && categories?.map((category) => (
                 <li className="mt-4" key={category.id}>
                   <Link
                     href={`/coupon-category/${category.slug}`}

@@ -306,7 +306,7 @@ class ApiClient {
         // signal: controller.signal
       });
 
-      // clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
 
       if (response.status === 301) {
         try {

@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import LanguageSelector from "../LanguageSelector";
-import { HeaderCategory, NotificationProps } from "@/types";
+import { NotificationProps } from "@/types";
 import UserNotifications from "../UserNotifications";
 import Link from "next/link";
 import Image from "next/image";
@@ -75,8 +75,7 @@ const Header = ({
           <Suspense>
             <MobileDrawer
               websiteLogo={websiteLogo}
-              notifications={notifications}
-            />{" "}
+            />
           </Suspense>
         </nav>
 

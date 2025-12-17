@@ -27,6 +27,7 @@ const ShowCouponDetails = ({ storeName }: Props) => {
     (store) => store
   );
   const [isCouponCopied, setIsCouponCopied] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, copyToClipboard] = useCopyToClipboard();
 
   const toggleIsOpen = () => {
@@ -48,6 +49,7 @@ const ShowCouponDetails = ({ storeName }: Props) => {
         store_id: coupon?.store_id,
       });
 
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       await useCoupon(coupon?.id);
       toast.success(t("Coupon copied successfully"));
 

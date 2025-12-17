@@ -9,18 +9,16 @@ import { CiDiscount1 } from 'react-icons/ci';
 import { GiSandsOfTime } from 'react-icons/gi';
 
 import { CardHeader } from '../card';
+import { useTranslations } from 'next-intl';
 
 function StoreCharts({
   statistics,
-  t,
-  locale,
   storeName,
 }: {
   statistics: statisticsType;
-  t: any;
-  locale: string;
   storeName: string;
 }) {
+  const t = useTranslations();
   const sectionRef = useRef<HTMLElement | null>(null);
   const [hasFired, setHasFired] = useState<boolean>(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);

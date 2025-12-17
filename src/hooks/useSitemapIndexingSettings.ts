@@ -21,7 +21,7 @@ type responseType = {
   faqs: boolean;
 };
 
-export const useSitemapSettingEnabled = async (): Promise<responseType> => {
+export const getSitemapSettingEnabled = async (): Promise<responseType> => {
   try {
     const generalSettings: Settings | undefined = await getSettings();
     const settingsArray: itemSetting[] = generalSettings?.settings || [];

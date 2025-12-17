@@ -4,14 +4,10 @@ import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@heroui/badge";
 import moment from "moment";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@heroui/button";
-import { useRouter } from "next/navigation";
 
 interface Blog {
   id: number;
@@ -32,7 +28,6 @@ interface BlogCardProps {
 export default function BlogCard({ blog }: BlogCardProps) {
   const t = useTranslations();
   const locale = useLocale();
-  const router = useRouter();
   // Function to extract the first paragraph from the HTML content
   const getExcerpt = (html: string, maxLength = 100) => {
     const tempDiv = document.createElement("div");

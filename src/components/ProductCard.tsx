@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { CopyIcon } from "lucide-react";
 import { Product } from "@/types";
 import { toast } from "@/components/ui/custom-toast";

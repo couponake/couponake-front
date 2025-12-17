@@ -4,7 +4,7 @@ import { Responsibile } from '@/types';
 import { Button } from '@heroui/button';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
 import { X } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React from 'react';
 
@@ -18,7 +18,6 @@ interface authorProps {
 
 const ShowAuthorDetails = ({ author, openDrawer, onClose }: authorProps) => {
   const t = useTranslations();
-  const locale = useLocale();
 
   //responsible
   const getResponsible = () => {

@@ -14,10 +14,7 @@ import { InferType } from "yup";
 import { toast } from "@/components/ui/custom-toast";
 import { logout } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import MyAxios from "@/components/MyAxios";
-import axiosInstance from '@/lib/axios';
 import { Label } from "@/components/ui/label";
-import axios from "axios";
 import api from "@/lib/api";
 
 type fromData = InferType<typeof updateProfileSchema>
@@ -26,7 +23,7 @@ const AccountDetails = () => {
   const t = useTranslations();
   const { user } = useStore((store) => store);
   const { update } = useSession()
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -50,8 +47,7 @@ const AccountDetails = () => {
       formDataToSend.append("email", formData.email);
       formDataToSend.append("phone", formData.phone);
       if (formData.image) {
-        //@ts-ignore
-        formDataToSend.append("image", formData?.image);
+        formDataToSend.append("image", formData?.image  as Blob);
       }
       if (formData.password) {
         formDataToSend.append("password", formData.password);

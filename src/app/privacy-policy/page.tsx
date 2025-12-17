@@ -1,4 +1,4 @@
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
+import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import api from "@/lib/api";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import { SettingsEnum } from "@/types/settingsEnum";
@@ -13,7 +13,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the PRIVACY page
-  const indexingPrivacy = await useSettingEnabled(SettingsEnum.Privacy);
+  const indexingPrivacy = await getSettingEnabled(SettingsEnum.Privacy);
 
   return {
     title: isArabic

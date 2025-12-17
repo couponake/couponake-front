@@ -16,8 +16,8 @@ const SignIn = async (email: string, password: string) => {
     } else {
       throw new Error("Error signing in");
     }
-  } catch (error: any) {
-    console.log(error)
+  } catch {
+    // console.log(error)
     // "Wrong email or password"
     return { error: "البريد الاكتروني او كلمة المرور غير صحيحة" }; // Return error in a structured format
   }
@@ -27,6 +27,7 @@ const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "credentials",
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-expect-error
       async authorize(credentials) {
         const email = credentials?.email;
@@ -70,7 +71,7 @@ const handler = NextAuth({
   pages: {
     signIn: "/auth/login",
     newUser: "/auth",
-    error:  "/auth/login",
+    error: "/auth/login",
     signOut: "/auth/login",
   },
   session: {

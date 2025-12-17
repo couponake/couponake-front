@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import UserDropDown from "../UserDropDown";
 import Link from "next/link";
-import { NotificationProps } from "@/types";
 import { Globe, Menu } from "lucide-react";
 import LanguageSelector from "../LanguageSelector";
 import { useStore } from "@/store";
@@ -13,16 +12,13 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerBody,
-  DrawerFooter,
 } from "@heroui/drawer";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 const MobileDrawer = ({
-  notifications,
   websiteLogo,
 }: {
-  notifications: NotificationProps[] | null | undefined;
   websiteLogo: string | null | undefined;
 }) => {
   const t = useTranslations();

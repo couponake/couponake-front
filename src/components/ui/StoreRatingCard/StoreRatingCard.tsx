@@ -26,14 +26,6 @@ function StoreRatingCard({
   store_isInFavorites,
   t,
 }: CardProps) {
-  const store = {
-    id: store_id,
-    slug: store_slug,
-    title: store_title,
-    rate: store_rate,
-    voters: store_voters,
-    isInFavorites: store_isInFavorites,
-  };
   return (
     isMobile && (
       <Card className="relative overflow-hidden max-sm:mt-4 border-none shadow-md rounded-full">

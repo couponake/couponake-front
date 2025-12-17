@@ -54,6 +54,7 @@ const Hero = ({
   const t = useTranslations();
   const locale = useLocale();
   const [api, setApi] = useState<CarouselApi>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [current, setCurrent] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const mobileScreen = useDetectMobile();

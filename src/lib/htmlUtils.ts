@@ -57,7 +57,7 @@ export function secureHtmlLinks(htmlContent: string): string {
           hrefMatch[0],
           `href="${encodedHref}"`
         );
-      } catch (e) {
+      } catch {
         // If it's a malformed URL (e.g., relative), still check for "coupoonat"
         // Keep the original href
       }

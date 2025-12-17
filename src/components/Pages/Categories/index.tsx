@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
 import { CategoryItem, paginationProps } from "@/types";
@@ -75,7 +76,7 @@ const Categories = ({
       setCategories(data);
       setPagination(pagination);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch categories. Please try again.");
     } finally {
       setLoading(false);
