@@ -4,8 +4,6 @@ import api from "@/lib/api";
 import StoresSkeleton from "@/components/loadingUis/StoresSkeleton";
 import Categories from "@/components/Pages/Categories";
 import { cookies } from "next/headers";
-import { getSettingEnabled } from "@/hooks/useIndexingSettings";
-import { SettingsEnum } from "@/types/settingsEnum";
 
 export const experimental_ppr = true;
 
@@ -14,7 +12,7 @@ export async function generateMetadata() {
   const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
   const isArabic = locale === "ar";
   //get the indexing settings of the Category page
-  const indexingCategory = await getSettingEnabled(SettingsEnum.Categories);
+  // const indexingCategory = await getSettingEnabled(SettingsEnum.Categories);
 
   return {
     title: isArabic
@@ -27,7 +25,8 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}categories/` || "",
     },
     robots: {
-      index: indexingCategory,
+      // index: indexingCategory,
+      index: false,
     },
     openGraph: {
       title: isArabic

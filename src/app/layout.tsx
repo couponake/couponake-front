@@ -2,13 +2,11 @@ import '@/styles/globals.css';
 
 import Providers from '@/components/Providers';
 import SessionProvider from '@/components/SessionProvider';
-import { getSettingEnabled } from '@/hooks/useIndexingSettings';
 import { routing } from '@/i18n/routing';
 import HomeLayout from '@/Layouts/HomeLayout';
 import api from '@/lib/api';
 import { getSettings } from '@/services/GetSettingsRequest';
 import { Settings } from '@/types';
-import { SettingsEnum } from '@/types/settingsEnum';
 import { Analytics } from '@vercel/analytics/react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
@@ -58,7 +56,7 @@ export async function generateMetadata() {
   // Fetch SEO data
   const seoData: homeSeoType = await getSeo();
   //get the indexing settings of the FAQs page
-  const indexingSite = await getSettingEnabled(SettingsEnum.SuperSite);
+  // const indexingSite = await getSettingEnabled(SettingsEnum.SuperSite);
 
 
   const fallbackTitle = "كوبونات";
@@ -81,7 +79,8 @@ export async function generateMetadata() {
       canonical: seoData?.url || `${process.env.NEXT_PUBLIC_WEBSITE_URL}`,
     },
     robots: {
-      index: indexingSite,
+      // index: indexingSite,
+      index: false,
     },
     // OpenGraph metadata
     openGraph: {

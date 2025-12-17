@@ -1,11 +1,10 @@
-import React from "react";
-import { api } from "@/components/MyAxios";
-import { Blog } from "@/types";
-import ShowBlog from "@/components/Pages/Blogs/show";
-import { redirect } from "next/navigation";
-import NotFound from "../not-found";
-import { getSettingEnabled } from "@/hooks/useIndexingSettings";
-import { SettingsEnum } from "@/types/settingsEnum";
+import { api } from '@/components/MyAxios';
+import ShowBlog from '@/components/Pages/Blogs/show';
+import { Blog } from '@/types';
+import { redirect } from 'next/navigation';
+import React from 'react';
+
+import NotFound from '../not-found';
 
 export async function generateMetadata({
   params,
@@ -25,14 +24,15 @@ export async function generateMetadata({
         },
         robots: {
           index: false,
-          follow: true,
+          // follow: true,
+          follow: false
         },
       };
     }
 
     const blog = response.blog as Blog;
     //get the indexing settings of the Blog page
-    const indexingBlog = await getSettingEnabled(SettingsEnum.Blogs);
+    // const indexingBlog = await getSettingEnabled(SettingsEnum.Blogs);
 
     return {
       title: blog?.blog_seo?.title,
@@ -41,7 +41,8 @@ export async function generateMetadata({
         canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}${slug}/` || "",
       },
       robots: {
-        index: indexingBlog,
+        // index: indexingBlog,
+        index: false,
       },
       openGraph: {
         title: blog?.blog_seo?.["og:title"],

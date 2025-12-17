@@ -1,8 +1,6 @@
 import BlogsList from "@/components/Pages/Blogs";
-import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import api from "@/lib/api";
 import { Blog } from "@/types";
-import { SettingsEnum } from "@/types/settingsEnum";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 
@@ -11,7 +9,7 @@ export async function generateMetadata() {
   const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
   const isArabic = locale === "ar";
   //get the indexing settings of the Blogs page
-  const indexingBlogs = await getSettingEnabled(SettingsEnum.Blogs);
+  // const indexingBlogs = await getSettingEnabled(SettingsEnum.Blogs);
 
   return {
     title: isArabic
@@ -24,7 +22,8 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}blog/` || "",
     },
     robots: {
-      index: indexingBlogs,
+      // index: indexingBlogs,
+      index: false,
     },
     openGraph: {
       title: isArabic

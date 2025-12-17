@@ -5,15 +5,13 @@ import "moment/locale/ar";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import { cookies } from "next/headers";
 import type { Article, BreadcrumbList } from "schema-dts";
-import { getSettingEnabled } from "@/hooks/useIndexingSettings";
-import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata() {
   const cookieStore = await cookies();
   const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
   const isArabic = locale === "ar";
   //get the indexing settings of the ABOUT page
-  const indexingAbout = await getSettingEnabled(SettingsEnum.About);
+  // const indexingAbout = await getSettingEnabled(SettingsEnum.About);
 
   return {
     title: isArabic
@@ -26,7 +24,8 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/` || "",
     },
     robots: {
-      index: indexingAbout,
+      // index: indexingAbout,
+      index: false,
     },
     openGraph: {
       title: isArabic

@@ -1,9 +1,7 @@
 import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
 import Empty from "@/components/Empty";
-import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import api from "@/lib/api";
 import { StoreProps } from "@/types";
-import { SettingsEnum } from "@/types/settingsEnum";
 import { Avatar } from "@heroui/avatar";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -20,7 +18,7 @@ export async function generateMetadata({
   const response: any = await api.dynamic(`home/country/${slug}`);
   const country_seo: any = response?.data?.country_seo;
   //get the indexing settings of the Country page
-  const indexingCountry = await getSettingEnabled(SettingsEnum.Countries);
+  // const indexingCountry = await getSettingEnabled(SettingsEnum.Countries);
 
 
   return {
@@ -31,7 +29,8 @@ export async function generateMetadata({
         `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupon_country/${slug}/` || "",
     },
     robots: {
-      index: indexingCountry,
+      // index: indexingCountry,
+      index: false,
     },
     openGraph: {
       title: country_seo?.title,

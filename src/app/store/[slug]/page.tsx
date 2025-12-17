@@ -1,8 +1,6 @@
 import ShowStore from "@/components/Pages/Stores/show";
-import { getSettingEnabled } from "@/hooks/useIndexingSettings";
 import { StoreResponse } from "@/hooks/useStoreData";
 import api from "@/lib/api";
-import { SettingsEnum } from "@/types/settingsEnum";
 import {
   dehydrate,
   HydrationBoundary,
@@ -52,7 +50,8 @@ export async function generateMetadata({
       description: "Invalid URL with coupon ID",
       robots: {
         index: false,
-        follow: true,
+        // follow: true,
+        follow: false
       },
     };
   }
@@ -71,14 +70,15 @@ export async function generateMetadata({
         },
         robots: {
           index: false,
-          follow: true,
+          // follow: true,
+          follow: false
         },
       };
     }
 
     const seoData: storeSeoType = response?.store_seo;
     //get the indexing settings of the Store page
-    const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
+    // const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
 
     // Default values in case API fails
     if (!seoData) {
@@ -96,7 +96,8 @@ export async function generateMetadata({
         canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
       },
       robots: {
-        index: indexingStore,
+        // index: indexingStore,
+        index: false,
       },
       // OpenGraph metadata
       openGraph: {
