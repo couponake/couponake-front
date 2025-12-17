@@ -28,8 +28,8 @@ const ShowAuthorDetails = ({ author, openDrawer, onClose }: authorProps) => {
 
   return (
     <Drawer open={openDrawer} onClose={onClose}>
-      <DrawerTitle className="hidden">
-        <span>{author?.name}</span>
+      <DrawerTitle asChild className="hidden">
+        <p>{author?.name}</p>
       </DrawerTitle>
       <DrawerContent
         className="container h-fit max-w-screen-md mx-auto mb-10 flex flex-col gap-5 justify-center items-center"
