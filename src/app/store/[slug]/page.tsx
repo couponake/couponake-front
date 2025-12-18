@@ -140,30 +140,29 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
   const reviewsSchema =
     Array.isArray(store.store_reviews) && store.store_reviews.length > 0
       ? store.store_reviews.slice(0, 20).map((review) => {
-          const cleanDescription = review.description
-            ? review.description.replace(/https?:\/\/[^\s]+/g, "").trim()
-            : "";
+        const cleanDescription = review.description
+          ? review.description.replace(/https?:\/\/[^\s]+/g, "").trim()
+          : "";
 
-          return {
-            "@type": "Review",
-            author: {
-              "@type": "Person",
-              name: review.name || "مستخدم",
-            },
-            reviewBody: cleanDescription || "No review text provided",
-            reviewRating: {
-              "@type": "Rating",
-              ratingValue: parseFloat(review.rate) || 1,
-              bestRating: "5",
-              worstRating: "1",
-            },
-            datePublished: review.created_at,
-          };
-        })
+        return {
+          "@type": "Review",
+          author: {
+            "@type": "Person",
+            name: review.name || "مستخدم",
+          },
+          reviewBody: cleanDescription || "No review text provided",
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: parseFloat(review.rate) || 1,
+            bestRating: "5",
+            worstRating: "1",
+          },
+          datePublished: review.created_at,
+        };
+      })
       : [];
 
   const storeSchema = {
-    "@context": "https://schema.org",
     "@type": "Store",
     name: store?.store?.title,
     image:
@@ -185,15 +184,15 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
     },
     sameAs: Array.isArray(store?.store?.social_links)
       ? store?.store?.social_links.filter(
-          (link) => typeof link === "string" && /^https?:\/\//.test(link)
-        )
+        (link) => typeof link === "string" && /^https?:\/\//.test(link)
+      )
       : [],
     ...(reviewsSchema.length > 0 && { review: reviewsSchema }),
   };
 
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${baseUrl}store/${store.store.slug}/#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
@@ -210,8 +209,8 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
     ],
   };
 
+
   const webPageSchema = {
-    "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${baseUrl}store/${store?.store?.slug}/#webpage`,
     url: `${baseUrl}store/${store?.store?.slug}/`,
@@ -235,126 +234,122 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
     mainEntity: {
       "@id": `${baseUrl}store/${store?.store?.slug}/#store`,
     },
+    breadcrumb: {
+      "@id": `${baseUrl}store/${store.store.slug}/#breadcrumb`,
+    },
   };
 
   const faqItems =
     Array.isArray(store?.store_faqs) && store?.store_faqs.length > 0
       ? store?.store_faqs.map((faq) => ({
-          "@type": "Question",
-          name: faq.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: stripHtml(faq.answer),
-          },
-        }))
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: stripHtml(faq.answer),
+        },
+      }))
       : [];
 
   const faqSchema =
     faqItems.length > 0
       ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqItems,
-        }
+        "@type": "FAQPage",
+        mainEntity: faqItems,
+      }
       : null;
 
   const couponsSchema =
     Array.isArray(store?.store?.coupons) && store?.store?.coupons.length > 0
       ? store?.store?.coupons.slice(0, 3).map((coupon, index) => ({
-          "@context": "https://schema.org",
-          "@type": "Offer",
-          "@id": `${baseUrl}store/${store?.store?.slug}/#coupon-${index}`,
-          name: coupon.title,
-          description: stripHtml(coupon.description || ""),
-          url: coupon.url || `${baseUrl}store/${store?.store?.slug}/`,
-          validFrom: coupon.created_at,
-          validThrough: coupon.expire_date || coupon.updated_at,
-          availability: "https://schema.org/InStock",
-          identifier: coupon.code,
-          seller: {
-            "@id": `${baseUrl}store/${store?.store?.slug}/#store`,
+        "@type": "Offer",
+        "@id": `${baseUrl}store/${store?.store?.slug}/#coupon-${index}`,
+        name: coupon.title,
+        description: stripHtml(coupon.description || ""),
+        url: coupon.url || `${baseUrl}store/${store?.store?.slug}/`,
+        validFrom: coupon.created_at,
+        validThrough: coupon.expire_date || coupon.updated_at,
+        availability: "https://schema.org/InStock",
+        identifier: coupon.code,
+        seller: {
+          "@id": `${baseUrl}store/${store?.store?.slug}/#store`,
+        },
+        image:
+          (store?.store?.coupon_image
+            ? store?.store?.coupon_image
+            : store?.store?.image) || `${baseUrl}noPreview.webp`,
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          description: `خصم بقيمة ${coupon?.discount_value}`,
+          eligibleQuantity: {
+            "@type": "QuantitativeValue",
+            value: coupon?.discount_value,
           },
-          image:
-            (store?.store?.coupon_image
-              ? store?.store?.coupon_image
-              : store?.store?.image) || `${baseUrl}noPreview.webp`,
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            description: `خصم بقيمة ${coupon?.discount_value}`,
-            eligibleQuantity: {
-              "@type": "QuantitativeValue",
-              value: coupon?.discount_value,
-            },
-          },
-        }))
+        },
+      }))
       : [];
 
   const statisticsSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
+    "@type": "WebPageElement",
     "@id": `${baseUrl}store/${store?.store?.slug}/#stats`,
     name: `${store?.store?.title} - Store Statistics`,
     url: `${baseUrl}store/${store?.store?.slug}/`,
     hasPart: [
       {
-        "@type": "WebPageElement",
+        "@type": "PropertyValue",
         name: "Love Score",
-        text: `${store?.store?.store_love}%` || "0%",
+        value: `${store?.store?.store_love}%` || "0%",
       },
       {
-        "@type": "WebPageElement",
+        "@type": "PropertyValue",
         name: "Saved Price",
-        text: `${store?.store?.saved_price} ${store?.store?.currency}`,
+        value: `${store?.store?.saved_price} ${store?.store?.currency}`,
       },
       {
-        "@type": "WebPageElement",
+        "@type": "PropertyValue",
         name: "Orders Number",
-        text: `${store?.store?.orders_number}`,
+        value: `${store?.store?.orders_number}`,
       },
       {
-        "@type": "WebPageElement",
+        "@type": "PropertyValue",
         name: "Total Used Coupons",
-        text: `${store?.store?.total_used_coupons}`,
+        value: `${store?.store?.total_used_coupons}`,
       },
       {
-        "@type": "WebPageElement",
+        "@type": "PropertyValue",
         name: "Maximum Coupon Discount",
-        text: `${store?.max_coupon_discount || "N/A"}`,
+        value: `${store?.max_coupon_discount || "N/A"}`,
       },
       {
-        "@type": "WebPageElement",
+        "@type": "PropertyValue",
         name: "Most Used Coupon",
-        text: `${store?.max_coupon_used || "N/A"}`,
+        value: `${store?.max_coupon_used || "N/A"}`,
       },
       {
-        "@type": "WebPageElement",
+        "@type": "PropertyValue",
         name: "Returned Visitors Rate",
-        text: `${store?.returned_visitors}%` || "0%",
+        value: `${store?.returned_visitors}%` || "0%",
       },
       {
-        "@type": "WebPageElement",
+        "@type": "PropertyValue",
         name: "Most Popular Category",
-        text: `${store?.popular_category?.category?.name} (${store?.popular_category?.count})`,
+        value: `${store?.popular_category?.category?.name} (${store?.popular_category?.count})`,
       },
     ],
   };
 
-  return faqSchema
-    ? [
-        storeSchema,
-        breadcrumbSchema,
-        faqSchema,
-        webPageSchema,
-        ...couponsSchema,
-        statisticsSchema,
-      ]
-    : [
-        storeSchema,
-        breadcrumbSchema,
-        webPageSchema,
-        ...couponsSchema,
-        statisticsSchema,
-      ];
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      storeSchema,
+      breadcrumbSchema,
+      ...(faqSchema ? [faqSchema] : []),
+      webPageSchema,
+      ...couponsSchema,
+      statisticsSchema,
+    ],
+  };
+
 };
 
 const ShowStorePage = async ({
