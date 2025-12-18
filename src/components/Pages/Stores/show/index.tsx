@@ -9,6 +9,7 @@ import ShowCouponDetails from '@/components/ShowCouponDetails';
 import SimilarCoupons from '@/components/SimilarCoupons';
 import StoreCoupon from '@/components/StoreCoupon';
 import StoreTable from '@/components/StoreTable';
+import StoreCharts from '@/components/ui/StoreCharts/StoreCharts';
 import StoreCoupons from '@/components/ui/StoreCoupons/StoreCoupons';
 import StoreHeader from '@/components/ui/StoreHeader/StoreHeader';
 import StoreRatingCard from '@/components/ui/StoreRatingCard/StoreRatingCard';
@@ -22,17 +23,11 @@ import { Accordion, AccordionItem } from '@heroui/accordion';
 import { Button } from '@heroui/button';
 import { Divider } from '@heroui/divider';
 import { useLocale, useTranslations } from 'next-intl';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React from 'react';
 
 import CompetitorsStores from '../../Home/CompetitorsStores';
 import Hero from '../../Home/Hero';
-
-const StoreChartsPage = dynamic(
-  () => import("@/components/ui/StoreCharts/StoreCharts"),
-  { ssr: true }
-);
 
 declare module "react-window";
 
@@ -157,7 +152,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
       />
       <section className="container flex flex-col-reverse sm:flex-col-reverse md:flex-row lg:flex-row xl:flex-row 2xl:flex-row gap-10 pt-20 sm:pt-40 md:pt-30 lg:pt-24 pb-5">
         {/* sidebar */}
-        <div className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
+        <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
           <StoreSidePart
             storeTitle={store?.title}
             couponImage={store?.coupon_image}
@@ -169,7 +164,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
             storeBrands={store_brands}
             storeBanners={store_banner}
           />
-        </div>
+        </aside>
         {/* main content */}
         <div className="w-full sm:w-full md:w-fit lg:w-fit xl:w-fit 2xl:w-fit min-h-150 h-fit flex-1 space-y-5 overflow-hidden">
           <StoreRatingCard
@@ -208,7 +203,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
             store_coupons={store?.coupons}
             store_image={store?.image}
           />
-          <StoreChartsPage
+          <StoreCharts
             statistics={statistics}
             storeName={store.slug}
           />

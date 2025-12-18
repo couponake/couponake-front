@@ -45,7 +45,7 @@ function StoreSidePart({
                     <div className="w-full h-fit overflow-hidden flex items-center justify-center">
                         <Image
                             src={couponImage}
-                            alt={storeTitle}
+                            alt={storeSlug}
                             width={!isMobile ? 215 : 175}
                             height={!isMobile ? 120.94 : 98.44}
                             className="rounded-lg w-full h-fit shadow-md object-cover my-2"
@@ -101,7 +101,7 @@ function StoreSidePart({
                             {store?.image && (
                                 <Image
                                     src={store?.image}
-                                    alt={store.title}
+                                    alt={store.slug}
                                     width={60}
                                     height={31.25}
                                     className="max-w-15 rounded"
@@ -129,7 +129,7 @@ function StoreSidePart({
                                 {brand?.image && (
                                     <Image
                                         src={brand?.image}
-                                        alt={brand.title}
+                                        alt={brand.slug}
                                         width={60}
                                         height={31.25}
                                         className="max-w-15 rounded"
