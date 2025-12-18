@@ -29,8 +29,7 @@ function StoreHeader({store_id, store_slug, store_image, store_title, isMobile, 
                 <div className="shrink-0">
                   <Image
                     src={store_image}
-                    alt={store_title}
-                    title={store_title}
+                    alt={store_slug}
                     width={!isMobile ? 106 : 71}
                     height={!isMobile ? 60 : 40}
                     priority
