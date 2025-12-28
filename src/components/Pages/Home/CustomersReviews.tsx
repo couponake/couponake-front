@@ -116,7 +116,7 @@ export default function CustomersReviews({
   return (
     <div className={cn("mx-auto w-full max-w-6xl px-4 py-12", className)}>
       <div className="mb-12 text-center">
-        <h2 className="mb-4 text-3xl font-bold">{t("Customer Reviews")}</h2>
+        <p className="mb-4 text-3xl font-bold">{t("Customer Reviews")}</p>
         <div className="flex items-center justify-center gap-2">
           <div className="h-px w-24 bg-main-500" />
           <div className="h-2 w-2 rounded-full bg-main-500" />

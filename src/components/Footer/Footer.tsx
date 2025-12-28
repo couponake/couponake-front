@@ -104,9 +104,9 @@ const Footer = ({
             </div>
           </div>
           <div>
-            <h3 className="mb-4 text-lg font-semibold">
+            <p className="mb-4 text-lg font-semibold">
               {t("Important Pages")}
-            </h3>
+            </p>
             <ul className="space-y-2">
               {footerLinks?.map((link: footerLinkType) => (
                 <li key={link.id}>
@@ -159,9 +159,9 @@ const Footer = ({
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-semibold">
+            <p className="mb-4 text-lg font-semibold">
               {t("Subscribe to Our Newsletter")}
-            </h3>
+            </p>
             <SubscribeForm />
           </div>
         </div>

@@ -73,9 +73,9 @@ function StoreCharts({
       aria-label="statistics"
       className="w-full h-full py-10 flex justify-center items-center flex-col gap-5"
     >
-      <h2 className="w-full my-5 text-lg font-semibold text-neutral-900 sm:text-xl md:text-2xl">
+      <p className="w-full my-5 text-lg font-semibold text-neutral-900 sm:text-xl md:text-2xl">
         {t("StoreStatistics")}
-      </h2>
+      </p>
       <div className="w-full h-fit shadow-md rounded-md overflow-hidden">
         <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 justify-center items-center gap-0 bg-white">
           <div className="w-full h-[228.75px] flex flex-col justify-center items-center gap-2">
