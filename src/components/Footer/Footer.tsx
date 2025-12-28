@@ -30,7 +30,7 @@ const Footer = ({
   const whatsapp = settings?.find((item) => item.name === "side_whatsapp")?.val;
 
   return (
-    <footer className="mt-auto bg-background text-foreground">
+    <footer suppressHydrationWarning className="mt-auto bg-background text-foreground">
       <div className="mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 container">
           <div className="space-y-4">
@@ -38,6 +38,7 @@ const Footer = ({
               target="_self"
               href="/"
               aria-label="Home"
+              prefetch={false}
             >
               {settings?.find((item) => item.name === "footer_logo")?.val && (
                 <Image
