@@ -192,6 +192,7 @@ const Stores = () => {
           className="mt-5 h-fit !w-full select-none rounded-lg border border-neutral-200 bg-white sm:w-[260px] relative pt-3"
         >
           <Link
+            prefetch={false}
             target="_self"
             href="/stores"
             className={cn(
