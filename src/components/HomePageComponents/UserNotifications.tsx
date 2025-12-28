@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from '@/components/ui/custom-toast';
+import { getRelativeTime } from '@/services/getRelativeTime';
 import api from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/store';
@@ -11,7 +11,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@heroui/popover';
 import { Spinner } from '@heroui/spinner';
 import { Switch } from '@heroui/switch';
 import { BellIcon } from 'lucide-react';
-import moment from 'moment';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -21,6 +20,7 @@ export default function UserNotifications({
   notifications: NotificationProps[] | null | undefined;
 }) {
   const t = useTranslations();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [unreadNotifications, setUnreadNotifications] = useState(0);
   const { user } = useStore((store) => store);
   const local = useLocale();
@@ -39,6 +39,7 @@ export default function UserNotifications({
   //     }
   // }, [userNotifications]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMarkingAsRead, setIsMarkingAsRead] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(!!user?.notify_sub);
   const [isToggling, setIsToggling] = useState(false);
@@ -50,7 +51,7 @@ export default function UserNotifications({
     }
     setIsToggling(true);
     try {
-      const data= await api.request.post("stores/notify-subscription", {
+      const data = await api.request.post("stores/notify-subscription", {
         subscribe: !isSubscribed,
       });
       setIsSubscribed(data.isSubscribed);
@@ -101,8 +102,8 @@ export default function UserNotifications({
               className={cn(
                 "text-gray-600",
                 userNotifications &&
-                  userNotifications?.length > 0 &&
-                  "animate-swing"
+                userNotifications?.length > 0 &&
+                "animate-swing"
               )}
             />
           </button>
@@ -149,28 +150,22 @@ export default function UserNotifications({
                   <button
                     className="rtl:text-right ltr:text-left gap-4 w-full p-2 rounded-md hover:bg-gray-50"
                     key={notification?.id}
-                    // onClick={() => {
-                    //     markAsRead(notification);
-                    // }}
+                  // onClick={() => {
+                  //     markAsRead(notification);
+                  // }}
                   >
                     <div className="space-y-1">
                       <h1 className="text-base font-semibold relative ">
                         {notification?.data}
                         <div
-                          className={`absolute rtl:left-0 ltr:right-0 animate-ping h-2 w-2 rounded-full ${
-                            notification?.status !== "unread"
-                              ? "bg-red-500"
-                              : "bg-green-500"
-                          }`}
+                          className={`absolute rtl:left-0 ltr:right-0 animate-ping h-2 w-2 rounded-full ${notification?.status !== "unread"
+                            ? "bg-red-500"
+                            : "bg-green-500"
+                            }`}
                         />
                       </h1>
-                      {/* <p className="text-sm font-medium">
-                                                {i18n.language === "ar"
-                                                    ? notification?.title_ar
-                                                    : notification?.title_en}
-                                            </p> */}
                       <p className="text-sm text-muted-foreground">
-                        {moment(notification?.created_at).fromNow()}
+                        {getRelativeTime(notification?.created_at, local)}
                       </p>
                     </div>
                   </button>

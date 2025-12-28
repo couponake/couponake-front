@@ -1,6 +1,5 @@
 "use client";
 import { lazy, Suspense, useEffect } from "react";
-import moment from "moment";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import { useLocale } from "next-intl";
 import { useSession } from "next-auth/react";
@@ -8,7 +7,6 @@ import { useStore } from "@/store";
 import { User } from "@/types";
 import { HeroUIProvider } from "@heroui/system";
 import NextTopLoader from "nextjs-toploader";
-import "moment/dist/locale/ar";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import QueryProvider from "./QueryProvider";
@@ -22,7 +20,6 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
   const { user, setUser } = useStore((store) => store);
   const local = useLocale();
-  moment.locale(local);
 
   const getUserProfile = async () => {
     if (user?.id) {

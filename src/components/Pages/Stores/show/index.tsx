@@ -1,6 +1,4 @@
 "use client";
-import 'moment/locale/ar';
-
 import Author from '@/components/StorePageComponents/Author';
 import FollowStore from '@/components/StorePageComponents/FollowStore';
 import CustomersReviews from '@/components/Pages/Home/CustomersReviews';

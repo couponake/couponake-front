@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import moment from "moment";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useStore } from "@/store";
 import Navigation from "@/components/Pages/Profile/Navigation";
 import { Avatar } from "@heroui/avatar";
@@ -10,6 +9,7 @@ import api from "@/lib/api";
 
 const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations();
+  const locale = useLocale();
   const { user } = useStore((store) => store);
   const queryClient = getQueryClient();
 
@@ -44,10 +44,21 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
                   <div className="mb-1 line-clamp-1 text-start text-lg font-bold md:text-center md:text-xl">
                     {user?.name}
                   </div>
-                  <p className="line-clamp-1 text-start text-sm text-neutral-650 opacity-70 md:text-center">
-                    {t("Joined")}{" "}
-                    {moment(user?.created_at).format("MMMM D, YYYY")}
-                  </p>
+                  {user?.created_at && (
+                    <p className="line-clamp-1 text-start text-sm text-neutral-650 opacity-70 md:text-center">
+                      {t("Joined")}{": "}
+                      {
+                        new Date(user.created_at).toLocaleDateString(
+                          locale === 'ar' ? 'ar-SA' : 'en-US',
+                          {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          }
+                        )
+                      }
+                    </p>
+                  )}
                 </div>
               </div>
               <Navigation />

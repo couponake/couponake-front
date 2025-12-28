@@ -7,7 +7,6 @@ import { Blog } from '@/types';
 import { Spinner } from '@heroui/spinner';
 import { useQuery } from '@tanstack/react-query';
 import Autoplay from 'embla-carousel-autoplay';
-import moment from 'moment';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React from 'react';
@@ -154,6 +153,7 @@ const LatestBlogs = () => {
                   className="py-2 w-full h-fit"
                 >
                   <Link
+                    prefetch={false}
                     target="_self"
                     href={`/${info?.slug}`}
                     dir="auto"
@@ -174,7 +174,11 @@ const LatestBlogs = () => {
 
                         <div className="flex items-center gap-3">
                           <div className="text-sm text-gray-500">
-                            {moment(info?.created_at).format("YYYY/MM/DD")}
+                            {new Date(info?.created_at).toLocaleDateString(locale === "ar" ? 'ar-SA' : 'en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric',
+                            })}
                           </div>
                           <button className="max-sm:text-sm border-2 border-default-300 rounded-xl px-3 py-2 hover:border-main-500 hover:bg-main-50 transition-all">
                             {t("View content")}

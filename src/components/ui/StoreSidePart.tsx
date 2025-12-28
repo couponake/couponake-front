@@ -1,11 +1,11 @@
 'use client'
 import useDetectMobile from '@/hooks/useDetectMobile';
 import { BannerItem, BrandProps, CouponProps, StoreProps } from '@/types';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
-import moment from 'moment';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React from 'react';
+
 import Hero from '../Pages/Home/Hero';
 
 interface sidePartType {
@@ -36,6 +36,7 @@ function StoreSidePart({
 }: sidePartType
 ) {
     const t = useTranslations();
+    const locale = useLocale();
     const isMobile = useDetectMobile();
     return (
         <>
@@ -70,7 +71,10 @@ function StoreSidePart({
                                 {t("Coupons date")}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
-                                {moment().format("MMMM")}
+                                {new Date().toLocaleDateString(
+                                    locale === 'ar' ? 'ar-SA' : 'en-US',
+                                    { month: 'long' }
+                                )}
                             </td>
                         </tr>
                         {sideTable && (

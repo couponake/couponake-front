@@ -7,9 +7,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Blog } from "@/types";
-import moment from "moment";
 import { toast } from "@/components/ui/custom-toast";
 import { Spinner } from "@heroui/spinner";
 import { Pagination } from "@heroui/pagination";
@@ -21,7 +20,7 @@ import { secureHtmlLinks } from "@/lib/htmlUtils";
 
 // API function to fetch blogs
 const fetchBlogs = async (page = 1) => {
-const data = await api.request.get("blogs", {
+  const data = await api.request.get("blogs", {
     params: { page },
   });
   return data;
@@ -29,6 +28,7 @@ const data = await api.request.get("blogs", {
 
 const Blogs = () => {
   const t = useTranslations();
+  const locale = useLocale();
 
   // Use React Query to fetch blogs
   const {
@@ -110,7 +110,7 @@ const Blogs = () => {
               page={1}
               total={1}
               color="primary"
-              onChange={() => {}}
+              onChange={() => { }}
             />
           </div>
         </div>
@@ -159,9 +159,10 @@ const Blogs = () => {
                 key={info?.id}
                 className="py-2 2xl:basis-[57%] h-fit"
               >
-                <Link 
-                target="_self"
-                 href={`/${info.id}`} dir="auto">
+                <Link
+                  prefetch={false}
+                  target="_self"
+                  href={`/${info.id}`} dir="auto">
                   <div className="block bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
                     <div className="p-6">
                       <h3 className="font-semibold text-lg mb-2 text-gray-800">
@@ -176,7 +177,14 @@ const Blogs = () => {
 
                       <div className="flex items-center gap-3">
                         <div className="text-sm text-gray-500">
-                          {moment(info?.created_at).format("DD MM YY")}
+                          {new Date(info?.created_at).toLocaleDateString(
+                            locale === 'ar' ? 'ar-SA' : 'en-US',
+                            {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric',
+                            }
+                          )}
                         </div>
                         <button className="max-sm:text-sm border-2 border-default-300 rounded-xl px-3 py-2 hover:border-main-500 hover:bg-main-50 transition-all">
                           {t("View content")}

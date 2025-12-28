@@ -1,13 +1,9 @@
-import Link from "next/link";
-import { Calendar, ArrowRight, ArrowLeft } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import moment from "moment";
-import { useLocale, useTranslations } from "next-intl";
-import { Button } from "@heroui/button";
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@heroui/button';
+import { ArrowLeft, ArrowRight, Calendar } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
+import Image from 'next/image';
 
 interface Blog {
   id: number;
@@ -67,10 +63,12 @@ export default function BlogCard({ blog }: BlogCardProps) {
       >
         {blog?.image && (
           <div className="aspect-video overflow-hidden relative">
-            <img
-              src={blog?.image || "/placeholder.svg"}
-              alt={blog?.title}
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            <Image
+              src={blog?.image ? encodeURI(blog.image) : "/noPreview.webp"}
+              alt={blog?.title || "Blog image"}
+              fill
+              className="object-cover transition-transform duration-500 hover:scale-110"
+              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
           </div>
@@ -88,7 +86,14 @@ export default function BlogCard({ blog }: BlogCardProps) {
         <CardFooter className="flex justify-between items-center pt-4 border-t">
           <div className="flex items-center text-sm text-gray-500">
             <Calendar className="h-4 w-4 me-2" />
-            <span>{moment(blog?.created_at).format("DD MMM, YYYY")}</span>
+            <span>{new Date(blog?.created_at).toLocaleDateString(
+              locale === 'ar' ? 'ar-SA' : 'en-US',
+              {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              }
+            )}</span>
           </div>
 
           <Button endContent={<ArrowIcon />} variant="flat">

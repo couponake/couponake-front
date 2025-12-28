@@ -1,18 +1,16 @@
 "use client";
-import React from "react";
-import { CouponProps } from "@/types";
-import { Button } from "@heroui/button";
-import { secureHtmlLinks } from "@/lib/htmlUtils";
-import { CopyIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useStore } from "@/store";
-
-import { Eye, ShoppingBag } from "lucide-react"
-import Image from "next/image";
-import moment from "moment";
+import { secureHtmlLinks } from '@/lib/htmlUtils';
+import { useStore } from '@/store';
+import { CouponProps } from '@/types';
+import { Button } from '@heroui/button';
+import { CopyIcon, Eye, ShoppingBag } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
+import React from 'react';
 
 export default function HorizontalCouponCard({ coupon }: { coupon: CouponProps }) {
   const t = useTranslations();
+  const locale = useLocale();
   const setSelectedCoupon = useStore((store) => store.setSelectedCoupon);
   return (
     <div className="relative overflow-hidden rounded-lg shadow-lg bg-gradient-to-br from-purple-100 to-main-100" dir="auto">
@@ -33,22 +31,23 @@ export default function HorizontalCouponCard({ coupon }: { coupon: CouponProps }
           </div>
           <div>
             <h2 className="text-xl max-w-64 font-bold text-gray-800 line-clamp-2">{coupon.title}</h2>
-            {/* <p className="text-sm text-gray-600 line-clamp-1">{coupon.store?.title || coupon.brand}</p> */}
           </div>
         </div>
 
         <div className="flex-grow">
           {coupon?.description && <div className="text-gray-700 mb-4 line-clamp-3" dangerouslySetInnerHTML={{ __html: secureHtmlLinks(coupon?.description) }} />}
-          {/* <div className="flex items-center mb-2">
-            <Tag className="w-4 h-4 me-2 text-purple-500" />
-            <span className="text-sm font-semibold text-purple-700">{coupon.category}</span>
-          </div> */}
           <div className="flex items-center mb-2">
             <ShoppingBag className="w-4 h-4 me-2 text-main-500" />
             <span className="text-sm font-semibold text-main-700">{coupon.discount_value} {t("OFF")}</span>
           </div>
-          {coupon.expire_date && (
-            <div className="text-sm text-gray-600">{t("Expire Date")}: {moment(coupon.expire_date).format("MMM dd, yyyy")}</div>
+          {coupon.expire_date && (<div className="text-sm text-gray-600">{t("Expire Date")}: {new Date(coupon.expire_date).toLocaleDateString(
+            locale === 'ar' ? 'ar-SA' : 'en-US',
+            {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }
+          )}</div>
           )}
         </div>
 

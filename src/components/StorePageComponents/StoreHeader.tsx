@@ -1,5 +1,4 @@
 'use client'
-import moment from 'moment'
 import React from 'react'
 import Image from 'next/image'
 import { StarIcon } from 'lucide-react'
@@ -28,8 +27,9 @@ function StoreHeader({ store_id, store_slug, store_image, store_title, isMobile,
             {store_image && (
               <div className="shrink-0">
                 <Image
-                  src={store_image}
-                  alt={store_slug}
+                  src={store_image ? encodeURI(store_image) : "noPreview.webp"}
+                  alt={store_title}
+                  title={store_title}
                   width={!isMobile ? 106 : 71}
                   height={!isMobile ? 60 : 40}
                   priority
@@ -61,10 +61,12 @@ function StoreHeader({ store_id, store_slug, store_image, store_title, isMobile,
                   )}
                   <div className="flex items-center gap-2 text-white text-sm">
                     <p>
-                      {t("Last updated")} {": "}{" "}
-                      {moment()
-                        .locale(locale === "ar" ? "ar" : "en")
-                        .format("LL")}{" "}
+                      {t("Last updated")} {": "}
+                      {new Date().toLocaleDateString(locale === "ar" ? 'ar-SA' : 'en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
                       {" ( " + `${t("Today")}` + " ) "}
                     </p>
                   </div>

@@ -15,8 +15,7 @@ import { Textarea } from '@heroui/input';
 import { Tooltip } from '@heroui/tooltip';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Calendar, CircleUser, Clock } from 'lucide-react';
-import moment from 'moment';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -40,6 +39,7 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
   const t = useTranslations();
+  const locale = useLocale();
   const { user } = useStore((store) => store);
   // Initialize form
   const {
@@ -88,7 +88,7 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
               <Image
                 height={256}
                 width={600}
-                src={blog?.image}
+                src={blog?.image ? encodeURI(blog.image) : "noPreview.webp"}
                 alt={blog?.image_alt || blog?.title}
                 className="w-full h-full object-contain"
                 unoptimized
@@ -118,11 +118,20 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
             <div className="w-full flex flex-wrap items-center gap-5 text-sm text-default-500 mt-2">
               <div className="min-w-max flex flex-nowrap items-center gap-1">
                 <Calendar size={16} />
-                <span>{moment(blog?.created_at).format("MMMM D, YYYY")}</span>
+                <span>{new Date(blog?.created_at).toLocaleDateString(locale === "ar" ? 'ar-SA' : 'en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}</span>
               </div>
               <div className="min-w-max flex flex-nowrap items-center gap-1">
                 <Clock size={16} />
-                <span>{moment(blog?.created_at).format("h:mm A")}</span>
+                <span> {new Date(blog?.created_at).toLocaleTimeString(locale === 'ar' ? 'ar-SA' : 'en-US', {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  hour12: true,
+                }
+                )}</span>
               </div>
               <Tooltip content={`${blog?.rate || 0} rating`}>
                 <div className="flex items-center gap-1">
@@ -175,7 +184,11 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
                               {review?.created_by?.name || "Anonymous"}
                             </p>
                             <p className="text-xs text-default-500">
-                              {moment(review.created_at).format("MMMM D, YYYY")}
+                              {new Date(review.created_at).toLocaleDateString(locale === "ar" ? 'ar-SA' : 'en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                              })}
                             </p>
                           </div>
                           <Rate
@@ -237,6 +250,7 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
                   <Controller
                     name="description"
                     control={control}
+                    defaultValue=""
                     render={({ field }) => (
                       <Textarea
                         {...field}
