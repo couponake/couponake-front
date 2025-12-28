@@ -35,7 +35,8 @@ export const useStoresData = () => {
   const fetchStores = async ({ page = 1, search = '', category = null, country = null }: StoresQueryParams) => {
     try {
       const response = await api.request.get(
-        user?.id ? 'stores' : 'stores/all-stores',
+        // user?.id ? 'stores' : 'stores/all-stores',
+        'stores/all-stores',
         {
           params: {
             page,
