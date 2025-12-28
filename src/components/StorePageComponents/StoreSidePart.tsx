@@ -152,6 +152,7 @@ function StoreSidePart({
                     <div className="space-y-2">
                         {storeBrands?.map((brand) => (
                             <Link
+                                prefetch={false}
                                 target="_self"
                                 key={brand?.id}
                                 href={`/brand/${brand?.id}`}

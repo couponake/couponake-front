@@ -66,6 +66,7 @@ const StoreCarousel = ({
         <div className="flex items-center gap-3 rtl:flex-row-reverse z-50">
           {showViewAll && (
             <Link
+              prefetch={false}
               target="_self"
               href={viewAllLink ? viewAllLink : "/stores"}>
               <button className="max-sm:text-sm rounded-xl px-3 py-2 gradient-btn transition-all">
@@ -81,6 +82,7 @@ const StoreCarousel = ({
         {stores?.map((store: StoreProps, index) => (
           <div key={store?.id || index}>
             <Link
+              prefetch={false}
               target="_self"
               href={`/store/${store?.slug}`}
               onClick={() => HandleClickStore(store)}

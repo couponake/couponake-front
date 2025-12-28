@@ -109,6 +109,7 @@ const BestStores = ({
           {filteredStores?.length > 0 ? (
             filteredStores?.map((store) => (
               <Link
+                prefetch={false}
                 target="_self"
                 key={store?.id}
                 href={`/store/${store?.slug}`}

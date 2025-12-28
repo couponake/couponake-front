@@ -98,6 +98,7 @@ const Categories = () => {
               className="z-10 my-5 basis-1/2 sm:basis-1/4 md:basis-1/5 lg:md:basis-1/6 2xl:basis-[11%]"
             >
               <Link
+                prefetch={false}
                 target="_self"
                 href={`/coupon-category/${category?.slug}`}
               >
@@ -125,6 +126,7 @@ const Categories = () => {
       </Carousel>
       <div className="flex w-full justify-center">
         <Link
+          prefetch={false}
           target="_self"
           href="/categories"
         >

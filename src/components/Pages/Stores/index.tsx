@@ -209,6 +209,7 @@ const Stores = () => {
             {categories?.map((category) => (
               <li key={category?.id}>
                 <Link
+                  prefetch={false}
                   target="_self"
                   href={`?category=${category?.id}`}
                   className={cn(
@@ -289,6 +290,7 @@ const Stores = () => {
                   w-full max-w-md mx-auto"
                 >
                   <Link
+                    prefetch={false}
                     target="_self"
                     href={`/store/${store?.slug}`}
                     className="flex items-center w-full gap-4 flex-grow max-sm:flex-col max-sm:justify-center"
