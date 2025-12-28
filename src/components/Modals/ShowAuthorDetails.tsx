@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React from 'react';
 
-import { Rate } from './ui/rate';
+import { Rate } from '../ui/rate';
 
 interface authorProps {
   author: Responsibile;

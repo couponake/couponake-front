@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import BlogCard from "@/components/blog-card";
+import BlogCard from "@/components/BlogPageComponents/blog-card";
 import { Pagination } from "@heroui/pagination";
 import { Blog, paginationProps } from "@/types";
 import { motion } from "framer-motion";
@@ -8,7 +8,7 @@ import Empty from "@/components/Empty";
 import api from "@/lib/api";
 import { toast } from "@/components/ui/custom-toast";
 import { Spinner } from "@heroui/spinner";
-import ScrollTracker from "@/hooks/ScrollPageAnalytics";
+import ScrollTracker from "@/services/ScrollPageAnalytics";
 
 export default function BlogsList({
   blogs,

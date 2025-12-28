@@ -5,7 +5,7 @@ import { Button } from "@heroui/button";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "@/components/ui/custom-toast";
-import MyAxios from "@/components/MyAxios";
+import MyAxios from "@/lib/MyAxios";
 
 interface CookiePreferences {
   necessary: boolean;

@@ -13,7 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { parseAsString, useQueryState } from "nuqs";
 import { Pagination } from "@heroui/pagination";
 import { Button } from "@heroui/button";
-import MyAxios from "@/components/MyAxios";
+import MyAxios from "@/lib/MyAxios";
 
 const Categories = ({
   categories,

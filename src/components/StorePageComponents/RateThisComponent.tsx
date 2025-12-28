@@ -7,9 +7,9 @@ import * as yup from "yup";
 import { StarIcon } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
 import { Button } from "@heroui/button";
-import { Rate } from "./ui/rate";
+import { Rate } from "../ui/rate";
 import { toast } from "@/components/ui/custom-toast";
-import MyAxios from "@/components/MyAxios";
+import MyAxios from "@/lib/MyAxios";
 import { Textarea } from "@heroui/input";
 
 // Validation schema using yup

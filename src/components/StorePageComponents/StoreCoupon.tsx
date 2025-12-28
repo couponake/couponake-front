@@ -19,7 +19,7 @@ import {
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import FacebookReactions from "./FacebookReactions";
+import FacebookReactions from "../FacebookReactions";
 
 interface emojiType {
   id: number;
@@ -129,7 +129,7 @@ const StoreCoupon = ({
               emoji?.user_id === user?.id && emoji?.emoji !== value
           )
         ) {
-           await api.request.post("stores/coupon/emoji", {
+          await api.request.post("stores/coupon/emoji", {
             emoji: value,
             coupon_id: coupon?.id,
           }).then(() => {

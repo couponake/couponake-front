@@ -6,7 +6,7 @@ import { useStore } from "@/store";
 import { Button } from "@heroui/button";
 import { Heart } from "lucide-react";
 import api from "@/lib/api";
-import { getQueryClient } from "@/services/get-query-client";
+import { getQueryClient } from "@/lib/get-query-client";
 
 type AddToFavoriteBtnProps = {
   storeId: number;
@@ -46,7 +46,7 @@ const AddToFavoriteBtn: React.FC<AddToFavoriteBtnProps> = ({
       } catch (error) {
         toast.error(
           "Something went wrong. Please try again." +
-            (error instanceof Error ? error.message : "")
+          (error instanceof Error ? error.message : "")
         );
         console.error(error);
       } finally {

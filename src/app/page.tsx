@@ -1,8 +1,8 @@
 import Main from "@/components/Pages/Home/main";
 import { getData } from "@/lib/actions";
 import React from "react";
-import ClientSideComponents from "../components/Pages/Home/ClientSideComponents";
-import ScrollTracker from "@/hooks/ScrollPageAnalytics";
+import ClientSideComponents from "../components/HomePageComponents/ClientSideComponents";
+import ScrollTracker from "@/services/ScrollPageAnalytics";
 
 export const experimental_ppr = true;
 export const runtime = "nodejs";

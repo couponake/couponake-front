@@ -1,4 +1,4 @@
-import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
+import AddToFavoriteBtn from "@/components/StorePageComponents/AddToFavoriteBtn";
 import Empty from "@/components/Empty";
 import api from "@/lib/api";
 import { StoreProps } from "@/types";

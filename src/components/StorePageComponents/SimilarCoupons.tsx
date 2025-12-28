@@ -6,7 +6,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useLocale, useTranslations } from 'next-intl';
 import React from 'react';
 
-import RelatedTicketCouponItem from './ui/RelatedTicketCoupon/RelatedTicketCouponItem';
+import RelatedTicketCouponItem from './RelatedTicketCoupon/RelatedTicketCouponItem';
 
 
 const SimilarCoupons = ({ coupons }: { coupons: CouponProps[] }) => {

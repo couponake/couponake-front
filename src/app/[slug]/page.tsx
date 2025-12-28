@@ -1,4 +1,4 @@
-import { api } from '@/components/MyAxios';
+import { api } from '@/lib/MyAxios';
 import ShowBlog from '@/components/Pages/Blogs/show';
 import { Blog } from '@/types';
 import { redirect } from 'next/navigation';

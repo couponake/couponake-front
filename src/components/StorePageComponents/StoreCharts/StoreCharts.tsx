@@ -8,7 +8,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { CiDiscount1 } from 'react-icons/ci';
 import { GiSandsOfTime } from 'react-icons/gi';
 
-import { CardHeader } from '../card';
+import { CardHeader } from '../../ui/card';
 import { useTranslations } from 'next-intl';
 
 function StoreCharts({

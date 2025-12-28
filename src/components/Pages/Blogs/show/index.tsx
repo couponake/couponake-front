@@ -1,9 +1,9 @@
 "use client";
-import ShowAuthorDetails from '@/components/ShowAuthorDetails';
+import ShowAuthorDetails from '@/components/Modals/ShowAuthorDetails';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { toast } from '@/components/ui/custom-toast';
 import { Rate } from '@/components/ui/rate';
-import ScrollTracker from '@/hooks/ScrollPageAnalytics';
+import ScrollTracker from '@/services/ScrollPageAnalytics';
 import api from '@/lib/api';
 import { secureHtmlLinks } from '@/lib/htmlUtils';
 import { useStore } from '@/store';

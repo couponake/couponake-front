@@ -1,5 +1,5 @@
 "use client";
-import StoreCoupon from "@/components/StoreCoupon";
+import StoreCoupon from "@/components/StorePageComponents/StoreCoupon";
 import { CouponProps } from "@/types";
 import { Button } from "@heroui/button";
 import { useTranslations } from "next-intl";

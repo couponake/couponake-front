@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { User } from "@/types";
-import MyAxios from "@/components/MyAxios";
+import MyAxios from "@/lib/MyAxios";
 
 const SignIn = async (email: string, password: string) => {
   try {

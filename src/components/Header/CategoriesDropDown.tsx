@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React, { Suspense, useEffect, useState, useCallback } from "react";
 import { toast } from "sonner";
-import MyAxios from "../MyAxios";
+import MyAxios from "../../lib/MyAxios";
 import { Spinner } from "@heroui/spinner";
 
 const CategoriesDropDown = () => {

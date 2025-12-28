@@ -1,4 +1,4 @@
-import { getSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings";
 import { NextResponse } from "next/server";
 
 type SitemapEntry = {

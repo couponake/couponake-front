@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-import LanguageSelector from "../LanguageSelector";
+import LanguageSelector from "../HomePageComponents/LanguageSelector";
 import { NotificationProps } from "@/types";
-import UserNotifications from "../UserNotifications";
+import UserNotifications from "../HomePageComponents/UserNotifications";
 import Link from "next/link";
 import Image from "next/image";
 import SearchInput from "./SearchInput";

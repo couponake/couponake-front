@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import BlurFade from "@/components/ui/blur-fade";
-import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
+import AddToFavoriteBtn from "@/components/StorePageComponents/AddToFavoriteBtn";
 import { useStore } from "@/store";
 import Link from "next/link";
 import Empty from "@/components/Empty";

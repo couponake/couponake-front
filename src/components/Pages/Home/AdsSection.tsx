@@ -6,7 +6,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import AdsItem from "@/components/AdsItem";
+import AdsItem from "@/components/HomePageComponents/AdsItem";
 import { useLocale, useTranslations } from "next-intl";
 import AutoScroll from "embla-carousel-auto-scroll";
 import { Skeleton } from "@/components/ui/skeleton";

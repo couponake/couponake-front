@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { Card, CardContent } from "../card";
+import { Card, CardContent } from "../ui/card";
 import { StarIcon } from "lucide-react";
-import RateThisComponent from "@/components/RateThisComponent";
-import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
+import RateThisComponent from "@/components/StorePageComponents/RateThisComponent";
+import AddToFavoriteBtn from "@/components/StorePageComponents/AddToFavoriteBtn";
 
 interface CardProps {
   store_id: number;

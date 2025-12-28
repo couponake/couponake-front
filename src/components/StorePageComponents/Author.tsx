@@ -4,7 +4,7 @@ import { Responsibile } from "@/types";
 import { CircleUser } from "lucide-react";
 import React, { useState } from "react";
 
-import ShowAuthorDetails from "./ShowAuthorDetails";
+import ShowAuthorDetails from "../Modals/ShowAuthorDetails";
 
 const Author = ({
   author,

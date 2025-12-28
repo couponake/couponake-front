@@ -1,5 +1,5 @@
 "use client";
-import AddToFavoriteBtn from '@/components/AddToFavoriteBtn';
+import AddToFavoriteBtn from '@/components/StorePageComponents/AddToFavoriteBtn';
 import Empty from '@/components/Empty';
 import { toast } from '@/components/ui/custom-toast';
 import { Input } from '@/components/ui/input';
@@ -213,7 +213,7 @@ const Stores = () => {
                   className={cn(
                     "rounded-s-0 mb-2 ml-2 flex h-12 items-center rounded-e-xl border-s-4 border-main-600/0 py-3.5 text-neutral-900 hover:border-s-4 hover:border-main-600 hover:bg-neutral-50 hover:text-main-600 ltr:pl-3 rtl:pr-3",
                     Number(selectedCategory) === Number(category?.id) &&
-                      "text-main-600 border-main-600"
+                    "text-main-600 border-main-600"
                   )}
                 >
                   <div className="text-base font-medium ms-2.5 line-clamp-1">
@@ -279,57 +279,57 @@ const Stores = () => {
           <div className="grid gap-4 grid-cols-2">
             {allStores && allStores.length > 0
               ? allStores?.map((store) => (
-                  <div
-                    key={store?.slug}
-                    className="relative flex flex-col sm:flex-row items-center justify-between 
+                <div
+                  key={store?.slug}
+                  className="relative flex flex-col sm:flex-row items-center justify-between 
                   rounded-2xl border border-neutral-200 bg-white 
                   shadow-sm hover:shadow-md transition-shadow duration-300 
                   p-4 sm:p-5 gap-y-3 sm:gap-y-0 sm:gap-x-4 
                   w-full max-w-md mx-auto"
+                >
+                  <Link
+                    target="_self"
+                    href={`/store/${store?.slug}`}
+                    className="flex items-center w-full gap-4 flex-grow max-sm:flex-col max-sm:justify-center"
                   >
-                    <Link
-                      target="_self"
-                      href={`/store/${store?.slug}`}
-                      className="flex items-center w-full gap-4 flex-grow max-sm:flex-col max-sm:justify-center"
-                    >
-                      <div className="w-16 aspect-square shadow-md bg-white rounded-full flex justify-center items-center overflow-hidden">
-                        <Image
-                          src={store?.image || "noPreview.webp"}
-                          alt={store?.store_name || "Store Image"}
-                          width={64}
-                          height={64}
-                          loading="lazy"
-                          className="w-16 h-fit object-fit"
-                          unoptimized
-                        />
-                      </div>
-                      <div className="flex-grow min-w-0">
-                        <h2
-                          className="sm:text-lg md:text-xl font-bold text-neutral-900  max-sm:text-center"
-                          title={store?.store_name}
-                        >
-                          {store?.store_name}
-                        </h2>
-                      </div>
-                    </Link>
-
-                    <div className="flex-shrink-0 sm:ml-4">
-                      {store?.id && (
-                        <AddToFavoriteBtn
-                          storeId={store?.id}
-                          isFavoriteInitially={
-                            store?.in_favourite || store?.isInFavorites
-                          }
-                        />
-                      )}
+                    <div className="w-16 aspect-square shadow-md bg-white rounded-full flex justify-center items-center overflow-hidden">
+                      <Image
+                        src={store?.image || "noPreview.webp"}
+                        alt={store?.store_name || "Store Image"}
+                        width={64}
+                        height={64}
+                        loading="lazy"
+                        className="w-16 h-fit object-fit"
+                        unoptimized
+                      />
                     </div>
+                    <div className="flex-grow min-w-0">
+                      <h2
+                        className="sm:text-lg md:text-xl font-bold text-neutral-900  max-sm:text-center"
+                        title={store?.store_name}
+                      >
+                        {store?.store_name}
+                      </h2>
+                    </div>
+                  </Link>
+
+                  <div className="flex-shrink-0 sm:ml-4">
+                    {store?.id && (
+                      <AddToFavoriteBtn
+                        storeId={store?.id}
+                        isFavoriteInitially={
+                          store?.in_favourite || store?.isInFavorites
+                        }
+                      />
+                    )}
                   </div>
-                ))
+                </div>
+              ))
               : !isLoading && (
-                  <div className="col-span-full">
-                    <Empty />
-                  </div>
-                )}
+                <div className="col-span-full">
+                  <Empty />
+                </div>
+              )}
           </div>
           {isLoading && (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

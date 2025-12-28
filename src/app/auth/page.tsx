@@ -13,7 +13,7 @@ import "react-international-phone/style.css";
 import { toast } from "@/components/ui/custom-toast";
 import { InferType } from "yup";
 import { signIn } from "next-auth/react";
-import MyAxios from "@/components/MyAxios";
+import MyAxios from "@/lib/MyAxios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";

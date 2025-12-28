@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import UserDropDown from "../UserDropDown";
+import UserDropDown from "../HomePageComponents/UserDropDown";
 import { UserIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useStore } from "@/store";
@@ -15,9 +15,9 @@ const ShowLoginBtnOrUserDropDown = () => {
       {user ? (
         <UserDropDown />
       ) : (
-        <Link 
-        target="_self"
-         href="/auth/login">
+        <Link
+          target="_self"
+          href="/auth/login">
           <li className="group relative rounded-full border border-neutral-100 px-4 py-2">
             <div className="flex items-center justify-between gap-3">
               <UserIcon className="size-5 text-neutral-900" />

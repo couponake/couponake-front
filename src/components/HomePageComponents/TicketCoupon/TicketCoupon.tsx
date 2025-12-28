@@ -20,7 +20,7 @@ import {
   IoMdArrowBack,
 } from "react-icons/io";
 
-import { toast } from "../custom-toast";
+import { toast } from "../../ui/custom-toast";
 
 function TicketCoupon() {
   const t = useTranslations();
