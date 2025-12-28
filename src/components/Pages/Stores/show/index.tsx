@@ -1,21 +1,20 @@
 "use client";
-import Author from '@/components/StorePageComponents/Author';
-import FollowStore from '@/components/StorePageComponents/FollowStore';
+import ShowCouponDetails from '@/components/Modals/ShowCouponDetails';
 import CustomersReviews from '@/components/Pages/Home/CustomersReviews';
 import FAQ from '@/components/Pages/Home/FAQ';
-import ShowCouponDetails from '@/components/Modals/ShowCouponDetails';
-import SimilarCoupons from '@/components/StorePageComponents/SimilarCoupons';
-import StoreCoupon from '@/components/StorePageComponents/StoreCoupon';
-import StoreTable from '@/components/StorePageComponents/StoreTable';
+import Author from '@/components/StorePageComponents/Author';
+import FollowStore from '@/components/StorePageComponents/FollowStore';
 import StoreCharts from '@/components/StorePageComponents/StoreCharts/StoreCharts';
+import StoreCoupon from '@/components/StorePageComponents/StoreCoupon';
 import StoreCoupons from '@/components/StorePageComponents/StoreCoupons';
 import StoreHeader from '@/components/StorePageComponents/StoreHeader';
 import StoreRatingCard from '@/components/StorePageComponents/StoreRatingCard';
-import StoreSidePart from '@/components/ui/StoreSidePart';
-import ScrollTracker from '@/services/ScrollPageAnalytics';
+import StoreSidePart from '@/components/StorePageComponents/StoreSidePart';
+import StoreTable from '@/components/StorePageComponents/StoreTable';
 import useDetectMobile from '@/hooks/useDetectMobile';
 import { useStoreData } from '@/hooks/useStoreData';
 import { secureHtmlLinks } from '@/lib/htmlUtils';
+import ScrollTracker from '@/services/ScrollPageAnalytics';
 import { CategoryItem, statisticsType } from '@/types';
 import { Accordion, AccordionItem } from '@heroui/accordion';
 import { Button } from '@heroui/button';
@@ -161,6 +160,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
             similar_stores={similarStores}
             storeBrands={store_brands}
             storeBanners={store_banner}
+            similarCoupons={similar_coupons_table}
           />
         </aside>
         {/* main content */}
@@ -228,12 +228,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
                   />
                 ))}
               </div>
-            </>
-          )}
-          {similar_coupons_table && similar_coupons_table.length > 0 && (
-            <>
-              <Divider />
-              <SimilarCoupons coupons={data?.similar_coupons_table || []} />
             </>
           )}
           {/* related_coupons */}

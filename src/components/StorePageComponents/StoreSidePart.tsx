@@ -2,11 +2,22 @@
 import useDetectMobile from '@/hooks/useDetectMobile';
 import { BannerItem, BrandProps, CouponProps, StoreProps } from '@/types';
 import { useLocale, useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import Hero from '../Pages/Home/Hero';
+import { Skeleton } from '../ui/skeleton';
+
+const RelatedTicketCouponItem = dynamic(() => import('./RelatedTicketCoupon/RelatedTicketCouponItem'), {
+    loading: () => (
+        <Skeleton
+            className="rounded-md w-[280px] h-[100px]"
+        />
+    ),
+    ssr: false
+});
 
 interface sidePartType {
     storeTitle: string;
@@ -21,6 +32,7 @@ interface sidePartType {
     storeBrands: BrandProps[];
     storeBanners: BannerItem[] | null;
     storeSlug: string;
+    similarCoupons: CouponProps[]
 }
 
 function StoreSidePart({
@@ -32,7 +44,8 @@ function StoreSidePart({
     similar_stores,
     storeBrands,
     storeBanners,
-    storeSlug
+    storeSlug,
+    similarCoupons
 }: sidePartType
 ) {
     const t = useTranslations();
@@ -46,11 +59,10 @@ function StoreSidePart({
                     <div className="w-full h-fit overflow-hidden flex items-center justify-center">
                         <Image
                             src={couponImage}
-                            alt={storeSlug}
+                            alt={storeTitle}
                             width={!isMobile ? 215 : 175}
                             height={!isMobile ? 120.94 : 98.44}
                             className="rounded-lg w-full h-fit shadow-md object-cover my-2"
-                            unoptimized
                         />
                     </div>
                 )
@@ -90,33 +102,48 @@ function StoreSidePart({
                     </tbody>
                 </table>
             </div>
-            <div className="mt-11 border-t-gray-300 border-t">
-                <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
-                    {t("Similar Stores")}
-                </p>
-                <div className="space-y-3">
-                    {similar_stores?.map((store) => (
-                        <Link
-                            target="_self"
-                            key={store?.slug}
-                            href={`/store/${store?.slug}`}
-                            className="flex items-center gap-2 text-main-700 hover:underline "
-                        >
-                            {store?.image && (
-                                <Image
-                                    src={store?.image}
-                                    alt={store.slug}
-                                    width={60}
-                                    height={31.25}
-                                    className="max-w-15 rounded"
-                                    unoptimized
-                                />
-                            )}
-                            <p className="line-clamp-1">{store.store_name}</p>
-                        </Link>
-                    ))}
+            <aside>
+                <div className="mt-11 border-t-gray-300 border-t">
+                    <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
+                        {t("Similar Stores")}
+                    </p>
+                    <div className="flex items-start justify-start gap-3 flex-wrap">
+                        {similar_stores?.map((store) => (
+                            <Link
+                                target="_self"
+                                key={store?.slug}
+                                href={`/store/${store?.slug}`}
+                                prefetch={false}
+                            >
+                                <div className="w-17 aspect-square p-0 rounded-full bg-white shadow-md">
+                                    <Image
+                                        src={store?.image ? encodeURI(store.image) : "noPreview.webp"}
+                                        alt={store.store_name}
+                                        width={68}
+                                        height={68}
+                                        loading="lazy"
+                                        className="size-full object-contain rounded-full"
+                                    />
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
-            </div>
+                {
+                    similarCoupons && similarCoupons.length > 0 && (
+                        <div className="mt-11 border-t-gray-300 border-t">
+                            <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
+                                {t("Related coupons")}
+                            </p>
+                            <div className='w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 m-0 p-0 flex flex-wrap items-start justify-start gap-3 overflow-hidden'>
+                                {similarCoupons.map((coupon: CouponProps) => (
+                                    <RelatedTicketCouponItem key={coupon?.id} coupon={coupon} />
+                                ))}
+                            </div>
+                        </div>
+                    )
+                }
+            </aside>
             {storeBrands?.length > 0 && (
                 <div className="mt-11 border-t-gray-300 border-t">
                     <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
@@ -130,14 +157,13 @@ function StoreSidePart({
                                 href={`/brand/${brand?.id}`}
                                 className="flex items-center gap-2 text-main-700 hover:underline"
                             >
-                                {brand?.image && (
+                                {brand.image && (
                                     <Image
-                                        src={brand?.image}
+                                        src={brand.image}
                                         alt={brand.slug}
                                         width={60}
                                         height={31.25}
                                         className="max-w-15 rounded"
-                                        unoptimized
                                     />
                                 )}
                                 {brand.title}
