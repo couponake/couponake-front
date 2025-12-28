@@ -300,7 +300,7 @@ const StoreCoupon = ({
                 onPress={() => setSelectedCoupon(coupon)}
               >
                 {t("Copy Coupon")}
-                <div className="absolute top-1 left-1 hover:inset-0 focus:inset-0 active:inset-0 w-[150px] md:w-[165px] lg:w-[165px] h-[48px] border border-main-500 rounded-[14px]" />
+                <div className="absolute rtl:top-1 rtl:left-1 ltr:top-1 ltr:right-1 hover:inset-0 focus:inset-0 active:inset-0 rtl:w-[150px] rtl:md:w-[165px] rtl:lg:w-[165px] ltr:w-[173px] ltr:md:w-[191px] ltr:lg:w-[191px] h-[48px] border border-main-500 rounded-[14px]" />
               </Button>
             )}
           </div>
