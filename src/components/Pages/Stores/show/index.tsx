@@ -1,32 +1,62 @@
 "use client";
 import ShowCouponDetails from '@/components/Modals/ShowCouponDetails';
-import CustomersReviews from '@/components/Pages/Home/CustomersReviews';
 import FAQ from '@/components/Pages/Home/FAQ';
 import Author from '@/components/StorePageComponents/Author';
 import FollowStore from '@/components/StorePageComponents/FollowStore';
 import StoreCharts from '@/components/StorePageComponents/StoreCharts/StoreCharts';
-import StoreCoupon from '@/components/StorePageComponents/StoreCoupon';
 import StoreCoupons from '@/components/StorePageComponents/StoreCoupons';
 import StoreHeader from '@/components/StorePageComponents/StoreHeader';
 import StoreRatingCard from '@/components/StorePageComponents/StoreRatingCard';
 import StoreSidePart from '@/components/StorePageComponents/StoreSidePart';
-import StoreTable from '@/components/StorePageComponents/StoreTable';
+import { Skeleton } from '@/components/ui/skeleton';
 import useDetectMobile from '@/hooks/useDetectMobile';
 import { useStoreData } from '@/hooks/useStoreData';
 import { secureHtmlLinks } from '@/lib/htmlUtils';
 import ScrollTracker from '@/services/ScrollPageAnalytics';
 import { CategoryItem, statisticsType } from '@/types';
-import { Accordion, AccordionItem } from '@heroui/accordion';
 import { Button } from '@heroui/button';
 import { Divider } from '@heroui/divider';
 import { useLocale, useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React from 'react';
 
-import CompetitorsStores from '../../Home/CompetitorsStores';
 import Hero from '../../Home/Hero';
 
 declare module "react-window";
+
+const CompetitorsStores = dynamic(() => import('../../Home/CompetitorsStores'), {
+  loading: () => (
+    <Skeleton
+      className="rounded-md w-full h-[200px]"
+    />
+  ),
+  ssr: false
+});
+const StoreCoupon = dynamic(() => import('@/components/StorePageComponents/StoreCoupon'), {
+  loading: () => (
+    <Skeleton
+      className="rounded-md w-full h-[200px]"
+    />
+  ),
+  ssr: false
+});
+const StoreTable = dynamic(() => import('@/components/StorePageComponents/StoreTable'), {
+  loading: () => (
+    <Skeleton
+      className="rounded-md w-full h-[300px]"
+    />
+  ),
+  ssr: false
+});
+const CustomersReviews = dynamic(() => import('@/components/Pages/Home/CustomersReviews'), {
+  loading: () => (
+    <Skeleton
+      className="rounded-md w-full h-[400px]"
+    />
+  ),
+  ssr: false
+});
 
 const ShowStore = ({ slug }: { slug: string }) => {
   const isMobile = useDetectMobile();
@@ -276,30 +306,24 @@ const ShowStore = ({ slug }: { slug: string }) => {
             )}
           {store_infos?.length > 0 && (
             <div className="space-y-5 mb-11">
-              <h2 className="text-lg font-semibold sm:text-xl">
+              <p className="text-lg font-semibold sm:text-xl">
                 {t("About The store")}
-              </h2>
-              <Accordion>
-                {store_infos?.map((faq) => (
-                  <AccordionItem
-                    title={faq?.title}
-                    aria-label={faq?.title}
-                    value={String(faq?.id)}
-                    key={faq?.id}
-                  >
-                    <div
-                      className="prose max-w-none"
-                      dangerouslySetInnerHTML={makeSafeHtml(faq?.description)}
-                    />
-                  </AccordionItem>
+              </p>
+              <div className='w-full h-fit bg-white rounded-md p-4 border-1'>
+                {store_infos?.map((info) => (
+                  <div
+                    key={info.id}
+                    className="prose max-w-none"
+                    dangerouslySetInnerHTML={makeSafeHtml(info?.description)}
+                  />
                 ))}
-              </Accordion>
+              </div>
             </div>
           )}
           {store_faqs && (
             <FAQ
               title={t("FAQS")}
-              className="!pt-0 !pb-7"
+              className="!py-5"
               storeName={store.slug}
               faqs={store_faqs.filter(
                 (faq) => Number(faq?.store_id) === Number(store?.id)
