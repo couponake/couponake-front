@@ -81,7 +81,7 @@ const FollowUs = ({
           <DropdownMenu aria-label="Static Actions">
             {menuItems?.map((item) => (
               <DropdownItem key={item.key} startContent={item?.icon} textValue={item?.label}>
-                <a target="_blank" href={item.href} rel="noopener noreferrer">
+                <a target="_blank" href={item.href} rel="noopener noreferrer nofollow">
                   {item.label}
                 </a>
               </DropdownItem>

@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
+import { Copyright } from "lucide-react";
 
 interface footerLinkType {
   id: number
@@ -168,8 +169,9 @@ const Footer = ({
 
         <div className="mt-8 border-t border-border pt-8">
           <div className="flex flex-wrap items-center justify-between container">
-            <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()}{" "}
+            <p suppressHydrationWarning className="text-xs text-muted-foreground flex gap-1 items-center">
+              <Copyright size={12} />
+              {new Date().getFullYear()}{" "}
               {settings?.find((item) => item.name === "site_name")?.val}.{" "}
               {t("All rights reserved")}
             </p>
