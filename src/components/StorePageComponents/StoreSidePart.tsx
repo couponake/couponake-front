@@ -19,6 +19,15 @@ const RelatedTicketCouponItem = dynamic(() => import('./RelatedTicketCoupon/Rela
     ssr: false
 });
 
+const SimilarStores = dynamic(() => import('./SimilarStores'), {
+    loading: () => (
+        <Skeleton
+            className="rounded-full w-17 aspect-square"
+        />
+    ),
+    ssr: false
+});
+
 interface sidePartType {
     storeTitle: string;
     couponImage: string | null;
@@ -109,23 +118,7 @@ function StoreSidePart({
                     </p>
                     <div className="flex items-start justify-start gap-3 flex-wrap">
                         {similar_stores?.map((store) => (
-                            <Link
-                                target="_self"
-                                key={store?.slug}
-                                href={`/store/${store?.slug}`}
-                                prefetch={false}
-                            >
-                                <div className="w-17 aspect-square p-0 rounded-full bg-white shadow-md">
-                                    <Image
-                                        src={store?.image ? encodeURI(store.image) : "noPreview.webp"}
-                                        alt={store.store_name}
-                                        width={68}
-                                        height={68}
-                                        loading="lazy"
-                                        className="size-full object-contain rounded-full"
-                                    />
-                                </div>
-                            </Link>
+                            <SimilarStores key={store?.slug} store={store} />
                         ))}
                     </div>
                 </div>
