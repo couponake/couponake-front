@@ -31,7 +31,7 @@ export default function StatisticsCard({ collection_count }: StatisticsProps) {
           />
           <StatItem
             icon={<Users className="w-8 h-8 text-green-500" />}
-            label={t("statistics.users")}
+            label={t("statistics.members")}
             value={collection_count.users}
           />
         </div>
