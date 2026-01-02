@@ -2,7 +2,7 @@
 import '../../../styles/hideScrollebar.css';
 
 import Empty from '@/components/Empty';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { CategoryItem, featuredStores, FeaturedStoresCategoryItem } from '@/types';
 import { Chip } from '@heroui/chip';
 import { Spinner } from '@heroui/spinner';
@@ -37,7 +37,9 @@ const BestStores = ({
   const storesCategoriesList: FeaturedStoresCategoryItem[] = useMemo(() => {
     return [
       { ...allOption, stores },
-      ...(Array.isArray(categories) ? categories : []),
+      ...(Array.isArray(categories)
+        ? categories.filter(category => category.stores?.length > 0)
+        : []),
     ];
   }, [stores, categories]);
 
@@ -126,7 +128,7 @@ const BestStores = ({
                   <CardContent className="p-0 rounded-full bg-white shadow-lg">
                     <div className="w-24 md:w-30 aspect-square">
                       <Image
-                        src={store?.image || "noPreview.webp"}
+                        src={store?.image ? encodeURI(store.image) : "noPreview.webp"}
                         alt={store?.slug || "Store Image"}
                         width={120}
                         height={120}
@@ -136,11 +138,6 @@ const BestStores = ({
                       />
                     </div>
                   </CardContent>
-                  <CardFooter className="w-full h-fit p-0 pt-2 pb-1 flex justify-center">
-                    <p className="text-xs font-medium text-center sm:text-sm w-fit">
-                      {store?.coupons_count} {t("Coupons")}
-                    </p>
-                  </CardFooter>
                 </Card>
               </Link>
             ))
