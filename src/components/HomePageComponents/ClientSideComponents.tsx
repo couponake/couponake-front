@@ -19,14 +19,14 @@ const ClientSideComponents = () => {
     <div ref={ref} className="min-h-[400px]">
       {inView ? (
         <>
+          <TextCarousel
+            texts={texts}
+            isLoading={isLoading}
+          />
           <CustomersReviews
             reviews={testimonials}
             isLoading={isLoading}
             page="home"
-          />
-          <TextCarousel
-            texts={texts}
-            isLoading={isLoading}
           />
         </>
       ) : (
