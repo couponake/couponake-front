@@ -119,7 +119,7 @@ const config: Config = {
       },
       screens: {
         xs: "576px",
-        mid: "768px",
+        md: "768px",
         "3xl": "1600px",
       },
       gridTemplateRows: {
