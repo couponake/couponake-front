@@ -291,7 +291,7 @@ function TicketCoupon() {
                             <div className="w-[110px] aspect-square bg-white">
                               <Image
                                 src={coupon?.store_image}
-                                alt={coupon?.slug}
+                                alt={coupon?.store_slug}
                                 width={110}
                                 height={110}
                                 unoptimized
@@ -414,7 +414,7 @@ function TicketCoupon() {
                           <div className="w-[110px] aspect-square bg-white">
                             <Image
                               src={coupon?.store_image}
-                              alt={coupon?.slug}
+                              alt={coupon?.store_slug}
                               width={110}
                               height={110}
                               unoptimized

@@ -370,6 +370,7 @@ export type LatestCoupons = {
   description: string;
   image: string;
   store_image: string;
+  store_slug: string;
   slug: string;
   code: string;
   url: string;

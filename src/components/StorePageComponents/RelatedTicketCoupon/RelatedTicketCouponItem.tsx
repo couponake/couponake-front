@@ -19,7 +19,7 @@ function RelatedTicketCouponItem({ coupon }: { coupon: CouponProps }) {
                     <div className='w-[90px] h-[100px] bg-white'>
                         <Image
                             src={coupon?.store_image ? encodeURI(coupon?.store_image) : "noPreview.webp"}
-                            alt={coupon?.slug}
+                            alt={coupon?.store_slug}
                             width={90}
                             height={90}
                             className="w-full aspect-square size-[90px] p-2 object-contain border-l-1 border-dashed border-[#ef5658]"
