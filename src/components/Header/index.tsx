@@ -10,7 +10,6 @@ import dynamic from "next/dynamic";
 const MobileDrawer = dynamic(() => import("./MobileDrawer"));
 import ShowLoginBtnOrUserDropDown from "./ShowLoginBtnOrUserDropDown";
 import NavLinks from "./NavLinks";
-import CategoriesDropDown from "./CategoriesDropDown";
 
 const Header = ({
   websiteLogo,
@@ -49,28 +48,26 @@ const Header = ({
               </Link>
             </Suspense>
           )}
-          {/* Categories */}
-          <CategoriesDropDown />
           {/* Navigation Links */}
           <div className="hidden md:flex">
             <NavLinks />
-            <div className="m-auto mx-4 h-6 rounded-2xl border-r-2 border-neutral-100" />
+            <div className="m-auto mx-2 h-6 rounded-2xl border-r-2 border-neutral-100" />
           </div>
 
           {/* Search Bar */}
           <div className="flex flex-1">
             <Suspense>
-              <SearchInput />{" "}
+              <SearchInput />
             </Suspense>
           </div>
-          <div className="m-auto mx-4 h-6 border-r-2 border-neutral-100 max-sm:hidden" />
+          <div className="m-auto mx-2 h-6 border-r-2 border-neutral-100 max-sm:hidden" />
           <div className="">
             <Suspense>
-              <UserNotifications notifications={notifications} />{" "}
+              <UserNotifications notifications={notifications} />
             </Suspense>
           </div>
 
-          <div className="m-auto mx-4 h-6 border-r-2 border-neutral-100 max-sm:hidden" />
+          <div className="m-auto mx-2 h-6 border-r-2 border-neutral-100 max-sm:hidden" />
           {/* Mobile Menu Button */}
           <Suspense>
             <MobileDrawer
@@ -86,10 +83,10 @@ const Header = ({
               <LanguageSelector />
             </li>
             <li>
-              <div className="m-auto mx-4 h-6 border-r-2 border-neutral-100" />
+              <div className="m-auto mx-2 h-6 border-r-2 border-neutral-100" />
             </li>
             <Suspense>
-              <ShowLoginBtnOrUserDropDown />{" "}
+              <ShowLoginBtnOrUserDropDown />
             </Suspense>
           </ul>
         </nav>
