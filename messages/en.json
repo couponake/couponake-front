@@ -231,7 +231,9 @@
   "Users": "Users",
   "statistics": {
     "stores": "Stores",
-    "members": "Members"
+    "members": "Members",
+    "continuousUpdates": "Continuous updates",
+    "successRate": "Success rate"
   },
   "View content": "View content",
   "Logged in successfully": "Logged in successfully",
@@ -363,7 +365,7 @@
   "Author": "Author",
   "Article Author": "Article Author",
   "StoreStatistics": "Store statistics and coupons",
-  "Coupoonat discount coupons": "Coupoonat discount coupons",
+  "Valid discount coupons": "Valid discount coupons for the best online stores",
   "Your message has been sent successfully": "Your message has been sent successfully",
   "Failed to send your message": "Failed to send your message",
   "Error submitting contact form:": "Error submitting contact form:",

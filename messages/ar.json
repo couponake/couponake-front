@@ -214,7 +214,9 @@
   "Stores": "متاجر",
   "statistics": {
     "stores": "متجر",
-    "members": "عضو"
+    "members": "عضو",
+    "continuousUpdates": "تحديث مستمر",
+    "successRate": "معدل النجاح"
   },
   "View content": "اظهار المحتوى",
   "Logged in successfully": "تم تسجيل الدخول بنجاح",
@@ -346,7 +348,7 @@
   "Author": "المؤلف",
   "Article Author": "مؤلف المقال",
   "StoreStatistics": "احصائيات المتجر والكوبونات",
-  "Coupoonat discount coupons": "كوبونات خصم | كوبونات",
+  "Valid discount coupons": "كوبونات خصم فعّالة لأفضل المتاجر أونلاين",
   "Your message has been sent successfully": "تم إرسال رسالتك بنجاح",
   "Failed to send your message": "فشل في إرسال رسالتك. يرجى المحاولة مرة أخرى.",
   "Error submitting contact form:": "خطأ في إرسال نموذج الاتصال: ",

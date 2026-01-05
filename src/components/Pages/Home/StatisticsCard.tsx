@@ -1,5 +1,5 @@
 import type React from "react";
-import { Store, Ticket, Users } from "lucide-react";
+import { CircleCheckBig, RefreshCcw, Store, Ticket } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface StatisticsProps {
@@ -16,9 +16,9 @@ export default function StatisticsCard({ collection_count }: StatisticsProps) {
     <div className="w-full min-h-fit bg-gradient-to-br from-purple-100 to-main-100 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
       <div className="p-2 md:p-4">
         <h1 className="text-sm md:text-lg lg:text-2xl xl:text-2xl 2xl:text-3xl text-center font-bold text-gray-800 mb-4 md:mb-8">
-          {t("Coupoonat discount coupons")}
+          {t("Valid discount coupons")}
         </h1>
-        <div className="grid grid-cols-3 gap-4 sm:gap-6 place-items-center">
+        <div className="grid grid-cols-4 gap-4 place-items-baseline sm:place-items-center">
           <StatItem
             icon={<Store className="w-8 h-8 text-purple-500" />}
             label={t("statistics.stores")}
@@ -29,10 +29,20 @@ export default function StatisticsCard({ collection_count }: StatisticsProps) {
             label={t("Coupons")}
             value={collection_count.coupons}
           />
-          <StatItem
+          {/* <StatItem
             icon={<Users className="w-8 h-8 text-green-500" />}
             label={t("statistics.members")}
             value={collection_count.users}
+          /> */}
+          <StatItem
+            icon={<CircleCheckBig className="w-8 h-8 text-blue-500" />}
+            label={t("statistics.successRate")}
+            value={"%98"}
+          />
+          <StatItem
+            icon={<RefreshCcw className="w-8 h-8 text-green-500" />}
+            label={t("statistics.continuousUpdates")}
+            value={"24/7"}
           />
         </div>
       </div>
@@ -44,7 +54,7 @@ export default function StatisticsCard({ collection_count }: StatisticsProps) {
 interface StatItemProps {
   icon: React.ReactNode;
   label: string;
-  value: number;
+  value: number | string;
 }
 
 function StatItem({ icon, label, value }: StatItemProps) {
