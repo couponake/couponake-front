@@ -6,11 +6,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { CategoryItem, featuredStores, FeaturedStoresCategoryItem } from '@/types';
 import { Chip } from '@heroui/chip';
 import { Spinner } from '@heroui/spinner';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useState, useRef } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
+// Added Chevron icons for the buttons
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const allOption: CategoryItem = {
   id: 0,
@@ -31,8 +33,12 @@ const BestStores = ({
   categories: FeaturedStoresCategoryItem[];
 }) => {
   const t = useTranslations();
+  const locale = useLocale();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedCat, setSelectedCat] = useState<number>(0);
+
+  // 1. Create a ref for the scroll container
+  const scrollRef = useRef<HTMLElement>(null);
 
   const storesCategoriesList: FeaturedStoresCategoryItem[] = useMemo(() => {
     return [
@@ -54,6 +60,17 @@ const BestStores = ({
       setIsLoading(false);
     }
   }, [stores, categories]);
+
+  // 2. Scroll function to move by ~3 items (approx 300px depending on chip width)
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 300;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   if (!stores || stores.length === 0) {
     return null;
@@ -84,29 +101,53 @@ const BestStores = ({
           <h2 className="text-lg font-semibold text-neutral-900 sm:text-xl md:text-2xl">
             {t("Best Stores")}
           </h2>
-          <ScrollContainer className="w-[330px] sm:w-[400px] md:w-[500px] lg:w-[600px] xl:w-[750px] h-7 flex flex-row gap-3 justify-start items-center overflow-x-auto whitespace-nowrap cursor-grab select-none scrollbar-visible">
-            {storesCategoriesList &&
-              storesCategoriesList?.length > 0 &&
-              storesCategoriesList.map((category) => (
-                <Chip
-                  as={"button"}
-                  role="button"
-                  aria-label={`Filter by ${category?.name}`}
-                  key={`category-${category.id}`}
-                  className={
-                    "text-sm " +
-                    (selectedCat === category?.id
-                      ? " bg-main-500 text-white"
-                      : " bg-gray-200 text-gray-800")
-                  }
-                  style={{ cursor: "pointer" }}
-                  onClick={() => filterStores(category)}
-                >
-                  {category?.id > 0 ? category?.name : t("All")}
-                </Chip>
-              ))}
-          </ScrollContainer>
+
+          {/* 3. Wrapper for buttons and container */}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => scroll('left')}
+              className="p-1 hover:bg-gray-200 rounded-full transition-colors"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft size={20} className={locale === 'ar' ? 'rotate-180' : 'rotate-0'} />
+            </button>
+
+            <ScrollContainer
+              innerRef={scrollRef} // Attach ref here
+              className="w-[280px] sm:w-[350px] md:w-[450px] lg:w-[550px] xl:w-[700px] h-7 flex flex-row gap-3 justify-start items-center overflow-x-auto whitespace-nowrap cursor-grab select-none scrollbar-visible"
+            >
+              {storesCategoriesList &&
+                storesCategoriesList?.length > 0 &&
+                storesCategoriesList.map((category) => (
+                  <Chip
+                    as={"button"}
+                    role="button"
+                    aria-label={`Filter by ${category?.name}`}
+                    key={`category-${category.id}`}
+                    className={
+                      "text-sm " +
+                      (selectedCat === category?.id
+                        ? " bg-main-500 text-white"
+                        : " bg-gray-200 text-gray-800")
+                    }
+                    style={{ cursor: "pointer" }}
+                    onClick={() => filterStores(category)}
+                  >
+                    {category?.id > 0 ? category?.name : t("All")}
+                  </Chip>
+                ))}
+            </ScrollContainer>
+
+            <button
+              onClick={() => scroll('right')}
+              className="p-1 hover:bg-gray-200 rounded-full transition-colors"
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={20} className={locale === 'ar' ? 'rotate-180' : 'rotate-0'} />
+            </button>
+          </div>
         </div>
+
         <div className="w-full h-fit flex flex-wrap items-center justify-center sm:justify-start md:justify-start lg:justify-start xl:justify-start gap-3 md:gap-5 bg-transparent p-0">
           {filteredStores?.length > 0 ? (
             filteredStores?.map((store) => (
