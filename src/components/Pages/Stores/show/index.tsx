@@ -182,6 +182,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
             storeBrands={store_brands}
             storeBanners={store_banner}
             similarCoupons={similar_coupons_table}
+            storeInfo={store_infos}
           />
         </aside>
         {/* main content */}
@@ -289,21 +290,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
                 <Divider />
               </>
             )}
-          {store_infos?.length > 0 && (
-            <div className="space-y-5 mb-11">
-              <p className="text-lg font-semibold sm:text-xl">
-                {t("About The store")}
-              </p>
-              {store_infos?.map((info) => (
-                <div key={info.id} className='w-full h-fit bg-white rounded-md p-4 border-1'>
-                  <div
-                    className="prose max-w-none"
-                    dangerouslySetInnerHTML={makeSafeHtml(info?.description)}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
           {store_faqs && (
             <FAQ
               title={t("FAQS")}

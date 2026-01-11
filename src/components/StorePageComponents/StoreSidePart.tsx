@@ -1,6 +1,6 @@
 'use client'
 import useDetectMobile from '@/hooks/useDetectMobile';
-import { BannerItem, BrandProps, CouponProps, StoreProps } from '@/types';
+import { BannerItem, BrandProps, CouponProps, InfoItem, StoreProps } from '@/types';
 import { useLocale, useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -9,6 +9,7 @@ import React from 'react';
 
 import Hero from '../Pages/Home/Hero';
 import { Skeleton } from '../ui/skeleton';
+import { secureHtmlLinks } from '@/lib/htmlUtils';
 
 const RelatedTicketCouponItem = dynamic(() => import('./RelatedTicketCoupon/RelatedTicketCouponItem'), {
     loading: () => (
@@ -28,6 +29,10 @@ const SimilarStores = dynamic(() => import('./SimilarStores'), {
     ssr: false
 });
 
+function makeSafeHtml(content: string | null): { __html: string } {
+    return { __html: secureHtmlLinks(content ?? "") };
+}
+
 interface sidePartType {
     storeTitle: string;
     couponImage: string | null;
@@ -42,6 +47,7 @@ interface sidePartType {
     storeBanners: BannerItem[] | null;
     storeSlug: string;
     similarCoupons: CouponProps[]
+    storeInfo: InfoItem[]
 }
 
 function StoreSidePart({
@@ -54,7 +60,8 @@ function StoreSidePart({
     storeBrands,
     storeBanners,
     storeSlug,
-    similarCoupons
+    similarCoupons,
+    storeInfo
 }: sidePartType
 ) {
     const t = useTranslations();
@@ -137,6 +144,21 @@ function StoreSidePart({
                     )
                 }
             </aside>
+            {storeInfo?.length > 0 && (
+                <div className="space-y-5 mt-11 border-t-gray-300 border-t">
+                    <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
+                        {t("About The store")}
+                    </p>
+                    {storeInfo?.map((info) => (
+                        <div key={info.id} className='w-full h-fit bg-white rounded-md p-4 border-1'>
+                            <div
+                                className="prose max-w-none"
+                                dangerouslySetInnerHTML={makeSafeHtml(info?.description)}
+                            />
+                        </div>
+                    ))}
+                </div>
+            )}
             {storeBrands?.length > 0 && (
                 <div className="mt-11 border-t-gray-300 border-t">
                     <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
