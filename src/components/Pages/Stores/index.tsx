@@ -295,20 +295,19 @@ const Stores = () => {
                     href={`/store/${store?.slug}`}
                     className="flex items-center w-full gap-4 flex-grow max-sm:flex-col max-sm:justify-center"
                   >
-                    <div className="w-16 aspect-square shadow-md bg-white rounded-full flex justify-center items-center overflow-hidden">
+                    <div className="relative w-20 h-20 shadow-md bg-white rounded-full shrink-0 overflow-hidden ">
                       <Image
                         src={store?.image || "noPreview.webp"}
                         alt={store?.store_name || "Store Image"}
-                        width={64}
-                        height={64}
+                        fill
                         loading="lazy"
-                        className="w-16 h-fit object-fit"
+                        className="object-contain p-2"
                         unoptimized
                       />
                     </div>
                     <div className="flex-grow min-w-0">
                       <h2
-                        className="sm:text-lg md:text-xl font-bold text-neutral-900  max-sm:text-center"
+                        className="sm:text-base md:text-lg font-semibold text-neutral-900 max-sm:text-center"
                         title={store?.store_name}
                       >
                         {store?.store_name}
