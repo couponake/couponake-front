@@ -25,14 +25,6 @@ import Hero from '../../Home/Hero';
 
 declare module "react-window";
 
-const CompetitorsStores = dynamic(() => import('../../Home/CompetitorsStores'), {
-  loading: () => (
-    <Skeleton
-      className="rounded-md w-full h-[200px]"
-    />
-  ),
-  ssr: false
-});
 const StoreCoupon = dynamic(() => import('@/components/StorePageComponents/StoreCoupon'), {
   loading: () => (
     <Skeleton
@@ -75,7 +67,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
     store_reviews = [],
     store_banner = null,
     related_coupons = [],
-    related_stores = [],
     store_faqs = [],
     similar_coupons_table = [],
     store_infos = [],
@@ -235,12 +226,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
             statistics={statistics}
             storeName={store.slug}
           />
-          {related_stores && related_stores.length > 0 && (
-            <CompetitorsStores
-              title={store.store_name}
-              stores={data?.related_stores || []}
-            />
-          )}
           {/* expiredCoupons */}
           {expiredCoupons?.length > 0 && (
             <>
@@ -309,15 +294,14 @@ const ShowStore = ({ slug }: { slug: string }) => {
               <p className="text-lg font-semibold sm:text-xl">
                 {t("About The store")}
               </p>
-              <div className='w-full h-fit bg-white rounded-md p-4 border-1'>
-                {store_infos?.map((info) => (
+              {store_infos?.map((info) => (
+                <div key={info.id} className='w-full h-fit bg-white rounded-md p-4 border-1'>
                   <div
-                    key={info.id}
                     className="prose max-w-none"
                     dangerouslySetInnerHTML={makeSafeHtml(info?.description)}
                   />
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           )}
           {store_faqs && (

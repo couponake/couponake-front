@@ -19,7 +19,6 @@ export interface StoreResponse {
   store_table:
   | { id: number; code: string; title: string; description: string }[]
   | [];
-  related_stores: StoreProps[];
   store_reviews: userReviewType[];
   store_banner: BannerItem[] | null;
   related_coupons: CouponProps[] | [];
