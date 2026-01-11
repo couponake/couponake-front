@@ -61,13 +61,13 @@ const AddToFavoriteBtn: React.FC<AddToFavoriteBtnProps> = ({
     <Button
       name="favorite"
       title="Favorite"
-      color={isFavorite ? "primary" : "default"}
+      color={isFavorite ? "primary" : "secondary"}
       isIconOnly
       radius="full"
       onPress={toggleFavorite}
       isLoading={loading}
     >
-      <Heart className={isFavorite ? "fill-red-500" : "text-main-500"} />
+      <Heart size={26} className={isFavorite ? "fill-red-500" : "text-main-500"} />
     </Button>
   );
 };
