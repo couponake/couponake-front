@@ -24,26 +24,19 @@ const Header = ({
         <nav className="flex flex-1 items-center gap-4 md:gap-0">
           {websiteLogo && (
             <Suspense>
-              <Link href="/" className="my-auto cursor-pointer bg-transparent rounded-lg">
+              <Link
+                href="/"
+                className="my-auto cursor-pointer bg-transparent rounded-lg"
+              >
                 <Image
                   src={websiteLogo}
                   alt="Website Logo"
                   width={144}
-                  height={48}
-                  className="hidden md:inline-flex h-14 min-w-36 w-36 max-w-36 object-contain bg-white p-2 rounded-lg"
+                  height={56}
+                  sizes="(max-width: 768px) 108px, 144px"
+                  className="object-contain bg-white p-2 rounded-lg h-12 w-27 md:h-14 md:w-36"
                   priority
-                  quality={100}
-                  unoptimized
-                />
-                <Image
-                  src={websiteLogo}
-                  alt="Website Logo"
-                  width={40}
-                  height={40}
-                  className="inline-flex md:hidden h-17 min-w-27 w-27 max-w-27 object-contain bg-white p-2 rounded-lg"
-                  priority
-                  quality={100}
-                  unoptimized
+                  quality={85}
                 />
               </Link>
             </Suspense>
@@ -70,9 +63,7 @@ const Header = ({
           <div className="m-auto mx-2 h-6 border-r-2 border-neutral-100 max-sm:hidden" />
           {/* Mobile Menu Button */}
           <Suspense>
-            <MobileDrawer
-              websiteLogo={websiteLogo}
-            />
+            <MobileDrawer websiteLogo={websiteLogo} />
           </Suspense>
         </nav>
 
