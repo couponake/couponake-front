@@ -12,13 +12,13 @@ interface StoreCouponsProps {
 
 function StoreCoupons({ store_coupons, store_image }: StoreCouponsProps) {
   const t = useTranslations();
-  const [visibleCount, setVisibleCount] = useState<number>(2);
+  const [visibleCount, setVisibleCount] = useState<number>(3);
 
   const handleShowMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 2, store_coupons?.length || 0));
+    setVisibleCount((prev) => Math.min(prev + 3, store_coupons?.length || 0));
   };
   const handleShowLess = () => {
-    setVisibleCount(2);
+    setVisibleCount(3);
   };
 
   const couponsToShow = store_coupons?.slice(0, visibleCount);
