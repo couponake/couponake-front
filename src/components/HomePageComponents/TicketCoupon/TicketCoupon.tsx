@@ -40,7 +40,7 @@ function TicketCoupon() {
   const [isCouponLoading, setCouponLoading] = React.useState<boolean>(false);
   const [couponsData, setCouponsData] = React.useState<LatestCoupons[]>([]);
   const [filteredCoupons, setFilteredCoupons] = React.useState<LatestCoupons[]>(
-    []
+    [],
   );
   const [canScrollUp, setCanScrollUp] = React.useState(true);
   const [canScrollDown, setCanScrollDown] = React.useState(true);
@@ -90,7 +90,7 @@ function TicketCoupon() {
 
     try {
       const res = await axios.get(
-        process.env.NEXT_PUBLIC_API_URL + "home/latest-coupons"
+        process.env.NEXT_PUBLIC_API_URL + "home/latest-coupons",
       );
 
       if (res.status !== 200 || !res.data?.data) {
@@ -121,7 +121,7 @@ function TicketCoupon() {
       if (uniqueCategories.length > 0) {
         firstCatId = uniqueCategories[0].id;
         filtered = coupons.filter((item) =>
-          item.category?.some((cat) => cat.id === firstCatId)
+          item.category?.some((cat) => cat.id === firstCatId),
         );
       } else {
         filtered = coupons;
@@ -149,7 +149,7 @@ function TicketCoupon() {
     slug: string;
   }) => {
     setSelectedCat(category.id);
-    if (typeof window !== 'undefined' && (window as any).gtag) {
+    if (typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "best_coupons_category_click", {
         category_id: category?.id,
         category_name: category?.name,
@@ -157,15 +157,15 @@ function TicketCoupon() {
     }
     setFilteredCoupons(
       couponsData.filter((item) =>
-        item.category?.some((cat) => cat.id === category.id)
-      )
+        item.category?.some((cat) => cat.id === category.id),
+      ),
     );
   };
 
   const handelCopyCoupon = (coupon: LatestCoupons) => {
     copyToClipboard(coupon?.code);
     toast.success(t("Coupon copied successfully"));
-    if (typeof window !== 'undefined' && (window as any).gtag) {
+    if (typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "best_coupons_click", {
         coupon_id: coupon?.id,
         coupon_title: coupon?.title,
@@ -295,7 +295,7 @@ function TicketCoupon() {
                                 width={110}
                                 height={110}
                                 unoptimized
-                                className="w-full aspect-square size-[110px] object-contain border-l-1 border-dashed border-[#ef5658]"
+                                className="w-full aspect-square size-[110px] object-contain border-l-1 border-dashed border-[#7214d1]"
                               />
                             </div>
                           </div>
@@ -418,7 +418,7 @@ function TicketCoupon() {
                               width={110}
                               height={110}
                               unoptimized
-                              className="w-full aspect-square size-[110px] object-contain border-l-1 border-dashed border-[#ef5658]"
+                              className="w-full aspect-square size-[110px] object-contain border-l-1 border-dashed border-[#7214d1]"
                             />
                           </div>
                         </div>
