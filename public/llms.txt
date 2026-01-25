@@ -1,37 +1,34 @@
 # كوبونات: عالم من أكواد وكوبونات خصم وعروض وتخفيضات المتاجر
 
-> كوبونات خصم وأكواد وقسائم 2026 وأكثر من 100 ألف كوبون عروض لأشهر المتاجر فى الشرق الأوسط، معنا تحصل على أفضل وأحدث الكوبونات اليومية
+> كوبونات خصم وأكواد وقسائم 2026 وأكثر من 100 ألف كوبون عروض لأشهر المتاجر في الشرق الأوسط.
 
-## 1. خريطة المسارات (Main Routes & Sections)
+هذا الملف هو دليل "هجين" يربط بين روابط الموقع الحقيقية والملفات البرمجية المصدرية لتسهيل عمل نماذج الذكاء الاصطناعي.
 
-المشروع يعتمد على `App Router` مع دعم كامل للغات (Internationalization).
+## 1. خريطة المسارات والملفات (Routes & Source Files)
 
-### الصفحات الرئيسية والتجارية (Core Pages)
+### الأقسام التجارية
 
-- [/](../src/app/page.tsx) : الصفحة الرئيسية (أقسام الكوبونات والبراندات).
-- [/stores](../src/app/stores/page.tsx) : دليل جميع المتاجر المتوفرة.
-- [/store/[slug]](../src/app/store/[slug]/page.tsx) : الصفحة التفصيلية للمتجر (قالب ديناميكي).
-- [/categories](../src/app/categories/page.tsx) : تصفح المتاجر حسب التصنيف البرمجي.
-- [/blog](../src/app/blog/page.tsx) : مدونة الموقع (أحدث المقالات والعروض).
-- [/[slug]](../src/app/[slug]/page.tsx) : الصفحة التفصيلية للمقاله (قالب ديناميكي).
-- [/all_countries](../src/app/all_countries/page.tsx) : دليل الكوبونات مقسماً حسب الدول.
+- **[الرئيسية](https://coupoonat.com/)** -> [../src/app/page.tsx] : عرض الكوبونات والبراندات.
+- **[دليل المتاجر](https://coupoonat.com/stores/)** -> [../src/app/stores/page.tsx] : عرض كافة المتاجر.
+- **[تفاصيل المتجر](https://coupoonat.com/store/shein/)** -> [../src/app/store/[slug]/page.tsx] : قالب صفحة المتجر الديناميكية.
+- **[التصنيفات](https://coupoonat.com/categories/)** -> [../src/app/categories/page.tsx] : المتاجر مقسمة فئوياً.
+- **[متاجر الفئة](https://coupoonat.com/coupon-category/هدايا/)** -> [../src/app/coupon-category/[slug]/page.tsx] : متاجر الفئة الواحده.
+- **[المدونة](https://coupoonat.com/blog/)** -> [../src/app/blog/page.tsx] : مقالات التسوق والعروض.
+- **[تفاصيل المقال](https://coupoonat.com/%D9%83%D9%8A%D9%81%D9%8A%D8%A9-%D8%A7%D9%84%D8%B7%D9%84%D8%A8-%D9%85%D9%86-%D9%85%D9%88%D9%82%D8%B9-trendyol/)** -> [../src/app/[slug]/page.tsx] : عرض محتوى المقالات.
+- **[الدول](https://coupoonat.com/all_countries/)** -> [../src/app/all_countries/page.tsx] : الكوبونات حسب الموقع الجغرافي.
+- **[متاجر الدولة](https://coupoonat.com/coupon_country/الإمارات/)** -> [../src/app/coupon_country/[slug]/page.tsx] : متاجر الدولة الواحده.
 
-### صفحات المعلومات والسياسات (Info & Legal)
+### المعلومات والسياسات
 
-- [/about-us](../src/app/about-us/page.tsx) : نبذة عن الموقع وأهدافه.
-- [/contact](../src/app/contact/page.tsx) : نموذج التواصل والدعم الفني.
-- [/faq](../src/app/faq/page.tsx) : الأسئلة الشائعة وإجاباتها.
-- [/privacy-policy](../src/app/privacy-policy/page.tsx) : سياسة الخصوصية.
-- [/terms](../src/app/terms/page.tsx) : شروط وأحكام الاستخدام.
-- [/responsible](../src/app/responsible/page.tsx) : سياسة المسؤولية الاجتماعية وإخلاء المسؤولية.
+- **[من نحن](https://coupoonat.com/about-us/)** -> [../src/app/about-us/page.tsx]
+- **[شروط الاستخدام](https://coupoonat.com/terms/)** -> [../src/app/terms/page.tsx]
+- **[اتصل بنا](https://coupoonat.com/contact/)** -> [../src/app/contact/page.tsx]
+- **[الخصوصية](https://coupoonat.com/privacy-policy/)** -> [../src/app/privacy-policy/page.tsx]
+- **[الأسئلة الشائعة](https://coupoonat.com/faq/)** -> [../src/app/faq/page.tsx]
 
-### صفحات الحساب (Auth & Profile)
+## 2. الدليل التقني للمطور (Developer Technical Guide)
 
-- [/auth/login](../src/app/auth/login/page.tsx) : صفحة تسجيل الدخول.
-- [/profile](../src/app/profile/page.tsx) : لوحة تحكم المستخدم.
-- [/profile/favorites](../src/app/profile/favorites/page.tsx) : الكوبونات المفضلة للمستخدم.
-
-## 2. هيكلية المكونات (Component Architecture)
+### هيكلية المكونات (Component Architecture)
 
 تم تقسيم المكونات بشكل وظيفي لتسهيل الصيانة:
 
@@ -40,23 +37,28 @@
 - **[UI Kit](../src/components/ui)** : المكونات الأساسية (Atomic) مثل `button`, `input`, `card`.
 - **[Modals](../src/components/Modals)** : النوافذ المنبثقة للتفاعل السريع.
 
-## 3. المنطق البرمجي والبيانات (Logic & Data)
+### المنطق البرمجي (Logic)
 
-- **[Hooks](../src/hooks/)**: يتم إدارة جلب البيانات عبر Hooks مخصصة (مثل `useHomeData`, `useStoreData`).
-- **[State Management](../src/store/index.ts)**: يتم استخدام `Zustand` لإدارة الحالة العالمية للموقع.
-- **[API Clients](../src/lib/axios.ts)**: يتم استخدام `Axios` مع إعدادات مخصصة و `api-client.ts`.
-- **[Validation](../src/schema/)**: تعريف مخططات البيانات (Schemas) لضمان صحة البيانات المدخلة.
+- **جلب البيانات**: يتم عبر **[Hooks](../src/hooks/)** المخصصة (مثل `useHomeData`).
+- **إدارة الحالة**: نستخدم **[Zustand](../src/store/index.ts)** للبيانات العالمية.
+- **التحقق (Validation)**: جميع المخططات موجودة في **[Schema](../src/schema/)**.
+- **الربط مع API**: يتم عبر **[Axios Client](../src/lib/axios.ts)**.
 
-## 4. سيو والأرشفة (SEO & Sitemaps)
+### المكونات (UI Architecture)
+
+- **المكونات المشتركة**: [../src/components/ui/] (تعتمد على HeroUI).
+- **مكونات الصفحة الرئيسية**: [../src/components/HomePageComponents/].
+- **مكونات صفحة المتجر**: [../src/components/StorePageComponents/].
+
+### سيو والأرشفة (SEO & Sitemaps)
 
 يحتوي المشروع على نظام متطور لتوليد الخرائط ديناميكياً:
 
 - **[Sitemap Routes](../src/app/sitemap/)**: يحتوي على منطق الخرائط المنفصلة (المتاجر، التصنيفات، الدول، والمدونات).
 - **[Sitemap Utils](../src/lib/sitemap-utils.ts)**: الأدوات المساعدة لتوليد الروابط والأرشفة.
 
-## 5. قواعد التطوير لهذا المشروع (Coding Standards)
+## 3. قواعد العمل (General Rules)
 
-1. **التعامل مع الواجهة**: استخدم مكونات `HeroUI` وقم بتغليفها بمكونات `ui` الخاصة بنا عند الضرورة.
-2. **البيانات**: لا تقم بجلب البيانات مباشرة في المكونات، استخدم الـ `hooks` المتاحة.
-3. **التنسيق**: نستخدم Tailwind CSS مع نظام `globals.css`.
-4. **النصوص**: جميع النصوص يجب أن تكون قابلة للترجمة عبر `next-intl`.
+1. الـ AI يجب أن يستخدم المسارات المذكورة أعلاه عند طلب أي تعديل في الكود.
+2. الالتزام بـ `next-intl` لجميع النصوص الظاهرة في الروابط المذكورة.
+3. يمنع جلب البيانات مباشرة؛ الرجوع دائماً لمجلد الـ `hooks` المذكور في القسم 2.
