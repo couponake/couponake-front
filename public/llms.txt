@@ -1,0 +1,62 @@
+# كوبونات: عالم من أكواد وكوبونات خصم وعروض وتخفيضات المتاجر
+
+> كوبونات خصم وأكواد وقسائم 2026 وأكثر من 100 ألف كوبون عروض لأشهر المتاجر فى الشرق الأوسط، معنا تحصل على أفضل وأحدث الكوبونات اليومية
+
+## 1. خريطة المسارات (Main Routes & Sections)
+
+المشروع يعتمد على `App Router` مع دعم كامل للغات (Internationalization).
+
+### الصفحات الرئيسية والتجارية (Core Pages)
+
+- [/](../src/app/page.tsx) : الصفحة الرئيسية (أقسام الكوبونات والبراندات).
+- [/stores](../src/app/stores/page.tsx) : دليل جميع المتاجر المتوفرة.
+- [/store/[slug]](../src/app/store/[slug]/page.tsx) : الصفحة التفصيلية للمتجر (قالب ديناميكي).
+- [/categories](../src/app/categories/page.tsx) : تصفح المتاجر حسب التصنيف البرمجي.
+- [/blog](../src/app/blog/page.tsx) : مدونة الموقع (أحدث المقالات والعروض).
+- [/[slug]](../src/app/[slug]/page.tsx) : الصفحة التفصيلية للمقاله (قالب ديناميكي).
+- [/all_countries](../src/app/all_countries/page.tsx) : دليل الكوبونات مقسماً حسب الدول.
+
+### صفحات المعلومات والسياسات (Info & Legal)
+
+- [/about-us](../src/app/about-us/page.tsx) : نبذة عن الموقع وأهدافه.
+- [/contact](../src/app/contact/page.tsx) : نموذج التواصل والدعم الفني.
+- [/faq](../src/app/faq/page.tsx) : الأسئلة الشائعة وإجاباتها.
+- [/privacy-policy](../src/app/privacy-policy/page.tsx) : سياسة الخصوصية.
+- [/terms](../src/app/terms/page.tsx) : شروط وأحكام الاستخدام.
+- [/responsible](../src/app/responsible/page.tsx) : سياسة المسؤولية الاجتماعية وإخلاء المسؤولية.
+
+### صفحات الحساب (Auth & Profile)
+
+- [/auth/login](../src/app/auth/login/page.tsx) : صفحة تسجيل الدخول.
+- [/profile](../src/app/profile/page.tsx) : لوحة تحكم المستخدم.
+- [/profile/favorites](../src/app/profile/favorites/page.tsx) : الكوبونات المفضلة للمستخدم.
+
+## 2. هيكلية المكونات (Component Architecture)
+
+تم تقسيم المكونات بشكل وظيفي لتسهيل الصيانة:
+
+- **[HomePage Components](../src/components/HomePageComponents)** : مكونات الصفحة الرئيسية (مثل `TicketCoupon`).
+- **[Store Components](../src/components/StorePageComponents)** : مكونات صفحة المتجر (مثل `StoreCharts`, `StoreRatingCard`).
+- **[UI Kit](../src/components/ui)** : المكونات الأساسية (Atomic) مثل `button`, `input`, `card`.
+- **[Modals](../src/components/Modals)** : النوافذ المنبثقة للتفاعل السريع.
+
+## 3. المنطق البرمجي والبيانات (Logic & Data)
+
+- **[Hooks](../src/hooks/)**: يتم إدارة جلب البيانات عبر Hooks مخصصة (مثل `useHomeData`, `useStoreData`).
+- **[State Management](../src/store/index.ts)**: يتم استخدام `Zustand` لإدارة الحالة العالمية للموقع.
+- **[API Clients](../src/lib/axios.ts)**: يتم استخدام `Axios` مع إعدادات مخصصة و `api-client.ts`.
+- **[Validation](../src/schema/)**: تعريف مخططات البيانات (Schemas) لضمان صحة البيانات المدخلة.
+
+## 4. سيو والأرشفة (SEO & Sitemaps)
+
+يحتوي المشروع على نظام متطور لتوليد الخرائط ديناميكياً:
+
+- **[Sitemap Routes](../src/app/sitemap/)**: يحتوي على منطق الخرائط المنفصلة (المتاجر، التصنيفات، الدول، والمدونات).
+- **[Sitemap Utils](../src/lib/sitemap-utils.ts)**: الأدوات المساعدة لتوليد الروابط والأرشفة.
+
+## 5. قواعد التطوير لهذا المشروع (Coding Standards)
+
+1. **التعامل مع الواجهة**: استخدم مكونات `HeroUI` وقم بتغليفها بمكونات `ui` الخاصة بنا عند الضرورة.
+2. **البيانات**: لا تقم بجلب البيانات مباشرة في المكونات، استخدم الـ `hooks` المتاحة.
+3. **التنسيق**: نستخدم Tailwind CSS مع نظام `globals.css`.
+4. **النصوص**: جميع النصوص يجب أن تكون قابلة للترجمة عبر `next-intl`.
