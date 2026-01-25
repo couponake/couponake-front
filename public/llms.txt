@@ -14,17 +14,17 @@
 - **[التصنيفات](https://coupoonat.com/categories/)** -> [../src/app/categories/page.tsx] : المتاجر مقسمة فئوياً.
 - **[متاجر الفئة](https://coupoonat.com/coupon-category/هدايا/)** -> [../src/app/coupon-category/[slug]/page.tsx] : متاجر الفئة الواحده.
 - **[المدونة](https://coupoonat.com/blog/)** -> [../src/app/blog/page.tsx] : مقالات التسوق والعروض.
-- **[تفاصيل المقال](https://coupoonat.com/%D9%83%D9%8A%D9%81%D9%8A%D8%A9-%D8%A7%D9%84%D8%B7%D9%84%D8%A8-%D9%85%D9%86-%D9%85%D9%88%D9%82%D8%B9-trendyol/)** -> [../src/app/[slug]/page.tsx] : عرض محتوى المقالات.
+- **[تفاصيل المقال](https://coupoonat.com/%D9%83%D9%8A%D9%81%D9%8A%D8%A9-%D8%A7%D9%84%D8%B7%D9%84%D8%A8-%D9%85%D9%86-%D9%85%D9%88%D9%82%D8%B9-trendyol/)** -> [../src/app/[slug]/page.tsx] : عرض محتوى المقالة.
 - **[الدول](https://coupoonat.com/all_countries/)** -> [../src/app/all_countries/page.tsx] : الكوبونات حسب الموقع الجغرافي.
 - **[متاجر الدولة](https://coupoonat.com/coupon_country/الإمارات/)** -> [../src/app/coupon_country/[slug]/page.tsx] : متاجر الدولة الواحده.
 
 ### المعلومات والسياسات
 
-- **[من نحن](https://coupoonat.com/about-us/)** -> [../src/app/about-us/page.tsx]
-- **[شروط الاستخدام](https://coupoonat.com/terms/)** -> [../src/app/terms/page.tsx]
-- **[اتصل بنا](https://coupoonat.com/contact/)** -> [../src/app/contact/page.tsx]
-- **[الخصوصية](https://coupoonat.com/privacy-policy/)** -> [../src/app/privacy-policy/page.tsx]
-- **[الأسئلة الشائعة](https://coupoonat.com/faq/)** -> [../src/app/faq/page.tsx]
+- **[من نحن](https://coupoonat.com/about-us/)** -> [../src/app/about-us/page.tsx] : تعريف بمنصة كوبونات ورؤيتنا في تقديم أفضل تجربة توفير للمتسوق العربي.
+- **[شروط الاستخدام](https://coupoonat.com/terms/)** -> [../src/app/terms/page.tsx] : الاتفاقية القانونية التي تحكم العلاقة بين الموقع والمستخدمين لضمان حقوق الطرفين.
+- **[اتصل بنا](https://coupoonat.com/contact/)** -> [../src/app/contact/page.tsx] : قنوات التواصل المباشرة للدعم الفني، الاستفسارات، وطلبات التعاون التجاري.
+- **[الخصوصية](https://coupoonat.com/privacy-policy/)** -> [../src/app/privacy-policy/page.tsx] : توضيح كيفية تعاملنا مع بيانات المستخدمين والتزامنا بأقصى معايير الأمان والسرية.
+- **[الأسئلة الشائعة](https://coupoonat.com/faq/)** -> [../src/app/faq/page.tsx] : مركز المساعدة الذي يجيب على أكثر استفسارات المستخدمين شيوعاً حول الأكواد وطريقة تفعيلها.
 
 ## 2. الدليل التقني للمطور (Developer Technical Guide)
 
