@@ -29,16 +29,9 @@ interface CookiePolicy {
 }
 
 export default function CookieConsent() {
-  const [isOpen, setIsOpen] = useState(() => {
-    if (typeof window !== "undefined") {
-      try {
-        return localStorage.getItem("cookieConsent") === null;
-      } catch {
-        return true;
-      }
-    }
-    return false;
-  });
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
     necessary: true,
     analytics: false,
@@ -49,11 +42,23 @@ export default function CookieConsent() {
   const t = useTranslations();
 
   useEffect(() => {
+    setMounted(true);
+    if (typeof window !== "undefined") {
+      const consent = localStorage.getItem("cookieConsent");
+      if (consent === null) {
+        setIsOpen(true);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (isOpen) {
       loadPreferences();
       loadPolicy();
     }
   }, [isOpen]);
+
+  if (!mounted) return null;
 
   const loadPreferences = async () => {
     try {
@@ -119,8 +124,6 @@ export default function CookieConsent() {
     }
   };
 
-  const [isExpanded, setIsExpanded] = useState(false);
-
   return isOpen ? (
     <div className="fixed bottom-0 left-0 right-0 bg-gray-200 dark:bg-gray-900 shadow-lg border-t border-gray-400 dark:border-gray-700 transition-all duration-300 ease-in-out z-[999]">
       <div className="container mx-auto p-4">
@@ -156,13 +159,12 @@ export default function CookieConsent() {
           </div>
         </div>
 
-        <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-96' : 'max-h-0'}`}>
+        <div
+          className={`overflow-hidden transition-all duration-300 ${isExpanded ? "max-h-96" : "max-h-0"}`}
+        >
           <div className="space-y-4 py-4">
             {Object.entries(preferences).map(([key, value]) => (
-              <div
-                key={key}
-                className="flex items-center justify-between py-2"
-              >
+              <div key={key} className="flex items-center justify-between py-2">
                 <div>
                   <p className="text-lg font-medium capitalize">{key}</p>
                   <p className="text-sm text-gray-500">
@@ -172,7 +174,7 @@ export default function CookieConsent() {
                 <Switch
                   checked={value}
                   disabled={key === "necessary"}
-                  onValueChange={(checked) =>
+                  onValueChange={(checked: boolean) =>
                     setPreferences((prev) => ({ ...prev, [key]: checked }))
                   }
                 />
@@ -187,13 +189,19 @@ export default function CookieConsent() {
                 {policy.categories.map((category, index) => (
                   <div key={index} className="mb-4">
                     <p className="text-md font-medium">{category.name}</p>
-                    <p className="text-sm text-gray-500 mb-2">{category.description}</p>
+                    <p className="text-sm text-gray-500 mb-2">
+                      {category.description}
+                    </p>
                     <div className="ml-4">
                       {category.cookies.map((cookie, cookieIndex) => (
                         <div key={cookieIndex} className="mb-2">
                           <p className="text-sm font-medium">{cookie.name}</p>
-                          <p className="text-xs text-gray-500">{cookie.purpose}</p>
-                          <p className="text-xs text-gray-500">{t("Duration")}: {cookie.duration}</p>
+                          <p className="text-xs text-gray-500">
+                            {cookie.purpose}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {t("Duration")}: {cookie.duration}
+                          </p>
                         </div>
                       ))}
                     </div>
@@ -210,11 +218,7 @@ export default function CookieConsent() {
               >
                 {t("Clear non-essential cookies")}
               </Button>
-              <Button
-                color="primary"
-                size="sm"
-                onPress={handleSavePreferences}
-              >
+              <Button color="primary" size="sm" onPress={handleSavePreferences}>
                 {t("Save Preferences")}
               </Button>
             </div>
