@@ -1,54 +1,70 @@
 "use client";
-import ShowCouponDetails from '@/components/Modals/ShowCouponDetails';
-import FAQ from '@/components/Pages/Home/FAQ';
-import Author from '@/components/StorePageComponents/Author';
-import FollowStore from '@/components/StorePageComponents/FollowStore';
-import StoreCharts from '@/components/StorePageComponents/StoreCharts/StoreCharts';
-import StoreCoupons from '@/components/StorePageComponents/StoreCoupons';
-import StoreHeader from '@/components/StorePageComponents/StoreHeader';
-import StoreRatingCard from '@/components/StorePageComponents/StoreRatingCard';
-import StoreSidePart from '@/components/StorePageComponents/StoreSidePart';
-import { Skeleton } from '@/components/ui/skeleton';
-import useDetectMobile from '@/hooks/useDetectMobile';
-import { useStoreData } from '@/hooks/useStoreData';
-import { secureHtmlLinks } from '@/lib/htmlUtils';
-import ScrollTracker from '@/services/ScrollPageAnalytics';
-import { CategoryItem, statisticsType } from '@/types';
-import { Button } from '@heroui/button';
-import { Divider } from '@heroui/divider';
-import { useLocale, useTranslations } from 'next-intl';
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import React from 'react';
+import ShowCouponDetails from "@/components/Modals/ShowCouponDetails";
+import FAQ from "@/components/Pages/Home/FAQ";
+import Author from "@/components/StorePageComponents/Author";
+import FollowStore from "@/components/StorePageComponents/FollowStore";
+import StoreCharts from "@/components/StorePageComponents/StoreCharts/StoreCharts";
+import StoreCoupons from "@/components/StorePageComponents/StoreCoupons";
+import StoreHeader from "@/components/StorePageComponents/StoreHeader";
+import StoreRatingCard from "@/components/StorePageComponents/StoreRatingCard";
+import StoreSidePart from "@/components/StorePageComponents/StoreSidePart";
+import { Skeleton } from "@/components/ui/skeleton";
+import useDetectMobile from "@/hooks/useDetectMobile";
+import { useStoreData } from "@/hooks/useStoreData";
+import { secureHtmlLinks } from "@/lib/htmlUtils";
+import ScrollTracker from "@/services/ScrollPageAnalytics";
+import { CategoryItem, statisticsType } from "@/types";
+import { Button } from "@heroui/button";
+import { Divider } from "@heroui/divider";
+import { useLocale, useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import React from "react";
 
-import Hero from '../../Home/Hero';
+import Hero from "../../Home/Hero";
 
 declare module "react-window";
 
-const StoreCoupon = dynamic(() => import('@/components/StorePageComponents/StoreCoupon'), {
-  loading: () => (
-    <Skeleton
-      className="rounded-md w-full h-[200px]"
-    />
-  ),
-  ssr: false
-});
-const StoreTable = dynamic(() => import('@/components/StorePageComponents/StoreTable'), {
-  loading: () => (
-    <Skeleton
-      className="rounded-md w-full h-[300px]"
-    />
-  ),
-  ssr: false
-});
-const CustomersReviews = dynamic(() => import('@/components/Pages/Home/CustomersReviews'), {
-  loading: () => (
-    <Skeleton
-      className="rounded-md w-full h-[400px]"
-    />
-  ),
-  ssr: false
-});
+const StoreCoupon = dynamic(
+  () => import("@/components/StorePageComponents/StoreCoupon"),
+  {
+    loading: () => <Skeleton className="rounded-md w-full h-[200px]" />,
+    ssr: false,
+  },
+);
+const StoreTable = dynamic(
+  () => import("@/components/StorePageComponents/StoreTable"),
+  {
+    loading: () => <Skeleton className="rounded-md w-full h-[300px]" />,
+    ssr: false,
+  },
+);
+const CustomersReviews = dynamic(
+  () => import("@/components/Pages/Home/CustomersReviews"),
+  {
+    loading: () => <Skeleton className="rounded-md w-full h-[400px]" />,
+    ssr: false,
+  },
+);
+
+const SimilarStores = dynamic(
+  () => import("@/components/StorePageComponents/SimilarStores"),
+  {
+    loading: () => <Skeleton className="rounded-full w-17 aspect-square" />,
+    ssr: false,
+  },
+);
+
+const StoreRelatedCouponsCarousel = dynamic(
+  () =>
+    import(
+      "@/components/StorePageComponents/RelatedTicketCoupon/StoreRelatedCouponsCarousel"
+    ),
+  {
+    loading: () => <Skeleton className="rounded-md w-[280px] h-[100px]" />,
+    ssr: false,
+  },
+);
 
 const ShowStore = ({ slug }: { slug: string }) => {
   const isMobile = useDetectMobile();
@@ -115,13 +131,13 @@ const ShowStore = ({ slug }: { slug: string }) => {
     return (
       <div className="container pt-24 pb-10 text-center">
         <h2 className="text-2xl font-bold text-red-600 mb-4">
-          {'Error Loading Store'}
+          {"Error Loading Store"}
         </h2>
         <p className="text-gray-700 mb-4">
-          {'We couldn\'t load the store information. Please try again later.'}
+          {"We couldn't load the store information. Please try again later."}
         </p>
         <Button color="primary" as={Link} href="/stores">
-          {'Browse All Stores'}
+          {"Browse All Stores"}
         </Button>
       </div>
     );
@@ -136,7 +152,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
         </h2>
         <p className="text-gray-700 mb-4">
           {t(
-            "The store you are looking for does not exist or has been removed"
+            "The store you are looking for does not exist or has been removed",
           )}
         </p>
         <Button color="primary" as={Link} href="/stores">
@@ -168,7 +184,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
         locale={locale}
         t={t}
       />
-      <section className="container flex flex-col-reverse sm:flex-col-reverse md:flex-row lg:flex-row xl:flex-row 2xl:flex-row gap-10 pt-20 sm:pt-40 md:pt-30 lg:pt-24 pb-5">
+      <section className="container flex flex-col-reverse sm:flex-col-reverse md:flex-row lg:flex-row xl:flex-row 2xl:flex-row gap-10 pt-10 sm:pt-24 md:pt-30 lg:pt-24 pb-5">
         {/* sidebar */}
         <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
           <StoreSidePart
@@ -178,10 +194,8 @@ const ShowStore = ({ slug }: { slug: string }) => {
             storeSlug={store?.slug}
             couponsLength={store?.coupons?.length}
             sideTable={side_table}
-            similar_stores={similarStores}
             storeBrands={store_brands}
             storeBanners={store_banner}
-            similarCoupons={similar_coupons_table}
             storeInfo={store_infos}
           />
         </aside>
@@ -204,29 +218,26 @@ const ShowStore = ({ slug }: { slug: string }) => {
             />
           )}
           {store_banner?.some(
-            (banner) => banner?.location === "coupon_block"
+            (banner) => banner?.location === "coupon_block",
           ) && (
-              <>
-                <Hero
-                  storeName={store.slug}
-                  carouselItemClassName="basis-full md:basis-full lg:basis-full"
-                  banners={store_banner?.filter(
-                    (banner) => banner?.location === "coupon_block"
-                  )}
-                  location="coupon_block"
-                  className="mt-7"
-                />
-                <Divider />
-              </>
-            )}
+            <>
+              <Hero
+                storeName={store.slug}
+                carouselItemClassName="basis-full md:basis-full lg:basis-full"
+                banners={store_banner?.filter(
+                  (banner) => banner?.location === "coupon_block",
+                )}
+                location="coupon_block"
+                className="mt-7"
+              />
+              <Divider />
+            </>
+          )}
           <StoreCoupons
             store_coupons={store?.coupons}
             store_image={store?.image}
           />
-          <StoreCharts
-            statistics={statistics}
-            storeName={store.slug}
-          />
+          <StoreCharts statistics={statistics} storeName={store.slug} />
           {/* expiredCoupons */}
           {expiredCoupons?.length > 0 && (
             <>
@@ -266,6 +277,18 @@ const ShowStore = ({ slug }: { slug: string }) => {
               <StoreTable store={store?.store_table} t={t} />
             </>
           )}
+          <div className="mt-11 border-t-gray-300 border-t">
+            {similarStores && similarStores.length > 0 && (
+              <SimilarStores key={store?.slug} stores={similarStores} />
+            )}
+          </div>
+          <div className="mt-11 border-t-gray-300 border-t">
+            {similar_coupons_table && similar_coupons_table.length > 0 && (
+              <StoreRelatedCouponsCarousel
+                couponsList={similar_coupons_table}
+              />
+            )}
+          </div>
           {store_reviews && store_reviews.length > 0 && (
             <CustomersReviews
               className="max-w-[87vw]"
@@ -274,29 +297,29 @@ const ShowStore = ({ slug }: { slug: string }) => {
             />
           )}
           {store_banner?.some(
-            (banner) => banner?.location === "above_texts"
+            (banner) => banner?.location === "above_texts",
           ) && (
-              <>
-                <Divider />
-                <Hero
-                  storeName={store.slug}
-                  carouselItemClassName="basis-full md:basis-full lg:basis-full"
-                  banners={store_banner?.filter(
-                    (banner) => banner?.location === "above_texts"
-                  )}
-                  location="above_texts"
-                  className="mt-7"
-                />
-                <Divider />
-              </>
-            )}
+            <>
+              <Divider />
+              <Hero
+                storeName={store.slug}
+                carouselItemClassName="basis-full md:basis-full lg:basis-full"
+                banners={store_banner?.filter(
+                  (banner) => banner?.location === "above_texts",
+                )}
+                location="above_texts"
+                className="mt-7"
+              />
+              <Divider />
+            </>
+          )}
           {store_faqs && (
             <FAQ
               title={t("FAQS")}
               className="!py-5"
               storeName={store.slug}
               faqs={store_faqs.filter(
-                (faq) => Number(faq?.store_id) === Number(store?.id)
+                (faq) => Number(faq?.store_id) === Number(store?.id),
               )}
             />
           )}

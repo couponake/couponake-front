@@ -1,34 +1,13 @@
 "use client";
-import useDetectMobile from "@/hooks/useDetectMobile";
-import {
-  BannerItem,
-  BrandProps,
-  CouponProps,
-  InfoItem,
-  StoreProps,
-} from "@/types";
-import { useLocale, useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import useDetectMobile from '@/hooks/useDetectMobile';
+import { secureHtmlLinks } from '@/lib/htmlUtils';
+import { BannerItem, BrandProps, CouponProps, InfoItem } from '@/types';
+import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
-import Hero from "../Pages/Home/Hero";
-import { Skeleton } from "../ui/skeleton";
-import { secureHtmlLinks } from "@/lib/htmlUtils";
-
-const RelatedTicketCouponItem = dynamic(
-  () => import("./RelatedTicketCoupon/RelatedTicketCouponItem"),
-  {
-    loading: () => <Skeleton className="rounded-md w-[280px] h-[100px]" />,
-    ssr: false,
-  },
-);
-
-const SimilarStores = dynamic(() => import("./SimilarStores"), {
-  loading: () => <Skeleton className="rounded-full w-17 aspect-square" />,
-  ssr: false,
-});
+import Hero from '../Pages/Home/Hero';
 
 function makeSafeHtml(content: string | null): { __html: string } {
   return { __html: secureHtmlLinks(content ?? "") };
@@ -43,11 +22,9 @@ interface sidePartType {
     current_date: string;
     latest_coupon: CouponProps | null;
   } | null;
-  similar_stores: StoreProps[];
   storeBrands: BrandProps[];
   storeBanners: BannerItem[] | null;
   storeSlug: string;
-  similarCoupons: CouponProps[];
   storeInfo: InfoItem[];
 }
 
@@ -57,11 +34,9 @@ function StoreSidePart({
   storeName,
   couponsLength,
   sideTable,
-  similar_stores,
   storeBrands,
   storeBanners,
   storeSlug,
-  similarCoupons,
   storeInfo,
 }: sidePartType) {
   const t = useTranslations();
@@ -116,30 +91,6 @@ function StoreSidePart({
           </tbody>
         </table>
       </div>
-      <aside>
-        <div className="mt-11 border-t-gray-300 border-t">
-          <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
-            {t("Similar Stores")}
-          </p>
-          <div className="flex items-start justify-start gap-3 flex-wrap">
-            {similar_stores?.map((store) => (
-              <SimilarStores key={store?.slug} store={store} />
-            ))}
-          </div>
-        </div>
-        {similarCoupons && similarCoupons.length > 0 && (
-          <div className="mt-11 border-t-gray-300 border-t">
-            <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
-              {t("Related coupons")}
-            </p>
-            <div className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 m-0 p-0 flex flex-wrap items-start justify-center gap-3 overflow-hidden">
-              {similarCoupons.map((coupon: CouponProps) => (
-                <RelatedTicketCouponItem key={coupon?.id} coupon={coupon} />
-              ))}
-            </div>
-          </div>
-        )}
-      </aside>
       {storeInfo?.length > 0 && (
         <div className="space-y-5 mt-11 border-t-gray-300 border-t">
           <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">

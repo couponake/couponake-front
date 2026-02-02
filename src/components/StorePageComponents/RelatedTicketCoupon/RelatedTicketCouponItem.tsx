@@ -16,12 +16,12 @@ function RelatedTicketCouponItem({ coupon }: { coupon: CouponProps }) {
     <>
       <div
         className={
-          "w-[280px] bg-transparent flex items-center justify-between gap-0 mx-0 " +
+          "w-[320px] bg-transparent flex items-center justify-between gap-0 mx-0 " +
           (locale === "ar" ? "flex-row" : "flex-row-reverse")
         }
       >
         <div className="stub overflow-hidden">
-          <div className="w-[90px] h-[100px] bg-white">
+          <div className="w-[110px] h-[120px] bg-white">
             <Image
               src={
                 coupon?.store_image
@@ -29,9 +29,9 @@ function RelatedTicketCouponItem({ coupon }: { coupon: CouponProps }) {
                   : "noPreview.webp"
               }
               alt={coupon?.store_slug}
-              width={90}
-              height={90}
-              className="w-full aspect-square size-[90px] p-2 object-contain border-l-1 border-dashed border-[#7214d1]"
+              width={110}
+              height={110}
+              className="w-full aspect-square size-[110px] p-2 object-contain border-l-1 border-dashed border-[#7214d1]"
             />
           </div>
         </div>
