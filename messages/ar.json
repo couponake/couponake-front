@@ -286,6 +286,7 @@
   "The stores of": "متاجر دولة",
   "Save Preferences": "حفظ التفضيلات",
   "Important Pages": "روابط مهمة",
+  "Important Stores": "أهم المتاجر",
   "Coupons date": "تاريخ الكوبونات",
   "Strongest Coupon": "اقوى كوبون",
   "Wrong email or passowrd": "البريد الاكتروني او كلمة المرور غير صحيحة",
@@ -362,5 +363,10 @@
   "popularDiscounts": "أشهر خصومات المتجر",
   "couponPeakTimes": "أوقات الذروة لاستخدام الكوبونات",
   "couponShareRate": "معدل مشاركة الكوبون",
-  "robotVerification": "يرجى التحقق من انك لست روبوت"
+  "robotVerification": "يرجى التحقق من انك لست روبوت",
+  "noonDiscount": "كود خصم نون",
+  "namshiDiscount": "كود خصم نمشي",
+  "temuDiscount": "كود خصم تيمو",
+  "levelShoesDiscount": "كود خصم ليفل شوز",
+  "trendyolDiscount": "كود خصم ترينديول"
 }

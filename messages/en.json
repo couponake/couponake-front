@@ -303,6 +303,7 @@
   "The stores of": "The stores of",
   "Save Preferences": "Save Preferences",
   "Important Pages": "Important Pages",
+  "Important Stores": "Important Stores",
   "Coupons date": "Coupons dates",
   "Strongest Coupon": "Strongest Coupon",
   "Wrong email or passowrd": "Wrong email or passowrd",
@@ -379,5 +380,10 @@
   "popularDiscounts": "Popular Discounts",
   "couponPeakTimes": "Coupon Peak Times",
   "couponShareRate": "Coupon Share Rate",
-  "robotVerification": "Please verify you are not a robot"
+  "robotVerification": "Please verify you are not a robot",
+  "noonDiscount": "Noon discount code",
+  "namshiDiscount": "Namshi discount code",
+  "temuDiscount": "Temu discount code",
+  "levelShoesDiscount": "Level Shoes discount code",
+  "trendyolDiscount": "Trendyol discount code"
 }
