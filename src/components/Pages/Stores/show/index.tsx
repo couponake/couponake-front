@@ -233,6 +233,21 @@ const ShowStore = ({ slug }: { slug: string }) => {
               <Divider />
             </>
           )}
+          {store?.about_store && (
+            <>
+              {/* convert the recieved tag to h2 directly */}
+              <div
+                className="prose max-w-none my-5 prose-h2:text-sm prose-h2:font-semibold! md:prose-h2:text-base"
+                dangerouslySetInnerHTML={makeSafeHtml(
+                  store.about_store?.replace(
+                    /<([a-z1-6]+)>(.*?)<\/\1>/i,
+                    "<h2>$2</h2>",
+                  ),
+                )}
+              />
+              <Divider />
+            </>
+          )}
           <StoreCoupons
             store_coupons={store?.coupons}
             store_image={store?.image}
