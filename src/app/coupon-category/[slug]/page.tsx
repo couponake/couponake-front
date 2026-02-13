@@ -23,8 +23,7 @@ export async function generateMetadata({
         },
         robots: {
           index: false,
-          // follow: true,
-          follow: false
+          follow: true,
         },
       };
     }
