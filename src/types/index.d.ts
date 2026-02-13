@@ -264,6 +264,7 @@ export type StoreProps = {
   title: string;
   store_name: string;
   description: string | null;
+  about_store: string | null;
   image: string;
   coupon_image: string;
   slug: string;
@@ -370,6 +371,7 @@ export type LatestCoupons = {
   description: string;
   image: string;
   store_image: string;
+  store_slug: string;
   slug: string;
   code: string;
   url: string;

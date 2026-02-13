@@ -13,7 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { parseAsString, useQueryState } from "nuqs";
 import { Pagination } from "@heroui/pagination";
 import { Button } from "@heroui/button";
-import MyAxios from "@/components/MyAxios";
+import MyAxios from "@/lib/MyAxios";
 
 const Categories = ({
   categories,
@@ -114,9 +114,10 @@ const Categories = ({
             onChange={handleSearchChange}
           />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {allCategories?.map((category) => (
             <Link
+              prefetch={false}
               target="_self"
               href={`/coupon-category/${category.slug}`}
               key={category.id}
@@ -130,25 +131,20 @@ const Categories = ({
                 }
               }}
             >
-              <div className="bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
-                <div className="relative aspect-[16/9]">
+              <div className="bg-white border-none border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200">
+                <div className="relative aspect-[16/9] rounded-lg bg-white">
                   <Image
                     src={category.image}
                     alt={category.name}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     unoptimized
                   />
                 </div>
-                <div className="p-3">
-                  <h2 className="text-base font-medium mb-1.5 line-clamp-1 group-hover:text-main-500 transition-colors">
+                <div className="py-3 text-center">
+                  <h2 className="text-sm md:text-base font-medium line-clamp-1 group-hover:text-main-500 transition-colors">
                     {category.name}
                   </h2>
-                  {/* <div className="flex items-center text-xs text-gray-500">
-                    <span className="inline-block bg-main-50/50 text-main-600 px-2 py-0.5 rounded-full">
-                      {t("Coupons")} +{category?.coupons_count}
-                    </span>
-                  </div> */}
                 </div>
               </div>
             </Link>

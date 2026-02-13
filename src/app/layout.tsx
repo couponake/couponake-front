@@ -1,7 +1,7 @@
 import '@/styles/globals.css';
 
-import Providers from '@/components/Providers';
-import SessionProvider from '@/components/SessionProvider';
+import Providers from '@/lib/Providers';
+import SessionProvider from '@/lib/SessionProvider';
 import { routing } from '@/i18n/routing';
 import HomeLayout from '@/Layouts/HomeLayout';
 import api from '@/lib/api';

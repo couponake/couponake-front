@@ -1,4 +1,4 @@
-import { getSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings";
 import { getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 

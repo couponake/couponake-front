@@ -172,6 +172,7 @@ const AllCountriesPage = () => {
                 variants={itemVariants}
               >
                 <Link
+                  prefetch={false}
                   target="_self"
                   href={`/coupon_country/${country?.name}`}
                   className="p-6 flex flex-col items-center gap-2"

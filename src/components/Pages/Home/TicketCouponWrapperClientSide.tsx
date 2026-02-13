@@ -2,7 +2,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react'
 
-const TicketCoupon = dynamic(() => import('../../ui/TicketCoupon/TicketCoupon'), { ssr: false });
+const TicketCoupon = dynamic(() => import('../../HomePageComponents/TicketCoupon/TicketCoupon'), { ssr: false });
 
 function TicketCouponWrapperClientSide() {
     return (

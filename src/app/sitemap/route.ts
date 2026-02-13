@@ -1,5 +1,5 @@
 // app/sitemap.xml/route.ts
-import { getSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings";
 import { getAllBlogsData, getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 

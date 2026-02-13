@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import UserDropDown from "../UserDropDown";
+import UserDropDown from "../HomePageComponents/UserDropDown";
 import Link from "next/link";
 import { Globe, Menu } from "lucide-react";
-import LanguageSelector from "../LanguageSelector";
+import LanguageSelector from "../HomePageComponents/LanguageSelector";
 import { useStore } from "@/store";
 import {
   Drawer,

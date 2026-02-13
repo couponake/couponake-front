@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import MyAxios from "@/components/MyAxios";
+import MyAxios from "@/lib/MyAxios";
 import { getToken } from "next-auth/jwt";
 import { getLocale } from "next-intl/server";
 
