@@ -6,6 +6,8 @@ import { Avatar } from "@heroui/avatar";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import React from "react";
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 
 export const experimental_ppr = true;
 
@@ -18,7 +20,7 @@ export async function generateMetadata({
   const response: any = await api.dynamic(`home/country/${slug}`);
   const country_seo: any = response?.data?.country_seo;
   //get the indexing settings of the Country page
-  // const indexingCountry = await getSettingEnabled(SettingsEnum.Countries);
+  const indexingCountry = await getSettingEnabled(SettingsEnum.Countries);
 
 
   return {
@@ -29,8 +31,7 @@ export async function generateMetadata({
         `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupon_country/${slug}/` || "",
     },
     robots: {
-      // index: indexingCountry,
-      index: false,
+      index: indexingCountry,
     },
     openGraph: {
       title: country_seo?.title,

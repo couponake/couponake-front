@@ -10,6 +10,8 @@ import {
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 
 interface storeSeoType {
   title: string;
@@ -72,7 +74,7 @@ export async function generateMetadata({
 
     const seoData: storeSeoType = response?.store_seo;
     //get the indexing settings of the Store page
-    // const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
+    const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
 
     // Default values in case API fails
     if (!seoData) {
@@ -90,8 +92,7 @@ export async function generateMetadata({
         canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
       },
       robots: {
-        // index: indexingStore,
-        index: false,
+        index: indexingStore,
       },
       // OpenGraph metadata
       openGraph: {

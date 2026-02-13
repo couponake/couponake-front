@@ -2,6 +2,8 @@ import api from '@/lib/api';
 import { secureHtmlLinks } from '@/lib/htmlUtils';
 import { cookies } from 'next/headers';
 import React from 'react';
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 
 export async function generateMetadata() {
   const cookieStore = await cookies();
@@ -9,7 +11,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the Terms page
-  // const indexingTerms = await getSettingEnabled(SettingsEnum.Terms);
+  const indexingTerms = await getSettingEnabled(SettingsEnum.Terms);
 
   return {
     title: isArabic
@@ -22,8 +24,7 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/` || "",
     },
     robots: {
-      // index: indexingTerms,
-      index: false,
+      index: indexingTerms,
     },
     openGraph: {
       title: isArabic
