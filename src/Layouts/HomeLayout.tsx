@@ -1,14 +1,14 @@
 import CookieConsent from '@/components/CookieConsent';
 import Header from '@/components/Header';
-import ImagePopUp from '@/components/ImagePopUp';
+import ImagePopUp from '@/components/HomePageComponents/ImagePopUp';
 import api from '@/lib/api';
 import { Settings } from '@/types';
 import dynamic from 'next/dynamic';
 import React, { Suspense } from 'react';
 
 const Footer = dynamic(() => import("@/components/Footer/Footer"));
-const StickyMenu = dynamic(() => import("@/components/StickyMenu"));
-const FollowUs = dynamic(() => import("@/components/FollowUs"));
+const StickyMenu = dynamic(() => import("@/components/HomePageComponents/StickyMenu"));
+const FollowUs = dynamic(() => import("@/components/HomePageComponents/FollowUs"));
 
 const HomeLayout = async ({ children, generalSettings }: { children: React.ReactNode, generalSettings: Settings }) => {
   const response: any = await api.dynamic("home/footer-links");

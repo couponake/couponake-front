@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import CategoriesDropDown from "./CategoriesDropDown";
 
 const NavLinks = () => {
   const t = useTranslations();
@@ -31,7 +32,8 @@ const NavLinks = () => {
           {t("common.home")}
         </li>
       </Link>
-      <li className="mx-1" />
+      {/* Categories */}
+      <CategoriesDropDown />
       <Link
         prefetch={false}
         target="_self"
@@ -53,7 +55,6 @@ const NavLinks = () => {
           {t("common.stores")}
         </li>
       </Link>
-      <li className="mx-1" />
       <Link
         prefetch={false}
         target="_self"

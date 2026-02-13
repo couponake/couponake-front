@@ -1,11 +1,12 @@
-import React from "react";
-import { api } from "@/components/MyAxios";
-import { Blog } from "@/types";
-import ShowBlog from "@/components/Pages/Blogs/show";
-import { redirect } from "next/navigation";
-import NotFound from "../not-found";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
-import { SettingsEnum } from "@/types/settingsEnum";
+import { api } from '@/lib/MyAxios';
+import ShowBlog from '@/components/Pages/Blogs/show';
+import { Blog } from '@/types';
+import { redirect } from 'next/navigation';
+import React from 'react';
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
+
+import NotFound from '../not-found';
 
 export async function generateMetadata({
   params,
@@ -32,7 +33,7 @@ export async function generateMetadata({
 
     const blog = response.blog as Blog;
     //get the indexing settings of the Blog page
-    const indexingBlog = await useSettingEnabled(SettingsEnum.Blogs);
+    const indexingBlog = await getSettingEnabled(SettingsEnum.Blogs);
 
     return {
       title: blog?.blog_seo?.title,
@@ -65,7 +66,7 @@ export async function generateMetadata({
         ],
       },
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Error Loading Page",
       description: "An error occurred while loading this page",

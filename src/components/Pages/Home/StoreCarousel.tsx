@@ -66,6 +66,7 @@ const StoreCarousel = ({
         <div className="flex items-center gap-3 rtl:flex-row-reverse z-50">
           {showViewAll && (
             <Link
+              prefetch={false}
               target="_self"
               href={viewAllLink ? viewAllLink : "/stores"}>
               <button className="max-sm:text-sm rounded-xl px-3 py-2 gradient-btn transition-all">
@@ -81,9 +82,10 @@ const StoreCarousel = ({
         {stores?.map((store: StoreProps, index) => (
           <div key={store?.id || index}>
             <Link
+              prefetch={false}
               target="_self"
               href={`/store/${store?.slug}`}
-            // onClick={() => HandleClickStore(store)}
+              onClick={() => HandleClickStore(store)}
             >
               <Card className="w-32 h-fit p-1 rounded-b-3xl bg-[#F0F0F0]/50 hover:bg-main-500 text-black hover:text-white shadow-none rounded-full overflow-hidden border-none flex flex-col items-center justify-start">
                 <CardContent className="p-0 rounded-full bg-white shadow-none">

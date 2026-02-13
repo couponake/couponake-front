@@ -5,16 +5,25 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import type { SettingsItem } from "@/types";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
+import { Copyright } from "lucide-react";
 
 interface footerLinkType {
   id: number
   title: string
   url: string
 }
+
+const importantStoresLinks = [
+  { id: 1, title: "noonDiscount", url: "/store/noon-نون/" },
+  { id: 2, title: "namshiDiscount", url: "/store/namshi-نمشي/" },
+  { id: 3, title: "temuDiscount", url: "/store/temu/" },
+  { id: 4, title: "levelShoesDiscount", url: "/store/levelshoes/" },
+  { id: 5, title: "trendyolDiscount", url: "/store/trendyol/" },
+]
 
 const Footer = ({
   settings,
@@ -24,21 +33,21 @@ const Footer = ({
   footerLinks: footerLinkType[] | null | undefined;
 }) => {
   const t = useTranslations();
-  const locale = useLocale();
   const facebook = settings?.find((item) => item.name === "facebook")?.val;
   const instagram = settings?.find((item) => item.name === "instagram")?.val;
   const telegram = settings?.find((item) => item.name === "side_telegram")?.val;
   const whatsapp = settings?.find((item) => item.name === "side_whatsapp")?.val;
 
   return (
-    <footer className="mt-auto bg-background text-foreground">
-      <div className="mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 container">
+    <footer suppressHydrationWarning className="mt-auto bg-background text-foreground">
+      <div className="mx-auto px-4 py-12 mb-12 lg:mb-0">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 container">
           <div className="space-y-4">
             <Link
               target="_self"
               href="/"
               aria-label="Home"
+              prefetch={false}
             >
               {settings?.find((item) => item.name === "footer_logo")?.val && (
                 <Image
@@ -103,10 +112,11 @@ const Footer = ({
               )}
             </div>
           </div>
+          
           <div>
-            <h3 className="mb-4 text-lg font-semibold">
+            <p className="mb-4 text-lg font-semibold">
               {t("Important Pages")}
-            </h3>
+            </p>
             <ul className="space-y-2">
               {footerLinks?.map((link: footerLinkType) => (
                 <li key={link.id}>
@@ -159,17 +169,38 @@ const Footer = ({
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-semibold">
+            <p className="mb-4 text-lg font-semibold">
+              {t("Important Stores")}
+            </p>
+            <ul className="space-y-2">
+              {importantStoresLinks?.map((store_link) => (
+                <li key={store_link.id}>
+                  <Link
+                    href={store_link.url}
+                    target="_self"
+                    prefetch={false}
+                    className="text-sm hover:underline"
+                  >
+                    {t(store_link.title)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="mb-4 text-lg font-semibold">
               {t("Subscribe to Our Newsletter")}
-            </h3>
+            </p>
             <SubscribeForm />
           </div>
         </div>
 
         <div className="mt-8 border-t border-border pt-8">
           <div className="flex flex-wrap items-center justify-between container">
-            <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()}{" "}
+            <p suppressHydrationWarning className="text-xs text-muted-foreground flex gap-1 items-center">
+              <Copyright size={12} />
+              {new Date().getFullYear()}{" "}
               {settings?.find((item) => item.name === "site_name")?.val}.{" "}
               {t("All rights reserved")}
             </p>

@@ -1,10 +1,13 @@
-const createNextIntlPlugin = require("next-intl/plugin");
-const baseRedirects = require('./redirects/baseRedirects');
-const arabicRedirects = require('./redirects/arabicRedirects');
+import { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+import arabicRedirects from './redirects/arabicRedirects';
+import baseRedirects from './redirects/baseRedirects';
+
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
@@ -25,6 +28,7 @@ const nextConfig = {
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    qualities: [25, 50, 75, 85, 100],
     // formats: ["image/webp"],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,

@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import axiosInstance from '@/lib/axios';
 import { toast } from '@/components/ui/custom-toast';
 import api from '@/lib/api';
 
@@ -8,7 +7,7 @@ export const useCountriesData = () => {
     try {
       const data = await api.request.get('home/countries?per_page=-1');
       return data?.data || [];
-    } catch (error) {
+    } catch {
       toast.error('Failed to fetch countries. Please try again.');
       return [];
     }

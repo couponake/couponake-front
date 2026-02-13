@@ -180,7 +180,7 @@
   "Stores from the same category": "متاجر اخري من نفس الفئة",
   "Similar Brands": "براندات مشابهة",
   "Similar Stores": "متاجر مشابهة",
-  "Related coupons": "كود خصم اخر لمتاجر مشهورة",
+  "Related coupons": "كوبونات مشابهة",
   "About The store": "عن المتجر",
   "Coupon Title": "اسم الكوبون",
   "Coupon code": "كود الكوبون",
@@ -214,7 +214,9 @@
   "Stores": "متاجر",
   "statistics": {
     "stores": "متجر",
-    "users": "مستخدم"
+    "members": "عضو",
+    "continuousUpdates": "تحديث مستمر",
+    "successRate": "معدل النجاح"
   },
   "View content": "اظهار المحتوى",
   "Logged in successfully": "تم تسجيل الدخول بنجاح",
@@ -284,6 +286,7 @@
   "The stores of": "متاجر دولة",
   "Save Preferences": "حفظ التفضيلات",
   "Important Pages": "روابط مهمة",
+  "Important Stores": "أهم المتاجر",
   "Coupons date": "تاريخ الكوبونات",
   "Strongest Coupon": "اقوى كوبون",
   "Wrong email or passowrd": "البريد الاكتروني او كلمة المرور غير صحيحة",
@@ -334,7 +337,6 @@
   "MostCategory": "المنتجات التى يفضلها العملاء",
   "Note": "ملاحظة",
   "StoreAnalytics": "اغلق هذة النافذة للاطلاع علي احصائيات هامة قبل التسوق من ",
-  "Competitors": "منافسين",
   "MoreAbout": "المزيد عن",
   "Experience": "خبرة",
   "Years": "سنوات",
@@ -346,7 +348,7 @@
   "Author": "المؤلف",
   "Article Author": "مؤلف المقال",
   "StoreStatistics": "احصائيات المتجر والكوبونات",
-  "Coupoonat discount coupons": "كوبونات خصم | كوبونات",
+  "Valid discount coupons": "كوبونات خصم فعّالة لأفضل المتاجر أونلاين",
   "Your message has been sent successfully": "تم إرسال رسالتك بنجاح",
   "Failed to send your message": "فشل في إرسال رسالتك. يرجى المحاولة مرة أخرى.",
   "Error submitting contact form:": "خطأ في إرسال نموذج الاتصال: ",
@@ -361,5 +363,10 @@
   "popularDiscounts": "أشهر خصومات المتجر",
   "couponPeakTimes": "أوقات الذروة لاستخدام الكوبونات",
   "couponShareRate": "معدل مشاركة الكوبون",
-  "robotVerification": "يرجى التحقق من انك لست روبوت"
+  "robotVerification": "يرجى التحقق من انك لست روبوت",
+  "noonDiscount": "كود خصم نون",
+  "namshiDiscount": "كود خصم نمشي",
+  "temuDiscount": "كود خصم تيمو",
+  "levelShoesDiscount": "كود خصم ليفل شوز",
+  "trendyolDiscount": "كود خصم ترينديول"
 }

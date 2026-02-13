@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AxiosError } from "axios";
-import MyAxios from "@/components/MyAxios";
+import MyAxios from "@/lib/MyAxios";
 import { getToken } from "next-auth/jwt";
 import { getLocale } from "next-intl/server";
 
@@ -36,13 +35,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   } catch (error: any) {
     console.log(error?.response);
     const statusCode = error?.response?.status || 500;
-    
+
     // If status is 401, handle unauthorized access
     if (statusCode === 401) {
       // Return a specific response that will trigger the logout in the frontend
       return NextResponse.json({ error: "Unauthorized", message: "Unauthorized" }, { status: 401 });
     }
-    
+
     return NextResponse.json(error?.response?.data, { status: statusCode });
   }
 }
@@ -77,13 +76,13 @@ export async function PUT(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json(data);
   } catch (error: any) {
     const statusCode = error?.response?.status || 500;
-    
+
     // If status is 401, handle unauthorized access
     if (statusCode === 401) {
       // Return a specific response that will trigger the logout in the frontend
       return NextResponse.json({ error: "Unauthorized", message: "Unauthorized" }, { status: 401 });
     }
-    
+
     return NextResponse.json(error?.response?.data, { status: statusCode });
   }
 }
@@ -104,13 +103,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   } catch (error: any) {
     console.log('NextResponse', error);
     const statusCode = error?.response?.status || 500;
-    
+
     // If status is 401, handle unauthorized access
     if (statusCode === 401) {
       // Return a specific response that will trigger the logout in the frontend
       return NextResponse.json({ error: "Unauthorized", message: "Unauthorized" }, { status: 401 });
     }
-    
+
     return NextResponse.json(error?.response?.data, { status: statusCode });
   }
 }
@@ -132,13 +131,13 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
   } catch (error: any) {
     console.log('NextResponse', error);
     const statusCode = error?.response?.status || 500;
-    
+
     // If status is 401, handle unauthorized access
     if (statusCode === 401) {
       // Return a specific response that will trigger the logout in the frontend
       return NextResponse.json({ error: "Unauthorized", message: "Unauthorized" }, { status: 401 });
     }
-    
+
     return NextResponse.json(error?.response?.data, { status: statusCode });
   }
 }

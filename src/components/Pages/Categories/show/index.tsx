@@ -1,11 +1,9 @@
 import { CategoryItem, StoreProps } from "@/types";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const ShowCategory = ({ category }: { category: CategoryItem }) => {
-  const t = useTranslations();
   return (
     <div className="-mt-7">
       <div className="bg-gradient-to-tr from-blue-200 via-main-600 to-blue-300">

@@ -5,7 +5,7 @@ import { getToken } from "next-auth/jwt";
 export default async function middleware(req: NextRequest) {
   const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const pathname = req.nextUrl.pathname;
-  const searchParams = req.nextUrl.searchParams;
+  // const searchParams = req.nextUrl.searchParams;
 
   // 🔐 1. Auth Logic
   if (!session) {

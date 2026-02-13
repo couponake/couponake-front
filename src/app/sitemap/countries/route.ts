@@ -1,11 +1,11 @@
-import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings";
 import { getAllCountries } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   const baseURL = "https://coupoonat.com/";
   //get Settings
-  const countriesSettings = await useSitemapSettingEnabled();
+  const countriesSettings = await getSitemapSettingEnabled();
   if (!countriesSettings.countries || !countriesSettings.superSite) {
     return new NextResponse("", { status: 404 });
   }

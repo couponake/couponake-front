@@ -231,7 +231,9 @@
   "Users": "Users",
   "statistics": {
     "stores": "Stores",
-    "users": "Users"
+    "members": "Members",
+    "continuousUpdates": "Continuous updates",
+    "successRate": "Success rate"
   },
   "View content": "View content",
   "Logged in successfully": "Logged in successfully",
@@ -301,6 +303,7 @@
   "The stores of": "The stores of",
   "Save Preferences": "Save Preferences",
   "Important Pages": "Important Pages",
+  "Important Stores": "Important Stores",
   "Coupons date": "Coupons dates",
   "Strongest Coupon": "Strongest Coupon",
   "Wrong email or passowrd": "Wrong email or passowrd",
@@ -351,7 +354,6 @@
   "MostCategory": "Products preferred by customers",
   "Note": "Note",
   "StoreAnalytics": "Close this window to view important statistics before shopping from",
-  "Competitors": "Competitors",
   "MoreAbout": "MORE ABOUT",
   "Experience": "Experience",
   "Years": "years",
@@ -363,7 +365,7 @@
   "Author": "Author",
   "Article Author": "Article Author",
   "StoreStatistics": "Store statistics and coupons",
-  "Coupoonat discount coupons": "Coupoonat discount coupons",
+  "Valid discount coupons": "Valid discount coupons for the best online stores",
   "Your message has been sent successfully": "Your message has been sent successfully",
   "Failed to send your message": "Failed to send your message",
   "Error submitting contact form:": "Error submitting contact form:",
@@ -378,5 +380,10 @@
   "popularDiscounts": "Popular Discounts",
   "couponPeakTimes": "Coupon Peak Times",
   "couponShareRate": "Coupon Share Rate",
-  "robotVerification": "Please verify you are not a robot"
+  "robotVerification": "Please verify you are not a robot",
+  "noonDiscount": "Noon discount code",
+  "namshiDiscount": "Namshi discount code",
+  "temuDiscount": "Temu discount code",
+  "levelShoesDiscount": "Level Shoes discount code",
+  "trendyolDiscount": "Trendyol discount code"
 }
