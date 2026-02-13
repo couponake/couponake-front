@@ -1,0 +1,62 @@
+.stub,
+.check {
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.stub {
+  height: 120px !important;
+  width: 110px !important;
+  color: white !important;
+  position: relative !important;
+}
+
+.stub::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -1px !important;
+  right: -1px !important;
+  border-top: 15px solid #fafafa !important;
+  border-left: 15px solid #07a07c00 !important;
+  width: 0 !important;
+}
+
+.stub::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  right: -1px !important;
+  border-bottom: 15px solid #fafafa !important;
+  border-left: 15px solid #07a07c00 !important;
+  width: 0 !important;
+}
+
+.check {
+  background: #ffffff !important;
+  height: 120px !important;
+  width: 210px !important;
+  padding-inline: 8px !important;
+  padding-top: 8px !important;
+  padding-bottom: 16px !important;
+  position: relative !important;
+}
+
+.check::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -1px !important;
+  left: -1px !important;
+  border-top: 15px solid #fafafa !important;
+  border-right: 15px solid #0b34a600 !important;
+  width: 0 !important;
+}
+
+.check::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -1px !important;
+  left: -1px !important;
+  border-bottom: 15px solid #fafafa !important;
+  border-right: 15px solid #0b34a600 !important;
+  width: 0 !important;
+}

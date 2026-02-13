@@ -6,10 +6,10 @@ export async function getAllBlogsData(
   pageNumber: number
 ): Promise<{ slugs: string[]; totalPages: number }> {
   try {
-    let slugs: string[] = [];
-    let pageRequired = pageNumber;
+    const slugs: string[] = [];
+    const pageRequired = pageNumber;
     let totalPages: number = 0;
-    let perPage: number = 300;
+    const perPage: number = 300;
 
     const res: any = await api.dynamic(
       `blogs?page=${pageRequired}&per_page=${perPage}`
@@ -34,11 +34,11 @@ export async function getAllStoresData(
   pageNumber: number
 ): Promise<{ images: string[]; totalPages: number; storesSlugs: string[] }> {
   try {
-    let images: string[] = [];
-    let pageRequired = pageNumber;
+    const images: string[] = [];
+    const pageRequired = pageNumber;
     let totalPages: number = 0;
-    let storesSlugs: string[] = [];
-    let perPage: number = 50;
+    const storesSlugs: string[] = [];
+    const perPage: number = 50;
 
     const res: any = await api.dynamic(
       `stores/all-stores?page=${pageRequired}&per_page=${perPage}`
@@ -61,7 +61,7 @@ export async function getAllStoresData(
 
 export async function getAllCountries(): Promise<string[]> {
   try {
-    let countries: string[] = [];
+    const countries: string[] = [];
     let page = 1;
     let hasMore = true;
 
@@ -86,7 +86,7 @@ export async function getAllCountries(): Promise<string[]> {
 // Get all categories data with slugs
 export async function getAllCategories(): Promise<string[]> {
   try {
-    let slugs: string[] = [];
+    const slugs: string[] = [];
     let page = 1;
     let hasMore = true;
 

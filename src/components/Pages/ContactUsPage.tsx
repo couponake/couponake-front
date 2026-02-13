@@ -86,14 +86,15 @@ const ContactUsPage = () => {
         }
       });
 
-      const data = await api.request.post("home/send/contact", {
+      await api.request.post("home/send/contact", {
         ...formData,
         recaptcha: captchaToken,
+      }).then(() => {
+        toast.success(t("Your message has been sent successfully"));
+        setSubmitted(true);
+        reset();
+        setCaptchaToken(null); // reset reCAPTCHA token
       });
-      toast.success(t("Your message has been sent successfully"));
-      setSubmitted(true);
-      reset();
-      setCaptchaToken(null); // reset reCAPTCHA token
     } catch (error) {
       console.error(t("Error submitting contact form:"), error);
       toast.error(t("Failed to send your message"));

@@ -1,11 +1,11 @@
-import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings";
 import { getAllCategories } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   const baseURL = "https://coupoonat.com/";
   //get Settings
-  const categoriesSettings = await useSitemapSettingEnabled();
+  const categoriesSettings = await getSitemapSettingEnabled();
   if (!categoriesSettings.categories || !categoriesSettings.superSite) {
     return new NextResponse("", { status: 404 });
   }

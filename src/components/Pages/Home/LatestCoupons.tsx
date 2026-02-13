@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance from '@/lib/axios';
 import { useLocale, useTranslations } from "next-intl";
 import { CouponProps } from "@/types";
 import {
@@ -11,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import HorizontalCouponCard from "@/components/HorizontalCouponCard";
+import HorizontalCouponCard from "@/components/HomePageComponents/HorizontalCouponCard";
 import Autoplay from "embla-carousel-autoplay";
 import { Skeleton } from '@/components/ui/skeleton';
 import api from "@/lib/api";
@@ -58,7 +57,7 @@ export default function LatestCoupons() {
               >
                 <div className="relative overflow-hidden rounded-lg shadow-lg bg-gradient-to-br from-purple-100 to-main-100" dir="auto">
                   <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-500 to-main-500 transform rotate-45 translate-x-12 -translate-y-12"></div>
-                  
+
                   <div className="relative p-6 flex flex-col h-full">
                     <div className="flex items-center mb-4 gap-3">
                       <Skeleton className="w-16 h-16 rounded-full" />
@@ -66,18 +65,18 @@ export default function LatestCoupons() {
                         <Skeleton className="h-6 w-48 mb-2" />
                       </div>
                     </div>
-                    
+
                     <div className="flex-grow">
                       <Skeleton className="h-4 w-full mb-2" />
                       <Skeleton className="h-4 w-3/4 mb-2" />
                       <Skeleton className="h-4 w-5/6 mb-4" />
-                      
+
                       <div className="flex items-center mb-2">
                         <Skeleton className="h-4 w-24" />
                       </div>
                       <Skeleton className="h-4 w-32 mb-2" />
                     </div>
-                    
+
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       <div className="flex justify-between items-center mb-4">
                         <Skeleton className="h-4 w-16" />
@@ -94,7 +93,7 @@ export default function LatestCoupons() {
       </div>
     );
   }
-  
+
   if (!latest_coupons || latest_coupons?.length === 0) return null;
 
   return (

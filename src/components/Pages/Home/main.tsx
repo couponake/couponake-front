@@ -4,7 +4,6 @@ import {
   FeaturedStoresCategoryItem,
   StoreProps,
 } from "@/types";
-import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import React from "react";
 import Hero from "./Hero";
@@ -35,7 +34,6 @@ const Main = ({
     users: number;
   };
 }) => {
-  const t = useTranslations();
   return (
     <section>
       <Hero autoplay banners={hero_banners} />

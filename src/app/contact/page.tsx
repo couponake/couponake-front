@@ -1,8 +1,8 @@
 import ContactUsPage from '@/components/Pages/ContactUsPage';
-import { useSettingEnabled } from '@/hooks/useIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
 import { cookies } from 'next/headers';
 import React from 'react';
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 
 export async function generateMetadata() {
   const cookieStore = await cookies();
@@ -10,7 +10,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the CONTACT page
-  const indexingContact = await useSettingEnabled(SettingsEnum.Contact);
+  const indexingContact = await getSettingEnabled(SettingsEnum.Contact);
 
   return {
     title: isArabic

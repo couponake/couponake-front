@@ -1,4 +1,4 @@
-import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings";
 import { getAllBlogsData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: Promise<{ page: string }> }
 ) {
   //get Settings
-  const blogSettings = await useSitemapSettingEnabled();
+  const blogSettings = await getSitemapSettingEnabled();
   if (!blogSettings.blogs || !blogSettings.superSite) {
     return new NextResponse("", { status: 404 });
   }

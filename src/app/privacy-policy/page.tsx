@@ -1,11 +1,9 @@
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
-import api from "@/lib/api";
-import { secureHtmlLinks } from "@/lib/htmlUtils";
-import { SettingsEnum } from "@/types/settingsEnum";
-import moment from "moment";
-import { cookies } from "next/headers";
-import React from "react";
-import "moment/locale/ar";
+import api from '@/lib/api';
+import { secureHtmlLinks } from '@/lib/htmlUtils';
+import { cookies } from 'next/headers';
+import React from 'react';
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 
 export async function generateMetadata() {
   const cookieStore = await cookies();
@@ -13,7 +11,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the PRIVACY page
-  const indexingPrivacy = await useSettingEnabled(SettingsEnum.Privacy);
+  const indexingPrivacy = await getSettingEnabled(SettingsEnum.Privacy);
 
   return {
     title: isArabic
@@ -67,6 +65,8 @@ const PrivacyPage = async () => {
     content: string;
     created_at?: string;
   };
+  const cookieStore = await cookies();
+  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
 
   const privacyPolicySchema = {
     "@context": "https://schema.org",
@@ -143,7 +143,14 @@ const PrivacyPage = async () => {
             </h1>
             {page.created_at && (
               <div className="text-sm text-gray-500 dark:text-gray-400 mb-8">
-                {moment(page.created_at).locale("ar").format("LL")}
+                {new Date(page.created_at).toLocaleDateString(
+                  locale === 'ar' ? 'ar-SA' : 'en-US',
+                  {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  }
+                )}
               </div>
             )}
             <div

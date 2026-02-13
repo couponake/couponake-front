@@ -1,13 +1,13 @@
-import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
+import AddToFavoriteBtn from "@/components/StorePageComponents/AddToFavoriteBtn";
 import Empty from "@/components/Empty";
-import { useSettingEnabled } from "@/hooks/useIndexingSettings";
 import api from "@/lib/api";
 import { StoreProps } from "@/types";
-import { SettingsEnum } from "@/types/settingsEnum";
 import { Avatar } from "@heroui/avatar";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import React from "react";
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 
 export const experimental_ppr = true;
 
@@ -16,11 +16,11 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug, locale } = await params;
+  const { slug } = await params;
   const response: any = await api.dynamic(`home/country/${slug}`);
   const country_seo: any = response?.data?.country_seo;
   //get the indexing settings of the Country page
-  const indexingCountry = await useSettingEnabled(SettingsEnum.Countries);
+  const indexingCountry = await getSettingEnabled(SettingsEnum.Countries);
 
 
   return {
@@ -68,7 +68,6 @@ export default async function CouponCountry({
   const stores: StoreProps[] = response?.data?.stores;
   const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-  const isArabic = locale === "ar";
 
   const graph = {
     "@context": "https://schema.org",
@@ -163,6 +162,7 @@ export default async function CouponCountry({
                   w-full max-w-md mx-auto"
                 >
                   <Link
+                    prefetch={false}
                     target="_self"
                     href={`/store/${store?.slug}`}
                     className="flex items-center w-full gap-4 flex-grow max-sm:flex-col max-sm:justify-center"

@@ -1,4 +1,4 @@
-import { useSitemapSettingEnabled } from "@/hooks/useSitemapIndexingSettings";
+import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings";
 import { getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: Promise<{ page: string }> }
 ) {
   //get Settings
-  const storesSettings = await useSitemapSettingEnabled();
+  const storesSettings = await getSitemapSettingEnabled();
   if (!storesSettings.stores || !storesSettings.superSite) {
     return new NextResponse("", { status: 404 });
   }

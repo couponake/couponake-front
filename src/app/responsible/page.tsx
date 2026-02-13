@@ -6,7 +6,7 @@ import { Spinner } from '@heroui/spinner';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { set } from 'react-hook-form';
+import Image from 'next/image';
 
 function Responsible() {
     const locale = useLocale();
@@ -35,21 +35,25 @@ function Responsible() {
             !isLoading ? (
                  <section dir='ltr' className="min-h-screen bg-transparent py-16 px-6 flex flex-col md:flex-row items-start justify-between gap-8 ">
                 <div className="w-full md:w-5/12 flex justify-center h-full md:justify-end">
-                    {
-                        responsible?.image !== null ? (
-                            <img
-                                src={responsible?.image}
-                                alt="About Me"
-                                className="w-72 h-96 md:w-80 lg:w-96 object-cover rounded-lg shadow-lg"
-                            />
-                        ) : (
-                            <img
-                                src='/user.webp'
-                                alt="About Me"
-                                className="w-72 h-96 md:w-80 lg:w-96 object-cover rounded-lg shadow-lg"
-                            />
-                        )
-                    }
+                     {
+                                responsible?.image !== null ? (
+                                    <Image
+                                        src={responsible?.image}
+                                        alt="About Me"
+                                        width={384}
+                                        height={384}
+                                        className="w-72 h-96 md:w-80 lg:w-96 object-cover rounded-lg shadow-lg"
+                                    />
+                                ) : (
+                                    <Image
+                                        src='/user.webp'
+                                        alt="About Me"
+                                        width={384}
+                                        height={384}
+                                        className="w-72 h-96 md:w-80 lg:w-96 object-cover rounded-lg shadow-lg"
+                                    />
+                                )
+                            }
                 </div>
                 <div className="w-full md:w-7/12 text-center md:text-left relative">
 

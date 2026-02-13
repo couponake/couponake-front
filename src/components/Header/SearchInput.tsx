@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { SearchIcon, XIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import SearchResults from "../SearchResults";
+import SearchResults from "../HomePageComponents/SearchResults";
 import { useDebounce } from "@uidotdev/usehooks";
 import { parseAsString, useQueryState } from "nuqs";
 import { toast } from "@/components/ui/custom-toast";
@@ -26,12 +26,12 @@ const SearchInput = () => {
   const getSearchResults = async () => {
     setIsSearching(true);
     try {
-      const data= await api.request.post(`filter`, {
+      const data = await api.request.post(`filter`, {
         search: debouncedSearchTerm,
       });
       if (data.success) {
         setResults(data.results);
-         trackSearch(
+        trackSearch(
           debouncedSearchTerm as string,
           data.results?.length ?? 0
         );
@@ -65,7 +65,7 @@ const SearchInput = () => {
     searchHN();
   }, [debouncedSearchTerm]);
 
-    const trackSearch = (
+  const trackSearch = (
     term: string,
     resultsCount: number
   ) => {

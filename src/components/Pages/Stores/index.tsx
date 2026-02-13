@@ -1,27 +1,26 @@
 "use client";
-import AddToFavoriteBtn from "@/components/AddToFavoriteBtn";
-import Empty from "@/components/Empty";
-import { toast } from "@/components/ui/custom-toast";
-import { Input } from "@/components/ui/input";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useCategoriesData, useStoresData } from "@/hooks/useStoresData";
-import api from "@/lib/api";
-import debounce from "@/lib/debounce";
-import { cn } from "@/lib/utils";
-import { useStore } from "@/store";
-import { HeaderCategory } from "@/types";
-import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
-import { Avatar } from "@heroui/avatar";
-import { Button } from "@heroui/button";
-import { Pagination } from "@heroui/pagination";
-import { LayoutGrid, XIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { parseAsString, useQueryState } from "nuqs";
-import React, { useCallback, useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import Image from "next/image";
+import AddToFavoriteBtn from '@/components/StorePageComponents/AddToFavoriteBtn';
+import Empty from '@/components/Empty';
+import { toast } from '@/components/ui/custom-toast';
+import { Input } from '@/components/ui/input';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useCategoriesData, useStoresData } from '@/hooks/useStoresData';
+import api from '@/lib/api';
+import debounce from '@/lib/debounce';
+import { cn } from '@/lib/utils';
+import { useStore } from '@/store';
+import { HeaderCategory } from '@/types';
+import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
+import { Button } from '@heroui/button';
+import { Pagination } from '@heroui/pagination';
+import { LayoutGrid, XIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { parseAsString, useQueryState } from 'nuqs';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const Stores = () => {
   const t = useTranslations();
@@ -70,7 +69,7 @@ const Stores = () => {
   // Update allCategories when new data is fetched
   useEffect(() => {
     if (categoriesData?.data) {
-      let categoriesDataArray = categoriesData?.data?.sort(
+      const categoriesDataArray = categoriesData?.data?.sort(
         (a, b) => a.id - b.id
       );
       if (categoriesPage === 1) {
@@ -97,6 +96,7 @@ const Stores = () => {
 
   // Debounced search function
   const debouncedSearch = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     debounce((value: string) => {
       setIsSearching(false);
     }, 500),
@@ -140,7 +140,7 @@ const Stores = () => {
     try {
       const data = await api.request.get("home/countries?per_page=-1");
       return data?.data;
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch countries. Please try again.");
       return [];
     }
@@ -192,6 +192,7 @@ const Stores = () => {
           className="mt-5 h-fit !w-full select-none rounded-lg border border-neutral-200 bg-white sm:w-[260px] relative pt-3"
         >
           <Link
+            prefetch={false}
             target="_self"
             href="/stores"
             className={cn(
@@ -208,12 +209,13 @@ const Stores = () => {
             {categories?.map((category) => (
               <li key={category?.id}>
                 <Link
+                  prefetch={false}
                   target="_self"
                   href={`?category=${category?.id}`}
                   className={cn(
                     "rounded-s-0 mb-2 ml-2 flex h-12 items-center rounded-e-xl border-s-4 border-main-600/0 py-3.5 text-neutral-900 hover:border-s-4 hover:border-main-600 hover:bg-neutral-50 hover:text-main-600 ltr:pl-3 rtl:pr-3",
                     Number(selectedCategory) === Number(category?.id) &&
-                      "text-main-600 border-main-600"
+                    "text-main-600 border-main-600"
                   )}
                 >
                   <div className="text-base font-medium ms-2.5 line-clamp-1">
@@ -279,57 +281,57 @@ const Stores = () => {
           <div className="grid gap-4 grid-cols-2">
             {allStores && allStores.length > 0
               ? allStores?.map((store) => (
-                  <div
-                    key={store?.slug}
-                    className="relative flex flex-col sm:flex-row items-center justify-between 
+                <div
+                  key={store?.slug}
+                  className="relative flex flex-col sm:flex-row items-center justify-between 
                   rounded-2xl border border-neutral-200 bg-white 
                   shadow-sm hover:shadow-md transition-shadow duration-300 
                   p-4 sm:p-5 gap-y-3 sm:gap-y-0 sm:gap-x-4 
                   w-full max-w-md mx-auto"
+                >
+                  <Link
+                    prefetch={false}
+                    target="_self"
+                    href={`/store/${store?.slug}`}
+                    className="flex items-center w-full gap-4 flex-grow max-sm:flex-col max-sm:justify-center"
                   >
-                    <Link
-                      target="_self"
-                      href={`/store/${store?.slug}`}
-                      className="flex items-center w-full gap-4 flex-grow max-sm:flex-col max-sm:justify-center"
-                    >
-                      <div className="w-16 aspect-square shadow-md bg-white rounded-full flex justify-center items-center overflow-hidden">
-                        <Image
-                          src={store?.image || "noPreview.webp"}
-                          alt={store?.store_name || "Store Image"}
-                          width={64}
-                          height={64}
-                          loading="lazy"
-                          className="w-16 h-fit object-fit"
-                          unoptimized
-                        />
-                      </div>
-                      <div className="flex-grow min-w-0">
-                        <h2
-                          className="sm:text-lg md:text-xl font-bold text-neutral-900  max-sm:text-center"
-                          title={store?.store_name}
-                        >
-                          {store?.store_name}
-                        </h2>
-                      </div>
-                    </Link>
-
-                    <div className="flex-shrink-0 sm:ml-4">
-                      {store?.id && (
-                        <AddToFavoriteBtn
-                          storeId={store?.id}
-                          isFavoriteInitially={
-                            store?.in_favourite || store?.isInFavorites
-                          }
-                        />
-                      )}
+                    <div className="relative w-20 h-20 shadow-md bg-white rounded-full shrink-0 overflow-hidden ">
+                      <Image
+                        src={store?.image || "noPreview.webp"}
+                        alt={store?.store_name || "Store Image"}
+                        fill
+                        loading="lazy"
+                        className="object-contain p-2"
+                        unoptimized
+                      />
                     </div>
+                    <div className="flex-grow min-w-0">
+                      <h2
+                        className="sm:text-base md:text-lg font-semibold text-neutral-900 max-sm:text-center"
+                        title={store?.store_name}
+                      >
+                        {store?.store_name}
+                      </h2>
+                    </div>
+                  </Link>
+
+                  <div className="flex-shrink-0 sm:ml-4">
+                    {store?.id && (
+                      <AddToFavoriteBtn
+                        storeId={store?.id}
+                        isFavoriteInitially={
+                          store?.in_favourite || store?.isInFavorites
+                        }
+                      />
+                    )}
                   </div>
-                ))
+                </div>
+              ))
               : !isLoading && (
-                  <div className="col-span-full">
-                    <Empty />
-                  </div>
-                )}
+                <div className="col-span-full">
+                  <Empty />
+                </div>
+              )}
           </div>
           {isLoading && (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

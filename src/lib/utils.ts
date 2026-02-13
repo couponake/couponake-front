@@ -1,4 +1,4 @@
-import MyAxios from "@/components/MyAxios";
+import MyAxios from "@/lib/MyAxios";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { signOut } from "next-auth/react";

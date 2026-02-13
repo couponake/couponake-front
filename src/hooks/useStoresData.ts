@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { HeaderCategory, StoreProps, paginationProps } from '@/types';
 import { useStore } from '@/store';
 import { toast } from '@/components/ui/custom-toast';
-import MyAxios from '@/components/MyAxios';
+import MyAxios from '@/lib/MyAxios';
 import api from '@/lib/api';
 
 interface StoresResponse {
@@ -35,7 +35,8 @@ export const useStoresData = () => {
   const fetchStores = async ({ page = 1, search = '', category = null, country = null }: StoresQueryParams) => {
     try {
       const response = await api.request.get(
-        user?.id ? 'stores' : 'stores/all-stores',
+        // user?.id ? 'stores' : 'stores/all-stores',
+        'stores/all-stores',
         {
           params: {
             page,
@@ -45,7 +46,7 @@ export const useStoresData = () => {
           },
         }
       );
-      return response as StoresResponse; 
+      return response as StoresResponse;
     } catch (error) {
       toast.error('Failed to fetch stores. Please try again.');
       throw error;
@@ -68,7 +69,7 @@ export const useCategoriesData = (page = 1) => {
       const { data } = await MyAxios.get('home/categories-data', {
         params: { page: pageNumber },
       });
-      
+
       return data as CategoriesResponse;
     } catch (error) {
       toast.error('Failed to fetch categories. Please try again.');
