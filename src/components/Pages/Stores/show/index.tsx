@@ -184,21 +184,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
         locale={locale}
         t={t}
       />
-      <section className="container flex flex-col-reverse sm:flex-col-reverse md:flex-row lg:flex-row xl:flex-row 2xl:flex-row gap-10 pt-10 sm:pt-24 md:pt-30 lg:pt-24 pb-5">
-        {/* sidebar */}
-        <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
-          <StoreSidePart
-            storeTitle={store?.title}
-            couponImage={store?.coupon_image}
-            storeName={store?.store_name}
-            storeSlug={store?.slug}
-            couponsLength={store?.coupons?.length}
-            sideTable={side_table}
-            storeBrands={store_brands}
-            storeBanners={store_banner}
-            storeInfo={store_infos}
-          />
-        </aside>
+      <section className="container flex flex-col md:flex-row-reverse gap-10 pt-10 sm:pt-24 md:pt-30 lg:pt-24 pb-5">
         {/* main content */}
         <div className="w-full sm:w-full md:w-fit lg:w-fit xl:w-fit 2xl:w-fit min-h-150 h-fit flex-1 space-y-5 overflow-hidden">
           <StoreRatingCard
@@ -342,6 +328,20 @@ const ShowStore = ({ slug }: { slug: string }) => {
             {t("Affiliate links")}
           </div>
         </div>
+        {/* sidebar */}
+        <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
+          <StoreSidePart
+            storeTitle={store?.title}
+            couponImage={store?.coupon_image}
+            storeName={store?.store_name}
+            storeSlug={store?.slug}
+            couponsLength={store?.coupons?.length}
+            sideTable={side_table}
+            storeBrands={store_brands}
+            storeBanners={store_banner}
+            storeInfo={store_infos}
+          />
+        </aside>
       </section>
     </div>
   );
