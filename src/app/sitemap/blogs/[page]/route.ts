@@ -22,13 +22,13 @@ export async function GET(
     .map((slug) => {
       return `
     <url>
-      <loc>${baseURL}${slug}/</loc>
+      <loc>${baseURL}${encodeURI(slug)}}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
       <xhtml:link 
         rel="canonical" 
-        href="${baseURL}${slug}/"
+        href="${baseURL}${encodeURI(slug)}}/"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
       />
     </url>

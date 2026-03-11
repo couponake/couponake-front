@@ -16,7 +16,7 @@ export async function GET() {
     .map(
       (slug) => `
     <url>
-      <loc>${baseURL}coupon-category/${slug}/</loc>
+      <loc>${baseURL}coupon-category/${encodeURI(slug)}}/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
