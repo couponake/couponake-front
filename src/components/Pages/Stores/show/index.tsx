@@ -55,17 +55,6 @@ const SimilarStores = dynamic(
   },
 );
 
-const StoreRelatedCouponsCarousel = dynamic(
-  () =>
-    import(
-      "@/components/StorePageComponents/RelatedTicketCoupon/StoreRelatedCouponsCarousel"
-    ),
-  {
-    loading: () => <Skeleton className="rounded-md w-[280px] h-[100px]" />,
-    ssr: false,
-  },
-);
-
 const ShowStore = ({ slug }: { slug: string }) => {
   const isMobile = useDetectMobile();
   const t = useTranslations();
@@ -84,7 +73,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
     store_banner = null,
     related_coupons = [],
     store_faqs = [],
-    similar_coupons_table = [],
     store_infos = [],
     side_table = null,
   } = data || {};
@@ -281,13 +269,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
           <div className="mt-11 border-t-gray-300 border-t">
             {similarStores && similarStores.length > 0 && (
               <SimilarStores key={store?.slug} stores={similarStores} />
-            )}
-          </div>
-          <div className="mt-11 border-t-gray-300 border-t">
-            {similar_coupons_table && similar_coupons_table.length > 0 && (
-              <StoreRelatedCouponsCarousel
-                couponsList={similar_coupons_table}
-              />
             )}
           </div>
           {store_reviews && store_reviews.length > 0 && (
