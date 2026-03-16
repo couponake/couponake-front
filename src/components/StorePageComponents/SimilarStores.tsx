@@ -12,8 +12,9 @@ import { cn } from "@heroui/react";
 import Autoplay from "embla-carousel-autoplay";
 import { useLocale, useTranslations } from "next-intl";
 import { StoreProps } from "@/types";
+import { Skeleton } from "../ui/skeleton";
 
-function SimilarStores({ stores }: { stores: StoreProps[] }) {
+export default function SimilarStores({ stores }: { stores: StoreProps[] }) {
   const t = useTranslations();
   const locale = useLocale();
   return (
@@ -69,4 +70,47 @@ function SimilarStores({ stores }: { stores: StoreProps[] }) {
   );
 }
 
-export default SimilarStores;
+export function SimilarStoresSkeleton() {
+  const t = useTranslations();
+  const locale = useLocale();
+  return (
+    <Carousel
+      opts={{
+        align: "start",
+        loop: true,
+        direction: locale === "ar" ? "rtl" : "ltr",
+        dragFree: true,
+      }}
+      plugins={[
+        Autoplay({
+          delay: 2900,
+          stopOnFocusIn: false,
+          stopOnInteraction: false,
+        }),
+      ]}
+      orientation="horizontal"
+      className={cn("Carousel relative")}
+    >
+      <div className="max-sm:hidden h-[77%] bottom-0 w-30 sm:w-50 absolute rtl:bg-gradient-to-l ltr:bg-gradient-to-r from-transparent to-neutral-50 z-[10] end-0 pointer-events-none" />
+
+      <div className="flex flex-wrap items-center justify-between gap-5">
+        <p className="font-semibold text-gray-700 text-xl mt-3 mb-5">
+          {t("Similar Stores")}
+        </p>
+        <div className="flex items-center gap-3 rtl:flex-row-reverse z-50">
+          <CarouselPrevious className="relative left-0 right-0 translate-x-0 translate-y-0 disabled:cursor-not-allowed" />
+          <CarouselNext className="relative left-0 right-0 translate-x-0 translate-y-0 disabled:cursor-not-allowed" />
+        </div>
+      </div>
+      <CarouselContent className="h-full min-h-[120px]">
+        {Array.from({ length: 8 })?.map((_, index) => {
+          return (
+            <CarouselItem key={index} className="basis-auto">
+              <Skeleton key={index} className="rounded-sm w-40 h-10" />
+            </CarouselItem>
+          );
+        })}
+      </CarouselContent>
+    </Carousel>
+  );
+}

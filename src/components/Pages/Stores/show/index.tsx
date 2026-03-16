@@ -22,6 +22,7 @@ import Link from "next/link";
 import React from "react";
 
 import Hero from "../../Home/Hero";
+import { SimilarStoresSkeleton } from "@/components/StorePageComponents/SimilarStores";
 
 declare module "react-window";
 
@@ -50,7 +51,7 @@ const CustomersReviews = dynamic(
 const SimilarStores = dynamic(
   () => import("@/components/StorePageComponents/SimilarStores"),
   {
-    loading: () => <Skeleton className="rounded-full w-17 aspect-square" />,
+    loading: () => <SimilarStoresSkeleton />,
     ssr: false,
   },
 );
