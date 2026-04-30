@@ -28,7 +28,7 @@ export async function GET(
 
   const urls = slugs.images
     .map((slug) => {
-      const safeSlug = escapeXml(slug);
+      const safeSlug = escapeXml(encodeURI(slug));
       return `
   <url>
     <loc>${safeSlug}</loc>

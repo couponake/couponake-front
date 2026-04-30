@@ -22,6 +22,7 @@ import Link from "next/link";
 import React from "react";
 
 import Hero from "../../Home/Hero";
+import { SimilarStoresSkeleton } from "@/components/StorePageComponents/SimilarStores";
 
 declare module "react-window";
 
@@ -50,18 +51,7 @@ const CustomersReviews = dynamic(
 const SimilarStores = dynamic(
   () => import("@/components/StorePageComponents/SimilarStores"),
   {
-    loading: () => <Skeleton className="rounded-full w-17 aspect-square" />,
-    ssr: false,
-  },
-);
-
-const StoreRelatedCouponsCarousel = dynamic(
-  () =>
-    import(
-      "@/components/StorePageComponents/RelatedTicketCoupon/StoreRelatedCouponsCarousel"
-    ),
-  {
-    loading: () => <Skeleton className="rounded-md w-[280px] h-[100px]" />,
+    loading: () => <SimilarStoresSkeleton />,
     ssr: false,
   },
 );
@@ -84,7 +74,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
     store_banner = null,
     related_coupons = [],
     store_faqs = [],
-    similar_coupons_table = [],
     store_infos = [],
     side_table = null,
   } = data || {};
@@ -184,21 +173,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
         locale={locale}
         t={t}
       />
-      <section className="container flex flex-col-reverse sm:flex-col-reverse md:flex-row lg:flex-row xl:flex-row 2xl:flex-row gap-10 pt-10 sm:pt-24 md:pt-30 lg:pt-24 pb-5">
-        {/* sidebar */}
-        <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
-          <StoreSidePart
-            storeTitle={store?.title}
-            couponImage={store?.coupon_image}
-            storeName={store?.store_name}
-            storeSlug={store?.slug}
-            couponsLength={store?.coupons?.length}
-            sideTable={side_table}
-            storeBrands={store_brands}
-            storeBanners={store_banner}
-            storeInfo={store_infos}
-          />
-        </aside>
+      <section className="container flex flex-col md:flex-row-reverse gap-10 pt-10 sm:pt-24 md:pt-30 lg:pt-24 pb-5">
         {/* main content */}
         <div className="w-full sm:w-full md:w-fit lg:w-fit xl:w-fit 2xl:w-fit min-h-150 h-fit flex-1 space-y-5 overflow-hidden">
           <StoreRatingCard
@@ -297,13 +272,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
               <SimilarStores key={store?.slug} stores={similarStores} />
             )}
           </div>
-          <div className="mt-11 border-t-gray-300 border-t">
-            {similar_coupons_table && similar_coupons_table.length > 0 && (
-              <StoreRelatedCouponsCarousel
-                couponsList={similar_coupons_table}
-              />
-            )}
-          </div>
           {store_reviews && store_reviews.length > 0 && (
             <CustomersReviews
               className="max-w-[87vw]"
@@ -342,6 +310,20 @@ const ShowStore = ({ slug }: { slug: string }) => {
             {t("Affiliate links")}
           </div>
         </div>
+        {/* sidebar */}
+        <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
+          <StoreSidePart
+            storeTitle={store?.title}
+            couponImage={store?.coupon_image}
+            storeName={store?.store_name}
+            storeSlug={store?.slug}
+            couponsLength={store?.coupons?.length}
+            sideTable={side_table}
+            storeBrands={store_brands}
+            storeBanners={store_banner}
+            storeInfo={store_infos}
+          />
+        </aside>
       </section>
     </div>
   );

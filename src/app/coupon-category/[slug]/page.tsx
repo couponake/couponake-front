@@ -4,6 +4,8 @@ import ShowCategory from "@/components/Pages/Categories/show";
 import { CategoryItem } from "@/types";
 import { redirect } from "next/navigation";
 import NotFound from "@/app/not-found";
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 
 export async function generateMetadata({
   params,
@@ -23,15 +25,14 @@ export async function generateMetadata({
         },
         robots: {
           index: false,
-          // follow: true,
-          follow: false
+          follow: true,
         },
       };
     }
 
     const category = response.category as CategoryItem;
     //get the indexing settings of the Category page
-    // const indexingCategory = await getSettingEnabled(SettingsEnum.Categories);
+    const indexingCategory = await getSettingEnabled(SettingsEnum.Categories);
 
 
     return {
@@ -42,8 +43,7 @@ export async function generateMetadata({
           `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupon-category/${slug}/` || "",
       },
       robots: {
-        // index: indexingCategory,
-        index: false,
+        index: indexingCategory,
       },
       openGraph: {
         title: category?.category_seo?.title,

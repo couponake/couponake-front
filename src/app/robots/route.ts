@@ -4,15 +4,13 @@ import { NextResponse } from 'next/server';
 export function GET() {
   const content = `
 User-agent: *
-Disallow: /
-Disallow: /api/
 Disallow: /_next/
+Allow: /_next/static/
+Allow: /_next/image/
+
+Disallow: /api/
 Disallow: /private/
 Disallow: /*?couponID=
-Disallow: /*.css$
-Disallow: /*.js$
-Disallow: /*.woff$
-Disallow: /*.woff2$
 
 Sitemap: https://coupoonat.com/sitemap.xml
 `.trim();

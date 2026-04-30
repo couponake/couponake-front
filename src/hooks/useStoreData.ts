@@ -23,7 +23,7 @@ export interface StoreResponse {
   store_banner: BannerItem[] | null;
   related_coupons: CouponProps[] | [];
   store_faqs: FaqItem[];
-  similar_coupons_table: CouponProps[] | [];
+  // similar_coupons_table: CouponProps[] | [];
   store_infos: InfoItem[];
   side_table: {
     current_date: string;
