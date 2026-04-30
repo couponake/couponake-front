@@ -12,8 +12,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { Cairo, Poppins } from 'next/font/google';
 import Script from 'next/script';
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
 
 interface homeSeoType {
   author: string;
@@ -58,7 +56,7 @@ export async function generateMetadata() {
   // Fetch SEO data
   const seoData: homeSeoType = await getSeo();
   //get the indexing settings of the FAQs page
-  const indexingSite = await getSettingEnabled(SettingsEnum.SuperSite);
+  // const indexingSite = await getSettingEnabled(SettingsEnum.SuperSite);
 
 
   const fallbackTitle = "كوبونات";
@@ -81,7 +79,8 @@ export async function generateMetadata() {
       canonical: seoData?.url || `${process.env.NEXT_PUBLIC_WEBSITE_URL}`,
     },
     robots: {
-      index: indexingSite,
+      index: false,
+      follow: false,
     },
     // OpenGraph metadata
     openGraph: {

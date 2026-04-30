@@ -10,8 +10,6 @@ import {
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
 
 interface storeSeoType {
   title: string;
@@ -48,7 +46,7 @@ export async function generateMetadata({
       description: "Invalid URL with coupon ID",
       robots: {
         index: false,
-        follow: true,
+        follow: false,
       },
     };
   }
@@ -67,14 +65,14 @@ export async function generateMetadata({
         },
         robots: {
           index: false,
-          follow: true,
+          follow: false,
         },
       };
     }
 
     const seoData: storeSeoType = response?.store_seo;
     //get the indexing settings of the Store page
-    const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
+    // const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
 
     // Default values in case API fails
     if (!seoData) {
@@ -92,7 +90,8 @@ export async function generateMetadata({
         canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
       },
       robots: {
-        index: indexingStore,
+        index: false,
+        follow: false,
       },
       // OpenGraph metadata
       openGraph: {
