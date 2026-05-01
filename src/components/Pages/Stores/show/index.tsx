@@ -216,10 +216,12 @@ const ShowStore = ({ slug }: { slug: string }) => {
                 dir="rtl"
                 className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
                 dangerouslySetInnerHTML={makeSafeHtml(
-                  store.about_store?.replace(
-                    /<([a-z1-6]+)>(.*?)<\/\1>/i,
-                    "<h2>$2</h2>",
-                  ),
+                  store.about_store
+                    ? store.about_store.replace(
+                        /<([a-z1-6]+)>(.*?)<\/\1>/gi,
+                        "<h2>$2</h2>",
+                      )
+                    : "",
                 )}
               />
               <Divider />
