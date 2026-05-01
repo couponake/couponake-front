@@ -20,6 +20,7 @@ import { useLocale, useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
+import styles from "@/styles/htmlTablesScroll.module.css";
 
 import Hero from "../../Home/Hero";
 import { SimilarStoresSkeleton } from "@/components/StorePageComponents/SimilarStores";
@@ -212,7 +213,8 @@ const ShowStore = ({ slug }: { slug: string }) => {
             <>
               {/* convert the recieved tag to h2 directly */}
               <div
-                className="prose max-w-none my-5 prose-h2:text-sm prose-h2:font-semibold! md:prose-h2:text-base"
+                dir="rtl"
+                className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
                 dangerouslySetInnerHTML={makeSafeHtml(
                   store.about_store?.replace(
                     /<([a-z1-6]+)>(.*?)<\/\1>/i,
