@@ -24,6 +24,7 @@ import styles from "@/styles/htmlTablesScroll.module.css";
 
 import Hero from "../../Home/Hero";
 import { SimilarStoresSkeleton } from "@/components/StorePageComponents/SimilarStores";
+import { processStoreHtml } from "@/lib/htmlStoreUtils";
 
 declare module "react-window";
 
@@ -156,6 +157,11 @@ const ShowStore = ({ slug }: { slug: string }) => {
     return { __html: secureHtmlLinks(content ?? "") };
   }
 
+  // Replace makeSafeHtml for about_store specifically:
+  function makeProcessedHtml(content: string | null): { __html: string } {
+    return { __html: secureHtmlLinks(processStoreHtml(content)) };
+  }
+
   return (
     <div id="show store" className="relative">
       <ScrollTracker event_name={`${store?.slug}_page_depth`} />
@@ -211,18 +217,10 @@ const ShowStore = ({ slug }: { slug: string }) => {
           )}
           {store?.about_store && (
             <>
-              {/* convert the recieved tag to h2 directly */}
               <div
                 dir="rtl"
-                className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
-                dangerouslySetInnerHTML={makeSafeHtml(
-                  store.about_store
-                    ? store.about_store.replace(
-                        /<([a-z1-6]+)>(.*?)<\/\1>/gi,
-                        "<h2>$2</h2>",
-                      )
-                    : "",
-                )}
+                className={`${styles.aboutStore} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo`}
+                dangerouslySetInnerHTML={makeProcessedHtml(store.about_store)}
               />
               <Divider />
             </>
