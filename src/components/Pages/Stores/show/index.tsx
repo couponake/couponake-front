@@ -18,6 +18,7 @@ import { Button } from "@heroui/button";
 import { Divider } from "@heroui/divider";
 import { useLocale, useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 import styles from "@/styles/htmlTablesScroll.module.css";
@@ -219,7 +220,9 @@ const ShowStore = ({ slug }: { slug: string }) => {
             <>
               <div
                 dir="rtl"
-                className={`${styles.aboutStore} prose prose-sm max-w-none my-5 leading-relaxed font-cairo [&_*]:font-cairo prose-h2:text-sm prose-h2:font-semibold md:prose-h2:text-base prose-h3:text-sm md:prose-h3:text-base prose-p:text-sm prose-p:leading-relaxed`}
+                className={cn(
+                  `${styles.aboutStore} prose prose-sm max-w-none my-5 leading-relaxed font-cairo [&_*]:font-cairo prose-h2:text-sm prose-h2:font-semibold md:prose-h2:text-base prose-h3:text-sm md:prose-h3:text-base prose-p:text-sm prose-p:leading-relaxed`,
+                )}
                 dangerouslySetInnerHTML={makeProcessedHtml(store.about_store)}
               />
               <Divider />
