@@ -1,8 +1,9 @@
 /* Rename the module class to avoid confusion with Tailwind's .prose */
 .aboutStore :global(*) {
-  all: revert;
+  all: unset;
   font-family: "Cairo", sans-serif;
   box-sizing: border-box;
+  display: revert; /* restore block/inline behavior per element type */
 }
 
 .aboutStore :global(table) {
