@@ -18,14 +18,12 @@ import { Button } from "@heroui/button";
 import { Divider } from "@heroui/divider";
 import { useLocale, useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 import styles from "@/styles/htmlTablesScroll.module.css";
 
 import Hero from "../../Home/Hero";
 import { SimilarStoresSkeleton } from "@/components/StorePageComponents/SimilarStores";
-import { processStoreHtml } from "@/lib/htmlStoreUtils";
 
 declare module "react-window";
 
@@ -159,9 +157,9 @@ const ShowStore = ({ slug }: { slug: string }) => {
   }
 
   // Replace makeSafeHtml for about_store specifically:
-  function makeProcessedHtml(content: string | null): { __html: string } {
-    return { __html: secureHtmlLinks(processStoreHtml(content)) };
-  }
+  // function makeProcessedHtml(content: string | null): { __html: string } {
+  //   return { __html: secureHtmlLinks(processStoreHtml(content)) };
+  // }
 
   return (
     <div id="show store" className="relative">
@@ -217,16 +215,20 @@ const ShowStore = ({ slug }: { slug: string }) => {
             </>
           )}
           {store?.about_store && (
-            <>
-              <div
-                dir="rtl"
-                className={cn(
-                  `${styles.aboutStore} prose prose-sm max-w-none my-5 leading-relaxed font-cairo [&_*]:font-cairo prose-h2:text-sm prose-h2:font-semibold md:prose-h2:text-base prose-h3:text-sm md:prose-h3:text-base prose-p:text-sm prose-p:leading-relaxed`,
-                )}
-                dangerouslySetInnerHTML={makeProcessedHtml(store.about_store)}
-              />
-              <Divider />
-            </>
+            <div className="space-y-5 my-10">
+              {/* <h2 className="text-lg md:text-2xl font-semibold text-neutral-900 sm:text-xl">
+                {t("About The store")} {": " + store?.store_name}
+              </h2> */}
+              <div className="w-full h-fit bg-white rounded-md p-4 border-1">
+                <div className="overflow-x-auto overflow-y-hidden px-1 w-full">
+                  <div
+                    dir="rtl"
+                    className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
+                    dangerouslySetInnerHTML={makeSafeHtml(store?.about_store)}
+                  />
+                </div>
+              </div>
+            </div>
           )}
           <StoreCoupons
             store_coupons={store?.coupons}

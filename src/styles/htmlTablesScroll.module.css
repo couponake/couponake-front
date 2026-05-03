@@ -1,67 +1,79 @@
-/* Rename the module class to avoid confusion with Tailwind's .prose */
-.aboutStore :global(*) {
-  all: unset;
-  font-family: "Cairo", sans-serif;
-  box-sizing: border-box;
-  display: revert; /* restore block/inline behavior per element type */
-}
-
-.aboutStore :global(table) {
+.prose table {
   width: 100% !important;
   table-layout: auto !important;
+  /* نستخدم separate بدلاً من collapse في حال وجود border-radius لإظهار الحدود بشكل أفضل */
   border-collapse: collapse !important;
   border-spacing: 0 !important;
+  border: 0.5px solid #d1d5db !important;
   margin: 1.5rem 0 !important;
   background-color: #ffffff;
   border-radius: 6px;
   overflow: hidden;
-  border-style: hidden !important;
+  border-style: hidden !important; /* خدعة لإظهار الـ radius مع الـ collapse */
   box-shadow: 0 0 0 1px #d1d5db;
 }
 
-.aboutStore :global(table th) {
+.prose table th {
   background-color: #f3f4f6 !important;
   padding: 4px 8px !important;
   text-align: right !important;
   color: #111827 !important;
   font-weight: 700 !important;
   font-size: 0.95rem !important;
+  /* إضافة حدود بين الأعمدة في الرأس */
   border: 1px solid #d1d5db !important;
 }
 
-.aboutStore :global(table td) {
-  padding: 4px 8px !important;
-  color: #374151 !important;
-  line-height: 1.6 !important;
-  border: 1px solid #d1d5db !important;
-  word-break: normal !important;
-}
-
-.aboutStore :global(table tbody tr:last-child td) {
+/* إزالة الحدود السفلية من آخر صف */
+.prose table tbody tr:last-child td {
   border-bottom: none !important;
 }
 
-.aboutStore :global(table th:first-child),
-.aboutStore :global(table td:first-child) {
+/* إزالة الحدود الجانبية الأخيرة لضمان شكل الإطار الخارجي */
+.prose table th:first-child,
+.prose table td:first-child {
   border-right: none !important;
   border-left: none !important;
 }
 
-.aboutStore :global(table tbody tr:nth-child(even)) {
+.prose table td {
+  padding: 4px 8px !important;
+  color: #374151 !important;
+  line-height: 1.6 !important;
+  /* إضافة حدود واضحة لكل خلية (أعمدة وصفوف) */
+  border: 1px solid #d1d5db !important;
+  word-break: normal !important; /* تم تعديله ليكون طبيعياً طالما هناك Scroll */
+}
+
+/* تمييز الصفوف الزوجية بلون خفيف جداً */
+.prose table tbody tr:nth-child(even) {
   background-color: #f9fafb;
 }
 
-/* ✅ Scroll wrapper — targets the JS-injected div, not all divs */
-.aboutStore :global(.table-scroll-wrapper) {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 1px;
-  margin-bottom: 1rem;
-}
-
+/* تحسين شكل الجدول في الموبايل مع الحفاظ على وضوح الحدود */
 @media (max-width: 768px) {
-  .aboutStore :global(.table-scroll-wrapper table) {
-    min-width: 500px !important;
+  /* نضع الجدول داخل حاوية تسمح بالتمرير بدلاً من جعل الجدول نفسه block */
+  .prose div {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    /* إضافة مساحة بسيطة لضمان ظهور الظل والحدود الخارجية بوضوح */
+    padding: 1px !important;
+    margin-bottom: 1rem;
+  }
+
+  .prose table {
+    display: table !important;
+    min-width: 500px !important; /* لضمان عدم انضغاط المحتوى */
     white-space: normal !important;
+    /* الحفاظ على نفس دقة الحدود اللي عملناها في الديسك توب */
+    border-collapse: collapse !important;
+    border-style: hidden !important;
+    box-shadow: 0 0 0 1px #d1d5db;
+  }
+
+  /* التأكد من أن الخلايا تحافظ على حدودها الرفيعة أثناء التمرير */
+  .prose table th,
+  .prose table td {
+    border: 1px solid #d1d5db !important;
   }
 }
