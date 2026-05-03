@@ -99,7 +99,8 @@ function StoreSidePart({
           {storeInfo?.map((info) => (
             <div
               key={info.id}
-              className="w-full h-fit bg-white rounded-md p-4 border-1"
+              dir="rtl"
+              className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1"
             >
               {info?.description === null ? null : (
                 <div
