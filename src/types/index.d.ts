@@ -393,6 +393,7 @@ export type InfoItem = {
   id: number;
   title: string;
   description: string;
+  description_2: string;
   status: number;
   created_at: string; // ISO 8601 formatted date string
   updated_at: string; // ISO 8601 formatted date string
