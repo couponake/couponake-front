@@ -1,13 +1,13 @@
 "use client";
-import useDetectMobile from '@/hooks/useDetectMobile';
-import { secureHtmlLinks } from '@/lib/htmlUtils';
-import { BannerItem, BrandProps, CouponProps, InfoItem } from '@/types';
-import { useLocale, useTranslations } from 'next-intl';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-
-import Hero from '../Pages/Home/Hero';
+import useDetectMobile from "@/hooks/useDetectMobile";
+import { secureHtmlLinks } from "@/lib/htmlUtils";
+import { BannerItem, BrandProps, CouponProps, InfoItem } from "@/types";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import styles from "@/styles/htmlTablesScroll.module.css";
+import Hero from "../Pages/Home/Hero";
 
 function makeSafeHtml(content: string | null): { __html: string } {
   return { __html: secureHtmlLinks(content ?? "") };
@@ -101,10 +101,20 @@ function StoreSidePart({
               key={info.id}
               className="w-full h-fit bg-white rounded-md p-4 border-1"
             >
-              <div
-                className="prose max-w-none"
-                dangerouslySetInnerHTML={makeSafeHtml(info?.description)}
-              />
+              {info?.description === null ? null : (
+                <div
+                  dir="rtl"
+                  className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
+                  dangerouslySetInnerHTML={makeSafeHtml(info?.description)}
+                />
+              )}
+              {info?.description_2 === null ? null : (
+                <div
+                  dir="rtl"
+                  className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
+                  dangerouslySetInnerHTML={makeSafeHtml(info?.description_2)}
+                />
+              )}
             </div>
           ))}
         </div>
