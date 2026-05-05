@@ -101,6 +101,9 @@ function StoreSidePart({
               key={info.id}
               className="w-full h-fit bg-white rounded-md p-4 border-1"
             >
+              <h2
+                className="font-semibold text-gray-900 text-lg mb-2"
+              > {info?.title}</h2>
               <div
                 className="prose max-w-none"
                 dangerouslySetInnerHTML={makeSafeHtml(info?.description)}
