@@ -60,18 +60,18 @@ function StoreSidePart({
         <table className="table-auto w-full border-collapse border border-gray-200">
           <tbody>
             <tr className="even:bg-gray-200">
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-green-300 px-4 py-2">
                 {t("Coupons count")} {storeName}
               </td>
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-green-300 px-4 py-2">
                 {couponsLength}
               </td>
             </tr>
             <tr className="even:bg-gray-200">
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-green-300 px-4 py-2">
                 {t("Coupons date")}
               </td>
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-green-300 px-4 py-2">
                 {new Date().toLocaleDateString(
                   locale === "ar" ? "ar-SA" : "en-US",
                   { month: "long" },
