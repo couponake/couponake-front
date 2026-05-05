@@ -19,7 +19,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install  # ← changed from npm ci
 
       - name: Build
         run: npm run build
@@ -42,7 +42,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /home/ubuntu/frontend/coupoonat
-            npm ci --omit=dev
+            npm install --omit=dev  # ← changed from npm ci
             pm2 stop nextjs-app
             PORT=3000 pm2 start npm --name "nextjs-app" -- start
             pm2 save
