@@ -13,7 +13,7 @@ import useDetectMobile from "@/hooks/useDetectMobile";
 import { useStoreData } from "@/hooks/useStoreData";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import ScrollTracker from "@/services/ScrollPageAnalytics";
-import { CategoryItem, statisticsType } from "@/types";
+import { CategoryItem, InfoItem, statisticsType } from "@/types";
 import { Button } from "@heroui/button";
 import { Divider } from "@heroui/divider";
 import { useLocale, useTranslations } from "next-intl";
@@ -156,11 +156,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
     return { __html: secureHtmlLinks(content ?? "") };
   }
 
-  // Replace makeSafeHtml for about_store specifically:
-  // function makeProcessedHtml(content: string | null): { __html: string } {
-  //   return { __html: secureHtmlLinks(processStoreHtml(content)) };
-  // }
-
   return (
     <div id="show store" className="relative">
       <ScrollTracker event_name={`${store?.slug}_page_depth`} />
@@ -226,6 +221,25 @@ const ShowStore = ({ slug }: { slug: string }) => {
                     className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
                     dangerouslySetInnerHTML={makeSafeHtml(store?.about_store)}
                   />
+                  {store_infos?.length > 0 && (
+                    <div className="space-y-5 mt-5">
+                      {store_infos
+                        ?.filter(
+                          (info) =>
+                            info.description_2 && info.description_2 !== null,
+                        )
+                        .map((info: InfoItem) => (
+                          <div
+                            key={info.id}
+                            dir="rtl"
+                            className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
+                            dangerouslySetInnerHTML={makeSafeHtml(
+                              info?.description_2,
+                            )}
+                          />
+                        ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
