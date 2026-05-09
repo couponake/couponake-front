@@ -107,16 +107,11 @@ function StoreSidePart({
                 className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1"
               >
                 {info?.description === null ? null : (
-                  <>
-                    <h2 className="font-semibold text-gray-900 text-lg mb-2">
-                      {info?.title}
-                    </h2>
                     <div
                       dir="rtl"
                       className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
                       dangerouslySetInnerHTML={makeSafeHtml(info?.description)}
                     />
-                  </>
                 )}
               </div>
             ))}
