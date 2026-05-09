@@ -36,7 +36,7 @@ jobs:
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avz --delete --exclude=node_modules
-          path: .next/ public/ package.json package-lock.json next.config.ts tsconfig.json
+          path: .next/ public/ next.config.ts tsconfig.json
           remote_path: /home/ubuntu/frontend/coupoonat
           remote_host: ${{ secrets.SERVER_HOST }}
           remote_user: ${{ secrets.SERVER_USER }}
@@ -50,6 +50,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /home/ubuntu/frontend/coupoonat
+            git pull origin staging
             npm install
             pm2 delete nextjs-app || true
             PORT=3000 pm2 start npm --name "nextjs-app" -- start
