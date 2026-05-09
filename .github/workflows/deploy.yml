@@ -50,7 +50,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /home/ubuntu/frontend/coupoonat
-            npm install --omit=dev
+            npm install
             pm2 delete nextjs-app || true
             PORT=3000 pm2 start npm --name "nextjs-app" -- start
             pm2 save
