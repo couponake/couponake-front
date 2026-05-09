@@ -1,3 +1,5 @@
+# .github/workflows/deploy.yml
+
 name: Deploy Coupoonat
 
 on:
@@ -9,49 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm install  # ← changed from npm ci
-
-      - name: Build
-        run: npm run build
-        env:
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
-          NEXT_PUBLIC_WEBSITE_URL: ${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}
-          LOGIN_ENCRYPTION: ${{ secrets.LOGIN_ENCRYPTION }}
-          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
-          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
-
-      - name: Deploy files to server
-        uses: burnett01/rsync-deployments@7.0.1
-        with:
-          switches: -avz --delete --exclude=node_modules
-          path: .next/ public/ next.config.ts tsconfig.json
-          remote_path: /home/ubuntu/frontend/coupoonat
-          remote_host: ${{ secrets.SERVER_HOST }}
-          remote_user: ${{ secrets.SERVER_USER }}
-          remote_key: ${{ secrets.SERVER_SSH_KEY }}
-
-      - name: Restart app via PM2
+      - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          command_timeout: 10m
           script: |
             cd /home/ubuntu/frontend/coupoonat
             git pull origin staging
             npm install
+            npm run build
             pm2 delete nextjs-app || true
             PORT=3000 pm2 start npm --name "nextjs-app" -- start
             pm2 save
