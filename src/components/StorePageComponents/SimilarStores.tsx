@@ -46,7 +46,7 @@ export default function SimilarStores({ stores }: { stores: StoreProps[] }) {
           <CarouselNext className="relative left-0 right-0 translate-x-0 translate-y-0" />
         </div>
       </div>
-      <CarouselContent className="h-full min-h-[120px]">
+      <CarouselContent className="h-full min-h-[50px]">
         {stores?.map((store: StoreProps) => {
           return (
             <CarouselItem key={store?.slug} className="basis-auto">
