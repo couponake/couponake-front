@@ -99,8 +99,8 @@ function StoreSidePart({
           {storeInfo.map((info: InfoItem) => {
             // 1. Ensure it's an array, then filter out empty/null content
             const cleanDesc1 = (
-              Array.isArray(info.description) ? info.description : []
-            ).filter((item) => item?.content && item.content.trim() !== "");
+              Array.isArray(info?.description) ? info?.description : []
+            ).filter((item) => item?.content && item?.content.trim() !== "");
 
             // 2. If no valid content blocks exist, skip this InfoItem entirely
             if (cleanDesc1.length === 0) return null;

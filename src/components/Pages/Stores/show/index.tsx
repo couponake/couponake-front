@@ -313,8 +313,8 @@ const ShowStore = ({ slug }: { slug: string }) => {
               {store_infos?.map((info: InfoItem) => {
                 // 1. Ensure it's an array, then filter out empty/null content
                 const cleanDesc2 = (
-                  Array.isArray(info.description_2) ? info.description_2 : []
-                ).filter((item) => item?.content && item.content.trim() !== "");
+                  Array.isArray(info?.description_2) ? info?.description_2 : []
+                ).filter((item) => item?.content && item?.content.trim() !== "");
 
                 // 2. If no valid content blocks exist, skip this InfoItem entirely
                 if (cleanDesc2.length === 0) return null;

@@ -111,7 +111,7 @@ const Infos = () => {
               page={1}
               total={1}
               color="primary"
-              onChange={() => { }}
+              onChange={() => {}}
             />
           </div>
         </div>
@@ -172,22 +172,25 @@ const Infos = () => {
                       <h3 className="font-semibold text-lg mb-2 text-gray-800">
                         {info.title}
                       </h3>
-                      <div
-                        className="text-gray-600 mb-4 line-clamp-3"
-                        dangerouslySetInnerHTML={{
-                          __html: secureHtmlLinks(info.description) as string,
-                        }}
-                      />
+                      {info?.description?.map((desc: any) => (
+                        <div
+                          key={desc?.id}
+                          className="text-gray-600 mb-4 line-clamp-3"
+                          dangerouslySetInnerHTML={{
+                            __html: secureHtmlLinks(desc?.content) as string,
+                          }}
+                        />
+                      ))}
 
                       <div className="flex items-center gap-3">
                         <div className="text-sm text-gray-500">
                           {new Date(info?.created_at).toLocaleDateString(
-                            locale === 'ar' ? 'ar-SA' : 'en-US',
+                            locale === "ar" ? "ar-SA" : "en-US",
                             {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric',
-                            }
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            },
                           )}
                         </div>
                         <button className="max-sm:text-sm border-2 border-default-300 rounded-xl px-3 py-2 hover:border-main-500 hover:bg-main-50 transition-all">
