@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { CopyIcon, BadgePercent, CheckCircle, X } from "lucide-react";
+import { CopyIcon, BadgePercent, CheckCircle, X, CircleCheckBig } from "lucide-react";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import { useTranslations, useLocale } from "next-intl";
 import { useStore } from "@/store";
@@ -92,7 +92,7 @@ const ShowCouponDetails = ({ storeName }: Props) => {
               {
                 storeName ? (
                   <>
-                    {t("Coupon source")}
+                    {t("CouponSource")}
                     {local === "ar" ? ` ${storeName?.split("-")[0]}` : ` ${storeName?.split("-")[1]}`}
                   </>
                 ) : (
@@ -124,6 +124,10 @@ const ShowCouponDetails = ({ storeName }: Props) => {
                   <span className="flex items-center text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-bold">
                     {coupon?.discount_value}
                   </span>
+                  <div className="flex items-center w-fit max-w-lg rounded-3xl gap-3 bg-green-250 bg-opacity-25 p-2 px-3 md:text-lg lg:text-xl font-semibold text-green-250">
+                    <CircleCheckBig className="size-4 md:size-6" />
+                    {t("Verified")}
+                  </div>
                 </h2>
               </div>
             </div>
