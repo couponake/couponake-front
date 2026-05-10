@@ -96,25 +96,29 @@ function StoreSidePart({
           <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
             {t("About The store")}
           </p>
-          {storeInfo
-            ?.filter(
-              (info) => info.description && info.description !== null,
-            )
-            ?.map((info: InfoItem) => (
+          {storeInfo.map((info: InfoItem) => {
+            // 1. Ensure it's an array, then filter out empty/null content
+            const cleanDesc1 = (
+              Array.isArray(info.description) ? info.description : []
+            ).filter((item) => item?.content && item.content.trim() !== "");
+
+            // 2. If no valid content blocks exist, skip this InfoItem entirely
+            if (cleanDesc1.length === 0) return null;
+
+            // 3. Map over the cleaned data
+            return cleanDesc1.map((item, idx) => (
               <div
-                key={info.id}
+                key={`desc1-${info.id}-${idx}`}
                 dir="rtl"
-                className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1"
+                className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1 mb-4"
               >
-                {info?.description === null ? null : (
-                    <div
-                      dir="rtl"
-                      className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
-                      dangerouslySetInnerHTML={makeSafeHtml(info?.description)}
-                    />
-                )}
+                <div
+                  className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4 last:mb-0`}
+                  dangerouslySetInnerHTML={makeSafeHtml(item.content)}
+                />
               </div>
-            ))}
+            ));
+          })}
         </div>
       )}
       {storeBrands?.length > 0 && (
