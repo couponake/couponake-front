@@ -1,5 +1,4 @@
 "use client";
-import useDetectMobile from "@/hooks/useDetectMobile";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import { BannerItem, BrandProps, CouponProps, InfoItem } from "@/types";
 import { useLocale, useTranslations } from "next-intl";
@@ -14,8 +13,6 @@ function makeSafeHtml(content: string | null): { __html: string } {
 }
 
 interface sidePartType {
-  storeTitle: string;
-  couponImage: string | null;
   storeName: string;
   couponsLength: number;
   sideTable: {
@@ -29,8 +26,6 @@ interface sidePartType {
 }
 
 function StoreSidePart({
-  storeTitle,
-  couponImage,
   storeName,
   couponsLength,
   sideTable,
@@ -41,21 +36,9 @@ function StoreSidePart({
 }: sidePartType) {
   const t = useTranslations();
   const locale = useLocale();
-  const isMobile = useDetectMobile();
   return (
     <>
-      {couponImage && (
-        <div className="w-full h-fit overflow-hidden flex items-center justify-center">
-          <Image
-            src={couponImage}
-            alt={storeTitle}
-            width={!isMobile ? 215 : 175}
-            height={!isMobile ? 120.94 : 98.44}
-            className="rounded-lg w-full h-fit shadow-md object-cover mb-2"
-          />
-        </div>
-      )}
-      <div className="prose max-w-none min-w-64 my-3">
+      <div className="prose max-w-none min-w-64">
         <table className="table-auto w-full border-collapse border border-gray-200">
           <tbody>
             <tr className="even:bg-gray-200">
@@ -91,8 +74,8 @@ function StoreSidePart({
         </table>
       </div>
       {storeInfo?.length > 0 && (
-        <div className="space-y-5 mt-11 border-t-gray-300 border-t">
-          <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
+        <div className="space-y-5">
+          <p className="font-semibold text-gray-700 text-lg my-5">
             {t("About The store")}
           </p>
           {storeInfo.map((info: InfoItem) => {

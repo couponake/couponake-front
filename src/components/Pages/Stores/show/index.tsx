@@ -21,6 +21,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
 import styles from "@/styles/htmlTablesScroll.module.css";
+import Image from "next/image";
 
 import Hero from "../../Home/Hero";
 import { SimilarStoresSkeleton } from "@/components/StorePageComponents/SimilarStores";
@@ -200,7 +201,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
                 location="coupon_block"
                 className="mt-7"
               />
-              <Divider />
             </>
           )}
           {store?.about_store && (
@@ -224,6 +224,21 @@ const ShowStore = ({ slug }: { slug: string }) => {
             store_image={store?.image}
           />
           <StoreCharts statistics={statistics} storeName={store.slug} />
+          {store?.coupon_image && (
+            <div className="flex justify-center">
+              <div className="relative w-full max-w-[430px] overflow-hidden rounded-lg shadow-md">
+                <Image
+                  src={store.coupon_image}
+                  alt={store.slug}
+                  width={430}
+                  height={241.88}
+                  priority
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 376px, 430px"
+                  className="h-auto w-full object-cover"
+                />
+              </div>
+            </div>
+          )}
           {/* expiredCoupons */}
           {expiredCoupons?.length > 0 && (
             <>
@@ -335,8 +350,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
         {/* sidebar */}
         <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
           <StoreSidePart
-            storeTitle={store?.title}
-            couponImage={store?.coupon_image}
             storeName={store?.store_name}
             storeSlug={store?.slug}
             couponsLength={store?.coupons?.length}
