@@ -269,6 +269,41 @@ const ShowStore = ({ slug }: { slug: string }) => {
               <StoreTable store={store?.store_table} t={t} />
             </>
           )}
+          {store_infos?.length > 0 && (
+            <div className="space-y-5 mt-10">
+              {store_infos?.map((info: InfoItem) => {
+                // 1. Ensure it's an array, then filter out empty/null content
+                const cleanDesc2 = (
+                  Array.isArray(info?.description_2) ? info?.description_2 : []
+                ).filter(
+                  (item) => item?.content && item?.content.trim() !== "",
+                );
+
+                // 2. If no valid content blocks exist, skip this InfoItem entirely
+                if (cleanDesc2.length === 0) return null;
+
+                // 3. Map over the cleaned data
+                return (
+                  <>
+                    <Divider />
+                    <div
+                      key={info.id}
+                      dir="rtl"
+                      className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1 mb-4"
+                    >
+                      {cleanDesc2.map((item, idx) => (
+                        <div
+                          key={`desc2-${idx}`}
+                          className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4`}
+                          dangerouslySetInnerHTML={makeSafeHtml(item.content)}
+                        />
+                      ))}
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+          )}
           <div className="mt-11 border-t-gray-300 border-t">
             {similarStores && similarStores.length > 0 && (
               <SimilarStores key={store?.slug} stores={similarStores} />
@@ -307,36 +342,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
                 (faq) => Number(faq?.store_id) === Number(store?.id),
               )}
             />
-          )}
-          {store_infos?.length > 0 && (
-            <div className="space-y-5 mt-10">
-              {store_infos?.map((info: InfoItem) => {
-                // 1. Ensure it's an array, then filter out empty/null content
-                const cleanDesc2 = (
-                  Array.isArray(info?.description_2) ? info?.description_2 : []
-                ).filter((item) => item?.content && item?.content.trim() !== "");
-
-                // 2. If no valid content blocks exist, skip this InfoItem entirely
-                if (cleanDesc2.length === 0) return null;
-
-                // 3. Map over the cleaned data
-                return (
-                  <div
-                    key={info.id}
-                    dir="rtl"
-                    className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1 mb-4"
-                  >
-                    {cleanDesc2.map((item, idx) => (
-                      <div
-                        key={`desc2-${idx}`}
-                        className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4`}
-                        dangerouslySetInnerHTML={makeSafeHtml(item.content)}
-                      />
-                    ))}
-                  </div>
-                );
-              })}
-            </div>
           )}
           <div className="w-full h-fit text-xs bg-white/75 p-4 rounded-lg">
             {t("Affiliate links")}
