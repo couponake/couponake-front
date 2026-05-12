@@ -34,13 +34,7 @@ const StoreCoupon = dynamic(
     ssr: false,
   },
 );
-const StoreTable = dynamic(
-  () => import("@/components/StorePageComponents/StoreTable"),
-  {
-    loading: () => <Skeleton className="rounded-md w-full h-[300px]" />,
-    ssr: false,
-  },
-);
+
 const CustomersReviews = dynamic(
   () => import("@/components/Pages/Home/CustomersReviews"),
   {
@@ -263,12 +257,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
               </div>
             </>
           )}
-          {store?.store_table && store?.store_table.length > 0 && (
-            <>
-              <Divider />
-              <StoreTable store={store?.store_table} t={t} />
-            </>
-          )}
           {store_infos?.length > 0 && (
             <div className="space-y-5 mt-10">
               {store_infos?.map((info: InfoItem) => {
@@ -284,22 +272,19 @@ const ShowStore = ({ slug }: { slug: string }) => {
 
                 // 3. Map over the cleaned data
                 return (
-                  <>
-                    <Divider />
-                    <div
-                      key={info.id}
-                      dir="rtl"
-                      className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1 mb-4"
-                    >
-                      {cleanDesc2.map((item, idx) => (
-                        <div
-                          key={`desc2-${idx}`}
-                          className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4`}
-                          dangerouslySetInnerHTML={makeSafeHtml(item.content)}
-                        />
-                      ))}
-                    </div>
-                  </>
+                  <div
+                    key={info.id}
+                    dir="rtl"
+                    className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1"
+                  >
+                    {cleanDesc2.map((item, idx) => (
+                      <div
+                        key={`desc2-${idx}`}
+                        className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4`}
+                        dangerouslySetInnerHTML={makeSafeHtml(item.content)}
+                      />
+                    ))}
+                  </div>
                 );
               })}
             </div>

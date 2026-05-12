@@ -44,7 +44,6 @@ function StoreSidePart({
   const isMobile = useDetectMobile();
   return (
     <>
-      <p className="font-semibold text-gray-700 text-lg">{storeTitle}</p>
       {couponImage && (
         <div className="w-full h-fit overflow-hidden flex items-center justify-center">
           <Image
@@ -52,7 +51,7 @@ function StoreSidePart({
             alt={storeTitle}
             width={!isMobile ? 215 : 175}
             height={!isMobile ? 120.94 : 98.44}
-            className="rounded-lg w-full h-fit shadow-md object-cover my-2"
+            className="rounded-lg w-full h-fit shadow-md object-cover mb-2"
           />
         </div>
       )}
