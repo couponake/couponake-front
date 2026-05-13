@@ -304,6 +304,30 @@ const ShowStore = ({ slug }: { slug: string }) => {
               })}
             </div>
           )}
+          {/* sidebar in sm screens */}
+          {isMobile && (
+            <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
+              <StoreSidePart
+                storeName={store?.store_name}
+                storeSlug={store?.slug}
+                couponsLength={store?.coupons?.length}
+                sideTable={side_table}
+                storeBrands={store_brands}
+                storeBanners={store_banner}
+                storeInfo={store_infos}
+              />
+            </aside>
+          )}
+          {store_faqs && (
+            <FAQ
+              title={t("FAQS")}
+              className="!py-5"
+              storeName={store.store_name}
+              faqs={store_faqs.filter(
+                (faq) => Number(faq?.store_id) === Number(store?.id),
+              )}
+            />
+          )}
           <div className="mt-11 border-t-gray-300 border-t">
             {similarStores && similarStores.length > 0 && (
               <SimilarStores key={store?.slug} stores={similarStores} />
@@ -333,32 +357,24 @@ const ShowStore = ({ slug }: { slug: string }) => {
               <Divider />
             </>
           )}
-          {store_faqs && (
-            <FAQ
-              title={t("FAQS")}
-              className="!py-5"
-              storeName={store.slug}
-              faqs={store_faqs.filter(
-                (faq) => Number(faq?.store_id) === Number(store?.id),
-              )}
-            />
-          )}
           <div className="w-full h-fit text-xs bg-white/75 p-4 rounded-lg">
             {t("Affiliate links")}
           </div>
         </div>
-        {/* sidebar */}
-        <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
-          <StoreSidePart
-            storeName={store?.store_name}
-            storeSlug={store?.slug}
-            couponsLength={store?.coupons?.length}
-            sideTable={side_table}
-            storeBrands={store_brands}
-            storeBanners={store_banner}
-            storeInfo={store_infos}
-          />
-        </aside>
+        {/* sidebar in md/lg screens */}
+        {!isMobile && (
+          <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
+            <StoreSidePart
+              storeName={store?.store_name}
+              storeSlug={store?.slug}
+              couponsLength={store?.coupons?.length}
+              sideTable={side_table}
+              storeBrands={store_brands}
+              storeBanners={store_banner}
+              storeInfo={store_infos}
+            />
+          </aside>
+        )}
       </section>
     </div>
   );
