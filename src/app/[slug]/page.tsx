@@ -5,6 +5,8 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 
 import NotFound from '../not-found';
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 
 export async function generateMetadata({
   params,
@@ -31,7 +33,7 @@ export async function generateMetadata({
 
     const blog = response.blog as Blog;
     //get the indexing settings of the Blog page
-    //const indexingBlog = await getSettingEnabled(SettingsEnum.Blogs);
+    const indexingBlog = await getSettingEnabled(SettingsEnum.Blogs);
 
     return {
       title: blog?.blog_seo?.title,
@@ -40,7 +42,7 @@ export async function generateMetadata({
         canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}${slug}/` || "",
       },
       robots: {
-        index: false,
+        index: indexingBlog,
       },
       openGraph: {
         title: blog?.blog_seo?.["og:title"],

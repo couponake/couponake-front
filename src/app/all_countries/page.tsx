@@ -1,4 +1,6 @@
 import AllCountriesPage from "@/components/Pages/AllCountriesPage";
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 import { cookies } from "next/headers";
 import React from "react";
 
@@ -8,7 +10,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the all-countries page
-  // const indexingCountries = await getSettingEnabled(SettingsEnum.Countries);
+  const indexingCountries = await getSettingEnabled(SettingsEnum.Countries);
 
 
   return {
@@ -22,8 +24,8 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}all_countries/` || "",
     },
     robots: {
-      index: false,
-      follow: false
+      index: indexingCountries,
+      follow: indexingCountries
     },
     openGraph: {
       title: isArabic

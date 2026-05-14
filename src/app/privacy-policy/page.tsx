@@ -1,5 +1,7 @@
 import api from '@/lib/api';
 import { secureHtmlLinks } from '@/lib/htmlUtils';
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 import { cookies } from 'next/headers';
 import React from 'react';
 
@@ -9,7 +11,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the PRIVACY page
-  // const indexingPrivacy = await getSettingEnabled(SettingsEnum.Privacy);
+  const indexingPrivacy = await getSettingEnabled(SettingsEnum.Privacy);
 
   return {
     title: isArabic
@@ -22,8 +24,8 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/` || "",
     },
     robots: {
-      index: false,
-      follow: false,
+      index: indexingPrivacy,
+      follow: indexingPrivacy,
     },
     openGraph: {
       title: isArabic

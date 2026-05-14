@@ -1,6 +1,8 @@
 import FAQPage from '@/components/Pages/FAQ';
 import api from '@/lib/api';
+import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { FaqItem } from '@/types';
+import { SettingsEnum } from '@/types/settingsEnum';
 import { cookies } from 'next/headers';
 import React from 'react';
 
@@ -10,7 +12,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the FAQs page
-  // const indexingFAQ = await getSettingEnabled(SettingsEnum.FAQ);
+  const indexingFAQ = await getSettingEnabled(SettingsEnum.FAQ);
 
   return {
     title: isArabic
@@ -23,8 +25,8 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/` || "",
     },
     robots: {
-      index: false,
-      follow: false,
+      index: indexingFAQ,
+      follow: indexingFAQ,
     },
     openGraph: {
       title: isArabic

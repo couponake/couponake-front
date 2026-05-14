@@ -1,4 +1,6 @@
 import ContactUsPage from '@/components/Pages/ContactUsPage';
+import { getSettingEnabled } from '@/services/getIndexingSettings';
+import { SettingsEnum } from '@/types/settingsEnum';
 import { cookies } from 'next/headers';
 import React from 'react';
 
@@ -8,7 +10,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   //get the indexing settings of the CONTACT page
-  // const indexingContact = await getSettingEnabled(SettingsEnum.Contact);
+  const indexingContact = await getSettingEnabled(SettingsEnum.Contact);
 
   return {
     title: isArabic
@@ -21,8 +23,8 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}contact/` || "",
     },
     robots: {
-      index: false,
-      follow: false
+      index: indexingContact,
+      follow: indexingContact
     },
     openGraph: {
       title: isArabic

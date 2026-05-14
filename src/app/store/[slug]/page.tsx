@@ -2,6 +2,8 @@ import ShowStore from "@/components/Pages/Stores/show";
 import { StoreResponse } from "@/hooks/useStoreData";
 import api from "@/lib/api";
 import getStructuredDataSchemas from "@/schema/storeSchema";
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 import {
   dehydrate,
   HydrationBoundary,
@@ -72,7 +74,7 @@ export async function generateMetadata({
 
     const seoData: storeSeoType = response?.store_seo;
     //get the indexing settings of the Store page
-    // const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
+    const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
 
     // Default values in case API fails
     if (!seoData) {
@@ -90,8 +92,8 @@ export async function generateMetadata({
         canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
       },
       robots: {
-        index: false,
-        follow: false,
+        index: indexingStore,
+        follow: indexingStore,
       },
       // OpenGraph metadata
       openGraph: {
