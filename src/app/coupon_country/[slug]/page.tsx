@@ -32,7 +32,6 @@ export async function generateMetadata({
     },
     robots: {
       index: indexingCountry,
-      follow: indexingCountry,
     },
     openGraph: {
       title: country_seo?.title,

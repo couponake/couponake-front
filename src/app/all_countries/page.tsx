@@ -24,8 +24,7 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}all_countries/` || "",
     },
     robots: {
-      index: indexingCountries,
-      follow: indexingCountries
+      index: indexingCountries
     },
     openGraph: {
       title: isArabic

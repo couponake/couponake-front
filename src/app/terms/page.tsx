@@ -25,7 +25,6 @@ export async function generateMetadata() {
     },
     robots: {
       index: indexingTerms,
-      follow: indexingTerms,
     },
     openGraph: {
       title: isArabic

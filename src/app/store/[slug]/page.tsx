@@ -48,7 +48,7 @@ export async function generateMetadata({
       description: "Invalid URL with coupon ID",
       robots: {
         index: false,
-        follow: false,
+        follow: true,
       },
     };
   }
@@ -67,7 +67,7 @@ export async function generateMetadata({
         },
         robots: {
           index: false,
-          follow: false,
+          follow: true,
         },
       };
     }
@@ -93,7 +93,6 @@ export async function generateMetadata({
       },
       robots: {
         index: indexingStore,
-        follow: indexingStore,
       },
       // OpenGraph metadata
       openGraph: {

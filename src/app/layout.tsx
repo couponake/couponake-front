@@ -82,7 +82,6 @@ export async function generateMetadata() {
     },
     robots: {
       index: indexingSite,
-      follow: indexingSite,
     },
     // OpenGraph metadata
     openGraph: {
