@@ -1,8 +1,8 @@
 import AllCountriesPage from "@/components/Pages/AllCountriesPage";
 import { cookies } from "next/headers";
 import React from "react";
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata() {
   const cookieStore = await cookies();

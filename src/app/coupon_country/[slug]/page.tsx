@@ -6,8 +6,8 @@ import { Avatar } from "@heroui/avatar";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import React from "react";
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 
 export const experimental_ppr = true;
 

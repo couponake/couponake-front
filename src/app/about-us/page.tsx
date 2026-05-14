@@ -3,8 +3,8 @@ import api from "@/lib/api";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import { cookies } from "next/headers";
 import type { Article, BreadcrumbList } from "schema-dts";
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata() {
   const cookieStore = await cookies();

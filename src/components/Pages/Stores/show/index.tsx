@@ -13,13 +13,15 @@ import useDetectMobile from "@/hooks/useDetectMobile";
 import { useStoreData } from "@/hooks/useStoreData";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import ScrollTracker from "@/services/ScrollPageAnalytics";
-import { CategoryItem, statisticsType } from "@/types";
+import { CategoryItem, InfoItem, statisticsType } from "@/types";
 import { Button } from "@heroui/button";
 import { Divider } from "@heroui/divider";
 import { useLocale, useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
+import styles from "@/styles/htmlTablesScroll.module.css";
+import Image from "next/image";
 
 import Hero from "../../Home/Hero";
 import { SimilarStoresSkeleton } from "@/components/StorePageComponents/SimilarStores";
@@ -33,13 +35,7 @@ const StoreCoupon = dynamic(
     ssr: false,
   },
 );
-const StoreTable = dynamic(
-  () => import("@/components/StorePageComponents/StoreTable"),
-  {
-    loading: () => <Skeleton className="rounded-md w-full h-[300px]" />,
-    ssr: false,
-  },
-);
+
 const CustomersReviews = dynamic(
   () => import("@/components/Pages/Home/CustomersReviews"),
   {
@@ -205,29 +201,44 @@ const ShowStore = ({ slug }: { slug: string }) => {
                 location="coupon_block"
                 className="mt-7"
               />
-              <Divider />
             </>
           )}
           {store?.about_store && (
-            <>
-              {/* convert the recieved tag to h2 directly */}
-              <div
-                className="prose max-w-none my-5 prose-h2:text-sm prose-h2:font-semibold! md:prose-h2:text-base"
-                dangerouslySetInnerHTML={makeSafeHtml(
-                  store.about_store?.replace(
-                    /<([a-z1-6]+)>(.*?)<\/\1>/i,
-                    "<h2>$2</h2>",
-                  ),
-                )}
-              />
-              <Divider />
-            </>
+            <div className="space-y-5 my-10">
+              {/* <h2 className="text-lg md:text-2xl font-semibold text-neutral-900 sm:text-xl">
+                {t("About The store")} {": " + store?.store_name}
+              </h2> */}
+              <div className="w-full h-fit bg-white rounded-md p-4 border-1">
+                <div className="overflow-x-auto overflow-y-hidden px-1 w-full">
+                  <div
+                    dir="rtl"
+                    className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
+                    dangerouslySetInnerHTML={makeSafeHtml(store?.about_store)}
+                  />
+                </div>
+              </div>
+            </div>
           )}
           <StoreCoupons
             store_coupons={store?.coupons}
             store_image={store?.image}
           />
           <StoreCharts statistics={statistics} storeName={store.slug} />
+          {store?.coupon_image && (
+            <div className="flex justify-center">
+              <div className="relative w-full max-w-[430px] overflow-hidden rounded-lg shadow-md">
+                <Image
+                  src={store.coupon_image}
+                  alt={store.slug}
+                  width={430}
+                  height={241.88}
+                  priority
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 376px, 430px"
+                  className="h-auto w-full object-cover"
+                />
+              </div>
+            </div>
+          )}
           {/* expiredCoupons */}
           {expiredCoupons?.length > 0 && (
             <>
@@ -261,11 +272,61 @@ const ShowStore = ({ slug }: { slug: string }) => {
               </div>
             </>
           )}
-          {store?.store_table && store?.store_table.length > 0 && (
-            <>
-              <Divider />
-              <StoreTable store={store?.store_table} t={t} />
-            </>
+          {store_infos?.length > 0 && (
+            <div className="space-y-5 mt-10">
+              {store_infos?.map((info: InfoItem) => {
+                // 1. Ensure it's an array, then filter out empty/null content
+                const cleanDesc2 = (
+                  Array.isArray(info?.description_2) ? info?.description_2 : []
+                ).filter(
+                  (item) => item?.content && item?.content.trim() !== "",
+                );
+
+                // 2. If no valid content blocks exist, skip this InfoItem entirely
+                if (cleanDesc2.length === 0) return null;
+
+                // 3. Map over the cleaned data
+                return (
+                  <div
+                    key={info.id}
+                    dir="rtl"
+                    className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1"
+                  >
+                    {cleanDesc2.map((item, idx) => (
+                      <div
+                        key={`desc2-${idx}`}
+                        className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4`}
+                        dangerouslySetInnerHTML={makeSafeHtml(item.content)}
+                      />
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {/* sidebar in sm screens */}
+          {isMobile && (
+            <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
+              <StoreSidePart
+                storeName={store?.store_name}
+                storeSlug={store?.slug}
+                couponsLength={store?.coupons?.length}
+                sideTable={side_table}
+                storeBrands={store_brands}
+                storeBanners={store_banner}
+                storeInfo={store_infos}
+              />
+            </aside>
+          )}
+          {store_faqs && (
+            <FAQ
+              title={t("FAQS")}
+              className="!py-5"
+              storeName={store.store_name}
+              faqs={store_faqs.filter(
+                (faq) => Number(faq?.store_id) === Number(store?.id),
+              )}
+            />
           )}
           <div className="mt-11 border-t-gray-300 border-t">
             {similarStores && similarStores.length > 0 && (
@@ -296,34 +357,24 @@ const ShowStore = ({ slug }: { slug: string }) => {
               <Divider />
             </>
           )}
-          {store_faqs && (
-            <FAQ
-              title={t("FAQS")}
-              className="!py-5"
-              storeName={store.slug}
-              faqs={store_faqs.filter(
-                (faq) => Number(faq?.store_id) === Number(store?.id),
-              )}
-            />
-          )}
           <div className="w-full h-fit text-xs bg-white/75 p-4 rounded-lg">
             {t("Affiliate links")}
           </div>
         </div>
-        {/* sidebar */}
-        <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
-          <StoreSidePart
-            storeTitle={store?.title}
-            couponImage={store?.coupon_image}
-            storeName={store?.store_name}
-            storeSlug={store?.slug}
-            couponsLength={store?.coupons?.length}
-            sideTable={side_table}
-            storeBrands={store_brands}
-            storeBanners={store_banner}
-            storeInfo={store_infos}
-          />
-        </aside>
+        {/* sidebar in md/lg screens */}
+        {!isMobile && (
+          <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
+            <StoreSidePart
+              storeName={store?.store_name}
+              storeSlug={store?.slug}
+              couponsLength={store?.coupons?.length}
+              sideTable={side_table}
+              storeBrands={store_brands}
+              storeBanners={store_banner}
+              storeInfo={store_infos}
+            />
+          </aside>
+        )}
       </section>
     </div>
   );

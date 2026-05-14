@@ -4,8 +4,8 @@ import ShowCategory from "@/components/Pages/Categories/show";
 import { CategoryItem } from "@/types";
 import { redirect } from "next/navigation";
 import NotFound from "@/app/not-found";
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata({
   params,

@@ -30,9 +30,9 @@ const FAQ = ({
   return (
     <section className={cn("container py-8 md:py-11 lg:py-20", className)}>
       <div className="flex gap-5 flex-wrap items-start justify-between my-5">
-        <h3 className="text-lg md:text-2xl font-semibold text-neutral-900 sm:text-xl">
-          {title}
-        </h3>
+        <h2 className="text-lg md:text-2xl font-semibold text-neutral-900 sm:text-xl">
+          {title + (storeName ? ` ${storeName}` : "")}
+        </h2>
       </div>
 
       <div className="space-y-5">
