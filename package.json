@@ -64,7 +64,7 @@
     "js-cookie": "3.0.5",
     "lucide-react": "0.477.0",
     "minimatch": "^9.0.9",
-    "next": "^15.5.15",
+    "next": "^15.5.18",
     "next-auth": "^4.24.13",
     "next-intl": "^4.9.2",
     "nextjs-toploader": "3.7.15",
