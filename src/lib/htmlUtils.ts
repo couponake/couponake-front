@@ -13,12 +13,18 @@
 export function secureHtmlLinks(htmlContent: string): string {
   if (!htmlContent) return htmlContent;
 
+  // Wrap tables for horizontal scrolling
+  const tableRegex = /<table[^>]*>[\s\S]*?<\/table>/gi;
+  htmlContent = htmlContent.replace(tableRegex, (match) => {
+    return `<div>${match}</div>`;
+  });
+
   // Regular expression to find all anchor tags
   const anchorTagRegex = /<a([^>]*)>/gi;
 
   return htmlContent.replace(anchorTagRegex, (match, attributes) => {
     const hasReferrerPolicy = /referrerPolicy\s*=\s*["']no-referrer["']/i.test(
-      attributes
+      attributes,
     );
     const hasTargetBlank = /target\s*=\s*["']_blank["']/i.test(attributes);
 
@@ -55,7 +61,7 @@ export function secureHtmlLinks(htmlContent: string): string {
         const encodedHref = url.toString();
         newAttributes = newAttributes.replace(
           hrefMatch[0],
-          `href="${encodedHref}"`
+          `href="${encodedHref}"`,
         );
       } catch {
         // If it's a malformed URL (e.g., relative), still check for "coupoonat"

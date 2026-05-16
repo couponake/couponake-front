@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import styles from "@/styles/htmlTablesScroll.module.css";
+import styles from "@/styles/htmlSideTablesScroll.module.css";
 import Hero from "../Pages/Home/Hero";
 
 function makeSafeHtml(content: string | null): { __html: string } {

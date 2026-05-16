@@ -1,0 +1,55 @@
+.prose div {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  padding: 1px !important;
+  margin-bottom: 1rem;
+}
+
+.prose table {
+  display: table !important;
+  min-width: 500px !important;
+  width: 100% !important;
+  white-space: normal !important;
+  table-layout: auto !important;
+  margin: 1.5rem 0 !important;
+  background-color: #ffffff;
+  border: 0.5px solid #d1d5db !important;
+  border-radius: 6px;
+  border-spacing: 0 !important;
+  border-collapse: collapse !important;
+  border-style: hidden !important;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px #d1d5db;
+}
+
+.prose table th {
+  background-color: #f3f4f6 !important;
+  padding: 4px 8px !important;
+  text-align: right !important;
+  color: #111827 !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  border: 1px solid #d1d5db !important;
+}
+
+.prose table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.prose table th:first-child,
+.prose table td:first-child {
+  border-right: none !important;
+  border-left: none !important;
+}
+
+.prose table td {
+  padding: 4px 8px !important;
+  color: #374151 !important;
+  line-height: 1.6 !important;
+  border: 1px solid #d1d5db !important;
+  word-break: normal !important;
+}
+
+.prose table tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
