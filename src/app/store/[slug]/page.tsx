@@ -10,8 +10,8 @@ import {
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 
 interface storeSeoType {
   title: string;

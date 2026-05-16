@@ -11,6 +11,7 @@ import { Button } from "@heroui/button";
 import { useCopyToClipboard } from "@uidotdev/usehooks";
 import {
   ChevronDown,
+  CircleCheckBig,
   CopyIcon,
   ScissorsIcon,
   ThumbsUpIcon,
@@ -256,7 +257,8 @@ const StoreCoupon = ({
               </h2>
             </div>
             <div className="w-fit h-fit flex flex-wrap items-start justify-center gap-3">
-              <span className="inline-flex gap-1 items-center rounded-full bg-gray-200 px-2 py-1 text-[10px] md:text-xs lg:text-xs xl:text-xs font-medium text-gray-600 ring-1 ring-gray-500/0 ring-inset">
+              <span className="inline-flex gap-1 items-center rounded-full bg-transparent px-2 py-1 text-[10px] md:text-xs lg:text-xs xl:text-xs font-medium text-green-600 ring-1 ring-gray-500/0 ring-inset">
+                <CircleCheckBig size={16} />
                 <p>{t("Verified")}</p>
               </span>
               <span className="inline-flex gap-1 items-center rounded-full bg-gray-200 px-2 py-1 text-[10px] md:text-xs lg:text-xs xl:text-xs font-medium text-gray-600 ring-1 ring-gray-500/0 ring-inset">
@@ -290,10 +292,10 @@ const StoreCoupon = ({
             </button>
             {!isExpired && (
               <Button
-                variant="flat"
+                variant="solid"
                 color="primary"
                 size="lg"
-                className="relative text-primary text-sm md:text-base lg:text-base xl:text-base overflow-visible"
+                className="relative text-white text-sm md:text-base lg:text-base xl:text-base overflow-visible"
                 startContent={
                   <CopyIcon className="size-4 md:size-5 lg:size-5 xl:size-5" />
                 }

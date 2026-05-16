@@ -172,18 +172,18 @@ export type FaqItem = {
 export type SettingsItem = {
   id: number;
   name:
-  | "_token"
-  | "site_name"
-  | "footer_description"
-  | "facebook"
-  | "side_whatsapp"
-  | "side_telegram"
-  | "instagram"
-  | "image"
-  | "footer_logo"
-  | "popup_url"
-  | "popup_location"
-  | "popup_image";
+    | "_token"
+    | "site_name"
+    | "footer_description"
+    | "facebook"
+    | "side_whatsapp"
+    | "side_telegram"
+    | "instagram"
+    | "image"
+    | "footer_logo"
+    | "popup_url"
+    | "popup_location"
+    | "popup_image";
   val: string;
 };
 
@@ -282,8 +282,8 @@ export type StoreProps = {
   category?: { id: number; name: string; slug: string }[];
   responsible: Responsibile;
   store_table:
-  | { id: number; code: string; title: string; description: string }[]
-  | [];
+    | { id: number; code: string; title: string; description: string }[]
+    | [];
   currency: string;
   saved_price: string;
   orders_number: number;
@@ -392,7 +392,8 @@ export type LatestCoupons = {
 export type InfoItem = {
   id: number;
   title: string;
-  description: string;
+  description: { content: string }[];
+  description_2: { content: string }[];
   status: number;
   created_at: string; // ISO 8601 formatted date string
   updated_at: string; // ISO 8601 formatted date string

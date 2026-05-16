@@ -4,8 +4,8 @@ import api from "@/lib/api";
 import StoresSkeleton from "@/components/loadingUis/StoresSkeleton";
 import Categories from "@/components/Pages/Categories";
 import { cookies } from "next/headers";
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 
 export const experimental_ppr = true;
 

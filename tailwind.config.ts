@@ -11,6 +11,8 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/layouts/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/lib/**/*.{js,ts}",
+    "./src/styles/**/*.module.css",
     "./node_modules/@heroui/theme/dist/components/(accordion|autocomplete|avatar|badge|button|chip|divider|drawer|dropdown|image|input|link|listbox|modal|navbar|pagination|popover|progress|select|skeleton|snippet|spinner|toggle|tabs|ripple|form|scroll-shadow|menu).js"
   ],
 

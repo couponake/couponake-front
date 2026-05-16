@@ -2,8 +2,8 @@ import React from "react";
 import { getTranslations } from "next-intl/server";
 import Stores from "@/components/Pages/Stores";
 import { cookies } from "next/headers";
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata() {
   const cookieStore = await cookies();
