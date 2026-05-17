@@ -11,12 +11,13 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import {
   FaFacebook,
-  FaInstagram,
+  // FaInstagram,
   FaTelegram,
   FaWhatsapp,
 } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
 import { usePathname } from "next/navigation";
+import { socialMediaEnum } from "@/types/settingsEnum";
 
 const FollowUs = ({
   settings,
@@ -38,25 +39,25 @@ const FollowUs = ({
     {
       key: "Facebook",
       label: "Facebook",
-      href: settings?.find((item) => item.name === "facebook")?.val,
+      href: settings?.find((item) => item.name === socialMediaEnum.Facebook)?.val,
       icon: <FaFacebook className="size-5 text-blue-500" />,
     },
-    {
-      key: "Instagram",
-      label: "Instagram",
-      href: settings?.find((item) => item.name === "instagram")?.val,
-      icon: <FaInstagram className="size-5 text-[#e45090]" />,
-    },
+    // {
+    //   key: "Instagram",
+    //   label: "Instagram",
+    //   href: settings?.find((item) => item.name === socialMediaEnum.Instagram)?.val,
+    //   icon: <FaInstagram className="size-5 text-[#e45090]" />,
+    // },
     {
       key: "Whatsapp",
       label: "Whatsapp",
-      href: settings?.find((item) => item.name === "side_whatsapp")?.val,
+      href: settings?.find((item) => item.name === socialMediaEnum.Whatsapp)?.val,
       icon: <FaWhatsapp className="size-5 text-green-600" />,
     },
     {
       key: "Telegram",
       label: "Telegram",
-      href: settings?.find((item) => item.name === "side_telegram")?.val,
+      href: settings?.find((item) => item.name === socialMediaEnum.Telegram)?.val,
       icon: <FaTelegram className="size-5 text-sky-400" />,
     },
   ].filter((item) => item.href);

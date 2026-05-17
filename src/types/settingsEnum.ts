@@ -12,3 +12,10 @@ export enum SettingsEnum {
   Terms = "shrot-alastkhdam",
   About = "mn-nhn",
 }
+
+export enum socialMediaEnum {
+  Facebook = "facebook",
+  Instagram = "instagram",
+  Telegram = "side_telegram",
+  Whatsapp = "side_whatsapp",
+}

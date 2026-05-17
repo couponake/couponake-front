@@ -1,6 +1,6 @@
 import {
   FaFacebook,
-  FaInstagram,
+  // FaInstagram,
   FaTelegram,
   FaWhatsapp,
 } from "react-icons/fa";
@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
 import { Copyright } from "lucide-react";
+import { socialMediaEnum } from "@/types/settingsEnum";
 
 interface footerLinkType {
   id: number
@@ -33,10 +34,10 @@ const Footer = ({
   footerLinks: footerLinkType[] | null | undefined;
 }) => {
   const t = useTranslations();
-  const facebook = settings?.find((item) => item.name === "facebook")?.val;
-  const instagram = settings?.find((item) => item.name === "instagram")?.val;
-  const telegram = settings?.find((item) => item.name === "side_telegram")?.val;
-  const whatsapp = settings?.find((item) => item.name === "side_whatsapp")?.val;
+  const facebook = settings?.find((item) => item.name === socialMediaEnum.Facebook)?.val;
+  // const instagram = settings?.find((item) => item.name === socialMediaEnum.Instagram)?.val;
+  const telegram = settings?.find((item) => item.name === socialMediaEnum.Telegram)?.val;
+  const whatsapp = settings?.find((item) => item.name === socialMediaEnum.Whatsapp)?.val;
 
   return (
     <footer suppressHydrationWarning className="mt-auto bg-background text-foreground">
@@ -70,7 +71,7 @@ const Footer = ({
               }
             </p>
             <div className="flex gap-x-4">
-              {instagram && (
+              {/* {instagram && (
                 <a
                   href={instagram ?? "#"}
                   rel="noopener noreferrer nofollow"
@@ -79,7 +80,7 @@ const Footer = ({
                 >
                   <FaInstagram className="h-5 w-5 text-[#e45090]" />
                 </a>
-              )}
+              )} */}
               {telegram && (
                 <a
                   href={telegram ?? "#"}
