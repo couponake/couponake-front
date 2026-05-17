@@ -54,6 +54,11 @@ const ShowStore = ({ slug }: { slug: string }) => {
     side_table = null,
   } = data || {};
 
+  const store_name_lang: string =
+    locale === "ar"
+      ? (store?.store_name?.split("-")[0] ?? "")
+      : store?.store_name?.split("-")[1] || store?.store_name || "";
+
   const statistics: statisticsType = {
     store_love: store?.store_love ?? "0%",
     currency: store?.currency ?? "",
@@ -220,7 +225,10 @@ const ShowStore = ({ slug }: { slug: string }) => {
             </div>
           )}
           {store_infos?.length > 0 && (
-            <div className="space-y-5 mt-10">
+            <div className="space-y-5 pt-5">
+              <p className="font-bold text-gray-700 text-lg">
+                {t("aboutStore")} {" " + store_name_lang}
+              </p>
               {store_infos?.map((info: InfoItem) => {
                 // 1. Ensure it's an array, then filter out empty/null content
                 const cleanDesc2 = (
@@ -254,8 +262,8 @@ const ShowStore = ({ slug }: { slug: string }) => {
           {store_faqs && (
             <FAQ
               title={t("FAQS")}
-              className="!py-5"
-              storeName={store.store_name}
+              className="!pt-0"
+              storeName={store_name_lang}
               faqs={store_faqs.filter(
                 (faq) => Number(faq?.store_id) === Number(store?.id),
               )}
@@ -293,7 +301,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
         </div>
         <div className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
           <StoreSidePart
-            storeName={store?.store_name}
+            storeName={store_name_lang}
             storeSlug={store?.slug}
             couponsLength={store?.coupons?.length}
             sideTable={side_table}

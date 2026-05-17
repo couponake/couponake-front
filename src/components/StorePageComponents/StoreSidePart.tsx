@@ -54,7 +54,7 @@ function StoreSidePart({
       ? [
           {
             id: 2,
-            label: `${t("Strongest Coupon")} ${storeSlug}`,
+            label: `${t("Strongest Coupon")} ${storeName}`,
             value: sideTable?.latest_coupon?.code,
           },
         ]
@@ -80,10 +80,7 @@ function StoreSidePart({
         </table>
       </div>
       {storeInfo?.length > 0 && (
-        <div className="space-y-5">
-          <p className="font-semibold text-gray-700 text-lg my-5">
-            {t("About The store")}
-          </p>
+        <div className="space-y-5 mt-5">
           {storeInfo.map((info: InfoItem) => {
             // 1. Ensure it's an array, then filter out empty/null content
             const cleanDesc1 = (
