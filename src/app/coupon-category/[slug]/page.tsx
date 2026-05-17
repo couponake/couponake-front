@@ -75,7 +75,7 @@ export async function generateMetadata({
   }
 }
 
-const ShowBrandPage = async ({
+const ShowCouponCategoryPage = async ({
   params,
 }: {
   params: Promise<{ slug: string; locale: string }>;
@@ -170,4 +170,4 @@ const ShowBrandPage = async ({
   );
 };
 
-export default ShowBrandPage;
+export default ShowCouponCategoryPage;

@@ -24,30 +24,13 @@ import styles from "@/styles/htmlTablesScroll.module.css";
 import Image from "next/image";
 
 import Hero from "../../Home/Hero";
-import { SimilarStoresSkeleton } from "@/components/StorePageComponents/SimilarStores";
 
 declare module "react-window";
-
-const StoreCoupon = dynamic(
-  () => import("@/components/StorePageComponents/StoreCoupon"),
-  {
-    loading: () => <Skeleton className="rounded-md w-full h-[200px]" />,
-    ssr: false,
-  },
-);
 
 const CustomersReviews = dynamic(
   () => import("@/components/Pages/Home/CustomersReviews"),
   {
     loading: () => <Skeleton className="rounded-md w-full h-[400px]" />,
-    ssr: false,
-  },
-);
-
-const SimilarStores = dynamic(
-  () => import("@/components/StorePageComponents/SimilarStores"),
-  {
-    loading: () => <SimilarStoresSkeleton />,
     ssr: false,
   },
 );
@@ -63,12 +46,9 @@ const ShowStore = ({ slug }: { slug: string }) => {
   // Destructure data for easier access
   const {
     store,
-    expiredCoupons = [],
-    store_brands = [],
     similarStores = [],
     store_reviews = [],
     store_banner = null,
-    related_coupons = [],
     store_faqs = [],
     store_infos = [],
     side_table = null,
@@ -239,39 +219,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
               </div>
             </div>
           )}
-          {/* expiredCoupons */}
-          {expiredCoupons?.length > 0 && (
-            <>
-              <Divider />
-              <div className="space-y-5 mt-5">
-                <h3 className="text-lg font-semibold sm:text-xl">
-                  {t("Expired coupons")}
-                </h3>
-                {expiredCoupons?.map((coupon) => (
-                  <StoreCoupon
-                    key={coupon?.id}
-                    coupon={coupon}
-                    isExpired
-                    className="overflow-hidden relative bg-gray-50"
-                  />
-                ))}
-              </div>
-            </>
-          )}
-          {/* related_coupons */}
-          {related_coupons && related_coupons.length > 0 && (
-            <>
-              <Divider />
-              <div className="space-y-5 mt-5 ">
-                <h3 className="text-lg font-semibold sm:text-xl">
-                  {t("Related coupons")}
-                </h3>
-                {related_coupons?.map((coupon) => (
-                  <StoreCoupon key={coupon?.id} coupon={coupon} />
-                ))}
-              </div>
-            </>
-          )}
           {store_infos?.length > 0 && (
             <div className="space-y-5 mt-10">
               {store_infos?.map((info: InfoItem) => {
@@ -304,20 +251,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
               })}
             </div>
           )}
-          {/* sidebar in sm screens */}
-          {isMobile && (
-            <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
-              <StoreSidePart
-                storeName={store?.store_name}
-                storeSlug={store?.slug}
-                couponsLength={store?.coupons?.length}
-                sideTable={side_table}
-                storeBrands={store_brands}
-                storeBanners={store_banner}
-                storeInfo={store_infos}
-              />
-            </aside>
-          )}
           {store_faqs && (
             <FAQ
               title={t("FAQS")}
@@ -328,11 +261,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
               )}
             />
           )}
-          <div className="mt-11 border-t-gray-300 border-t">
-            {similarStores && similarStores.length > 0 && (
-              <SimilarStores key={store?.slug} stores={similarStores} />
-            )}
-          </div>
           {store_reviews && store_reviews.length > 0 && (
             <CustomersReviews
               className="max-w-[87vw]"
@@ -357,23 +285,27 @@ const ShowStore = ({ slug }: { slug: string }) => {
               <Divider />
             </>
           )}
+          {!isMobile && (
+            <div className="w-full h-fit text-xs bg-white/75 p-4 rounded-lg">
+              {t("Affiliate links")}
+            </div>
+          )}
+        </div>
+        <div className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
+          <StoreSidePart
+            storeName={store?.store_name}
+            storeSlug={store?.slug}
+            couponsLength={store?.coupons?.length}
+            sideTable={side_table}
+            similarStores={similarStores}
+            storeBanners={store_banner}
+            storeInfo={store_infos}
+          />
+        </div>
+        {isMobile && (
           <div className="w-full h-fit text-xs bg-white/75 p-4 rounded-lg">
             {t("Affiliate links")}
           </div>
-        </div>
-        {/* sidebar in md/lg screens */}
-        {!isMobile && (
-          <aside className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
-            <StoreSidePart
-              storeName={store?.store_name}
-              storeSlug={store?.slug}
-              couponsLength={store?.coupons?.length}
-              sideTable={side_table}
-              storeBrands={store_brands}
-              storeBanners={store_banner}
-              storeInfo={store_infos}
-            />
-          </aside>
         )}
       </section>
     </div>

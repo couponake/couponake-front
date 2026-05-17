@@ -72,14 +72,6 @@ const FAQ = ({
           ))}
         </Accordion>
       </div>
-
-      {/* <div className="w-full flex gap-5 items-center justify-end mt-5">
-        <div className="flex items-center gap-3">
-          <Button className="gradient-btn" onPress={() => setShowAll(!showAll)}>
-            {showAll ? t("View less") : t("View more")}
-          </Button>
-        </div>
-      </div> */}
     </section>
   );
 };

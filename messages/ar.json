@@ -100,7 +100,6 @@
     "error_occurred": "حدث خطأ، يرجى المحاولة مرة أخرى لاحقًا.",
     "stores": "كل المتاجر",
     "login_or_create": "تسجيل الدخول إلى حسابك أو إنشاء حساب",
-    "brands": "الماركات",
     "blog": "المدونة"
   },
   "Status": "الحالة",
@@ -165,7 +164,6 @@
   "All Categories": "كل الفئات",
   "search_here": "إبحث هنا...",
   "Recently Discount Codes Added": "كوبونات تم إضافتها مؤخرا",
-  "Latest Brands": "أحدث الماركات",
   "Latest Stores": "أحدث المتاجر",
   "Customer Reviews": "آراء العملاء ",
   "Latest blogs": "أحدث المقالات",
@@ -178,7 +176,6 @@
   "Expired": "منتهي",
   "Stores from the same country": "متاجر اخري من نفس الدولة",
   "Stores from the same category": "متاجر اخري من نفس الفئة",
-  "Similar Brands": "براندات مشابهة",
   "Similar Stores": "متاجر مشابهة",
   "Related coupons": "كوبونات مشابهة",
   "About The store": "عن المتجر",

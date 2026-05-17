@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import {
   StoreProps,
   CouponProps,
-  BrandProps,
   BannerItem,
   FaqItem,
   InfoItem,
@@ -12,18 +11,13 @@ import api from "@/lib/api";
 
 export interface StoreResponse {
   store: StoreProps;
-  expiredCoupons: CouponProps[] | [];
-  store_brands: BrandProps[];
   similarStores: StoreProps[];
-  // store_reviews: userReview[];
   store_table:
   | { id: number; code: string; title: string; description: string }[]
   | [];
   store_reviews: userReviewType[];
   store_banner: BannerItem[] | null;
-  related_coupons: CouponProps[] | [];
   store_faqs: FaqItem[];
-  // similar_coupons_table: CouponProps[] | [];
   store_infos: InfoItem[];
   side_table: {
     current_date: string;

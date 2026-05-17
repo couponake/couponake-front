@@ -106,7 +106,6 @@
     "error_occurred": "An error occurred, please try again later.",
     "stores": "Stores",
     "login_or_create": "Login to your account or create one",
-    "brands": "Brands",
     "blog": "Blog"
   },
   "NotFound": {
@@ -179,7 +178,6 @@
   "All Categories": "All Categories",
   "search_here": "Search here...",
   "Recently Discount Codes Added": "Recently Discount Codes Added",
-  "Latest Brands": "Latest Brands",
   "Latest Stores": "Latest Stores",
   "Customer Reviews": "Customer Reviews",
   "Latest blogs": "Latest blogs",
@@ -191,7 +189,6 @@
   "Expired": "Expired",
   "Stores from the same country": "Stores from the same country",
   "Stores from the same category": "Stores from the same category",
-  "Similar Brands": "Similar Brands",
   "Similar Stores": "Similar Stores",
   "Related coupons": "Related coupons",
   "About The store": "About The store",

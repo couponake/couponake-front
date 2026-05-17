@@ -110,17 +110,6 @@ export type paginationProps = {
   total: number;
 };
 
-export type BrandProps = {
-  id: number;
-  title: string;
-  image: string;
-  slug: string;
-  created_at: string;
-  updated_at: string;
-  coupons?: CouponProps[];
-  stores?: StoreProps[];
-};
-
 export type InfosItem = {
   id: number;
   title: string;
@@ -272,7 +261,6 @@ export type StoreProps = {
   order: number | null;
   rate: string;
   voters: number;
-  brand: BrandProps[] | [];
   created_at: string;
   updated_at: string;
   isInFavorites: boolean;
