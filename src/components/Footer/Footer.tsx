@@ -36,7 +36,7 @@ const Footer = ({
 }) => {
   const t = useTranslations();
   const socialLinks = useMemo(() => {
-    if (!settings)
+    if (!settings || !Array.isArray(settings))
       return {
         facebook: null,
         telegram: null,
@@ -46,19 +46,16 @@ const Footer = ({
         siteName: "",
       };
 
+    const facebookItem = settings.find((item) => item.name === socialMediaEnum.Facebook)?.val;
+    const telegramItem = settings.find((item) => item.name === socialMediaEnum.Telegram)?.val;
+    const whatsappItem = settings.find((item) => item.name === socialMediaEnum.Whatsapp)?.val;
+
     return {
-      facebook:
-        settings.find((item) => item.name === socialMediaEnum.Facebook)?.val ||
-        null,
-      telegram:
-        settings.find((item) => item.name === socialMediaEnum.Telegram)?.val ||
-        null,
-      whatsapp:
-        settings.find((item) => item.name === socialMediaEnum.Whatsapp)?.val ||
-        null,
+      facebook: facebookItem ? facebookItem.trim() : null,
+      telegram: telegramItem ? telegramItem.trim() : null,
+      whatsapp: whatsappItem ? whatsappItem.trim() : null,
       logo: settings.find((item) => item.name === "footer_logo")?.val || null,
-      description:
-        settings.find((item) => item.name === "footer_description")?.val || "",
+      description: settings.find((item) => item.name === "footer_description")?.val || "",
       siteName: settings.find((item) => item.name === "site_name")?.val || "",
     };
   }, [settings]);
@@ -203,7 +200,7 @@ const Footer = ({
               className="text-xs text-muted-foreground flex gap-1 items-center"
             >
               <Copyright size={12} />
-              {new Date().getFullYear()} {socialLinks.siteName}.{" "}
+              {new Date().getFullYear()} {socialLinks.siteName.split('|')[0]}{", "}
               {t("All rights reserved")}
             </p>
           </div>

@@ -32,43 +32,41 @@ const FollowUs = ({
   useEffect(() => {
     setIsMounted(true);
   }, []);
+  
   const toggleIsOpen = () => {
     setIsOpen((prev) => !prev);
   };
 
   const isStorePage = /^\/store\/[^\/]+/.test(pathname);
 
-  // Define the menu items
+  // Define the menu items with robust fallback lookups
   const menuItems = useMemo(() => {
-    if (!settings) return [];
+    if (!settings || !Array.isArray(settings)) return [];
 
     const facebookHref = settings.find(
-      (item) => item.name === socialMediaEnum.Facebook,
-    )?.val;
+      (item) => item.name === socialMediaEnum.Facebook)?.val;
     const whatsappHref = settings.find(
-      (item) => item.name === socialMediaEnum.Whatsapp,
-    )?.val;
+      (item) => item.name === socialMediaEnum.Whatsapp)?.val;
     const telegramHref = settings.find(
-      (item) => item.name === socialMediaEnum.Telegram,
-    )?.val;
+      (item) => item.name === socialMediaEnum.Telegram)?.val;
 
     return [
       {
         key: "Facebook",
         label: "Facebook",
-        href: facebookHref,
+        href: facebookHref ? facebookHref.trim() : null,
         icon: <FaFacebook className="size-5 text-blue-500" />,
       },
       {
         key: "Whatsapp",
         label: "Whatsapp",
-        href: whatsappHref,
+        href: whatsappHref ? whatsappHref.trim() : null,
         icon: <FaWhatsapp className="size-5 text-green-600" />,
       },
       {
         key: "Telegram",
         label: "Telegram",
-        href: telegramHref,
+        href: telegramHref ? telegramHref.trim() : null,
         icon: <FaTelegram className="size-5 text-sky-400" />,
       },
     ].filter((item) => item.href);
@@ -99,15 +97,12 @@ const FollowUs = ({
                 key={item.key}
                 startContent={item?.icon}
                 textValue={item?.label}
+                as="a"
+                href={item.href!}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
               >
-                <a
-                  target="_blank"
-                  href={item.href}
-                  rel="noopener noreferrer nofollow"
-                  className="block w-full h-full"
-                >
-                  {item.label}
-                </a>
+                {item.label}
               </DropdownItem>
             ))}
           </DropdownMenu>
