@@ -1,8 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { Button } from "@heroui/button";
+import React from "react";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
 import { FaqItem } from "@/types";
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
@@ -18,14 +16,12 @@ const FAQ = ({
   className?: string;
   storeName?: string;
 }) => {
-  const t = useTranslations();
-  const [showAll, setShowAll] = useState(false);
 
   if (faqs && faqs.length <= 0) {
     return null;
   }
 
-  const faqsToDisplay = showAll ? faqs : faqs?.slice(0, 5);
+  const faqsToDisplay = faqs;
 
   return (
     <section className={cn("container py-8 md:py-11 lg:py-20", className)}>
@@ -77,13 +73,13 @@ const FAQ = ({
         </Accordion>
       </div>
 
-      <div className="w-full flex gap-5 items-center justify-end mt-5">
+      {/* <div className="w-full flex gap-5 items-center justify-end mt-5">
         <div className="flex items-center gap-3">
           <Button className="gradient-btn" onPress={() => setShowAll(!showAll)}>
             {showAll ? t("View less") : t("View more")}
           </Button>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
