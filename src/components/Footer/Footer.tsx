@@ -10,7 +10,6 @@ import Image from "next/image";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
 import { Copyright } from "lucide-react";
-import { socialMediaEnum } from "@/types/settingsEnum";
 import { useMemo } from "react";
 
 interface footerLinkType {
@@ -36,7 +35,7 @@ const Footer = ({
 }) => {
   const t = useTranslations();
   const socialLinks = useMemo(() => {
-    if (!settings || !Array.isArray(settings))
+    if (!settings || !Array.isArray(settings)) {
       return {
         facebook: null,
         telegram: null,
@@ -45,19 +44,34 @@ const Footer = ({
         description: null,
         siteName: "",
       };
+    }
 
-    const facebookItem = settings.find((item) => item.name === socialMediaEnum.Facebook)?.val;
-    const telegramItem = settings.find((item) => item.name === socialMediaEnum.Telegram)?.val;
-    const whatsappItem = settings.find((item) => item.name === socialMediaEnum.Whatsapp)?.val;
-
-    return {
-      facebook: facebookItem ? facebookItem.trim() : null,
-      telegram: telegramItem ? telegramItem.trim() : null,
-      whatsapp: whatsappItem ? whatsappItem.trim() : null,
-      logo: settings.find((item) => item.name === "footer_logo")?.val || null,
-      description: settings.find((item) => item.name === "footer_description")?.val || "",
-      siteName: settings.find((item) => item.name === "site_name")?.val || "",
+    const getSettingValue = (keys: string[]) => {
+      const match = settings.find((item) => {
+        if (!item || !item.name) return false;
+        const normalizedName = item.name.toLowerCase().trim();
+        return keys.some((k) => normalizedName === k.toLowerCase());
+      });
+      return match?.val ? match.val.trim() : null;
     };
+
+    // 3. Scan multiple variants used by different environment DBs
+    const facebook = getSettingValue(["facebook", "social_facebook"]);
+    const telegram = getSettingValue([
+      "side_telegram",
+      "telegram",
+      "social_telegram",
+    ]);
+    const whatsapp = getSettingValue([
+      "side_whatsapp",
+      "whatsapp",
+      "social_whatsapp",
+    ]);
+    const logo = getSettingValue(["footer_logo", "logo"]);
+    const description = getSettingValue(["footer_description", "description"]);
+    const siteName = getSettingValue(["site_name", "title"]) || "";
+
+    return { facebook, telegram, whatsapp, logo, description, siteName };
   }, [settings]);
 
   return (
@@ -200,7 +214,8 @@ const Footer = ({
               className="text-xs text-muted-foreground flex gap-1 items-center"
             >
               <Copyright size={12} />
-              {new Date().getFullYear()} {socialLinks.siteName.split('|')[0]}{", "}
+              {new Date().getFullYear()} {socialLinks.siteName.split("|")[0]}
+              {", "}
               {t("All rights reserved")}
             </p>
           </div>

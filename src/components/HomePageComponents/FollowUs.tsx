@@ -43,30 +43,36 @@ const FollowUs = ({
   const menuItems = useMemo(() => {
     if (!settings || !Array.isArray(settings)) return [];
 
-    const facebookHref = settings.find(
-      (item) => item.name === socialMediaEnum.Facebook)?.val;
-    const whatsappHref = settings.find(
-      (item) => item.name === socialMediaEnum.Whatsapp)?.val;
-    const telegramHref = settings.find(
-      (item) => item.name === socialMediaEnum.Telegram)?.val;
+    const getSettingValue = (keys: string[]) => {
+      const match = settings.find((item) => {
+        if (!item || !item.name) return false;
+        const normalizedName = item.name.toLowerCase().trim();
+        return keys.some((k) => normalizedName === k.toLowerCase());
+      });
+      return match?.val ? match.val.trim() : null;
+    };
+
+    const facebookHref = getSettingValue([socialMediaEnum.Facebook, "facebook", "social_facebook"]);
+    const whatsappHref = getSettingValue([socialMediaEnum.Whatsapp, "side_whatsapp", "whatsapp", "social_whatsapp"]);
+    const telegramHref = getSettingValue([socialMediaEnum.Telegram, "side_telegram", "telegram", "social_telegram"]);
 
     return [
       {
         key: "Facebook",
         label: "Facebook",
-        href: facebookHref ? facebookHref.trim() : null,
+        href: facebookHref,
         icon: <FaFacebook className="size-5 text-blue-500" />,
       },
       {
         key: "Whatsapp",
         label: "Whatsapp",
-        href: whatsappHref ? whatsappHref.trim() : null,
+        href: whatsappHref,
         icon: <FaWhatsapp className="size-5 text-green-600" />,
       },
       {
         key: "Telegram",
         label: "Telegram",
-        href: telegramHref ? telegramHref.trim() : null,
+        href: telegramHref,
         icon: <FaTelegram className="size-5 text-sky-400" />,
       },
     ].filter((item) => item.href);
@@ -98,7 +104,7 @@ const FollowUs = ({
                 startContent={item?.icon}
                 textValue={item?.label}
                 as="a"
-                href={item.href!}
+                href={item.href || "#"}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
               >
