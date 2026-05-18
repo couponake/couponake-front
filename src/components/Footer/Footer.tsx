@@ -4,19 +4,13 @@ import {
   FaTelegram,
   FaWhatsapp,
 } from "react-icons/fa";
-import type { SettingsItem } from "@/types";
+import type { footerLinkType, SettingsItem } from "@/types";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
 import { Copyright } from "lucide-react";
 import { useMemo } from "react";
-
-interface footerLinkType {
-  id: number;
-  title: string;
-  url: string;
-}
 
 const importantStoresLinks = [
   { id: 1, title: "noonDiscount", url: "/store/noon-نون/" },
@@ -30,8 +24,8 @@ const Footer = ({
   settings,
   footerLinks,
 }: {
-  settings: SettingsItem[] | null | undefined;
-  footerLinks: footerLinkType[] | null | undefined;
+  settings: SettingsItem[];
+  footerLinks: footerLinkType[];
 }) => {
   const t = useTranslations();
   const socialLinks = useMemo(() => {
@@ -57,16 +51,8 @@ const Footer = ({
 
     // 3. Scan multiple variants used by different environment DBs
     const facebook = getSettingValue(["facebook", "social_facebook"]);
-    const telegram = getSettingValue([
-      "side_telegram",
-      "telegram",
-      "social_telegram",
-    ]);
-    const whatsapp = getSettingValue([
-      "side_whatsapp",
-      "whatsapp",
-      "social_whatsapp",
-    ]);
+    const telegram = getSettingValue(["side_telegram", "telegram", "social_telegram"]);
+    const whatsapp = getSettingValue(["side_whatsapp", "whatsapp", "social_whatsapp"]);
     const logo = getSettingValue(["footer_logo", "logo"]);
     const description = getSettingValue(["footer_description", "description"]);
     const siteName = getSettingValue(["site_name", "title"]) || "";

@@ -435,7 +435,21 @@ export type SettingsResponse = {
 };
 
 export type Settings = {
-  menus: MenuItem[] | null;
-  settings: SettingsItem[] | null;
-  notifications: NotificationProps[] | null;
+  menus: MenuItem[];
+  settings: SettingsItem[];
+  notifications: NotificationProps[];
+};
+
+export type FooterLinksResponse = {
+  status: string;
+  message: string;
+  data: footerLinkType[];
+};
+
+export type footerLinkType = {
+  id: number;
+  title: string;
+  url: string;
+  created_at: string;
+  updated_at: string;
 };

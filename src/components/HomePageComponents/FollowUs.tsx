@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -19,20 +19,17 @@ import { FiShare2 } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 import { socialMediaEnum } from "@/types/settingsEnum";
 
-const FollowUs = ({
-  settings,
-}: {
-  settings: SettingsItem[] | null | undefined;
-}) => {
+type MenuItem = {
+  key: string;
+  label: string;
+  href: string;
+  icon: React.JSX.Element;
+};
+
+const FollowUs = ({ settings }: { settings: SettingsItem[] }) => {
   const t = useTranslations();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-  
   const toggleIsOpen = () => {
     setIsOpen((prev) => !prev);
   };
@@ -41,7 +38,9 @@ const FollowUs = ({
 
   // Define the menu items with robust fallback lookups
   const menuItems = useMemo(() => {
-    if (!settings || !Array.isArray(settings)) return [];
+    if (!settings || !Array.isArray(settings)) {
+      return [];
+    }
 
     const getSettingValue = (keys: string[]) => {
       const match = settings.find((item) => {
@@ -52,9 +51,23 @@ const FollowUs = ({
       return match?.val ? match.val.trim() : null;
     };
 
-    const facebookHref = getSettingValue([socialMediaEnum.Facebook, "facebook", "social_facebook"]);
-    const whatsappHref = getSettingValue([socialMediaEnum.Whatsapp, "side_whatsapp", "whatsapp", "social_whatsapp"]);
-    const telegramHref = getSettingValue([socialMediaEnum.Telegram, "side_telegram", "telegram", "social_telegram"]);
+    const facebookHref = getSettingValue([
+      socialMediaEnum.Facebook,
+      "facebook",
+      "social_facebook",
+    ]);
+    const whatsappHref = getSettingValue([
+      socialMediaEnum.Whatsapp,
+      "side_whatsapp",
+      "whatsapp",
+      "social_whatsapp",
+    ]);
+    const telegramHref = getSettingValue([
+      socialMediaEnum.Telegram,
+      "side_telegram",
+      "telegram",
+      "social_telegram",
+    ]);
 
     return [
       {
@@ -75,11 +88,14 @@ const FollowUs = ({
         href: telegramHref,
         icon: <FaTelegram className="size-5 text-sky-400" />,
       },
-    ].filter((item) => item.href);
+    ].filter(
+      (
+        item,
+      ): item is MenuItem => Boolean(item.href),
+    );
   }, [settings]);
 
   if (isStorePage) return null;
-  if (!isMounted) return null;
 
   return (
     <>
@@ -101,14 +117,17 @@ const FollowUs = ({
             {menuItems?.map((item) => (
               <DropdownItem
                 key={item.key}
-                startContent={item?.icon}
-                textValue={item?.label}
-                as="a"
-                href={item.href || "#"}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
+                startContent={item.icon}
+                textValue={item.label}
               >
-                {item.label}
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="w-full"
+                >
+                  <span>{item.label}</span>
+                </a>
               </DropdownItem>
             ))}
           </DropdownMenu>
