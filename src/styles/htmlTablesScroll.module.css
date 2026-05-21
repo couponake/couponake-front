@@ -50,6 +50,19 @@
   background-color: #f9fafb;
 }
 
+.prose input[type="image"],
+.prose img {
+  display: block !important;
+  max-width: 100% !important; /* Ensures it never overflows the screen */
+  width: auto !important; /* Allows the image to scale proportionally */
+  height: auto !important; /* Overrides the inline height: 500px so it scales proportionally */
+  margin: 1.5rem auto !important; /* Centers the image and gives it spacing top/bottom */
+  border-radius: 6px !important; /* Matches the border-radius of your table */
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06) !important; /* Gives it a clean, modern look */
+}
+
 /* تحسين شكل الجدول في الموبايل مع الحفاظ على وضوح الحدود */
 @media (max-width: 768px) {
   /* نضع الجدول داخل حاوية تسمح بالتمرير بدلاً من جعل الجدول نفسه block */
@@ -75,5 +88,11 @@
   .prose table th,
   .prose table td {
     border: 1px solid #d1d5db !important;
+  }
+
+  .prose input[type="image"],
+  .prose img {
+    max-width: 100% !important;
+    width: auto !important;
   }
 }
