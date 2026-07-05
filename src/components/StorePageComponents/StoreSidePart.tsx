@@ -1,5 +1,5 @@
 "use client";
-import { secureHtmlLinks } from "@/lib/htmlUtils";
+import { getContentDirection, secureStoreHtmlLinks } from "@/lib/storeHtmlUtils";
 import { BannerItem, CouponProps, InfoItem, StoreProps } from "@/types";
 import { useLocale, useTranslations } from "next-intl";
 import SimilarStores from "./SimilarStores";
@@ -8,7 +8,7 @@ import styles from "@/styles/htmlSideTablesScroll.module.css";
 import Hero from "../Pages/Home/Hero";
 
 function makeSafeHtml(content: string | null): { __html: string } {
-  return { __html: secureHtmlLinks(content ?? "") };
+  return { __html: secureStoreHtmlLinks(content ?? "") };
 }
 
 interface sidePartType {
@@ -94,11 +94,12 @@ function StoreSidePart({
             return cleanDesc1.map((item, idx) => (
               <div
                 key={`desc1-${info.id}-${idx}`}
-                dir="rtl"
+                dir={getContentDirection(item.content)}
                 className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1 mb-4"
               >
                 <div
                   className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4 last:mb-0`}
+                  dir={getContentDirection(item.content)}
                   dangerouslySetInnerHTML={makeSafeHtml(item.content)}
                 />
               </div>

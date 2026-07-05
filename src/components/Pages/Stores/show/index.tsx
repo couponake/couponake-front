@@ -11,7 +11,7 @@ import StoreSidePart from "@/components/StorePageComponents/StoreSidePart";
 import { Skeleton } from "@/components/ui/skeleton";
 import useDetectMobile from "@/hooks/useDetectMobile";
 import { useStoreData } from "@/hooks/useStoreData";
-import { secureHtmlLinks } from "@/lib/htmlUtils";
+import { getContentDirection, secureStoreHtmlLinks } from "@/lib/storeHtmlUtils";
 import ScrollTracker from "@/services/ScrollPageAnalytics";
 import { CategoryItem, InfoItem, statisticsType } from "@/types";
 import { Button } from "@heroui/button";
@@ -133,7 +133,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
   }
 
   function makeSafeHtml(content: string | null): { __html: string } {
-    return { __html: secureHtmlLinks(content ?? "") };
+    return { __html: secureStoreHtmlLinks(content ?? "") };
   }
 
   return (
@@ -244,12 +244,13 @@ const ShowStore = ({ slug }: { slug: string }) => {
                 return (
                   <div
                     key={info.id}
-                    dir="rtl"
+                    dir={getContentDirection(cleanDesc2.map((item) => item.content).join(" "))}
                     className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1"
                   >
                     {cleanDesc2.map((item, idx) => (
                       <div
                         key={`desc2-${idx}`}
+                        dir={getContentDirection(item.content)}
                         className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4`}
                         dangerouslySetInnerHTML={makeSafeHtml(item.content)}
                       />
