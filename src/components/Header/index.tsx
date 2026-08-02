@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 const MobileDrawer = dynamic(() => import("./MobileDrawer"));
 import ShowLoginBtnOrUserDropDown from "./ShowLoginBtnOrUserDropDown";
 import NavLinks from "./NavLinks";
+import AppDownloader from "../AppDownloader/AppDownloader";
 
 const Header = ({
   websiteLogo,
@@ -19,7 +20,10 @@ const Header = ({
   notifications: NotificationProps[] | null | undefined;
 }) => {
   return (
-    <div className="fixed z-[999] w-full border-b border-neutral-200 bg-white">
+    <div
+      className="fixed z-[999] inset-0 w-full flex flex-col gap-0 border-b border-neutral-200 bg-white"
+      style={{ height: "var(--header-h)" }}
+    >
       <header className="container relative mx-auto flex items-center justify-between py-3 sm:py-5">
         <nav className="flex flex-1 items-center gap-4 md:gap-0">
           {websiteLogo && (
@@ -82,6 +86,7 @@ const Header = ({
           </ul>
         </nav>
       </header>
+      <AppDownloader />
     </div>
   );
 };
