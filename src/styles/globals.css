@@ -44,6 +44,16 @@
   direction: ltr !important;
 }
 
+:root {
+  --header-h: 134px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 167px;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -20,7 +20,7 @@ interface HeaderProps {
 
 function StoreHeader({ store_id, store_slug, store_image, store_title, isMobile, store_rate, store_voters, store_isInFavorites, locale, t }: HeaderProps) {
   return (
-    <header className="fixed z-[90] w-full top-3 pt-16 sm:pt-20">
+    <header className="w-full">
       <div className="bg-gradient-to-r from-main-700 to-main-600 shadow-lg">
         <div className="container mx-auto px-4 py-2">
           <div className="flex flex-row items-center sm:items-start md:items-start lg:items-start gap-3">

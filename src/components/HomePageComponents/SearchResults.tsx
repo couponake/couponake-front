@@ -23,7 +23,7 @@ const SearchResults = ({
   };
 
   return (
-    <div className="relative isolate">
+    <div className="relative isolate z-[10000]">
       <div
         className="fixed inset-0 bg-black/50 top-17 sm:top-21 md:top-22 z-10"
         onClick={onClose}
