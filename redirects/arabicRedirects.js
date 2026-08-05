@@ -29,6 +29,8 @@ const customRedirects = [
   { from: '/thrillark-promo-code/', to: '/' },
   { from: '/كود-خصم-خرابيط/', to: '/' },
   { from: '/كود-خصم-دومينوز/', to: '/' },
+  { from: '/تخفيضات-الدو/', to: '/store/aldo/' },
+  { from: '/الدخيل-للعود-عطور/', to: '/store/aldakheeloud/' }
 ]
 
 //blogs
