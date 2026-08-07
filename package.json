@@ -66,7 +66,7 @@
     "minimatch": "^9.0.9",
     "motion-dom": "^12.43.0",
     "motion-utils": "^12.39.0",
-    "next": "^15.5.21",
+    "next": "^16.3.0",
     "next-auth": "^4.24.15",
     "next-intl": "^4.9.2",
     "nextjs-toploader": "3.7.15",
