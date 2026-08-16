@@ -13,6 +13,7 @@ const storeRedirects = [
   { from: '/store/carrefour/', to: '/store/كارفور-carrefour/' },
   { from: '/store/زورا-zura/', to: '/store/zura/' },
   { from: '/store/كود-خصم-تريجر-ايلاند/', to: '/store/treasure-island/' },
+  { from: '/store/voucherek/', to: '/stores/' },
 ]
 
 //cutom redirects
