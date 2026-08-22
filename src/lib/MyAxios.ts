@@ -11,10 +11,14 @@ interface ErrorResponse {
   status: number;
 }
 
+let base_url: string = "";
+
 if (!process.env.NEXT_PUBLIC_API_URL) {
   throw new Error(
-    "NEXT_PUBLIC_API_URL is not defined in environment variables"
+    "NEXT_PUBLIC_API_URL is not defined in environment variables",
   );
+} else {
+  base_url = process.env.NEXT_PUBLIC_API_URL;
 }
 
 const getAccessToken = (): string | null | undefined => {
@@ -34,7 +38,7 @@ const currentLang = getCurrentLang();
 
 // Create an instance of Axios with default settings
 const MyAxios = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: base_url,
   withCredentials: false,
   headers: {
     "X-Requested-With": "XMLHttpRequest",
@@ -86,7 +90,7 @@ MyAxios.interceptors.response.use(
       }
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export const api = {
@@ -94,14 +98,14 @@ export const api = {
     endpoint: string,
     revalidate = 60,
     token?: string | undefined,
-    lang = "ar"
+    lang = "ar",
   ): Promise<T> => {
     try {
       // Use a cache key that includes the endpoint and token to ensure proper caching
       const cacheKey = `${endpoint}${token ? `-${token.substring(0, 8)}` : ""}`;
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
+        `${base_url}${endpoint}`,
         {
           next: { revalidate, tags: [cacheKey] },
           headers: {
@@ -109,7 +113,7 @@ export const api = {
             Authorization: token ? `Bearer ${token}` : "",
             "Accept-Language": lang || currentLang,
           },
-        }
+        },
       );
 
       if (response.status === 301) {
@@ -121,7 +125,7 @@ export const api = {
         } catch (e) {
           console.error("Error parsing 301 response:", e);
           throw new Error(
-            `API error: ${response.status} ${response.statusText}`
+            `API error: ${response.status} ${response.statusText}`,
           );
         }
       }
@@ -141,7 +145,7 @@ export const api = {
         }
         const errorText = await response.text();
         throw new Error(
-          `API error: ${response.status} ${errorText.substring(0, 100)}`
+          `API error: ${response.status} ${errorText.substring(0, 100)}`,
         );
       }
 
@@ -156,14 +160,14 @@ export const api = {
   dynamic: async <T>(
     endpoint: string,
     token?: string | undefined,
-    lang = "ar"
+    lang = "ar",
   ): Promise<T> => {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
+        `${base_url}${endpoint}`,
         {
           cache: "no-store",
           headers: {
@@ -171,7 +175,7 @@ export const api = {
             "Accept-Language": lang || currentLang,
           },
           signal: controller.signal,
-        }
+        },
       );
 
       clearTimeout(timeoutId);
@@ -185,12 +189,12 @@ export const api = {
         } catch (e) {
           console.error("Error parsing 301 response:", e);
           throw new Error(
-            `API error: ${response.status} ${response.statusText}`
+            `API error: ${response.status} ${response.statusText}`,
           );
         }
       }
 
-      if(response?.status === 404 || response?.status === 400){
+      if (response?.status === 404 || response?.status === 400) {
         return response.json();
       }
 
@@ -209,7 +213,7 @@ export const api = {
         }
         const errorText = await response.text();
         throw new Error(
-          `API error: ${response.status} ${errorText.substring(0, 100)}`
+          `API error: ${response.status} ${errorText.substring(0, 100)}`,
         );
       }
 
