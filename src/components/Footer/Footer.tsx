@@ -12,14 +12,6 @@ import SubscribeForm from "./SubscribeForm";
 import { Copyright } from "lucide-react";
 import { useMemo } from "react";
 
-const importantStoresLinks = [
-  { id: 1, title: "noonDiscount", url: "/store/noon-نون/" },
-  { id: 2, title: "namshiDiscount", url: "/store/namshi-نمشي/" },
-  { id: 3, title: "temuDiscount", url: "/store/temu/" },
-  { id: 4, title: "levelShoesDiscount", url: "/store/levelshoes/" },
-  { id: 5, title: "trendyolDiscount", url: "/store/trendyol/" },
-];
-
 const Footer = ({
   settings,
   footerLinks,
@@ -172,26 +164,6 @@ const Footer = ({
                   {t("footer_sitemap_url")}
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-4 text-lg font-semibold">
-              {t("Important Stores")}
-            </p>
-            <ul className="space-y-2">
-              {importantStoresLinks?.map((store_link) => (
-                <li key={store_link.id}>
-                  <Link
-                    href={store_link.url}
-                    target="_self"
-                    prefetch={false}
-                    className="text-sm hover:underline"
-                  >
-                    {t(store_link.title)}
-                  </Link>
-                </li>
-              ))}
             </ul>
           </div>
 
