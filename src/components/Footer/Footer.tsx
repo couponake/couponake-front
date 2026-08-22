@@ -13,6 +13,7 @@ import { Copyright } from "lucide-react";
 import { useMemo } from "react";
 
 const importantStoresLinks = [
+  { id: 0, title: "footer_sitemap_url", url: "/sitemap.xml" },
   { id: 1, title: "noonDiscount", url: "/store/noon-نون/" },
   { id: 2, title: "namshiDiscount", url: "/store/namshi-نمشي/" },
   { id: 3, title: "temuDiscount", url: "/store/temu/" },
