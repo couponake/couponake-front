@@ -13,6 +13,7 @@ const storeRedirects = [
   { from: '/store/carrefour/', to: '/store/كارفور-carrefour/' },
   { from: '/store/زورا-zura/', to: '/store/zura/' },
   { from: '/store/كود-خصم-تريجر-ايلاند/', to: '/store/treasure-island/' },
+  { from: '/store/voucherek/', to: '/stores/' },
 ]
 
 //cutom redirects
@@ -29,6 +30,8 @@ const customRedirects = [
   { from: '/thrillark-promo-code/', to: '/' },
   { from: '/كود-خصم-خرابيط/', to: '/' },
   { from: '/كود-خصم-دومينوز/', to: '/' },
+  { from: '/تخفيضات-الدو/', to: '/store/aldo/' },
+  { from: '/الدخيل-للعود-عطور/', to: '/store/aldakheeloud/' }
 ]
 
 //blogs

@@ -109,7 +109,7 @@ const Hero = ({
 
   if (isLoading) {
     return (
-      <div className="h-full min-h-24 md:min-h-64 min-w-80 overflow-x-hidden mx-auto container mb-7 md:mb-14 w-full rounded-2xl bg-[#efefef] flex justify-center items-center">
+      <div className="h-full mt-2 min-h-24 md:min-h-64 min-w-80 overflow-x-hidden mx-auto container mb-7 md:mb-14 w-full rounded-2xl bg-[#efefef] flex justify-center items-center">
         <Spinner />
       </div>
     )
@@ -159,7 +159,7 @@ const Hero = ({
           ...(autoplay ? [Autoplay({ delay: 4000 })] : []),
           // ClassNames(),
         ]}
-        className="mx-auto container relative"
+        className="mx-auto container relative mt-2"
         setApi={setApi}
       >
         <CarouselPrevious className="z-40 absolute size-6 sm:size-7 md:size-8 lg:size-10 xl:size-10 2xl:size-10 left-4 sm:left-5 md:left-6 lg:left-8 xl:left-8 2xl:left-8 top-1/2 transform -translate-y-1/2 bg-white/30 border-none" />

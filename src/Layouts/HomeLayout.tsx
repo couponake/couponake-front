@@ -37,11 +37,8 @@ const HomeLayout = async ({
         notifications={safeSettings?.notifications}
       />
       <main
-        className="pt-[6.5rem] relative bg-neutral-50 min-h-[75vh]"
-        style={{
-          paddingTop: "6.5rem",
-          minHeight: "75vh",
-        }}
+        className="relative bg-neutral-50 min-h-[75vh]"
+        style={{ paddingTop: "var(--header-h)" }}
       >
         <Suspense>
           <FollowUs settings={safeSettings?.settings} />

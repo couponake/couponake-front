@@ -99,7 +99,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
   // Show error state
   if (isError) {
     return (
-      <div className="container pt-24 pb-10 text-center">
+      <div className="container pt-6 md:pt-10 lg:pt-10 pb-5 text-center">
         <h2 className="text-2xl font-bold text-red-600 mb-4">
           {"Error Loading Store"}
         </h2>
@@ -116,7 +116,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
   // If no store data is available
   if (!store) {
     return (
-      <div className="container pt-24 pb-10 text-center">
+      <div className="container pt-6 md:pt-10 lg:pt-10 pb-5 text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
           {t("Store Not Found")}
         </h2>
@@ -154,7 +154,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
         locale={locale}
         t={t}
       />
-      <section className="container flex flex-col md:flex-row-reverse gap-10 pt-10 sm:pt-24 md:pt-30 lg:pt-24 pb-5">
+      <section className="container flex flex-col md:flex-row-reverse gap-10 pt-6 md:pt-10 lg:pt-10 pb-5">
         {/* main content */}
         <div className="w-full sm:w-full md:w-fit lg:w-fit xl:w-fit 2xl:w-fit min-h-150 h-fit flex-1 space-y-5 overflow-hidden">
           <StoreRatingCard
@@ -169,7 +169,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
           />
           {store?.description && (
             <div
-              className="prose max-w-none my-5"
+              className="prose max-w-none mb-5"
               dangerouslySetInnerHTML={makeSafeHtml(store?.description)}
             />
           )}
@@ -300,7 +300,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
             </div>
           )}
         </div>
-        <div className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100 mt-7">
+        <div className="w-full md:w-70 lg:w-80 xl:w-80 2xl:w-100">
           <StoreSidePart
             storeName={store_name_lang}
             storeSlug={store?.slug}

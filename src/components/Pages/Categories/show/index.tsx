@@ -5,7 +5,7 @@ import React from "react";
 
 const ShowCategory = ({ category }: { category: CategoryItem }) => {
   return (
-    <div className="-mt-7">
+    <div>
       <div className="bg-gradient-to-tr from-blue-200 via-main-600 to-blue-300">
         <div className="container mx-auto py-5 md:py-7">
           <div className="flex items-center justify-center lg:justify-between flex-wrap gap-7 min-h-50">
@@ -15,15 +15,15 @@ const ShowCategory = ({ category }: { category: CategoryItem }) => {
               </h1>
             </div>
             {category?.image && (
-              <div className="rounded-xl">
+              <div className="rounded-xl bg-white overflow-hidden">
                 <Image
-                  height={240}
-                  width={300}
+                  height={200}
+                  width={250}
                   src={category?.image || "noPreview.webp"}
                   alt={category?.name}
                   title={category?.name}
-                  quality={100}
-                  className="max-h-60 object-contain"
+                  quality={75}
+                  className="max-h-50 object-contain"
                   unoptimized
                 />
               </div>

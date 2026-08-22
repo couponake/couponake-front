@@ -110,9 +110,9 @@ export default async function StoresPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <section className="bg-white -mt-9 sm:-mt-7">
-        <div className="bg-gradient-to-tr from-blue-200 via-main-600 to-blue-300 pt-5 sm:pt-12">
-          <div className="container mx-auto py-8">
+      <section className="bg-white">
+        <div className="bg-gradient-to-tr from-blue-200 via-main-600 to-blue-300 pt-4">
+          <div className="container mx-auto py-4">
             <div className="flex items-center justify-between">
               <div className="text-white">
                 <h1 className="mb-4 text-4xl font-bold sm:text-6xl sm:leading-[4rem]">

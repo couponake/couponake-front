@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { signOut } from 'next-auth/react';
 // Create an axios instance with a base URL
-const baseURL = process.env.NEXT_API_URL || 'http://localhost:3000'; // Fallback for server
+const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'; // Fallback for server
 
 const axiosInstance = axios.create({
   baseURL,

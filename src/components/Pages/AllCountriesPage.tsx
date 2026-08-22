@@ -12,6 +12,21 @@ import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaGlobeAmericas, FaSearch, FaTimes } from "react-icons/fa";
 
+type Variants = {
+  hidden: {
+    y: number;
+    opacity: number;
+  };
+  visible: {
+    y: number;
+    opacity: number;
+    transition: {
+      type: "spring";
+      stiffness: number;
+    };
+  };
+};
+
 const AllCountriesPage = () => {
   const t = useTranslations();
   const [countries, setCountries] = useState<
@@ -90,7 +105,7 @@ const AllCountriesPage = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants : Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,

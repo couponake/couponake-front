@@ -136,7 +136,7 @@ export default async function Home({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
-      <section className="bg-gradient-to-b from-white to-gray-50 -mt-5">
+      <section className="bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-clip bg-clip-text text-transparent bg-gradient-to-r from-main-300 to-main-500">
