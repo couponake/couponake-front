@@ -6,6 +6,7 @@ import Categories from "@/components/Pages/Categories";
 import { cookies } from "next/headers";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
+import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
 
 export const experimental_ppr = true;
 
@@ -137,10 +138,11 @@ export default async function CategoriesPage({
             </div>
           </div>
         </div>
-        <div className="container mx-auto mt-8">
+       <div className="container px-0 py-18 overflow-hidden flex flex-col md:flex-row-reverse gap-5">
           <Suspense fallback={<StoresSkeleton hideSideBar />}>
             <Categories {...categories} />
           </Suspense>
+          <CuratedStoreWidget />
         </div>
       </section>
     </>

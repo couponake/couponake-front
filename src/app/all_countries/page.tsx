@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
+import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
 
 export async function generateMetadata() {
   const cookieStore = await cookies();
@@ -11,7 +12,6 @@ export async function generateMetadata() {
 
   //get the indexing settings of the all-countries page
   const indexingCountries = await getSettingEnabled(SettingsEnum.Countries);
-
 
   return {
     title: isArabic
@@ -24,7 +24,7 @@ export async function generateMetadata() {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}all_countries/` || "",
     },
     robots: {
-      index: indexingCountries
+      index: indexingCountries,
     },
     openGraph: {
       title: isArabic
@@ -93,7 +93,8 @@ const AllCountries = () => {
       {
         "@type": "WebPage",
         name: "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك",
-        description: "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب",
+        description:
+          "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب",
         url: `${baseUrl}all_countries/`,
         publisher: {
           "@type": "Organization",
@@ -113,7 +114,10 @@ const AllCountries = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
       />
-      <AllCountriesPage />
+      <section className="container flex flex-col md:flex-row-reverse gap-5 py-4 overflow-hidden">
+        <AllCountriesPage />
+        <CuratedStoreWidget />
+      </section>
     </>
   );
 };
