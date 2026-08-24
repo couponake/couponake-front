@@ -1,12 +1,13 @@
-import { api } from '@/lib/MyAxios';
-import ShowBlog from '@/components/Pages/Blogs/show';
-import { Blog } from '@/types';
-import { redirect } from 'next/navigation';
-import React from 'react';
-import { getSettingEnabled } from '@/services/getIndexingSettings';
-import { SettingsEnum } from '@/types/settingsEnum';
+import { api } from "@/lib/MyAxios";
+import ShowBlog from "@/components/Pages/Blogs/show";
+import { Blog } from "@/types";
+import { redirect } from "next/navigation";
+import React from "react";
+import { getSettingEnabled } from "@/services/getIndexingSettings";
+import { SettingsEnum } from "@/types/settingsEnum";
 
-import NotFound from '../not-found';
+import NotFound from "../not-found";
+import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
 
 export async function generateMetadata({
   params,
@@ -231,7 +232,10 @@ const BlogDetails = async ({
           __html: JSON.stringify(ratingSchema),
         }}
       />
-      <ShowBlog blog={blog} />
+      <section className="container flex flex-col md:flex-row-reverse gap-5 py-4 overflow-hidden">
+        <ShowBlog blog={blog} />
+        <CuratedStoreWidget />
+      </section>
     </>
   );
 };
