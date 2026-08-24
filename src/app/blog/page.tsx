@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { SettingsEnum } from '@/types/settingsEnum';
+import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
 
 export async function generateMetadata() {
   const cookieStore = await cookies();
@@ -136,16 +137,19 @@ export default async function Home({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
-      <section className="bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-clip bg-clip-text text-transparent bg-gradient-to-r from-main-300 to-main-500">
-              {t("Our Blog")}
-            </h1>
-            <div className="mt-8 w-24 h-1 bg-main-500 mx-auto rounded-full"></div>
-          </div>
+     <section className="px-0 py-18 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+        <div className="container mx-auto flex flex-col md:flex-row-reverse gap-5">
+          <div className="w-full max-w-5xl overflow-hidden">
+            <div className="w-full mx-auto text-center mb-8">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-clip bg-clip-text text-transparent bg-gradient-to-r from-main-300 to-main-500">
+                {t("Our Blog")}
+              </h1>
+              <div className="mt-8 w-24 h-1 bg-main-500 mx-auto rounded-full"></div>
+            </div>
 
-          <BlogsList {...blogs} />
+            <BlogsList {...blogs} />
+          </div>
+          <CuratedStoreWidget />
         </div>
       </section>
     </>

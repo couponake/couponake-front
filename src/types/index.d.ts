@@ -270,8 +270,7 @@ export type StoreProps = {
   category?: { id: number; name: string; slug: string }[];
   responsible: Responsibile;
   store_table:
-    | { id: number; code: string; title: string; description: string }[]
-    | [];
+    { id: number; code: string; title: string; description: string }[] | [];
   currency: string;
   saved_price: string;
   orders_number: number;
@@ -351,6 +350,7 @@ export type CouponProps = {
   created_at: string; // ISO date string
   updated_at: string; // ISO date string
   last_used: string;
+  landing_page: couponLandingPageResponse | null;
 };
 
 export type LatestCoupons = {
@@ -453,3 +453,49 @@ export type footerLinkType = {
   created_at: string;
   updated_at: string;
 };
+
+export type CuratedStore = {
+  id: number;
+  store_name: string;
+  image: string;
+  slug: string;
+};
+
+export type CuratedStoresResponse = {
+  status: string;
+  data: CuratedStore[];
+};
+export type couponLandingPageSuccess = {
+  status: "success";
+  data: couponLandingPageResponse;
+}
+
+export type couponLandingPageError = {
+  status: "error";
+  message: string;
+}
+
+
+export type couponLandingPageResponse = {
+  id: number;
+  title: string;
+  slug: string;
+  path: string;
+  headline: string;
+  description: string;
+  display_mode: string;
+  countdown_seconds: number;
+  redirect_url: string;
+  is_active: boolean;
+  buttons: couponLandingPageButton[];
+  created_at: string;
+  updated_at: string;
+};
+
+export type couponLandingPageButton = {
+    title: string;
+    url: string;
+    open_in: string;
+    image: null | string;
+    order: number;
+  }

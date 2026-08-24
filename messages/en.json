@@ -190,6 +190,7 @@
   "Stores from the same country": "Stores from the same country",
   "Stores from the same category": "Stores from the same category",
   "Similar Stores": "Similar Stores",
+  "popularStores": "Popular Stores",
   "Related coupons": "Related coupons",
   "aboutStore": "Your smart guide to discount codes",
   "Coupon Title": "Coupon Title",
@@ -385,5 +386,8 @@
   "downloadApp": "Download the app",
   "android": "android",
   "chooseCopy": "Choose your copy",
-  "footer_sitemap_url": "Site Map"
+  "footer_sitemap_url": "Site Map",
+  "redirecting": "Redirecting...",
+  "redirected": "Redirected successfully",
+  "second": "seconds"
 }
