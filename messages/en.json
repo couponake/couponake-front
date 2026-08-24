@@ -385,5 +385,8 @@
   "downloadApp": "Download the app",
   "android": "android",
   "chooseCopy": "Choose your copy",
-  "footer_sitemap_url": "Site Map"
+  "footer_sitemap_url": "Site Map",
+  "redirecting": "Redirecting...",
+  "redirected": "Redirected successfully",
+  "second": "seconds"
 }

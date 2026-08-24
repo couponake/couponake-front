@@ -1,6 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { CopyIcon, BadgePercent, CheckCircle, X, CircleCheckBig } from "lucide-react";
+import {
+  CopyIcon,
+  BadgePercent,
+  CheckCircle,
+  X,
+  CircleCheckBig,
+} from "lucide-react";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
 import { useTranslations, useLocale } from "next-intl";
 import { useStore } from "@/store";
@@ -17,14 +23,14 @@ import {
 import { Button } from "@heroui/button";
 
 interface Props {
-  storeName?: string
+  storeName?: string;
 }
 
 const ShowCouponDetails = ({ storeName }: Props) => {
   const t = useTranslations();
   const local = useLocale();
   const { selectedCoupon: coupon, setSelectedCoupon } = useStore(
-    (store) => store
+    (store) => store,
   );
   const [isCouponCopied, setIsCouponCopied] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -40,7 +46,7 @@ const ShowCouponDetails = ({ storeName }: Props) => {
       copyToClipboard(coupon?.code ?? "");
       setIsCouponCopied(true);
 
-      (window as any).gtag?.("event", 'coupons_copy', {
+      (window as any).gtag?.("event", "coupons_copy", {
         event_category: coupon?.slug,
         event_title: coupon?.title,
         coupon_id: coupon?.id,
@@ -55,8 +61,11 @@ const ShowCouponDetails = ({ storeName }: Props) => {
 
       setTimeout(() => {
         const link = document.createElement("a");
-        link.href = coupon?.url;
-        link.target = "_blank";
+        link.href =
+          coupon.landing_page === null
+            ? coupon?.url
+            : coupon?.landing_page?.path;
+        link.target = coupon.landing_page === null ? "_blank" : "_self";
         link.rel = "nofollow";
         link.click();
       }, 1000);
@@ -66,7 +75,6 @@ const ShowCouponDetails = ({ storeName }: Props) => {
       }, 2000);
     }
   };
-
 
   return (
     <Drawer open={!!coupon} onClose={toggleIsOpen}>
@@ -89,19 +97,16 @@ const ShowCouponDetails = ({ storeName }: Props) => {
         <div className="flex h-full scrollbar overflow-y-scroll max-h-full flex-col items-center justify-between">
           <div className="modal-header w-full">
             <div className="w-full px-2 pt-8 text-xs font-normal text-center text-neutral-600">
-              {
-                storeName ? (
-                  <>
-                    {t("CouponSource")}
-                    {local === "ar" ? ` ${storeName?.split("-")[0]}` : ` ${storeName?.split("-")[1]}`}
-                  </>
-                ) : (
-                  <>
-                    {t("CouponSource")}
-                  </>
-                )
-              }
-
+              {storeName ? (
+                <>
+                  {t("CouponSource")}
+                  {local === "ar"
+                    ? ` ${storeName?.split("-")[0]}`
+                    : ` ${storeName?.split("-")[1]}`}
+                </>
+              ) : (
+                <>{t("CouponSource")}</>
+              )}
             </div>
             <div className="flex items-center justify-between gap-2 border-b border-neutral-100 bg-white p-2 py-4 xs:p-5">
               <span>
@@ -132,8 +137,8 @@ const ShowCouponDetails = ({ storeName }: Props) => {
               </div>
             </div>
             <div className="w-full bg-white p-5 text-base sm:text-lg md:text-lg lg:text-lg xl:text-xl 2xl:text-3xl text-neutral-800">
-              {coupon?.description && (
-                storeName === undefined ? (
+              {coupon?.description &&
+                (storeName === undefined ? (
                   <>
                     <h3 className="mb-2.5 font-semibold">{t("Details")}:</h3>
                     <div
@@ -146,15 +151,14 @@ const ShowCouponDetails = ({ storeName }: Props) => {
                 ) : (
                   <>
                     <h3 className="mb-2.5 font-semibold">{t("Note")}:</h3>
-                    <div
-                      className="prose max-w-none leading-normal text-main-500 text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg 2xl:text-lg"
-                    >
+                    <div className="prose max-w-none leading-normal text-main-500 text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg 2xl:text-lg">
                       {t("StoreAnalytics")}
-                      {local === "ar" ? ` ${storeName?.split("-")[0]}` : ` ${storeName?.split("-")[1]}`}
+                      {local === "ar"
+                        ? ` ${storeName?.split("-")[0]}`
+                        : ` ${storeName?.split("-")[1]}`}
                     </div>
                   </>
-                )
-              )}
+                ))}
             </div>
 
             <div className="w-[90%] my-6">
@@ -164,7 +168,7 @@ const ShowCouponDetails = ({ storeName }: Props) => {
                   isCouponCopied && "bg-green-50",
                   coupon?.type === "coupon"
                     ? "justify-between"
-                    : "justify-center"
+                    : "justify-center",
                 )}
               >
                 {coupon?.type === "coupon" && (
@@ -176,7 +180,7 @@ const ShowCouponDetails = ({ storeName }: Props) => {
                   onClick={() => handleCopyCoupon()}
                   className={cn(
                     "m-2 flex cursor-pointer items-center gap-3 rounded-full transition-all duration-300 bg-main-600 px-4 py-2 text-sm text-white xs:px-8 xs:py-4 xs:text-lg",
-                    isCouponCopied && "bg-green-600"
+                    isCouponCopied && "bg-green-600",
                   )}
                 >
                   {isCouponCopied ? <CheckCircle /> : <CopyIcon />}

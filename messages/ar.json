@@ -368,5 +368,8 @@
   "downloadApp": "حمّل التطبيق",
   "android": "أندرويد",
   "chooseCopy": "اختر نسختك المناسبة",
-  "footer_sitemap_url": "خريطة الموقع"
+  "footer_sitemap_url": "خريطة الموقع",
+  "redirecting": "جاري إعادة توجيهك",
+  "redirected": "تم التوجيه بنجاح",
+  "second": "ثانية"
 }
