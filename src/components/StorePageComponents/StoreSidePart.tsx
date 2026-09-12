@@ -4,6 +4,7 @@ import { BannerItem, CouponProps, InfoItem, StoreProps } from "@/types";
 import { useLocale, useTranslations } from "next-intl";
 import SimilarStores from "./SimilarStores";
 import React from "react";
+import { useClientNow } from "@/hooks/useClientNow";
 import styles from "@/styles/htmlSideTablesScroll.module.css";
 import Hero from "../Pages/Home/Hero";
 
@@ -36,6 +37,7 @@ function StoreSidePart({
   const t = useTranslations();
   const locale = useLocale();
 
+  const now = useClientNow();
   const tableInfo = [
     {
       id: 0,
@@ -45,10 +47,12 @@ function StoreSidePart({
     {
       id: 1,
       label: `${t("Coupons date")}`,
-      value: `${new Date().toLocaleDateString(
-        locale === "ar" ? "ar-SA" : "en-US",
-        { month: "long" },
-      )}`,
+      // visitor's clock, not the ISR generation time (see useClientNow)
+      value: now
+        ? now.toLocaleDateString(locale === "ar" ? "ar-SA" : "en-US", {
+            month: "long",
+          })
+        : "",
     },
     ...(sideTable
       ? [
