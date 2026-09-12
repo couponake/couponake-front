@@ -13,7 +13,7 @@ export const HOME_REVALIDATE = 300;
  * Same return shape as getData(), but the request goes through Next's
  * Data Cache (fetch + next.revalidate) instead of an uncached axios call,
  * so SSR renders reuse the response instead of hitting api.coupoonat.com
- * on every page view.
+ * on every page view. See PR #109 for the measurements behind this.
  */
 export async function getCachedData<T = any>(
   url: string,
