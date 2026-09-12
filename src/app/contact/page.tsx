@@ -1,12 +1,10 @@
 import ContactUsPage from '@/components/Pages/ContactUsPage';
-import { cookies } from 'next/headers';
 import React from 'react';
 import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { SettingsEnum } from '@/types/settingsEnum';
 
 export async function generateMetadata() {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
+  const locale = "ar"; // site renders in Arabic only (static)
   const isArabic = locale === "ar";
 
   //get the indexing settings of the CONTACT page

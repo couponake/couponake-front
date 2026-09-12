@@ -1,4 +1,6 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "regions": ["dxb1", "bom1"],
   "headers": [
     {
       "source": "/sitemap.xml",

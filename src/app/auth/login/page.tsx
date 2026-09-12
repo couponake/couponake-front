@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { useTranslations } from "next-intl";
@@ -135,4 +135,11 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+// useSearchParams() needs a Suspense boundary so the route can be prerendered.
+const AuthPageWithBoundary = () => (
+  <Suspense fallback={null}>
+    <AuthPage />
+  </Suspense>
+);
+
+export default AuthPageWithBoundary;

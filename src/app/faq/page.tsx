@@ -1,14 +1,12 @@
 import FAQPage from '@/components/Pages/FAQ';
 import api from '@/lib/api';
 import { FaqItem } from '@/types';
-import { cookies } from 'next/headers';
 import React from 'react';
 import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { SettingsEnum } from '@/types/settingsEnum';
 
 export async function generateMetadata() {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
+  const locale = "ar"; // site renders in Arabic only (static)
   const isArabic = locale === "ar";
 
   //get the indexing settings of the FAQs page
@@ -60,7 +58,7 @@ export async function generateMetadata() {
 }
 
 const FAQ = async () => {
-  const data: { data: FaqItem[] } = await api.dynamic("home/faqs");
+  const data: { data: FaqItem[] } = await api.static("home/faqs", 3600);
   const FAQSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

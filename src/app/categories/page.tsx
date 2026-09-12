@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 import api from "@/lib/api";
 import StoresSkeleton from "@/components/loadingUis/StoresSkeleton";
 import Categories from "@/components/Pages/Categories";
-import { cookies } from "next/headers";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
@@ -11,8 +10,7 @@ import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
 export const experimental_ppr = true;
 
 export async function generateMetadata() {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
+  const locale = "ar"; // site renders in Arabic only (static)
   const isArabic = locale === "ar";
   //get the indexing settings of the Category page
   const indexingCategory = await getSettingEnabled(SettingsEnum.Categories);
