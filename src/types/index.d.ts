@@ -22,6 +22,7 @@ export interface Blog {
   slug: string;
   created_at: string;
   updated_at: string;
+  content_updated_at?: string; // real last content change (API)
   rate: string;
   voters: number;
   responsible: responsibile;
@@ -248,6 +249,7 @@ export type BannerItem = {
 };
 
 export type StoreProps = {
+  content_updated_at?: string; // real last content change (API)
   id?: number;
   keywords: string;
   title: string;

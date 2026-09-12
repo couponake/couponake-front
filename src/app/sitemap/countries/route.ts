@@ -17,7 +17,6 @@ export async function GET() {
       (name) => `
     <url>
       <loc>${baseURL}coupon_country/${encodeURI(name)}/</loc>
-      <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
@@ -35,7 +34,7 @@ export async function GET() {
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "public, max-age=1800",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

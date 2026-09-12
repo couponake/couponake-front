@@ -137,7 +137,7 @@ const BlogDetails = async ({
       },
     },
     datePublished: blog?.created_at,
-    dateModified: blog?.updated_at || blog?.created_at,
+    dateModified: blog?.content_updated_at || blog?.created_at,
   };
 
   const breadcrumbSchema = {
@@ -193,7 +193,7 @@ const BlogDetails = async ({
       url: blog?.image || `${baseUrl}noPreview.webp`,
     },
     datePublished: blog?.created_at,
-    dateModified: blog?.updated_at || blog?.created_at,
+    dateModified: blog?.content_updated_at || blog?.created_at,
   };
 
   const ratingSchema = {

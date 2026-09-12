@@ -18,7 +18,6 @@ export async function GET() {
   for (let page = 1; page <= pages; page++) {
     urls.push(`<url>
     <loc>${baseURL}stores-images/${page}/</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`);
@@ -34,7 +33,7 @@ export async function GET() {
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "no-cache, no-store, must-revalidate",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

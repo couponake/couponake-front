@@ -19,7 +19,6 @@ export async function GET() {
     for (let page = 1; page <= blogTotalPages; page++) {
       blogsURLs.push(`<sitemap>
         <loc>${baseURL}blogs/${page}/</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
         </sitemap>`);
     }
   }
@@ -33,12 +32,10 @@ export async function GET() {
     for (let page = 1; page <= StoresPages; page++) {
       StoreImagesURLs.push(`<sitemap>
       <loc>${baseURL}stores-images/${page}/</loc>
-      <lastmod>${new Date().toISOString()}</lastmod>
     </sitemap>`);
 
       storesURLs.push(`<sitemap>
       <loc>${baseURL}stores/${page}/</loc>
-      <lastmod>${new Date().toISOString()}</lastmod>
     </sitemap>`);
     }
   }
@@ -57,7 +54,6 @@ export async function GET() {
   const urls = URLs.map(
     (url) => `<sitemap>
     <loc>${url}</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
   </sitemap>`
   ).join("");
 
@@ -74,6 +70,7 @@ export async function GET() {
   return new NextResponse(sitemapIndex, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

@@ -82,7 +82,7 @@ export default async function Home({
       headline: post.title,
       url: `${baseUrl}${post.slug}`,
       datePublished: post.created_at,
-      dateModified: post.updated_at || post.created_at,
+      dateModified: post.content_updated_at || post.created_at,
       author: {
         "@type": "Organization",
         name: "كوبونات",

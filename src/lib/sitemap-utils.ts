@@ -4,58 +4,64 @@ import api from "./api";
 //blogs data with slugs
 export async function getAllBlogsData(
   pageNumber: number
-): Promise<{ slugs: string[]; totalPages: number }> {
+): Promise<{ slugs: string[]; lastmods: (string | undefined)[]; totalPages: number }> {
   try {
     const slugs: string[] = [];
+    const lastmods: (string | undefined)[] = [];
     const pageRequired = pageNumber;
     let totalPages: number = 0;
     const perPage: number = 300;
 
-    const res: any = await api.dynamic(
-      `blogs?page=${pageRequired}&per_page=${perPage}`
+    const res: any = await api.static(
+      `blogs?page=${pageRequired}&per_page=${perPage}`,
+      3600
     );
     const blogs = res.blogs as Blog[];
     slugs.push(...blogs.map((b) => b.slug));
+    lastmods.push(...blogs.map((b) => b.content_updated_at));
     totalPages = res.pagination.last_page;
 
     if (Number(pageRequired) > Number(totalPages)) {
-      return { slugs: [], totalPages: 0 };
+      return { slugs: [], lastmods: [], totalPages: 0 };
     }
 
-    return { slugs, totalPages };
+    return { slugs, lastmods, totalPages };
   } catch (error) {
     console.error("Failed to fetch all blogs slugs:", error);
-    return { slugs: [], totalPages: 0 };
+    return { slugs: [], lastmods: [], totalPages: 0 };
   }
 }
 
 //store data with images and slugs
 export async function getAllStoresData(
   pageNumber: number
-): Promise<{ images: string[]; totalPages: number; storesSlugs: string[] }> {
+): Promise<{ images: string[]; totalPages: number; storesSlugs: string[]; lastmods: (string | undefined)[] }> {
   try {
     const images: string[] = [];
     const pageRequired = pageNumber;
     let totalPages: number = 0;
     const storesSlugs: string[] = [];
+    const lastmods: (string | undefined)[] = [];
     const perPage: number = 50;
 
-    const res: any = await api.dynamic(
-      `stores/all-stores?page=${pageRequired}&per_page=${perPage}`
+    const res: any = await api.static(
+      `stores/all-stores?page=${pageRequired}&per_page=${perPage}`,
+      3600
     );
     const stores = res.stores as StoreProps[];
     images.push(...stores.map((b) => b.image));
     totalPages = res.pagination.last_page;
     storesSlugs.push(...stores.map((b) => b.slug));
+    lastmods.push(...stores.map((b) => b.content_updated_at));
 
     if (Number(pageRequired) > Number(totalPages)) {
-      return { images: [], totalPages: 0, storesSlugs: [] };
+      return { images: [], totalPages: 0, storesSlugs: [], lastmods: [] };
     }
 
-    return { images, totalPages, storesSlugs };
+    return { images, totalPages, storesSlugs, lastmods };
   } catch (error) {
     console.error("Failed to fetch stores data:", error);
-    return { images: [], totalPages: 0, storesSlugs: [] };
+    return { images: [], totalPages: 0, storesSlugs: [], lastmods: [] };
   }
 }
 
@@ -66,8 +72,9 @@ export async function getAllCountries(): Promise<string[]> {
     let hasMore = true;
 
     while (hasMore) {
-      const res: any = await api.dynamic(
-        `home/countries-meta?page=${page}&per_page=300`
+      const res: any = await api.static(
+        `home/countries-meta?page=${page}&per_page=300`,
+        3600
       );
       countries.push(...res.data.map((c: { name: string }) => c.name));
 
@@ -91,8 +98,9 @@ export async function getAllCategories(): Promise<string[]> {
     let hasMore = true;
 
     while (hasMore) {
-      const res: any = await api.dynamic(
-        `home/categories-data?page=${page}&per_page=300`
+      const res: any = await api.static(
+        `home/categories-data?page=${page}&per_page=300`,
+        3600
       );
       const categories = res.data as HeaderCategory[];
       slugs.push(...categories.map((b) => b.slug));
