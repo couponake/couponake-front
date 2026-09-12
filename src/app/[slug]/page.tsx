@@ -9,6 +9,10 @@ import { SettingsEnum } from "@/types/settingsEnum";
 import NotFound from "../not-found";
 import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
 
+// Blog data is cached for 5 minutes (stale-while-revalidate) instead of
+// being fetched from the API twice on every page view.
+const BLOG_REVALIDATE = 300;
+
 export async function generateMetadata({
   params,
 }: {
@@ -17,7 +21,7 @@ export async function generateMetadata({
   const slug = (await params).slug;
 
   try {
-    const response: any = await api.dynamic(`blogs/${slug}`);
+    const response: any = await api.static(`blogs/${slug}`, BLOG_REVALIDATE);
     if (response.redirect_url) {
       return {
         title: "Redirecting...",
@@ -82,7 +86,7 @@ const BlogDetails = async ({
 }) => {
   const slug = (await params).slug;
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-  const response: any = await api.dynamic(`blogs/${slug}`);
+  const response: any = await api.static(`blogs/${slug}`, BLOG_REVALIDATE);
 
   if (response.redirect_url) {
     redirect(response.redirect_url);

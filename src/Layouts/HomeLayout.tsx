@@ -21,7 +21,8 @@ const HomeLayout = async ({
   children: React.ReactNode;
   generalSettings: Settings;
 }) => {
-  const response: FooterLinksResponse = await api.dynamic("home/footer-links");
+  // Footer links change rarely; cache for 1 hour instead of refetching on every page render.
+  const response: FooterLinksResponse = await api.static("home/footer-links", 3600);
   const footerLinks = response?.data as footerLinkType[];
 
   const safeSettings = structuredClone(generalSettings);

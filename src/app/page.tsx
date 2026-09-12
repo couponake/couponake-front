@@ -1,5 +1,5 @@
 import Main from "@/components/Pages/Home/main";
-import { getData } from "@/lib/actions";
+import { getCachedData } from "@/lib/cached-data";
 import React from "react";
 import ClientSideComponents from "../components/HomePageComponents/ClientSideComponents";
 import ScrollTracker from "@/services/ScrollPageAnalytics";
@@ -17,11 +17,11 @@ export default async function Home() {
     collectionCount = { stores: 0, coupons: 0, used: 0 },
     testimonials = [],
   ] = await Promise.all([
-    getData("home/general-banners"),
-    getData("home/featured-stores"),
-    getData("home/latest-stores"),
-    getData("home/collection-count"),
-    getData("home/testimonials"),
+    getCachedData("home/general-banners"),
+    getCachedData("home/featured-stores"),
+    getCachedData("home/latest-stores"),
+    getCachedData("home/collection-count"),
+    getCachedData("home/testimonials"),
   ]);
 
   const calculatingReviewsValue = () => {
