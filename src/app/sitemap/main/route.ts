@@ -84,7 +84,6 @@ export async function GET() {
       (page) => `
     <url>
       <loc>${page.url}</loc>
-      <lastmod>${page.lastModified.toISOString()}</lastmod>
       <changefreq>${page.changeFrequency}</changefreq>
       <priority>${page.priority}</priority>
     </url>
@@ -102,6 +101,7 @@ export async function GET() {
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

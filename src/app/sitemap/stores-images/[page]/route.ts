@@ -2,6 +2,8 @@ import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings"
 import { getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
+const lastmod = (d?: string) => (d ? `<lastmod>${d}</lastmod>` : "");
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ page: string }> }
@@ -27,12 +29,12 @@ export async function GET(
   }
 
   const urls = slugs.images
-    .map((slug) => {
+    .map((slug, i) => {
       const safeSlug = escapeXml(encodeURI(slug));
       return `
   <url>
     <loc>${safeSlug}</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
+    ${lastmod(slugs.lastmods[i])}
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`;
@@ -50,7 +52,7 @@ export async function GET(
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "no-cache, no-store, must-revalidate",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

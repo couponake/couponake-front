@@ -2,6 +2,9 @@ import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings"
 import { getAllBlogsData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
+// <lastmod> only when the API reports a real content change; never a generated timestamp.
+const lastmod = (d?: string) => (d ? `<lastmod>${d}</lastmod>` : "");
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ page: string }> }
@@ -19,18 +22,13 @@ export async function GET(
   const baseURL = "https://coupoonat.com/";
 
   const urls = blogs.slugs
-    .map((slug) => {
+    .map((slug, i) => {
       return `
     <url>
       <loc>${baseURL}${encodeURI(slug)}/</loc>
-      <lastmod>${new Date().toISOString()}</lastmod>
+      ${lastmod(blogs.lastmods[i])}
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
-      <xhtml:link 
-        rel="canonical" 
-        href="${baseURL}${encodeURI(slug)}/"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-      />
     </url>
   `;
     })
@@ -47,7 +45,7 @@ export async function GET(
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "no-cache, no-store, must-revalidate",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }
