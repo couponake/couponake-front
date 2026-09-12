@@ -1,14 +1,12 @@
 import React from "react";
 import api from "@/lib/api";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
-import { cookies } from "next/headers";
 import type { Article, BreadcrumbList } from "schema-dts";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata() {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
+  const locale = "ar"; // site renders in Arabic only (static)
   const isArabic = locale === "ar";
   //get the indexing settings of the ABOUT page
   const indexingAbout = await getSettingEnabled(SettingsEnum.About);
@@ -59,14 +57,13 @@ export async function generateMetadata() {
 }
 
 const AboutUsPage = async () => {
-  const response: any = await api.dynamic(`home/page/about`);
+  const response: any = await api.static(`home/page/about`, 3600);
   const page = response.data as {
     title: string;
     content: string;
     created_at?: string;
   };
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
+  const locale = "ar"; // site renders in Arabic only (static)
 
   const articleSchema: Article = {
     "@context": "https://schema.org",

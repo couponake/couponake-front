@@ -6,6 +6,8 @@ import ScrollTracker from "@/services/ScrollPageAnalytics";
 
 export const experimental_ppr = true;
 export const runtime = "nodejs";
+// ISR: cache the rendered home page at the edge, refresh in the background.
+export const revalidate = 300;
 
 export default async function Home() {
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;

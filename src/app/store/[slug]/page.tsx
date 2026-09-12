@@ -12,6 +12,13 @@ import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
+// ISR: register the route for on-demand static generation. Pages are rendered
+// on first request, cached at the edge, and refreshed in the background.
+export const revalidate = 300;
+export async function generateStaticParams() {
+  return [];
+}
+
 // Store data is cached for 5 minutes (stale-while-revalidate) instead of
 // being fetched from the API on every page view.
 const STORE_REVALIDATE = 300;

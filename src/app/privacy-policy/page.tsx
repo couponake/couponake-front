@@ -1,13 +1,11 @@
 import api from '@/lib/api';
 import { secureHtmlLinks } from '@/lib/htmlUtils';
-import { cookies } from 'next/headers';
 import React from 'react';
 import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { SettingsEnum } from '@/types/settingsEnum';
 
 export async function generateMetadata() {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
+  const locale = "ar"; // site renders in Arabic only (static)
   const isArabic = locale === "ar";
 
   //get the indexing settings of the PRIVACY page
@@ -59,14 +57,13 @@ export async function generateMetadata() {
 }
 
 const PrivacyPage = async () => {
-  const response: any = await api.dynamic(`home/page/privacy-policy`);
+  const response: any = await api.static(`home/page/privacy-policy`, 3600);
   const page = response.data as {
     title: string;
     content: string;
     created_at?: string;
   };
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
+  const locale = "ar"; // site renders in Arabic only (static)
 
   const privacyPolicySchema = {
     "@context": "https://schema.org",

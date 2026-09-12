@@ -1,13 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
+import StoresSkeleton from "@/components/loadingUis/StoresSkeleton";
 import { getTranslations } from "next-intl/server";
 import Stores from "@/components/Pages/Stores";
-import { cookies } from "next/headers";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
 export async function generateMetadata() {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
+  const locale = "ar"; // site renders in Arabic only (static)
   const isArabic = locale === "ar";
   //get the indexing settings of the Stores page
   const indexingStores = await getSettingEnabled(SettingsEnum.Stores);
@@ -123,7 +122,10 @@ export default async function StoresPage({
           </div>
         </div>
         <div className="container mx-auto mt-8">
-          <Stores />
+          {/* Stores reads useSearchParams(); the Suspense boundary lets the page prerender (ISR) */}
+          <Suspense fallback={<StoresSkeleton />}>
+            <Stores />
+          </Suspense>
         </div>
       </section>
     </>

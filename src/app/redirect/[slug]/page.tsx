@@ -8,7 +8,6 @@ import {
 } from "@/types";
 import { Avatar } from "@heroui/avatar";
 import { ArrowLeft } from "lucide-react";
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 
@@ -88,8 +87,7 @@ async function CouponLandingPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("NEXT_LOCALE")?.value || "ar";
+  const locale = "ar"; // site renders in Arabic only (static)
   const isArabic = locale === "ar";
 
   try {

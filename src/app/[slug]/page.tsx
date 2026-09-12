@@ -9,6 +9,13 @@ import { SettingsEnum } from "@/types/settingsEnum";
 import NotFound from "../not-found";
 import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
 
+// ISR: register the route for on-demand static generation. Pages are rendered
+// on first request, cached at the edge, and refreshed in the background.
+export const revalidate = 300;
+export async function generateStaticParams() {
+  return [];
+}
+
 // Blog data is cached for 5 minutes (stale-while-revalidate) instead of
 // being fetched from the API twice on every page view.
 const BLOG_REVALIDATE = 300;
