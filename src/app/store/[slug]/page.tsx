@@ -1,17 +1,20 @@
 import ShowStore from "@/components/Pages/Stores/show";
 import { StoreResponse } from "@/hooks/useStoreData";
-import api from "@/lib/api";
+import { api } from "@/lib/MyAxios";
 import getStructuredDataSchemas from "@/schema/storeSchema";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
+
+// Store data is cached for 5 minutes (stale-while-revalidate) instead of
+// being fetched from the API on every page view.
+const STORE_REVALIDATE = 300;
 
 interface storeSeoType {
   title: string;
@@ -26,7 +29,11 @@ interface storeSeoType {
 }
 
 async function getStore(slug: string) {
-  const data = await api.request.get<StoreResponse>(`/stores/store/${slug}`);
+  // MyAxios api.static understands the API's 301-with-JSON redirect_url responses.
+  const data = await api.static<StoreResponse>(
+    `stores/store/${slug}`,
+    STORE_REVALIDATE
+  );
   return data;
 }
 
@@ -38,24 +45,10 @@ export async function generateMetadata({
   // Fetch SEO data
   const slug = (await params).slug;
 
-  const headerList = await headers();
-  const url = headerList.get("x-url") || ""; // optional: inject from middleware
-  const hasCouponID = url.includes("couponID="); // OR parse from searchParams if available
-
-  if (hasCouponID) {
-    return {
-      title: "Redirecting...",
-      description: "Invalid URL with coupon ID",
-      robots: {
-        index: false,
-        follow: true,
-      },
-    };
-  }
-
   try {
     const response: { store_seo: storeSeoType } = await api.static(
-      `stores/seo/${slug}`
+      `stores/seo/${slug}`,
+      STORE_REVALIDATE
     );
 
     if ((response as any).redirect_url) {
