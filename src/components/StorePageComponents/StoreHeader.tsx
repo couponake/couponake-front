@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import { useClientNow } from '@/hooks/useClientNow'
 import Image from 'next/image'
 import { StarIcon } from 'lucide-react'
 import RateThisComponent from '@/components/StorePageComponents/RateThisComponent'
@@ -19,6 +20,8 @@ interface HeaderProps {
 }
 
 function StoreHeader({ store_id, store_slug, store_image, store_title, isMobile, store_rate, store_voters, store_isInFavorites, locale, t }: HeaderProps) {
+  // Visitor's clock, not the ISR generation time (see useClientNow)
+  const now = useClientNow()
   return (
     <header className="w-full">
       <div className="bg-gradient-to-r from-main-700 to-main-600 shadow-lg">
@@ -62,12 +65,16 @@ function StoreHeader({ store_id, store_slug, store_image, store_title, isMobile,
                   <div className="flex items-center gap-2 text-white text-sm">
                     <p>
                       {t("Last updated")} {": "}
-                      {new Date().toLocaleDateString(locale === "ar" ? 'ar-SA' : 'en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                      {" ( " + `${t("Today")}` + " ) "}
+                      {now && (
+                        <>
+                          {now.toLocaleDateString(locale === "ar" ? 'ar-SA' : 'en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}
+                          {" ( " + `${t("Today")}` + " ) "}
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>
