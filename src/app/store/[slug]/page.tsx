@@ -12,16 +12,60 @@ import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
-// ISR: register the route for on-demand static generation. Pages are rendered
-// on first request, cached at the edge, and refreshed in the background.
+// ISR: every published store is rendered once at build time and served from
+// the edge from the first request; pages are refreshed in the background
+// every `revalidate` seconds. Stores created after the build are rendered on
+// demand (dynamicParams is true by default) and cached the same way.
 export const revalidate = 300;
-export async function generateStaticParams() {
-  return [];
-}
+export const dynamicParams = true;
 
 // Store data is cached for 5 minutes (stale-while-revalidate) instead of
 // being fetched from the API on every page view.
 const STORE_REVALIDATE = 300;
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
+
+// Retry waits for the store fetch. api.coupoonat.com sits behind a Cloudflare
+// rate limit of 200 requests / 10 s per IP that blocks for 10 s, so the last
+// wait outlasts a block.
+const RETRY_DELAYS_MS = [1000, 3000, 11000];
+const FETCH_TIMEOUT_MS = 15000;
+
+export async function generateStaticParams() {
+  const slugs: string[] = [];
+
+  try {
+    const perPage = 100;
+    let page = 1;
+    let lastPage = 1;
+
+    do {
+      // Same endpoint and pagination shape the sitemap uses (only is_deleted = 0).
+      const res: any = await api.static(
+        `stores/all-stores?page=${page}&per_page=${perPage}`,
+        3600
+      );
+      const stores: any[] = Array.isArray(res?.stores) ? res.stores : [];
+      if (stores.length === 0) break;
+
+      slugs.push(
+        ...stores
+          .map((s) => s?.slug)
+          .filter((s): s is string => typeof s === "string" && s.length > 0)
+      );
+
+      lastPage = Number(res?.pagination?.last_page) || page;
+      page++;
+    } while (page <= lastPage && page <= 50);
+  } catch (error) {
+    // Never fail the build over the list: fall back to on-demand rendering.
+    console.error(
+      "generateStaticParams(store): could not list stores, falling back to on-demand rendering:",
+      error
+    );
+  }
+
+  return slugs.map((slug) => ({ slug }));
+}
 
 interface storeSeoType {
   title: string;
@@ -35,13 +79,67 @@ interface storeSeoType {
   "og:image": string;
 }
 
-async function getStore(slug: string) {
-  // MyAxios api.static understands the API's 301-with-JSON redirect_url responses.
-  const data = await api.static<StoreResponse>(
-    `stores/store/${slug}`,
-    STORE_REVALIDATE
-  );
-  return data;
+type StoreFetchResult = StoreResponse | { redirect_url: string } | null;
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Fetches a store through Next's Data Cache (same key/tag MyAxios used).
+ *
+ * - 200 → the store payload
+ * - 301 with a JSON redirect_url (deleted store with a replacement) → { redirect_url }
+ * - 404 → null (the caller answers with a real 404)
+ * - anything else (network error, timeout, 429, 5xx) → retried, then thrown.
+ *   Throwing matters: a swallowed failure used to become an empty payload and
+ *   therefore a 404 cached for the revalidate window — and, at build time, a
+ *   static 404 shipped for a real store. A thrown error is an uncached 500 at
+ *   runtime and a failed build at build time; neither can be indexed as "gone".
+ */
+async function getStore(slug: string): Promise<StoreFetchResult> {
+  const endpoint = `stores/store/${slug}`;
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
+    try {
+      const response = await fetch(`${API_BASE}${endpoint}`, {
+        next: { revalidate: STORE_REVALIDATE, tags: [endpoint] },
+        headers: {
+          Accept: "application/json",
+          "Accept-Language": "ar",
+        },
+        signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+      });
+
+      if (response.status === 404) {
+        return null;
+      }
+
+      if (response.status === 301) {
+        const data = await response.json().catch(() => null);
+        return data?.redirect_url ? (data as { redirect_url: string }) : null;
+      }
+
+      if (response.ok) {
+        return (await response.json()) as StoreResponse;
+      }
+
+      lastError = new Error(`API error: ${response.status} at ${endpoint}`);
+      // Only rate limiting and server-side failures are worth retrying.
+      if (response.status !== 429 && response.status < 500) {
+        break;
+      }
+    } catch (error) {
+      lastError = error;
+    }
+
+    if (attempt < RETRY_DELAYS_MS.length) {
+      await sleep(RETRY_DELAYS_MS[attempt]);
+    }
+  }
+
+  throw lastError instanceof Error
+    ? lastError
+    : new Error(`Store fetch failed at ${endpoint}`);
 }
 
 export async function generateMetadata({
@@ -142,10 +240,10 @@ const ShowStorePage = async ({
   // fetch store once
   const storeData = await getStore(slug);
 
-  if ((storeData as any)?.redirect_url) {
+  if (storeData && "redirect_url" in storeData && storeData.redirect_url) {
     // Deleted store with a replacement: keep the 301 (checked first, as before).
-    redirect((storeData as any).redirect_url);
-  } else if (!storeData || !storeData.store) {
+    redirect(storeData.redirect_url);
+  } else if (!storeData || !("store" in storeData) || !storeData.store) {
     // Unknown, deleted-without-replacement or unpublished store: a real 404
     // status instead of the store template rendered empty with 200 (soft 404).
     notFound();
