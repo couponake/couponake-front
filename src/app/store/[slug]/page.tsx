@@ -24,7 +24,7 @@ export const dynamicParams = true;
 const STORE_REVALIDATE = 300;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
 
-// Retry waits for the store fetch. api.coupoonat.com sits behind a Cloudflare
+// Retry waits for the store fetches. api.coupoonat.com sits behind a Cloudflare
 // rate limit of 200 requests / 10 s per IP that blocks for 10 s, so the last
 // wait outlasts a block.
 const RETRY_DELAYS_MS = [1000, 3000, 11000];
@@ -79,24 +79,27 @@ interface storeSeoType {
   "og:image": string;
 }
 
-type StoreFetchResult = StoreResponse | { redirect_url: string } | null;
+type ApiResult<T> =
+  | { kind: "ok"; data: T }
+  | { kind: "redirect"; redirect_url: string }
+  | { kind: "not_found" };
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
- * Fetches a store through Next's Data Cache (same key/tag MyAxios used).
+ * Fetches a store endpoint through Next's Data Cache (same key/tag MyAxios used).
  *
- * - 200 → the store payload
- * - 301 with a JSON redirect_url (deleted store with a replacement) → { redirect_url }
- * - 404 → null (the caller answers with a real 404)
+ * - 200 → { kind: "ok", data }
+ * - 301 with a JSON redirect_url (deleted store with a replacement) → { kind: "redirect" }
+ * - 404 → { kind: "not_found" }
  * - anything else (network error, timeout, 429, 5xx) → retried, then thrown.
- *   Throwing matters: a swallowed failure used to become an empty payload and
- *   therefore a 404 cached for the revalidate window — and, at build time, a
- *   static 404 shipped for a real store. A thrown error is an uncached 500 at
- *   runtime and a failed build at build time; neither can be indexed as "gone".
+ *   Throwing matters: MyAxios.api.static swallows every failure into {}, which
+ *   turned a transient API error into a real store served as a 404 (or with
+ *   fallback metadata) cached for the revalidate window — and, at build time,
+ *   shipped that way to every region. A thrown error is an uncached 500 at
+ *   runtime and a retried/failed build at build time; neither can be indexed.
  */
-async function getStore(slug: string): Promise<StoreFetchResult> {
-  const endpoint = `stores/store/${slug}`;
+async function fetchStoreApi<T>(endpoint: string): Promise<ApiResult<T>> {
   let lastError: unknown;
 
   for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
@@ -111,16 +114,18 @@ async function getStore(slug: string): Promise<StoreFetchResult> {
       });
 
       if (response.status === 404) {
-        return null;
+        return { kind: "not_found" };
       }
 
       if (response.status === 301) {
         const data = await response.json().catch(() => null);
-        return data?.redirect_url ? (data as { redirect_url: string }) : null;
+        return data?.redirect_url
+          ? { kind: "redirect", redirect_url: String(data.redirect_url) }
+          : { kind: "not_found" };
       }
 
       if (response.ok) {
-        return (await response.json()) as StoreResponse;
+        return { kind: "ok", data: (await response.json()) as T };
       }
 
       lastError = new Error(`API error: ${response.status} at ${endpoint}`);
@@ -142,6 +147,10 @@ async function getStore(slug: string): Promise<StoreFetchResult> {
     : new Error(`Store fetch failed at ${endpoint}`);
 }
 
+async function getStore(slug: string) {
+  return fetchStoreApi<StoreResponse>(`stores/store/${slug}`);
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -150,81 +159,74 @@ export async function generateMetadata({
   // Fetch SEO data
   const slug = (await params).slug;
 
-  try {
-    const response: { store_seo: storeSeoType } = await api.static(
-      `stores/seo/${slug}`,
-      STORE_REVALIDATE
-    );
+  const response = await fetchStoreApi<{ store_seo: storeSeoType }>(
+    `stores/seo/${slug}`
+  );
 
-    if ((response as any).redirect_url) {
-      return {
-        title: "Redirecting...",
-        description: "You are being redirected to the correct page",
-        alternates: {
-          canonical: (response as any).redirect_url,
-        },
-        robots: {
-          index: false,
-          follow: true,
-        },
-      };
-    }
-
-    const seoData: storeSeoType = response?.store_seo;
-    //get the indexing settings of the Store page
-    const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
-
-    // Default values in case API fails
-    if (!seoData) {
-      return {
-        title: "كوبونات",
-        description: "كوبونات",
-      };
-    }
-
+  if (response.kind === "redirect") {
     return {
-      // Basic metadata
-      title: seoData.title || "كوبونات",
-      description: seoData.description || "كوبونات",
+      title: "Redirecting...",
+      description: "You are being redirected to the correct page",
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
+        canonical: response.redirect_url,
       },
       robots: {
-        index: indexingStore,
+        index: false,
+        follow: true,
       },
-      // OpenGraph metadata
-      openGraph: {
-        title: seoData["og:title"] || seoData.title || "كوبونات",
-        description:
-          seoData["og:description"] || seoData.description || "كوبونات",
-        images: [
-          {
-            url: seoData["og:image"] || "",
-            alt: seoData["og:description"] || "",
-          },
-        ],
-      },
-
-      // Twitter metadata
-      twitter: {
-        card: "summary_large_image",
-        title: seoData["twitter:title"] || seoData.title || "كوبونات",
-        description:
-          seoData["twitter:description"] || seoData.description || "كوبونات",
-        images: [
-          {
-            url: seoData["twitter:image"] || "",
-            alt: seoData["twitter:description"] || "",
-          },
-        ],
-      },
-    };
-  } catch {
-    return {
-      title: "Error Loading Page",
-      description: "An error occurred while loading this page",
     };
   }
+
+  const seoData: storeSeoType | undefined =
+    response.kind === "ok" ? response.data?.store_seo : undefined;
+  //get the indexing settings of the Store page
+  const indexingStore = await getSettingEnabled(SettingsEnum.Stores);
+
+  // Default values when the store does not exist (the page itself answers 404)
+  if (!seoData) {
+    return {
+      title: "كوبونات",
+      description: "كوبونات",
+    };
+  }
+
+  return {
+    // Basic metadata
+    title: seoData.title || "كوبونات",
+    description: seoData.description || "كوبونات",
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
+    },
+    robots: {
+      index: indexingStore,
+    },
+    // OpenGraph metadata
+    openGraph: {
+      title: seoData["og:title"] || seoData.title || "كوبونات",
+      description:
+        seoData["og:description"] || seoData.description || "كوبونات",
+      images: [
+        {
+          url: seoData["og:image"] || "",
+          alt: seoData["og:description"] || "",
+        },
+      ],
+    },
+
+    // Twitter metadata
+    twitter: {
+      card: "summary_large_image",
+      title: seoData["twitter:title"] || seoData.title || "كوبونات",
+      description:
+        seoData["twitter:description"] || seoData.description || "كوبونات",
+      images: [
+        {
+          url: seoData["twitter:image"] || "",
+          alt: seoData["twitter:description"] || "",
+        },
+      ],
+    },
+  };
 }
 
 const ShowStorePage = async ({
@@ -238,18 +240,21 @@ const ShowStorePage = async ({
   const queryClient = new QueryClient();
 
   // fetch store once
-  const storeData = await getStore(slug);
+  const result = await getStore(slug);
 
-  if (storeData && "redirect_url" in storeData && storeData.redirect_url) {
+  if (result.kind === "redirect") {
     // Deleted store with a replacement: keep the 301 (checked first, as before).
-    redirect(storeData.redirect_url);
-  } else if (!storeData || !("store" in storeData) || !storeData.store) {
+    redirect(result.redirect_url);
+  }
+
+  if (result.kind !== "ok" || !result.data?.store) {
     // Unknown, deleted-without-replacement or unpublished store: a real 404
     // status instead of the store template rendered empty with 200 (soft 404).
     notFound();
-  } else {
-    schemas = getStructuredDataSchemas(storeData);
   }
+
+  const storeData = result.data;
+  schemas = getStructuredDataSchemas(storeData);
 
   await queryClient.prefetchQuery({
     queryKey: ["store", slug],
