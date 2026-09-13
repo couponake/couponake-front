@@ -1,4 +1,5 @@
 import AllCountriesPage from "@/components/Pages/AllCountriesPage";
+import api from "@/lib/api";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
@@ -56,8 +57,20 @@ export async function generateMetadata() {
   };
 }
 
-const AllCountries = () => {
+const AllCountries = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
+  // First page of countries fetched on the server so the 12 country links are
+  // in the prerendered HTML. The client component fetched them through
+  // /api/home/countries-meta, which robots.txt disallows — so even after
+  // rendering, crawlers saw an empty list (audit finding F-04).
+  const countriesRes: any = await api.static(
+    "home/countries-meta?page=1&perPage=20",
+    3600
+  );
+  const initialCountries = Array.isArray(countriesRes?.data)
+    ? countriesRes.data
+    : null;
+  const initialPagination = countriesRes?.meta ?? null;
 
   const graph = {
     "@context": "https://schema.org",
@@ -113,7 +126,10 @@ const AllCountries = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
       />
       <section className="container flex flex-col md:flex-row-reverse gap-5 py-4 overflow-hidden">
-        <AllCountriesPage />
+        <AllCountriesPage
+        initialCountries={initialCountries}
+        initialPagination={initialPagination}
+      />
         <CuratedStoreWidget />
       </section>
     </>

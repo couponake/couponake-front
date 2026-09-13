@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import api from "@/lib/api";
 import StoresSkeleton from "@/components/loadingUis/StoresSkeleton";
 import Categories from "@/components/Pages/Categories";
+import CategoriesStaticGrid from "@/components/Pages/Categories/StaticGrid";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
@@ -137,7 +138,16 @@ export default async function CategoriesPage({
           </div>
         </div>
        <div className="container px-0 py-18 overflow-hidden flex flex-col md:flex-row-reverse gap-5">
-          <Suspense fallback={<StoresSkeleton hideSideBar />}>
+          {/* Fallback = server-rendered links (crawlable); <Categories/> is client-rendered (useSearchParams) */}
+          <Suspense
+            fallback={
+              categories?.categories?.length ? (
+                <CategoriesStaticGrid categories={categories.categories} />
+              ) : (
+                <StoresSkeleton hideSideBar />
+              )
+            }
+          >
             <Categories {...categories} />
           </Suspense>
           <CuratedStoreWidget />
