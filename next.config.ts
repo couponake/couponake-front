@@ -43,6 +43,15 @@ const nextConfig: NextConfig = {
       "@heroui/modal",
     ],
     scrollRestoration: true,
+    // Build-time prerender of the store pages (store/[slug]/generateStaticParams)
+    // makes ~2 API calls per store from the single build IP. api.coupoonat.com
+    // sits behind a Cloudflare rate limit of 200 requests / 10 s per IP and a
+    // PHP-FPM pool of 5 workers, so static generation runs in one worker, 3 pages
+    // at a time, and retries a page whose render fails before failing the build.
+    // Build-time only; nothing at runtime changes.
+    cpus: 1,
+    staticGenerationMaxConcurrency: 3,
+    staticGenerationRetryCount: 3,
   },
   poweredByHeader: false,
   compress: true,
