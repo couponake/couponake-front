@@ -1,4 +1,4 @@
-import { api } from "@/lib/MyAxios";
+import { fetchApi } from "@/lib/api-result";
 import ShowBlog from "@/components/Pages/Blogs/show";
 import { Blog } from "@/types";
 import { notFound, redirect } from "next/navigation";
@@ -26,23 +26,29 @@ export async function generateMetadata({
 }) {
   const slug = (await params).slug;
 
-  try {
-    const response: any = await api.static(`blogs/${slug}`, BLOG_REVALIDATE);
-    if (response.redirect_url) {
-      return {
-        title: "Redirecting...",
-        description: "You are being redirected to the correct page",
-        alternates: {
-          canonical: response.redirect_url,
-        },
-        robots: {
-          index: false,
-          follow: true,
-        },
-      };
-    }
+  const response = await fetchApi<{ blog: Blog }>(`blogs/${slug}`, {
+    revalidate: BLOG_REVALIDATE,
+  });
+  if (response.kind === "redirect") {
+    return {
+      title: "Redirecting...",
+      description: "You are being redirected to the correct page",
+      alternates: {
+        canonical: response.redirect_url,
+      },
+      robots: {
+        index: false,
+        follow: true,
+      },
+    };
+  }
+  if (response.kind === "not_found" || !response.data?.blog) {
+    // The page itself answers 404 (notFound()); metadata is irrelevant.
+    return { title: "كوبونات", description: "كوبونات" };
+  }
 
-    const blog = response.blog as Blog;
+  {
+    const blog = response.data.blog;
     //get the indexing settings of the Blog page
     const indexingBlog = await getSettingEnabled(SettingsEnum.Blogs);
 
@@ -77,11 +83,6 @@ export async function generateMetadata({
         ],
       },
     };
-  } catch {
-    return {
-      title: "Error Loading Page",
-      description: "An error occurred while loading this page",
-    };
   }
 }
 
@@ -92,26 +93,30 @@ const BlogDetails = async ({
 }) => {
   const slug = (await params).slug;
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-  const response: any = await api.static(`blogs/${slug}`, BLOG_REVALIDATE);
+  // fetchApi tells a missing post (API 404 → real 404 here) apart from an API
+  // failure (thrown → uncached 500), so a service hiccup is never cached as 404.
+  const response = await fetchApi<{ blog: Blog }>(`blogs/${slug}`, {
+    revalidate: BLOG_REVALIDATE,
+  });
 
-  if (response.redirect_url) {
+  if (response.kind === "redirect") {
     redirect(response.redirect_url);
   }
 
   // Unknown slug (bot probes like /wp-login.php, deleted or unpublished posts):
   // a real 404 status, not the not-found UI rendered as a 200 page (soft 404).
-  if (response?.status === "error" || !response?.blog) {
+  if (response.kind !== "ok" || !response.data?.blog) {
     notFound();
   }
 
-  const blog = response.blog as Blog;
+  const blog = response.data.blog;
 
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${baseUrl}${encodeURIComponent(blog?.slug)}`,
+      "@id": `${baseUrl}${encodeURIComponent(blog?.slug)}/`,
     },
     headline: blog?.blog_seo?.title,
     name: blog?.blog_seo?.title,

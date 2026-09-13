@@ -1,9 +1,8 @@
 import React from "react";
-import api from "@/lib/api";
+import { fetchApi } from "@/lib/api-result";
 import ShowCategory from "@/components/Pages/Categories/show";
 import { CategoryItem } from "@/types";
-import { redirect } from "next/navigation";
-import NotFound from "@/app/not-found";
+import { notFound, redirect } from "next/navigation";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
@@ -14,23 +13,31 @@ export async function generateMetadata({
 }) {
   const slug = (await params).slug;
 
-  try {
-    const response: any = await api.dynamic(`categories/${slug}`);
-    if (response.redirect_url) {
-      return {
-        title: "Redirecting...",
-        description: "You are being redirected to the correct page",
-        alternates: {
-          canonical: response.redirect_url,
-        },
-        robots: {
-          index: false,
-          follow: true,
-        },
-      };
-    }
+  // Same caching semantics as before (no-store); only the failure handling changes.
+  const response = await fetchApi<{ category: CategoryItem }>(
+    `categories/${slug}`,
+    { revalidate: false }
+  );
+  if (response.kind === "redirect") {
+    return {
+      title: "Redirecting...",
+      description: "You are being redirected to the correct page",
+      alternates: {
+        canonical: response.redirect_url,
+      },
+      robots: {
+        index: false,
+        follow: true,
+      },
+    };
+  }
+  if (response.kind === "not_found" || !response.data?.category) {
+    // The page itself answers 404 (notFound()); metadata is irrelevant.
+    return { title: "كوبونات", description: "كوبونات" };
+  }
 
-    const category = response.category as CategoryItem;
+  {
+    const category = response.data.category;
     //get the indexing settings of the Category page
     const indexingCategory = await getSettingEnabled(SettingsEnum.Categories);
 
@@ -67,11 +74,6 @@ export async function generateMetadata({
         ],
       },
     };
-  } catch {
-    return {
-      title: "Error Loading Page",
-      description: "An error occurred while loading this page",
-    };
   }
 }
 
@@ -81,18 +83,24 @@ const ShowCouponCategoryPage = async ({
   params: Promise<{ slug: string; locale: string }>;
 }) => {
   const slug = (await params).slug;
-  const category: any = await api.dynamic(`categories/${slug}`);
+  // fetchApi: API 404 → real 404 here (was the not-found UI rendered with a
+  // 200 status — soft 404); API failure → thrown (uncached 500).
+  const response = await fetchApi<{ category: CategoryItem }>(
+    `categories/${slug}`,
+    { revalidate: false }
+  );
 
-  if (category.redirect_url) {
-    redirect(category.redirect_url);
+  if (response.kind === "redirect") {
+    redirect(response.redirect_url);
   }
 
-  if (category?.status === 'error' || !category?.category) {
-    return NotFound();
+  if (response.kind !== "ok" || !response.data?.category) {
+    notFound();
   }
 
+  const category: any = response.data;
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-  const categoryData = category?.category as CategoryItem;
+  const categoryData = category.category as CategoryItem;
 
   const graph = {
     "@context": "https://schema.org",
@@ -150,7 +158,7 @@ const ShowCouponCategoryPage = async ({
             ?.map((store: any, index: number) => ({
               "@type": "webPage",
               name: store.store_name,
-              url: `${baseUrl}store/${store.slug}`,
+              url: `${baseUrl}store/${store.slug}/`,
               identifier: store.id,
               position: index + 1,
             })),
