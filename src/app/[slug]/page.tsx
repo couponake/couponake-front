@@ -1,12 +1,11 @@
 import { api } from "@/lib/MyAxios";
 import ShowBlog from "@/components/Pages/Blogs/show";
 import { Blog } from "@/types";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
-import NotFound from "../not-found";
 import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
 
 // ISR: register the route for on-demand static generation. Pages are rendered
@@ -99,8 +98,10 @@ const BlogDetails = async ({
     redirect(response.redirect_url);
   }
 
+  // Unknown slug (bot probes like /wp-login.php, deleted or unpublished posts):
+  // a real 404 status, not the not-found UI rendered as a 200 page (soft 404).
   if (response?.status === "error" || !response?.blog) {
-    return NotFound();
+    notFound();
   }
 
   const blog = response.blog as Blog;
