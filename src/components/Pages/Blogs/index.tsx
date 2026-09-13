@@ -14,11 +14,16 @@ export default function BlogsList({
   blogs,
   pagination,
 }: {
-  blogs: { data: Blog[] } | null;
+  blogs: Blog[] | null;
   pagination: paginationProps;
 }) {
-  const [allBlogs, setBlogs] = useState(blogs?.data);
-  const [isLoading, setLoading] = useState(true);
+  // The server passes page 1; render it immediately (HTML carries the post
+  // links for crawlers) and only fetch when nothing was provided.
+  const hasInitial = Array.isArray(blogs) && blogs.length > 0;
+  const [allBlogs, setBlogs] = useState<Blog[] | undefined>(
+    hasInitial ? blogs : undefined
+  );
+  const [isLoading, setLoading] = useState(!hasInitial);
   const [paginate, setPagination] = useState<paginationProps>(pagination);
   const [trackScroll, setTrackScroll] = useState<boolean>(false);
 
@@ -44,7 +49,9 @@ export default function BlogsList({
   };
 
   useEffect(() => {
-    fetchBlogs();
+    if (!hasInitial) {
+      fetchBlogs();
+    }
 
     // Delay ScrollTracker activation until after scroll is reset
     const timeout = setTimeout(() => {

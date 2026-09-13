@@ -27,17 +27,30 @@ type Variants = {
   };
 };
 
-const AllCountriesPage = () => {
+type CountryEntry = { name: string; meta: any };
+
+const AllCountriesPage = ({
+  initialCountries = null,
+  initialPagination = null,
+}: {
+  initialCountries?: CountryEntry[] | null;
+  initialPagination?: paginationProps | null;
+}) => {
   const t = useTranslations();
-  const [countries, setCountries] = useState<
-    { name: string; meta: any }[] | null
-  >(null);
+  // When the server provides page 1 the list renders immediately (links in the
+  // HTML); the client only fetches for search / pagination.
+  const hasInitial = Array.isArray(initialCountries) && initialCountries.length > 0;
+  const [countries, setCountries] = useState<CountryEntry[] | null>(
+    hasInitial ? initialCountries : null
+  );
   const [filteredCountries, setFilteredCountries] = useState<
-    { name: string; meta: any }[] | null
-  >(null);
-  const [pagination, setPagination] = useState<paginationProps | null>(null);
+    CountryEntry[] | null
+  >(hasInitial ? initialCountries : null);
+  const [pagination, setPagination] = useState<paginationProps | null>(
+    hasInitial ? initialPagination : null
+  );
   const [searchQuery, setSearchQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!hasInitial);
   const [currentPage, setCurrentPage] = useState(1);
 
   const fetchCountries = async (page = 1, search?: string) => {
@@ -65,7 +78,10 @@ const AllCountriesPage = () => {
   };
 
   useEffect(() => {
-    fetchCountries(1);
+    if (!hasInitial) {
+      fetchCountries(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlePageChange = (page: number) => {

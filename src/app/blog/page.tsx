@@ -145,7 +145,8 @@ export default async function Home({
               <div className="mt-8 w-24 h-1 bg-main-500 mx-auto rounded-full"></div>
             </div>
 
-            <BlogsList {...blogs} />
+            {/* The API returns blogs as an array; pass it explicitly so the first page renders on the server */}
+            <BlogsList blogs={blogs?.blogs ?? null} pagination={blogs?.pagination} />
           </div>
           <CuratedStoreWidget />
         </div>

@@ -25,10 +25,22 @@ export default function BlogCard({ blog }: BlogCardProps) {
   const t = useTranslations();
   const locale = useLocale();
   // Function to extract the first paragraph from the HTML content
+  // Plain-text excerpt without touching the DOM: BlogCard is now rendered on
+  // the server too (/blog/ carries its posts in the HTML), and using the same
+  // string-based conversion on both sides keeps server and client markup
+  // identical (no hydration mismatch).
   const getExcerpt = (html: string, maxLength = 100) => {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = html;
-    const text = tempDiv.textContent || tempDiv.innerText || "";
+    const text = (html || "")
+      .replace(/<style[\s\S]*?<\/style>|<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;/gi, " ")
+      .replace(/&amp;/gi, "&")
+      .replace(/&lt;/gi, "<")
+      .replace(/&gt;/gi, ">")
+      .replace(/&quot;/gi, '"')
+      .replace(/&#39;|&apos;/gi, "'")
+      .replace(/\s+/g, " ")
+      .trim();
     return text.length > maxLength
       ? text.substring(0, maxLength) + "..."
       : text;

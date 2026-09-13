@@ -2,6 +2,13 @@ import React, { Suspense } from "react";
 import StoresSkeleton from "@/components/loadingUis/StoresSkeleton";
 import { getTranslations } from "next-intl/server";
 import Stores from "@/components/Pages/Stores";
+import StoresStaticGrid from "@/components/Pages/Stores/StaticGrid";
+import api from "@/lib/api";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
@@ -65,6 +72,20 @@ export default async function StoresPage({
   const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
+  // First page of stores, fetched on the server (Data Cache, 5 min) so that
+  // (a) the prerendered HTML carries real store links (Suspense fallback below)
+  // and (b) <Stores/> starts from the same data through react-query hydration
+  // instead of a skeleton + client fetch. Query key mirrors useStoresQuery()
+  // with no filters and no signed-in user; a mismatch only means no hydration.
+  const firstPage: any = await api.static("stores/all-stores?page=1", 300);
+  const queryClient = new QueryClient();
+  if (firstPage?.stores) {
+    await queryClient.prefetchQuery({
+      queryKey: ["stores", 1, "", null, null, false],
+      queryFn: () => Promise.resolve(firstPage),
+    });
+  }
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -123,9 +144,19 @@ export default async function StoresPage({
         </div>
         <div className="container mx-auto mt-8">
           {/* Stores reads useSearchParams(); the Suspense boundary lets the page prerender (ISR) */}
-          <Suspense fallback={<StoresSkeleton />}>
-            <Stores />
-          </Suspense>
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <Suspense
+              fallback={
+                firstPage?.stores?.length ? (
+                  <StoresStaticGrid stores={firstPage.stores} />
+                ) : (
+                  <StoresSkeleton />
+                )
+              }
+            >
+              <Stores />
+            </Suspense>
+          </HydrationBoundary>
         </div>
       </section>
     </>
