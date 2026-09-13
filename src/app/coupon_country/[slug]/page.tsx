@@ -5,6 +5,7 @@ import { StoreProps } from "@/types";
 import { Avatar } from "@heroui/avatar";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
@@ -66,6 +67,13 @@ export default async function CouponCountry({
   const response: any = await api.dynamic(`home/country/${slug}`);
   const country: string = response?.data?.country;
   const stores: StoreProps[] = response?.data?.stores;
+
+  // Unknown country (API 404): a real 404 page/status instead of an empty
+  // "متاجر دولة undefined" page served with 200 (soft 404).
+  if (!country) {
+    notFound();
+  }
+
   const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
