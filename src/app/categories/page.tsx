@@ -67,7 +67,9 @@ export default async function CategoriesPage({
   params: Promise<{ locale: string }>;
 }) {
   const locale = (await params).locale;
-  const categories: any = await api.static("categories");
+  // All 29 categories in one page (the API defaults to 12/page): every category
+  // link is in the prerendered HTML and the grid needs no pagination.
+  const categories: any = await api.static("categories?per_page=50", 300);
   const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
