@@ -7,7 +7,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
@@ -142,16 +142,21 @@ const ShowStorePage = async ({
   // fetch store once
   const storeData = await getStore(slug);
 
+  if ((storeData as any)?.redirect_url) {
+    // Deleted store with a replacement: keep the 301 (checked first, as before).
+    redirect((storeData as any).redirect_url);
+  } else if (!storeData || !storeData.store) {
+    // Unknown, deleted-without-replacement or unpublished store: a real 404
+    // status instead of the store template rendered empty with 200 (soft 404).
+    notFound();
+  } else {
+    schemas = getStructuredDataSchemas(storeData);
+  }
+
   await queryClient.prefetchQuery({
     queryKey: ["store", slug],
     queryFn: () => Promise.resolve(storeData),
   });
-
-  if ((storeData as any)?.redirect_url) {
-    redirect((storeData as any).redirect_url);
-  } else if (storeData && storeData.store) {
-    schemas = getStructuredDataSchemas(storeData);
-  }
 
   return (
     <>
