@@ -1,6 +1,6 @@
 import AddToFavoriteBtn from "@/components/StorePageComponents/AddToFavoriteBtn";
 import Empty from "@/components/Empty";
-import api from "@/lib/api";
+import { fetchApi } from "@/lib/api-result";
 import { StoreProps } from "@/types";
 import { Avatar } from "@heroui/avatar";
 import { getTranslations } from "next-intl/server";
@@ -18,8 +18,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug } = await params;
-  const response: any = await api.dynamic(`home/country/${slug}`);
-  const country_seo: any = response?.data?.country_seo;
+  // Same caching semantics as before (no-store); only the failure handling changes.
+  const response = await fetchApi<{ data: any }>(`home/country/${slug}`, {
+    revalidate: false,
+  });
+  const country_seo: any =
+    response.kind === "ok" ? response.data?.data?.country_seo : undefined;
   //get the indexing settings of the Country page
   const indexingCountry = await getSettingEnabled(SettingsEnum.Countries);
 
@@ -64,9 +68,15 @@ export default async function CouponCountry({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const response: any = await api.dynamic(`home/country/${slug}`);
-  const country: string = response?.data?.country;
-  const stores: StoreProps[] = response?.data?.stores;
+  // fetchApi: API 404 → real 404 here; API failure → thrown (uncached 500),
+  // never an empty page or a cached 404 for a real country.
+  const response = await fetchApi<{ data: any }>(`home/country/${slug}`, {
+    revalidate: false,
+  });
+  const country: string | undefined =
+    response.kind === "ok" ? response.data?.data?.country : undefined;
+  const stores: StoreProps[] =
+    response.kind === "ok" ? response.data?.data?.stores : [];
 
   // Unknown country (API 404): a real 404 page/status instead of an empty
   // "متاجر دولة undefined" page served with 200 (soft 404).
@@ -130,7 +140,7 @@ export default async function CouponCountry({
           hasPart: stores?.slice(0, 5)?.map((store: any, index: number) => ({
             "@type": "WebPage",
             name: store.store_name,
-            url: `${baseUrl}store/${store.slug}`,
+            url: `${baseUrl}store/${store.slug}/`,
             identifier: store.id,
             position: index + 1,
           })),
