@@ -70,6 +70,8 @@ const Categories = ({
           page,
           search,
           category: selectedCategory,
+          // Match the server-rendered list (all 29 categories on one page).
+          per_page: 50,
         },
       });
       const { categories: data, pagination } = response.data;
@@ -87,8 +89,18 @@ const Categories = ({
     fetchCategories(page, searchQuery ?? "");
   };
 
+  // The server already rendered the full list from props; refetching on mount
+  // replaced it with the API's default 12-per-page slice (pagination reappeared)
+  // and scrolled the page to the top. Only refetch when the category filter
+  // actually changes after mount.
+  const isFirstRender = React.useRef(true);
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     fetchCategories(paginate?.current_page, searchQuery ?? "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
   return (
     <div className="container mx-auto px-4 py-12">
@@ -151,16 +163,18 @@ const Categories = ({
           ))}
         </div>
       </div>
-      <div className="mt-12 flex items-center justify-center" dir="ltr">
-        <Pagination
-          isDisabled={isLoading}
-          page={paginate?.current_page}
-          total={paginate?.last_page}
-          onChange={handlePageChange}
-          color="primary"
-          className="shadow-sm"
-        />
-      </div>
+      {(paginate?.last_page ?? 1) > 1 && (
+        <div className="mt-12 flex items-center justify-center" dir="ltr">
+          <Pagination
+            isDisabled={isLoading}
+            page={paginate?.current_page}
+            total={paginate?.last_page}
+            onChange={handlePageChange}
+            color="primary"
+            className="shadow-sm"
+          />
+        </div>
+      )}
     </div>
   );
 };
