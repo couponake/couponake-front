@@ -1,9 +1,10 @@
-import React, { Suspense } from "react";
-import StoresSkeleton from "@/components/loadingUis/StoresSkeleton";
+import React from "react";
 import { getTranslations } from "next-intl/server";
 import Stores from "@/components/Pages/Stores";
-import StoresStaticGrid from "@/components/Pages/Stores/StaticGrid";
-import api from "@/lib/api";
+import { connection } from "next/server";
+import { notFound, permanentRedirect } from "next/navigation";
+import { getStoresPage } from "@/services/public-stores-data";
+import { parseStorePage, parseStoreFilters, storeFilterHref, storePageHref } from "@/lib/stores-list";
 import {
   dehydrate,
   HydrationBoundary,
@@ -12,7 +13,11 @@ import {
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
-export async function generateMetadata() {
+type PageProps = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | string[] | undefined>> };
+
+export async function generateMetadata({ searchParams }: PageProps) {
+  const query = await searchParams;
+  const page = parseStorePage(query.page) ?? 1;
   const locale = "ar"; // site renders in Arabic only (static)
   const isArabic = locale === "ar";
   //get the indexing settings of the Stores page
@@ -26,7 +31,7 @@ export async function generateMetadata() {
       ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً"
       : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
     alternates: {
-      canonical: "https://coupoonat.com/stores/",
+      canonical: `https://coupoonat.com${storePageHref(page)}`,
     },
     robots: {
       index: indexingStores,
@@ -63,36 +68,37 @@ export async function generateMetadata() {
   };
 }
 
-export default async function StoresPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function StoresPage({ params, searchParams }: PageProps) {
+  await connection(); // Data Cache only; no Full Route ISR redirect path.
+  const query = await searchParams;
+  const page = parseStorePage(query.page);
+  if (page === null) notFound();
+  if (["category", "country", "search"].some(key => query[key] !== undefined)) {
+    const filters = new URLSearchParams();
+    for (const key of ["category", "country", "search", "page"]) {
+      if (Array.isArray(query[key])) notFound();
+      if (typeof query[key] === "string") filters.set(key, query[key]);
+    }
+    // Preserve old filter bookmarks without creating crawlable combinations.
+    permanentRedirect(storeFilterHref(parseStoreFilters(filters)));
+  }
+  if (query.page === "1") permanentRedirect("/stores/");
+  const firstPage = await getStoresPage(page);
+  if (page > firstPage.pagination.last_page) notFound();
   const locale = (await params).locale;
   const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-
-  // First page of stores, fetched on the server (Data Cache, 5 min) so that
-  // (a) the prerendered HTML carries real store links (Suspense fallback below)
-  // and (b) <Stores/> starts from the same data through react-query hydration
-  // instead of a skeleton + client fetch. Query key mirrors useStoresQuery()
-  // with no filters and no signed-in user; a mismatch only means no hydration.
-  const firstPage: any = await api.static("stores/all-stores?page=1", 300);
+  const pageUrl = 'https://coupoonat.com' + storePageHref(page);
   const queryClient = new QueryClient();
-  if (firstPage?.stores) {
-    await queryClient.prefetchQuery({
-      queryKey: ["stores", 1, "", null, null, false],
-      queryFn: () => Promise.resolve(firstPage),
-    });
-  }
+  queryClient.setQueryData(["stores", page, "", null, null, false], firstPage, { updatedAt: firstPage.fetchedAt });
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": `${baseUrl}stores/#webpage`,
+    "@id": `${pageUrl}#webpage`,
     name: "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط",
     description: "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً",
-    url: `${baseUrl}stores/`,
+    url: pageUrl,
     inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
@@ -143,19 +149,9 @@ export default async function StoresPage({
           </div>
         </div>
         <div className="container mx-auto mt-8">
-          {/* Stores reads useSearchParams(); the Suspense boundary lets the page prerender (ISR) */}
+          {/* The public page and its navigation remain available before JavaScript. */}
           <HydrationBoundary state={dehydrate(queryClient)}>
-            <Suspense
-              fallback={
-                firstPage?.stores?.length ? (
-                  <StoresStaticGrid stores={firstPage.stores} />
-                ) : (
-                  <StoresSkeleton />
-                )
-              }
-            >
-              <Stores />
-            </Suspense>
+            <Stores initialPage={page} />
           </HydrationBoundary>
         </div>
       </section>

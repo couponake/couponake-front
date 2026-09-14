@@ -1,0 +1,32 @@
+const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),{spawn}=require('node:child_process');
+const root=path.resolve(__dirname,'..'),dir=fs.mkdtempSync(path.join(root,'.stores-test-')),nextBin=path.join(root,'node_modules/next/dist/bin/next');
+let next,mode='valid',total=51,calls=0,leaks=0,log='';const pause=ms=>new Promise(r=>setTimeout(r,ms));
+const listen=s=>new Promise(r=>s.listen(0,'127.0.0.1',()=>r(s.address().port)));
+const write=(f,t)=>{const p=path.join(dir,f);fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,t)};
+const api=http.createServer((req,res)=>{calls++;const url=new URL(req.url,'http://local');if(req.headers.cookie||req.headers.authorization||url.searchParams.size!==2||url.searchParams.get('per_page')!=='50')leaks++;
+ if(mode==='disconnect')return req.socket.destroy();res.setHeader('content-type','application/json');if(mode==='failure'){res.writeHead(503);return res.end('{}')}if(mode==='json')return res.end('broken');
+ const p=Number(url.searchParams.get('page'));const stores=Array.from({length:Math.max(0,Math.min(50,total-(p-1)*50))},(_,i)=>({id:(p-1)*50+i+1,slug:'store-'+((p-1)*50+i+1),store_name:'Store',image:null}));
+ if(mode==='partial')stores.pop();res.end(JSON.stringify({success:true,stores,pagination:{current_page:p,last_page:Math.ceil(total/50),total,per_page:50}}));});
+const run=(args,env)=>new Promise((resolve,reject)=>{const p=spawn(process.execPath,[nextBin,...args],{cwd:dir,env,stdio:['ignore','pipe','pipe']});let text='';p.stdout.on('data',d=>text+=d);p.stderr.on('data',d=>text+=d);p.on('error',reject);p.on('exit',c=>c?reject(Error(text)):resolve(text));});
+(async()=>{const ap=await listen(api),reservation=http.createServer(),port=await listen(reservation);await new Promise(r=>reservation.close(r));const origin='http://127.0.0.1:'+port;
+ for(const f of ['src/lib/stores-list.ts','src/services/public-stores-data.ts','src/types/index.d.ts','src/components/Pages/Stores/PageLinks.tsx'])write(f,fs.readFileSync(path.join(root,f),'utf8'));
+ write('package.json',JSON.stringify({private:true,dependencies:{next:'16.3.0',react:'19.2.3','react-dom':'19.2.3'}}));fs.symlinkSync(fs.realpathSync(path.join(root,'node_modules')),path.join(dir,'node_modules'),'dir');
+ write('next.config.js','module.exports={trailingSlash:true,experimental:{cpus:1},turbopack:{root:'+JSON.stringify(root)+'}};');
+ write('tsconfig.json',JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,esModuleInterop:true,moduleResolution:'bundler',module:'esnext',target:'ES2017',jsx:'preserve',paths:{'@/*':['./src/*']}}}));
+ write('src/app/layout.tsx','export default function Layout({children}:{children:React.ReactNode}){return <html><body>{children}</body></html>}');write('src/app/health/route.ts','export async function GET(){return new Response("ok")}');
+ write('src/app/stores/page.tsx',`import {connection} from 'next/server';import {notFound,permanentRedirect} from 'next/navigation';import {createStoresPageLoader} from '@/services/public-stores-data';import {parseStorePage,storePageHref,parseStoreFilters,storeFilterHref} from '@/lib/stores-list';import Links from '@/components/Pages/Stores/PageLinks';const get=createStoresPageLoader(1);
+ export default async function Page({searchParams}:any){await connection();const q=await searchParams,p= parseStorePage(q.page);if(p===null)notFound();if(q.category)permanentRedirect(storeFilterHref(parseStoreFilters(new URLSearchParams(q))));if(q.page==='1')permanentRedirect('/stores/');const d=await get(p);if(p>d.pagination.last_page)notFound();return <main><link rel="canonical" href={'https://example.test'+storePageHref(p)}/>{d.stores.map(s=><a key={s.id} href={'/store/'+s.slug+'/'}>{s.store_name}</a>)}<Links page={p} total={d.pagination.last_page}/></main>}`);
+ const env={...process.env,NODE_ENV:'production',NEXT_TELEMETRY_DISABLED:'1',NEXT_PUBLIC_API_URL:'http://127.0.0.1:'+ap+'/'};console.log('Building Next.js stores cache fixture');await run(['build'],env);
+ next=spawn(process.execPath,[nextBin,'start','--hostname','127.0.0.1','--port',String(port)],{cwd:dir,env,stdio:['ignore','pipe','pipe']});next.stdout.on('data',d=>log+=d);next.stderr.on('data',d=>log+=d);
+ for(let i=0;i<100;i++){try{if((await fetch(origin+'/health')).ok)break}catch{}await pause(100);if(i===99)throw Error(log)}
+ const get=async p=>{const r=await fetch(origin+p,{redirect:'manual',headers:{Cookie:'session=test',Authorization:'Bearer test','User-Agent':'Googlebot'}});return{status:r.status,body:await r.text(),location:r.headers.get('location')}};
+ const count=r=>(r.body.match(/href="\/store\//g)||[]).length;
+ assert.equal(count(await get('/stores/')),50);let second=await get('/stores/?page=2');assert.equal(count(second),1);assert.ok(second.body.includes('/store/store-51/'));assert.ok(second.body.includes('/stores/?page=2'));
+ const before=calls;await get('/stores/');await get('/stores/?page=2');assert.equal(calls,before);assert.equal(leaks,0);console.log('PASS distinct HTML pages and warm cache without user headers');
+ for(const m of ['partial','json','failure','disconnect']){mode=m;await pause(1200);const r=await get('/stores/?page=2');assert.equal(r.status,200);assert.equal(count(r),1);await pause(350);assert.equal(count(await get('/stores/?page=2')),1);console.log('PASS last valid data retained on '+m);}
+ mode='valid';total=52;for(let i=0;i<30;i++){await pause(200);second=await get('/stores/?page=2');if(count(second)===2)break;}assert.equal(count(second),2);console.log('PASS refreshed store appears after recovery');
+ for(const p of ['0','-1','abc','01','999'])assert.equal((await get('/stores/?page='+p)).status,404);
+ for(const url of ['/stores/?page=1','/stores/?category=168']){const r=await get(url);assert.equal(r.status,308);assert.ok(r.location&&!r.location.includes(','));}console.log('PASS strict 404 and single-Location cold redirects');
+ mode='json';assert.equal((await get('/stores/?page=3')).status,500);assert.equal(leaks,0);console.log('PASS cold malformed data stays a server error');
+})().catch(e=>{console.error(e);process.exitCode=1}).finally(async()=>{if(next){const done=new Promise(r=>next.once('exit',r));next.kill('SIGTERM');await done;}await new Promise(r=>api.close(r));if(path.dirname(dir)!==root||!path.basename(dir).startsWith('.stores-test-'))throw Error('Unsafe fixture path');fs.rmSync(dir,{recursive:true,force:true})});
+
