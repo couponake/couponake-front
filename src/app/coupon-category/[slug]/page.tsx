@@ -1,23 +1,25 @@
 import React from "react";
-import { fetchApi } from "@/lib/api-result";
+import { getCategoryDetail } from "@/services/public-detail-data";
 import ShowCategory from "@/components/Pages/Categories/show";
 import { CategoryItem } from "@/types";
 import { notFound, redirect } from "next/navigation";
+import { connection } from "next/server";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
+
+// Keep redirects out of Full Route Cache (Next.js #82117). The public data
+// loader still caches validated anonymous data for 300 seconds. connection()
+// preserves explicit caches in the layout, unlike force-dynamic.
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  await connection();
   const slug = (await params).slug;
 
-  // Same caching semantics as before (no-store); only the failure handling changes.
-  const response = await fetchApi<{ category: CategoryItem }>(
-    `categories/${slug}`,
-    { revalidate: false }
-  );
+  const response = await getCategoryDetail(slug);
   if (response.kind === "redirect") {
     return {
       title: "Redirecting...",
@@ -31,10 +33,7 @@ export async function generateMetadata({
       },
     };
   }
-  if (response.kind === "not_found" || !response.data?.category) {
-    // The page itself answers 404 (notFound()); metadata is irrelevant.
-    return { title: "كوبونات", description: "كوبونات" };
-  }
+  if (response.kind === "not_found") notFound();
 
   {
     const category = response.data.category;
@@ -82,19 +81,15 @@ const ShowCouponCategoryPage = async ({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }) => {
+  await connection();
   const slug = (await params).slug;
-  // fetchApi: API 404 → real 404 here (was the not-found UI rendered with a
-  // 200 status — soft 404); API failure → thrown (uncached 500).
-  const response = await fetchApi<{ category: CategoryItem }>(
-    `categories/${slug}`,
-    { revalidate: false }
-  );
+  const response = await getCategoryDetail(slug);
 
   if (response.kind === "redirect") {
     redirect(response.redirect_url);
   }
 
-  if (response.kind !== "ok" || !response.data?.category) {
+  if (response.kind === "not_found") {
     notFound();
   }
 

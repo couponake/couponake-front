@@ -1,29 +1,34 @@
 import AddToFavoriteBtn from "@/components/StorePageComponents/AddToFavoriteBtn";
 import Empty from "@/components/Empty";
-import { fetchApi } from "@/lib/api-result";
-import { StoreProps } from "@/types";
+import { getCountryDetail } from "@/services/public-detail-data";
 import { Avatar } from "@heroui/avatar";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { connection } from "next/server";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
-export const experimental_ppr = true;
+// Keep redirects out of Full Route Cache (Next.js #82117). The public data
+// loader still caches validated anonymous data for 300 seconds. connection()
+// preserves explicit caches in the layout, unlike force-dynamic.
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }) {
+  await connection();
   const { slug } = await params;
-  // Same caching semantics as before (no-store); only the failure handling changes.
-  const response = await fetchApi<{ data: any }>(`home/country/${slug}`, {
-    revalidate: false,
-  });
-  const country_seo: any =
-    response.kind === "ok" ? response.data?.data?.country_seo : undefined;
+  const response = await getCountryDetail(slug);
+  if (response.kind === "redirect") return {
+    title: "Redirecting...",
+    alternates: { canonical: response.redirect_url },
+    robots: { index: false, follow: true },
+  };
+  if (response.kind === "not_found") notFound();
+  const country_seo = response.data.data.country_seo;
   //get the indexing settings of the Country page
   const indexingCountry = await getSettingEnabled(SettingsEnum.Countries);
 
@@ -67,22 +72,14 @@ export default async function CouponCountry({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
+  await connection();
   const { locale, slug } = await params;
-  // fetchApi: API 404 → real 404 here; API failure → thrown (uncached 500),
-  // never an empty page or a cached 404 for a real country.
-  const response = await fetchApi<{ data: any }>(`home/country/${slug}`, {
-    revalidate: false,
-  });
-  const country: string | undefined =
-    response.kind === "ok" ? response.data?.data?.country : undefined;
-  const stores: StoreProps[] =
-    response.kind === "ok" ? response.data?.data?.stores : [];
-
-  // Unknown country (API 404): a real 404 page/status instead of an empty
-  // "متاجر دولة undefined" page served with 200 (soft 404).
-  if (!country) {
-    notFound();
+  const response = await getCountryDetail(slug);
+  if (response.kind === "redirect") {
+    redirect(response.redirect_url);
   }
+  if (response.kind === "not_found") notFound();
+  const { country, stores } = response.data.data;
 
   const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;

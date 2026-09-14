@@ -1,0 +1,21 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),ts=require('typescript');
+const assert=require('node:assert/strict'),{test}=require('node:test');
+const lib={};vm.runInNewContext(ts.transpileModule(fs.readFileSync(path.join(__dirname,'../src/lib/detail-data.ts'),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText,{exports:lib,require});
+const seo={title:'Title',description:'Description',image:'/a.png'};
+const stores=[{id:1,slug:'متجر',store_name:'Store',image:null}];
+const country=()=>({success:true,data:{country:'العراق',country_seo:{...seo},stores:structuredClone(stores)}});
+const category=()=>({category:{id:2,name:'Fashion',slug:'أزياء-موضة',image:null,category_seo:{...seo},stores:structuredClone(stores)}});
+test('preserve valid country data and links',()=>assert.deepEqual(lib.validateCountryDetail(country(),'العراق'),country()));
+test('preserve valid category data and links',()=>assert.deepEqual(lib.validateCategoryDetail(category(),'أزياء-موضة'),category()));
+test('reject missing entity and incorrect country success',()=>{for(const x of [{},null,{success:false,data:country().data}])assert.throws(()=>lib.validateCountryDetail(x,'العراق'));assert.throws(()=>lib.validateCategoryDetail({},'أزياء-موضة'));});
+test('reject response for a different slug',()=>{assert.throws(()=>lib.validateCountryDetail(country(),'مصر'));assert.throws(()=>lib.validateCategoryDetail(category(),'other'));});
+test('missing store list is an error, explicit empty list is valid',()=>{const x=country();delete x.data.stores;assert.throws(()=>lib.validateCountryDetail(x,'العراق'));x.data.stores=[];assert.equal(lib.validateCountryDetail(x,'العراق').data.stores.length,0);});
+test('reject broken or duplicate store links',()=>{for(const mutate of [s=>s.push(s[0]),s=>s[0].slug='../x',s=>delete s[0].id,s=>delete s[0].store_name]){const x=category();mutate(x.category.stores);assert.throws(()=>lib.validateCategoryDetail(x,'أزياء-موضة'));}});
+test('reject missing SEO metadata',()=>{const x=country();delete x.data.country_seo;assert.throws(()=>lib.validateCountryDetail(x,'العراق'));});
+test('preserve existing distinct records sharing a slug',()=>{const x=country();x.data.stores.push({...x.data.stores[0],id:2});assert.equal(lib.validateCountryDetail(x,'العراق').data.stores.length,2);});
+test('404 must match the Laravel entity-not-found contract',()=>{assert.ok(lib.isDetailNotFound({success:false,message:'Country not found'},'country'));assert.ok(lib.isDetailNotFound({status:'error',message:'Category not found'},'category'));assert.equal(lib.isDetailNotFound({},'country'),false);});
+test('redirects preserve valid URLs and encode Arabic once',()=>{assert.equal(lib.validateDetailRedirect({redirect_url:'/coupon-category/عطور/'}),'/coupon-category/%D8%B9%D8%B7%D9%88%D8%B1/');assert.equal(lib.validateDetailRedirect({redirect_url:'/x/%D8%B9/'}),'/x/%D8%B9/');});
+test('reject malformed and executable redirects',()=>{for(const url of [undefined,'','//outside.test','javascript:alert(1)','/x\r\nLocation:x'])assert.throws(()=>lib.validateDetailRedirect({redirect_url:url}));});
+test('slugs cannot change request path or query',()=>{for(const slug of ['../x','..','a/b','a?x=1','a#x','a\\b',''])assert.equal(lib.isDetailSlug(slug),false);assert.ok(lib.isDetailSlug('أزياء-موضة'));});
+test('raw and ISR-encoded Arabic params share a normalized slug',()=>{assert.equal(lib.normalizeDetailSlug('العراق'),'العراق');assert.equal(lib.normalizeDetailSlug(encodeURIComponent('العراق')),'العراق');for(const x of ['%ZZ','a%2Fb','a%3Fx=1','%2E%2E'])assert.equal(lib.normalizeDetailSlug(x),null);});
+if(process.env.DETAIL_FIXTURES){const files=fs.readdirSync(process.env.DETAIL_FIXTURES).filter(x=>/^(country|category)-\d+\.json$/.test(x));test('validate all '+files.length+' captured live API responses',()=>{assert.ok(files.length>=41);for(const file of files){const value=JSON.parse(fs.readFileSync(path.join(process.env.DETAIL_FIXTURES,file),'utf8'));file.startsWith('country')?lib.validateCountryDetail(value,value.data.country):lib.validateCategoryDetail(value,value.category.slug);}});}
