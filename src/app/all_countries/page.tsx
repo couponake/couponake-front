@@ -1,5 +1,5 @@
 import AllCountriesPage from "@/components/Pages/AllCountriesPage";
-import api from "@/lib/api";
+import { getCountries } from "@/services/public-reference-data";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
@@ -63,10 +63,7 @@ const AllCountries = async () => {
   // in the prerendered HTML. The client component fetched them through
   // /api/home/countries-meta, which robots.txt disallows — so even after
   // rendering, crawlers saw an empty list (audit finding F-04).
-  const countriesRes: any = await api.static(
-    "home/countries-meta?page=1&perPage=20",
-    3600
-  );
+  const countriesRes = await getCountries();
   const initialCountries = Array.isArray(countriesRes?.data)
     ? countriesRes.data
     : null;

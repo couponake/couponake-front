@@ -5,7 +5,7 @@ import { toast } from '@/components/ui/custom-toast';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCategoriesData, useStoresData } from '@/hooks/useStoresData';
-import api from '@/lib/api';
+import { useCountriesData } from '@/hooks/useCountriesData';
 import debounce from '@/lib/debounce';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/store';
@@ -31,7 +31,7 @@ const Stores = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
-  const [countriesList, setCountriesList] = useState<string[]>([]);
+  const { data: countriesList = [], error: countriesError } = useCountriesData();
   const [categoriesPage, setCategoriesPage] = useState(1);
 
   // Use React Query for stores data
@@ -135,17 +135,6 @@ const Stores = () => {
     }
   }, [storesData, isFetching, isLoading]);
 
-  // Function to fetch countries from API
-  const fetchCountries = async () => {
-    try {
-      const data = await api.request.get("home/countries?per_page=-1");
-      return data?.data;
-    } catch {
-      toast.error("Failed to fetch countries. Please try again.");
-      return [];
-    }
-  };
-
   // Create ref that detects when element is visible for infinite scrolling
   const { ref: categoriesLoadMoreRef, inView: categoriesLoadMoreInView } =
     useInView({
@@ -153,14 +142,10 @@ const Stores = () => {
       triggerOnce: false,
     });
 
-  // Initial load for countries
+  // React Query shares the public list and preserves previous data on failure.
   useEffect(() => {
-    const getCountries = async () => {
-      const data = await fetchCountries();
-      setCountriesList(data);
-    };
-    getCountries();
-  }, []);
+    if (countriesError) toast.error("Failed to fetch countries. Please try again.");
+  }, [countriesError]);
 
   // Effect for loading more categories when scrolling
   useEffect(() => {
