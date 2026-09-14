@@ -1,22 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { toast } from '@/components/ui/custom-toast';
-import api from '@/lib/api';
 
 export const useCountriesData = () => {
   const fetchCountries = async () => {
-    try {
-      const data = await api.request.get('home/countries?per_page=-1');
-      return data?.data || [];
-    } catch {
-      toast.error('Failed to fetch countries. Please try again.');
-      return [];
+    const response = await fetch('/api/reference-data/countries/', { credentials: 'omit' });
+    if (!response.ok) throw new Error('Countries temporarily unavailable');
+    const payload: unknown = await response.json();
+    const data = (payload as { data?: unknown } | null)?.data;
+    if (!Array.isArray(data) || !data.every(item => typeof item === 'string' && item.trim())) {
+      throw new Error('Invalid countries response');
     }
+    return data as string[];
   };
 
   return useQuery({
-    queryKey: ['countries'],
+    queryKey: ['public-country-options'],
     queryFn: fetchCountries,
-    staleTime: 1000 * 60 * 30, // 30 minutes cache
+    staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
   });
 };

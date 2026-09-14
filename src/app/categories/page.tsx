@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
-import api from "@/lib/api";
+import { getCategories } from "@/services/public-reference-data";
 import StoresSkeleton from "@/components/loadingUis/StoresSkeleton";
 import Categories from "@/components/Pages/Categories";
 import CategoriesStaticGrid from "@/components/Pages/Categories/StaticGrid";
@@ -69,7 +69,7 @@ export default async function CategoriesPage({
   const locale = (await params).locale;
   // All 29 categories in one page (the API defaults to 12/page): every category
   // link is in the prerendered HTML and the grid needs no pagination.
-  const categories: any = await api.static("categories?per_page=50", 300);
+  const categories = await getCategories();
   const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
