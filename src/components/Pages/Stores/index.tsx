@@ -6,9 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCategoriesData, useStoresData } from '@/hooks/useStoresData';
 import { useCountriesData } from '@/hooks/useCountriesData';
-import debounce from '@/lib/debounce';
 import { cn } from '@/lib/utils';
-import { useStore } from '@/store';
 import { HeaderCategory } from '@/types';
 import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
 import { Button } from '@heroui/button';
@@ -18,43 +16,63 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { parseAsString, useQueryState } from 'nuqs';
 import React, { useCallback, useEffect, useState } from 'react';
+import StorePageLinks from './PageLinks';
+import { emptyStoreFilters, hasStoreFilters, parseStoreFilters, parseStorePage, storeFilterHref, type StoreFilters } from '@/lib/stores-list';
 import { useInView } from 'react-intersection-observer';
 
-const Stores = () => {
+const Stores = ({ initialPage = 1 }: { initialPage?: number }) => {
   const t = useTranslations();
   const searchParams = useSearchParams();
-  const selectedCategory = searchParams.get("category");
-  const { user } = useStore((store) => store);
-  const [searchQuery, setSearchQuery] = useQueryState("search", parseAsString);
-  const [isSearching, setIsSearching] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
-  const { data: countriesList = [], error: countriesError } = useCountriesData();
+  const [activeFilters, setActiveFilters] = useState<StoreFilters>(emptyStoreFilters);
+  const [searchInput, setSearchInput] = useState("");
+  const filtered = hasStoreFilters(activeFilters);
+  const selectedCategory = activeFilters.category || null;
+  const selectedCountry = activeFilters.country || null;
+  const currentPage = filtered ? activeFilters.page : (parseStorePage(searchParams.get("page") ?? undefined) ?? initialPage);
   const [categoriesPage, setCategoriesPage] = useState(1);
-
-  // Use React Query for stores data
+  const { data: countriesList = [], error: countriesError } = useCountriesData();
   const { useStoresQuery } = useStoresData();
-  const {
-    data: storesData,
-    isLoading,
-    isFetching,
-  } = useStoresQuery({
-    page: currentPage,
-    search: searchQuery || "",
-    category: selectedCategory,
-    country: selectedCountry,
+  const { data: storesData, isLoading, isFetching, isError, refetch } = useStoresQuery({
+    page: currentPage, search: activeFilters.search, category: selectedCategory, country: selectedCountry,
   });
-
-  // Extract data from the query result
   const allStores = storesData?.stores || [];
   const paginate = storesData?.pagination;
-  const filters = storesData?.filters || {
-    search: "",
-    country: "",
-    category: "",
-  };
+  const isSearching = searchInput.trim() !== activeFilters.search;
+
+  useEffect(() => {
+    const sync = () => {
+      const next = parseStoreFilters(new URLSearchParams(window.location.hash.slice(1)));
+      setActiveFilters(next);
+      setSearchInput(next.search);
+    };
+    sync();
+    window.addEventListener("popstate", sync);
+    window.addEventListener("hashchange", sync);
+    return () => { window.removeEventListener("popstate", sync); window.removeEventListener("hashchange", sync); };
+  }, [searchParams]);
+
+  const changeFilters = useCallback((next: StoreFilters, replaceHistory = false) => {
+    setActiveFilters(next);
+    setSearchInput(next.search);
+    const url = storeFilterHref(next);
+    if (replaceHistory) window.history.replaceState(null, "", url);
+    else window.history.pushState(null, "", url);
+  }, []);
+
+  useEffect(() => {
+    const search = searchInput.trim().slice(0,200);
+    if (search === activeFilters.search) return;
+    const timer = setTimeout(() => changeFilters({ ...activeFilters, search, page: 1 }, true), 350);
+    return () => clearTimeout(timer);
+    // The debounced value, not every keystroke, changes the API query.
+  }, [searchInput, activeFilters, changeFilters]);
+
+  useEffect(() => {
+    if (filtered && paginate && currentPage > paginate.last_page) {
+      changeFilters({ ...activeFilters, page: 1 }, true);
+    }
+  }, [filtered, paginate, currentPage, activeFilters, changeFilters]);
 
   // Use React Query for categories data
   const {
@@ -69,7 +87,7 @@ const Stores = () => {
   // Update allCategories when new data is fetched
   useEffect(() => {
     if (categoriesData?.data) {
-      const categoriesDataArray = categoriesData?.data?.sort(
+      const categoriesDataArray = [...categoriesData.data].sort(
         (a, b) => a.id - b.id
       );
       if (categoriesPage === 1) {
@@ -94,39 +112,9 @@ const Stores = () => {
   const categories: HeaderCategory[] = allCategories;
   const paginateCategories = categoriesData?.pagination;
 
-  // Debounced search function
-  const debouncedSearch = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    debounce((value: string) => {
-      setIsSearching(false);
-    }, 500),
-    []
-  );
-
-  // Handle search input change
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSearchQuery(value);
-    setIsSearching(true);
-    debouncedSearch(value);
-  };
-
-  // Clear search
-  const handleClearSearch = () => {
-    setSearchQuery("");
-    setIsSearching(false);
-  };
-
-  // Handle page change
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  // Update when category or user changes
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedCategory, user?.id]);
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearchInput(event.target.value);
+  const handleClearSearch = () => changeFilters({ ...activeFilters, search: "", page: 1 });
+  const handlePageChange = (page: number) => changeFilters({ ...activeFilters, page });
 
   // Scroll to top when data changes
   useEffect(() => {
@@ -176,12 +164,11 @@ const Stores = () => {
           id="dropdown"
           className="mt-5 h-fit !w-full select-none rounded-lg border border-neutral-200 bg-white sm:w-[260px] relative pt-3"
         >
-          <Link
-            prefetch={false}
-            target="_self"
-            href="/stores"
+          <button
+            type="button"
+            onClick={() => changeFilters(emptyStoreFilters)}
             className={cn(
-              "sticky -top-7 rounded-s-0 mb-2 ms-2 flex h-12 items-center rounded-e-xl border-s-4 border-main-600/0 py-3.5 text-neutral-900 hover:border-s-4 hover:border-main-600 hover:bg-neutral-50 hover:text-main-600 ltr:pl-3 rtl:pr-3",
+              "sticky -top-7 w-full text-start rounded-s-0 mb-2 ms-2 flex h-12 items-center rounded-e-xl border-s-4 border-main-600/0 py-3.5 text-neutral-900 hover:border-s-4 hover:border-main-600 hover:bg-neutral-50 hover:text-main-600 ltr:pl-3 rtl:pr-3",
               !selectedCategory && "text-main-600 border-main-600"
             )}
           >
@@ -189,16 +176,16 @@ const Stores = () => {
             <h2 className="text-base font-medium ms-2.5">
               {t("All Categories")}
             </h2>
-          </Link>
+          </button>
           <ul className="select-none space-y-2 text-sm transition delay-150 duration-300 ease-in-out max-h-dvh overflow-y-auto scrollbar">
             {categories?.map((category) => (
               <li key={category?.id}>
-                <Link
-                  prefetch={false}
-                  target="_self"
-                  href={`?category=${category?.id}`}
+                <button
+                  type="button"
+                  onClick={() => changeFilters({ ...activeFilters, category: String(category.id), page: 1 })}
+                  aria-pressed={Number(selectedCategory) === category.id}
                   className={cn(
-                    "rounded-s-0 mb-2 ml-2 flex h-12 items-center rounded-e-xl border-s-4 border-main-600/0 py-3.5 text-neutral-900 hover:border-s-4 hover:border-main-600 hover:bg-neutral-50 hover:text-main-600 ltr:pl-3 rtl:pr-3",
+                    "w-full text-start rounded-s-0 mb-2 ml-2 flex h-12 items-center rounded-e-xl border-s-4 border-main-600/0 py-3.5 text-neutral-900 hover:border-s-4 hover:border-main-600 hover:bg-neutral-50 hover:text-main-600 ltr:pl-3 rtl:pr-3",
                     Number(selectedCategory) === Number(category?.id) &&
                     "text-main-600 border-main-600"
                   )}
@@ -206,7 +193,7 @@ const Stores = () => {
                   <div className="text-base font-medium ms-2.5 line-clamp-1">
                     {category?.name}
                   </div>
-                </Link>
+                </button>
               </li>
             ))}
             {paginateCategories &&
@@ -225,11 +212,11 @@ const Stores = () => {
           <div className="flex-1 md:w-96">
             <Input
               placeholder={t("Search for stores")}
-              value={searchQuery ?? ""}
+              value={searchInput}
               classNames={{
                 wrapper: "border-[1px] border-gray-200",
               }}
-              autoFocus={!!searchQuery}
+              maxLength={200}
               isLoading={isSearching}
               endContent={
                 <>
@@ -238,7 +225,7 @@ const Stores = () => {
                     variant="bordered"
                     size="sm"
                     isIconOnly
-                    className={` ${searchQuery ? "visible" : "invisible"}`}
+                    className={` ${searchInput ? "visible" : "invisible"}`}
                   >
                     <XIcon className="size-3" />
                   </Button>
@@ -248,10 +235,9 @@ const Stores = () => {
             />
           </div>
           <Autocomplete
-            defaultSelectedKey={filters?.country}
+            selectedKey={selectedCountry}
             onSelectionChange={(value) => {
-              setSelectedCountry(value ? String(value) : null);
-              setCurrentPage(1);
+              changeFilters({ ...activeFilters, country: value ? String(value) : "", page: 1 });
             }}
             className="max-w-50"
             size="sm"
@@ -312,12 +298,16 @@ const Stores = () => {
                   </div>
                 </div>
               ))
-              : !isLoading && (
+              : !isLoading && !isError && (
                 <div className="col-span-full">
                   <Empty />
                 </div>
               )}
           </div>
+          {isError && <div role="alert" className="p-4 text-center">
+            <p>تعذر تحميل المتاجر. حاول مرة أخرى.</p>
+            <button type="button" onClick={() => refetch()} className="mt-2 underline">إعادة المحاولة</button>
+          </div>}
           {isLoading && (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {Array.from({ length: 6 })?.map((_, index) => (
@@ -333,14 +323,14 @@ const Stores = () => {
           className="col-span-3 mt-16 flex items-center justify-center"
           dir="ltr"
         >
-          <Pagination
+          {filtered ? <Pagination
             isDisabled={isLoading}
             page={paginate?.current_page}
             total={paginate?.last_page || 1}
             onChange={handlePageChange}
             color="primary"
             dir="ltr"
-          />
+          /> : <StorePageLinks page={currentPage} total={paginate?.last_page || 1} />}
         </div>
       </div>
     </div>

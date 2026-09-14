@@ -1,19 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { HeaderCategory, StoreProps, paginationProps } from '@/types';
+import { HeaderCategory, paginationProps } from '@/types';
 import { useStore } from '@/store';
 import { toast } from '@/components/ui/custom-toast';
 import MyAxios from '@/lib/MyAxios';
 import api from '@/lib/api';
+import { validateStoresPage, type StoresPageData } from '@/lib/stores-list';
 
-interface StoresResponse {
-  stores: StoreProps[] | null;
-  pagination: paginationProps;
-  filters?: {
-    search: string;
-    country: string;
-    category: string;
-  };
-}
+type StoresResponse = StoresPageData;
 interface CategoriesResponse {
   data: HeaderCategory[] | null;
   pagination: paginationProps;
@@ -40,13 +33,14 @@ export const useStoresData = () => {
         {
           params: {
             page,
+            per_page: 50,
             search: search || undefined,
             category: category || undefined,
             country: country || undefined,
           },
         }
       );
-      return response as StoresResponse;
+      return validateStoresPage(response, page);
     } catch (error) {
       toast.error('Failed to fetch stores. Please try again.');
       throw error;
