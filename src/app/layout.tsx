@@ -68,6 +68,7 @@ export async function generateMetadata() {
     return {
       title: fallbackTitle,
       description: fallbackTitle,
+      robots: { index: indexingSite },
     };
   }
 

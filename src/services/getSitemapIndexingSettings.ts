@@ -1,12 +1,6 @@
 import { getSettings } from "@/services/GetSettingsRequest";
-import { Settings } from "@/types";
+import { readIndexingSetting } from "@/lib/indexing-settings";
 import { SettingsEnum } from "@/types/settingsEnum";
-
-type itemSetting = {
-  id: number;
-  name: string;
-  val: string;
-};
 
 type responseType = {
   superSite: boolean;
@@ -22,49 +16,19 @@ type responseType = {
 };
 
 export const getSitemapSettingEnabled = async (): Promise<responseType> => {
-  try {
-    const generalSettings: Settings | undefined = await getSettings();
-    const settingsArray: itemSetting[] = generalSettings?.settings || [];
-
-    const getSettingVal = (key: string) =>
-      settingsArray.find((item: itemSetting) => item.name === key)?.val;
-
-    const superSite = getSettingVal(SettingsEnum.SuperSite) === "on" && true;
-    const blogs = getSettingVal(SettingsEnum.Blogs) === "on" && true;
-    const stores = getSettingVal(SettingsEnum.Stores) === "on" && true;
-    const countries = getSettingVal(SettingsEnum.Countries) === "on" && true;
-    const categories = getSettingVal(SettingsEnum.Categories) === "on" && true;
-    const about = getSettingVal(SettingsEnum.About) === "on" && true;
-    const privacy = getSettingVal(SettingsEnum.Privacy) === "on" && true;
-    const contact = getSettingVal(SettingsEnum.Contact) === "on" && true;
-    const terms = getSettingVal(SettingsEnum.Terms) === "on" && true;
-    const faqs = getSettingVal(SettingsEnum.FAQ) === "on" && true;
-
-    return {
-      superSite,
-      blogs,
-      stores,
-      countries,
-      categories,
-      about,
-      privacy,
-      contact,
-      terms,
-      faqs,
-    };
-  } catch (error) {
-    console.error("Failed to fetch settings:", error);
-    return {
-      superSite: false,
-      blogs: false,
-      stores: false,
-      countries: false,
-      categories: false,
-      about: false,
-      privacy: false,
-      contact: false,
-      terms: false,
-      faqs: false,
-    };
-  }
+  const settings = await getSettings();
+  // Do not translate an upstream failure into false flags: sitemap routes
+  // would otherwise return 404 or omit valid sections.
+  return {
+    superSite: readIndexingSetting(settings, SettingsEnum.SuperSite),
+    blogs: readIndexingSetting(settings, SettingsEnum.Blogs),
+    stores: readIndexingSetting(settings, SettingsEnum.Stores),
+    countries: readIndexingSetting(settings, SettingsEnum.Countries),
+    categories: readIndexingSetting(settings, SettingsEnum.Categories),
+    about: readIndexingSetting(settings, SettingsEnum.About),
+    privacy: readIndexingSetting(settings, SettingsEnum.Privacy),
+    contact: readIndexingSetting(settings, SettingsEnum.Contact),
+    terms: readIndexingSetting(settings, SettingsEnum.Terms),
+    faqs: readIndexingSetting(settings, SettingsEnum.FAQ),
+  };
 };
