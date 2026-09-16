@@ -1,5 +1,4 @@
 "use client";
-import "react-international-phone/style.css";
 import { toast } from "@/components/ui/custom-toast";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { PhoneInput } from "react-international-phone";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { BreadcrumbList, ContactPage } from "schema-dts";
 import { InferType, object, string } from "yup";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -221,12 +220,12 @@ const ContactUsPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <Label className="rtl:text-right">
+                    <Label htmlFor="contact-phone" className="rtl:text-right">
                       {t("Phone Number")}
                     </Label>
                     <div className="mt-2">
                       <PhoneInput
-                        className="rounded-lg border-1 min-h-11 hover:border-main-400 transition text-gray-500 bg-gray-100"
+                        id="contact-phone"
                         onChange={(phone) =>
                           setValue("phone", phone, {
                             shouldValidate: true,

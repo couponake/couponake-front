@@ -48,8 +48,8 @@ export async function generateMetadata({
       description: country_seo?.description,
       images: [
         {
-          url: country_seo?.image,
-          alt: country_seo?.description,
+          url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupoonatLogo.webp`,
+          alt: "كوبونات",
         },
       ],
     },
@@ -59,8 +59,8 @@ export async function generateMetadata({
       description: country_seo?.description,
       images: [
         {
-          url: country_seo?.image,
-          alt: country_seo?.description,
+          url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupoonatLogo.webp`,
+          alt: "كوبونات",
         },
       ],
     },

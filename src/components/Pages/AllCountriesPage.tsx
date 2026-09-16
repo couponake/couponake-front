@@ -7,7 +7,6 @@ import { Pagination } from "@heroui/pagination";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaGlobeAmericas, FaSearch, FaTimes } from "react-icons/fa";
@@ -215,17 +214,6 @@ const AllCountriesPage = ({
                     }
                   }}
                 >
-                  <div className="w-20 aspect-video border border-gray-200">
-                    <Image
-                      src={country?.meta?.image || "noPreview.webp"}
-                      alt={country?.name || "Country Image"}
-                      width={80}
-                      height={80}
-                      loading="lazy"
-                      className="size-full object-cover"
-                      unoptimized
-                    />
-                  </div>
                   <h2 className="text-xl font-semibold text-gray-800 text-center">
                     {country?.name}
                   </h2>
