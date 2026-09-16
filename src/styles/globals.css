@@ -159,34 +159,6 @@
   border-radius: 10px;
 }
 
-.react-international-phone-input {
-  @apply !border-gray-300 min-h-11 w-full !text-gray-500 !bg-gray-100;
-  [dir="ltr"] & {
-    @apply !rounded-r-lg !rounded-l-none !border-l-0;
-  }
-  [dir="rtl"] & {
-    @apply !rounded-l-lg !rounded-r-none !border-r-0;
-  }
-}
-.react-international-phone-country-selector-button {
-  @apply !h-11 !w-14 !bg-white;
-  [dir="ltr"] & {
-    @apply !rounded-s-lg !rounded-e-none !border-e-0;
-  }
-  [dir="rtl"] & {
-    @apply !rounded-r-lg !rounded-l-none !border-l-0;
-  }
-}
-.react-international-phone-country-selector-dropdown {
-  @apply !outline-main-600 !border-0 !rounded-lg;
-  [dir="ltr"] & {
-    @apply !end-0;
-  }
-  [dir="rtl"] & {
-    @apply !start-0;
-  }
-}
-
 .gradient-btn {
   @apply bg-gradient-to-r from-purple-300 via-purple-500 to-main-700 text-white hover:opacity-70 transition-all;
 }

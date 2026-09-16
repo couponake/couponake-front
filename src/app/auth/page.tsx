@@ -8,8 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "@/schema";
 
-import { PhoneInput } from "react-international-phone";
-import "react-international-phone/style.css";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { toast } from "@/components/ui/custom-toast";
 import { InferType } from "yup";
 import { signIn } from "next-auth/react";
@@ -150,10 +149,10 @@ const AuthPage = () => {
               }
             />
             <div className="col-span-full">
-              <Label className="rtl:text-right">{t("Phone Number")}</Label>
+              <Label htmlFor="register-phone" className="rtl:text-right">{t("Phone Number")}</Label>
               <div className="mt-2">
                 <PhoneInput
-                  className="rounded-lg border-1 min-h-11 hover:border-main-400 transition text-gray-500 bg-gray-100"
+                  id="register-phone"
                   onChange={(phone) =>
                     setValue("phone", phone, {
                       shouldValidate: true,

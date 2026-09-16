@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { PhoneInput } from 'react-international-phone';
-import 'react-international-phone/style.css';
+import { PhoneInput } from "@/components/ui/phone-input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
@@ -108,12 +107,13 @@ const AccountDetails = () => {
             readOnly
           />
           <div className="">
-            <Label className="rtl:text-right">
+            <Label htmlFor="profile-phone" className="rtl:text-right">
               {t("Phone Number")}
             </Label>
             <div >
               <PhoneInput
-                className="rounded-lg mt-2 border-1 min-h-11 hover:border-main-400 transition text-gray-500 bg-gray-100"
+                id="profile-phone"
+                className="mt-2"
                 onChange={(phone) =>
                   setValue("phone", phone, {
                     shouldValidate: true, shouldDirty: true
