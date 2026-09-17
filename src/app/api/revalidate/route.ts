@@ -27,7 +27,8 @@ import { timingSafeEqual } from "node:crypto";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const MAX_ITEMS = 20;
+// The backend batches 20 pages per call; stores carry 2 tags each, blogs 1.
+const MAX_ITEMS = 60;
 
 function secretMatches(given: string | null): boolean {
   const expected = process.env.REVALIDATE_SECRET ?? "";
