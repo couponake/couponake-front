@@ -5,11 +5,10 @@ import Empty from '@/components/Empty';
 import { Card, CardContent } from '@/components/ui/card';
 import { CategoryItem, featuredStores, FeaturedStoresCategoryItem } from '@/types';
 import { Chip } from '@heroui/chip';
-import { Spinner } from '@heroui/spinner';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Fragment, useEffect, useMemo, useState, useRef } from 'react';
+import React, { Fragment, useMemo, useState, useRef } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 // Added Chevron icons for the buttons
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -34,7 +33,6 @@ const BestStores = ({
 }) => {
   const t = useTranslations();
   const locale = useLocale();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedCat, setSelectedCat] = useState<number>(0);
 
   // 1. Create a ref for the scroll container
@@ -55,12 +53,6 @@ const BestStores = ({
     return selected?.stores || [];
   }, [selectedCat, stores, storesCategoriesList]);
 
-  useEffect(() => {
-    if (stores?.length > 0 && categories?.length > 0) {
-      setIsLoading(false);
-    }
-  }, [stores, categories]);
-
   // 2. Scroll function to move by ~3 items (approx 300px depending on chip width)
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -74,14 +66,6 @@ const BestStores = ({
 
   if (!stores || stores.length === 0) {
     return null;
-  }
-
-  if (isLoading) {
-    return (
-      <div className="w-full h-fit bg-[#fafafa] flex flex-col items-center gap-5 shadow-lg p-5 relative my-10 md:my-16 container">
-        <Spinner />
-      </div>
-    );
   }
 
   const filterStores = (category: FeaturedStoresCategoryItem) => {

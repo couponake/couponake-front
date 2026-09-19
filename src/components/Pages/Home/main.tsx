@@ -36,7 +36,7 @@ const Main = ({
 }) => {
   return (
     <section>
-      <Hero autoplay banners={hero_banners} />
+      <Hero autoplay lcp banners={hero_banners} />
 
       <div className="container">
         <StatisticsCard collection_count={collection_count} />
