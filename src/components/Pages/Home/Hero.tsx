@@ -8,14 +8,11 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { toast } from '@/components/ui/custom-toast';
-import useDetectMobile from '@/hooks/useDetectMobile';
 import { cn } from '@/lib/utils';
 import { BannerItem } from '@/types';
-import { Spinner } from '@heroui/spinner';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import Autoplay from 'embla-carousel-autoplay';
 import { useLocale, useTranslations } from 'next-intl';
-import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 const isYouTubeUrl = (url: string): boolean => {
@@ -41,7 +38,8 @@ const Hero = ({
   className,
   carouselItemClassName,
   autoplay = false,
-  storeName
+  storeName,
+  lcp = false,
 }: {
   banners: BannerItem[];
   location?: "above_texts" | "coupon_block" | "side_part";
@@ -49,6 +47,8 @@ const Hero = ({
   carouselItemClassName?: string;
   autoplay?: boolean;
   storeName?: string;
+  /** Home page: the first slide is the LCP image — eager + fetchpriority=high, rendered on the server. */
+  lcp?: boolean;
 }) => {
   const [, copyToClipboard] = useCopyToClipboard();
   const t = useTranslations();
@@ -56,8 +56,6 @@ const Hero = ({
   const [api, setApi] = useState<CarouselApi>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [current, setCurrent] = useState(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const mobileScreen = useDetectMobile();
 
   useEffect(() => {
     if (!api) return;
@@ -96,23 +94,8 @@ const Hero = ({
     };
   }, [api, banners]);
 
-  useEffect(() => {
-    if (banners && banners.length > 0) {
-      setIsLoading(false);
-    }
-  }, [banners]);
-
-
   if (!banners || banners.length === 0) {
     return null;
-  }
-
-  if (isLoading) {
-    return (
-      <div className="h-full mt-2 min-h-24 md:min-h-64 min-w-80 overflow-x-hidden mx-auto container mb-7 md:mb-14 w-full rounded-2xl bg-[#efefef] flex justify-center items-center">
-        <Spinner />
-      </div>
-    )
   }
 
   const handleBannerClick = (banner: BannerItem) => {
@@ -166,7 +149,7 @@ const Hero = ({
         <CarouselNext className="z-40 absolute size-6 sm:size-7 md:size-8 lg:size-10 xl:size-10 2xl:size-10 right-4 sm:right-5 md:right-6 lg:right-8 xl:right-8 2xl:right-8 top-1/2 transform -translate-y-1/2 bg-white/30 border-none" />
         <CarouselContent>
           {banners
-            ? banners?.map((banner) =>
+            ? banners?.map((banner, index) =>
               (
                 location
                   ? banner?.location && banner?.location === location
@@ -188,16 +171,28 @@ const Hero = ({
                       >
                         <div className="w-full h-fit">
                           <div className="w-full h-fit rounded-lg">
-                            <Image
-                              className="w-full h-fit transition-all duration-300 ease-in-out rounded-lg"
-                              height={170}
-                              width={900}
-                              quality={100}
-                              priority
-                              alt={banner?.title ?? "Banner"}
-                              src={mobileScreen && !storeName ? banner?.image_small : banner?.image}
-                              unoptimized
-                            />
+                            {/*
+                              Plain <img> inside <picture>: the mobile file comes from the
+                              media query, not from a client-side hook, so the server HTML
+                              already carries the right image and the browser discovers it
+                              immediately (LCP). First home slide: eager + fetchpriority=high;
+                              the rest lazy. Sizes match the previous next/image props.
+                            */}
+                            <picture>
+                              {!storeName && banner?.image_small && (
+                                <source media="(max-width: 659px)" srcSet={banner.image_small} />
+                              )}
+                              <img
+                                className="w-full h-fit transition-all duration-300 ease-in-out rounded-lg"
+                                height={170}
+                                width={900}
+                                alt={banner?.title ?? "Banner"}
+                                src={banner?.image}
+                                decoding="async"
+                                loading={lcp && index === 0 ? "eager" : "lazy"}
+                                fetchPriority={lcp && index === 0 ? "high" : "auto"}
+                              />
+                            </picture>
                           </div>
                         </div>
                       </button>
