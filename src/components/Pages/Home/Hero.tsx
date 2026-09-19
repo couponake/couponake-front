@@ -180,7 +180,15 @@ const Hero = ({
                             */}
                             <picture>
                               {!storeName && banner?.image_small && (
-                                <source media="(max-width: 659px)" srcSet={banner.image_small} />
+                                // width/height on <source> let the browser reserve the mobile
+                                // aspect (1080x608) before the file arrives; the desktop banner is
+                                // 900x169, so without them the box jumped on load (CLS 0.128).
+                                <source
+                                  media="(max-width: 659px)"
+                                  srcSet={banner.image_small}
+                                  width={1080}
+                                  height={608}
+                                />
                               )}
                               <img
                                 className="w-full h-fit transition-all duration-300 ease-in-out rounded-lg"
