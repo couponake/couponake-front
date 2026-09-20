@@ -10,7 +10,7 @@
   <xsl:template match="/">
     <html>
       <head>
-        <title>Coupoonat - Categories</title>
+        <title>Couponake - Categories</title>
         <style>
           body { font-family: Arial; padding: 20px; background: #f4f4f4; }
           table { width: 100%; border-collapse: collapse; }
@@ -28,7 +28,7 @@
         </style>
       </head>
       <body>
-        <h1>Coupoonat - Categories (<xsl:value-of select="count(//sitemap:url)"/>)</h1>
+        <h1>Couponake - Categories (<xsl:value-of select="count(//sitemap:url)"/>)</h1>
         <table>
           <tbody>
             <xsl:for-each select="//sitemap:url">

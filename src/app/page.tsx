@@ -58,9 +58,9 @@ export default async function Home() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "كوبونات",
+    name: "كوبونك",
     url: `${baseUrl}`,
-    logo: `${baseUrl}coupoonatLogo.webp`,
+    logo: `${baseUrl}couponakeLogo.webp`,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: calculatingReviewsValue(),
@@ -74,15 +74,15 @@ export default async function Home() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "كوبونات خصم و الاكواد الاصلية المحدثة لأكثر من 10الاف متجر - كوبونات",
-    description: "كوبونات و اكواد خصم 2026 الاقوي و الاكثر استخداما لاننا نؤمن بالمصداقية مع عملائنا لذلك نوفر لك جميع كوبونات الخصم الاعلى تخفيضا للمتاجر",
+    name: "كوبونك خصم و الاكواد الاصلية المحدثة لأكثر من 10الاف متجر - كوبونك",
+    description: "كوبونك و اكواد خصم 2026 الاقوي و الاكثر استخداما لاننا نؤمن بالمصداقية مع عملائنا لذلك نوفر لك جميع كوبونك الخصم الاعلى تخفيضا للمتاجر",
     url: `${baseUrl}`,
     publisher: {
       "@type": "Organization",
-      name: "كوبونات",
+      name: "كوبونك",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}coupoonatLogo.webp`,
+        url: `${baseUrl}couponakeLogo.webp`,
       },
     },
   };

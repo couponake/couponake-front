@@ -18,10 +18,10 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات"
+      ? "الفئات: صفحة لتصنيف الكوبونك وفق فئات المنتجات"
       : "Categories: A page that categorizes coupons by product category",
     description: isArabic
-      ? "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود"
+      ? "يتم تصنيف اكواد و كوبونك الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونك التى تريدها باقل مجهود"
       : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}categories/` || "",
@@ -31,30 +31,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات"
+        ? "الفئات: صفحة لتصنيف الكوبونك وفق فئات المنتجات"
         : "Categories: A page that categorizes coupons by product category",
       description: isArabic
-        ? "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود"
+        ? "يتم تصنيف اكواد و كوبونك الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونك التى تريدها باقل مجهود"
         : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات"
+        ? "الفئات: صفحة لتصنيف الكوبونك وفق فئات المنتجات"
         : "Categories: A page that categorizes coupons by product category",
       description: isArabic
-        ? "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود"
+        ? "يتم تصنيف اكواد و كوبونك الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونك التى تريدها باقل مجهود"
         : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
@@ -95,23 +95,23 @@ export default async function CategoriesPage({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "كوبونات",
+    name: "كوبونك",
     url: `${baseUrl}`,
-    logo: `${baseUrl}coupoonatLogo.webp`,
+    logo: `${baseUrl}couponakeLogo.webp`,
   };
 
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات",
-    description: "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود",
+    name: "الفئات: صفحة لتصنيف الكوبونك وفق فئات المنتجات",
+    description: "يتم تصنيف اكواد و كوبونك الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونك التى تريدها باقل مجهود",
     url: `${baseUrl}categories/`,
     publisher: {
       "@type": "Organization",
-      name: "كوبونات",
+      name: "كوبونك",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}coupoonatLogo.webp`,
+        url: `${baseUrl}couponakeLogo.webp`,
       },
     },
   };

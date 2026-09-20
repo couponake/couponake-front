@@ -14,7 +14,7 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "مدونة موقع كوبونات لجميع اخبار متاجر التسوق"
+      ? "مدونة موقع كوبونك لجميع اخبار متاجر التسوق"
       : "Couponat's blog for all the latest shopping news",
     description: isArabic
       ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
@@ -27,30 +27,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "مدونة موقع كوبونات لجميع اخبار متاجر التسوق"
+        ? "مدونة موقع كوبونك لجميع اخبار متاجر التسوق"
         : "Couponat's blog for all the latest shopping news",
       description: isArabic
         ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
         : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "مدونة موقع كوبونات لجميع اخبار متاجر التسوق"
+        ? "مدونة موقع كوبونك لجميع اخبار متاجر التسوق"
         : "Couponat's blog for all the latest shopping news",
       description: isArabic
         ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
         : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
@@ -70,7 +70,7 @@ export default async function Home({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: "مدونة موقع كوبونات لجميع اخبار متاجر التسوق",
+    name: "مدونة موقع كوبونك لجميع اخبار متاجر التسوق",
     description: "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم",
     url: `${baseUrl}blog/`,
     isPartOf: {
@@ -85,11 +85,11 @@ export default async function Home({
       dateModified: post.content_updated_at || post.created_at,
       author: {
         "@type": "Organization",
-        name: "كوبونات",
+        name: "كوبونك",
       },
       image: {
         "@type": "ImageObject",
-        url: post.image || `${baseUrl}coupoonatLogo.webp`,
+        url: post.image || `${baseUrl}couponakeLogo.webp`,
       },
     })),
   };
@@ -116,9 +116,9 @@ export default async function Home({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "كوبونات",
+    name: "كوبونك",
     url: baseUrl,
-    logo: `${baseUrl}coupoonatLogo.webp`,
+    logo: `${baseUrl}couponakeLogo.webp`,
   };
 
   return (

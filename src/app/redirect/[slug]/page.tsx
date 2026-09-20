@@ -11,8 +11,8 @@ import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 
-const fallbackTitle = "كوبونات";
-const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupoonatLogo.webp`;
+const fallbackTitle = "كوبونك";
+const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponakeLogo.webp`;
 
 const getCouponLandingPage = cache(async (slug: string) => {
   return api.request.get<couponLandingPageSuccess | couponLandingPageError>(

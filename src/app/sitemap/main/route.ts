@@ -9,7 +9,7 @@ type SitemapEntry = {
 };
 
 export async function GET() {
-  const baseURL = "https://coupoonat.com/";
+  const baseURL = "https://couponake.com/";
   //get Settings
   const settings = await getSitemapSettingEnabled();
   if (!settings.superSite) {
@@ -87,7 +87,7 @@ export async function GET() {
       <changefreq>${page.changeFrequency}</changefreq>
       <priority>${page.priority}</priority>
     </url>
-  `
+  `,
     )
     .join("");
 

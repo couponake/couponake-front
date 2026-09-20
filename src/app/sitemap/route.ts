@@ -4,7 +4,7 @@ import { getAllBlogsData, getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://coupoonat.com/sitemap/";
+  const baseURL = "https://couponake.com/sitemap/";
   //get Settings
   const settings = await getSitemapSettingEnabled();
   if (!settings.superSite) {
@@ -15,7 +15,8 @@ export async function GET() {
   const blogsURLs = [];
   if (settings.blogs) {
     const blogPages = await getAllBlogsData(1);
-    const blogTotalPages = blogPages.slugs.length === 0 ? 0 : blogPages.totalPages;
+    const blogTotalPages =
+      blogPages.slugs.length === 0 ? 0 : blogPages.totalPages;
     for (let page = 1; page <= blogTotalPages; page++) {
       blogsURLs.push(`<sitemap>
         <loc>${baseURL}blogs/${page}/</loc>
@@ -54,7 +55,7 @@ export async function GET() {
   const urls = URLs.map(
     (url) => `<sitemap>
     <loc>${url}</loc>
-  </sitemap>`
+  </sitemap>`,
   ).join("");
 
   const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>

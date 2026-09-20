@@ -13,8 +13,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات"
-      : "Coupoonat | Privacy Policy & Data Protection",
+      ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونك"
+      : "Couponake | Privacy Policy & Data Protection",
     description: isArabic
       ? "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح"
       : "Learn how we protect your data and keep your information secure",
@@ -26,30 +26,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات"
-        : "Coupoonat | Privacy Policy & Data Protection",
+        ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونك"
+        : "Couponake | Privacy Policy & Data Protection",
       description: isArabic
         ? "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح"
         : "Learn how we protect your data and keep your information secure",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات"
-        : "Coupoonat | Privacy Policy & Data Protection",
+        ? "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونك"
+        : "Couponake | Privacy Policy & Data Protection",
       description: isArabic
         ? "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح"
         : "Learn how we protect your data and keep your information secure",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
@@ -69,7 +69,7 @@ const PrivacyPage = async () => {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#webpage`,
-    name: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات",
+    name: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونك",
     url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/`,
     description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
     datePublished: page.created_at
@@ -98,7 +98,7 @@ const PrivacyPage = async () => {
     mainEntity: {
       "@type": "Article",
       "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#article`,
-      headline: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونات",
+      headline: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونك",
       description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
       datePublished: page.created_at
         ? new Date(page.created_at).toISOString()
@@ -106,18 +106,18 @@ const PrivacyPage = async () => {
       dateModified: page.created_at
         ? new Date(page.created_at).toISOString()
         : undefined,
-      image: "https://coupoonat.com/coupoonatLogo.webp",
+      image: "https://couponake.com/couponakeLogo.webp",
       author: {
         "@type": "Organization",
-        name: "كوبونات",
+        name: "كوبونك",
         url: process.env.NEXT_PUBLIC_WEBSITE_URL,
       },
       publisher: {
         "@type": "Organization",
-        name: "كوبونات",
+        name: "كوبونك",
         logo: {
           "@type": "ImageObject",
-          url: "https://coupoonat.com/coupoonatLogo.webp",
+          url: "https://couponake.com/couponakeLogo.webp",
         },
       },
       articleBody: secureHtmlLinks(page.content as string),

@@ -1,8 +1,8 @@
-import { NextConfig } from 'next';
-import createNextIntlPlugin from 'next-intl/plugin';
+import { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
-import arabicRedirects from './redirects/arabicRedirects';
-import baseRedirects from './redirects/baseRedirects';
+import arabicRedirects from "./redirects/arabicRedirects";
+import baseRedirects from "./redirects/baseRedirects";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -12,12 +12,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "api.coupoonat.com",
+        hostname: "api.couponake.com",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "coupoonat.com",
+        hostname: "couponake.com",
         pathname: "/**",
       },
       {
@@ -44,7 +44,7 @@ const nextConfig: NextConfig = {
     ],
     scrollRestoration: true,
     // Build-time prerender of the store pages (store/[slug]/generateStaticParams)
-    // makes ~2 API calls per store from the single build IP. api.coupoonat.com
+    // makes ~2 API calls per store from the single build IP. api.couponake.com
     // sits behind a Cloudflare rate limit of 200 requests / 10 s per IP and a
     // PHP-FPM pool of 5 workers, so static generation runs in one worker, 3 pages
     // at a time, and retries a page whose render fails before failing the build.

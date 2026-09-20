@@ -17,7 +17,7 @@ export async function generateMetadata() {
       ? "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا"
       : "Frequently Asked Questions: All customer questions and answers here",
     description: isArabic
-      ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
+      ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
       : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/` || "",
@@ -30,12 +30,12 @@ export async function generateMetadata() {
         ? "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا"
         : "Frequently Asked Questions: All customer questions and answers here",
       description: isArabic
-        ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
+        ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
         : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
@@ -45,12 +45,12 @@ export async function generateMetadata() {
         ? "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا"
         : "Frequently Asked Questions: All customer questions and answers here",
       description: isArabic
-        ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
+        ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
         : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
@@ -64,15 +64,15 @@ const FAQ = async () => {
     "@type": "FAQPage",
     "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/#faqpage`,
     name: "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا",
-    description: "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها",
+    description: "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها",
     url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/`,
-    image: "https://coupoonat.com/coupoonatLogo.webp",
+    image: "https://couponake.com/couponakeLogo.webp",
     publisher: {
       "@type": "Organization",
-      name: "كوبونات",
+      name: "كوبونك",
       logo: {
         "@type": "ImageObject",
-        url: "https://coupoonat.com/coupoonatLogo.webp",
+        url: "https://couponake.com/couponakeLogo.webp",
       },
     },
     mainEntity: data?.data.map((faq) => ({
@@ -85,7 +85,7 @@ const FAQ = async () => {
       },
       author: {
         "@type": "Organization",
-        name: "كوبونات",
+        name: "كوبونك",
       },
     })),
   };

@@ -13,7 +13,7 @@
  * error is an uncached 500 at runtime and a retried/failed build at build
  * time; neither can be indexed as "gone".
  *
- * Retry waits: api.coupoonat.com sits behind a Cloudflare rate limit of
+ * Retry waits: api.couponake.com sits behind a Cloudflare rate limit of
  * 200 requests / 10 s per IP that blocks for 10 s, so the last wait outlasts
  * a block.
  */
@@ -30,7 +30,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function fetchApi<T>(
   endpoint: string,
-  options: { revalidate?: number | false; tags?: string[] } = {}
+  options: { revalidate?: number | false; tags?: string[] } = {},
 ): Promise<ApiResult<T>> {
   const { revalidate = 300, tags = [endpoint] } = options;
   let lastError: unknown;

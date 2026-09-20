@@ -13,10 +13,10 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "من نحن: تعرف على فريق عمل كوبونات الخصم |كوبونات"
-      : "About Us | Coupoonat Coupons",
+      ? "من نحن: تعرف على فريق عمل كوبونك الخصم |كوبونك"
+      : "About Us | Couponake Coupons",
     description: isArabic
-      ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء"
+      ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونك الشراء"
       : "Meet our vision and the experts delivering top shopping coupons",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/` || "",
@@ -26,30 +26,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "من نحن: تعرف على فريق عمل كوبونات الخصم |كوبونات"
-        : "About Us | Coupoonat Coupons",
+        ? "من نحن: تعرف على فريق عمل كوبونك الخصم |كوبونك"
+        : "About Us | Couponake Coupons",
       description: isArabic
-        ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء"
+        ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونك الشراء"
         : "Meet our vision and the experts delivering top shopping coupons",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "من نحن: تعرف على فريق عمل كوبونات الخصم |كوبونات"
-        : "About Us | Coupoonat Coupons",
+        ? "من نحن: تعرف على فريق عمل كوبونك الخصم |كوبونك"
+        : "About Us | Couponake Coupons",
       description: isArabic
-        ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء"
+        ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونك الشراء"
         : "Meet our vision and the experts delivering top shopping coupons",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
@@ -69,18 +69,18 @@ const AboutUsPage = async () => {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: page.title,
-    description: "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء",
-    image: "https://coupoonat.com/coupoonatLogo.webp",
+    description: "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونك الشراء",
+    image: "https://couponake.com/couponakeLogo.webp",
     author: {
       "@type": "Organization",
-      name: "كوبونات",
+      name: "كوبونك",
     },
     publisher: {
       "@type": "Organization",
-      name: "كوبونات",
+      name: "كوبونك",
       logo: {
         "@type": "ImageObject",
-        url: "https://coupoonat.com/coupoonatLogo.webp",
+        url: "https://couponake.com/couponakeLogo.webp",
       },
     },
     datePublished: page.created_at,

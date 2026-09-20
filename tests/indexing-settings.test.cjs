@@ -50,10 +50,12 @@ function services(fetchImpl) {
 const names = ["super_site", "categories", "stores", "countries", "blogs",
   "contact_us", "faqs", "syas-alkhsosy-alafdl", "shrot-alastkhdam", "mn-nhn"];
 function fixture(overrides = {}) {
-  return { status: "success", data: {
-    menus: [], notifications: [],
-    settings: names.map((name, id) => ({ id, name, val: overrides[name] ?? "on" }))
-  }};
+  return {
+    status: "success", data: {
+      menus: [], notifications: [],
+      settings: names.map((name, id) => ({ id, name, val: overrides[name] ?? "on" }))
+    }
+  };
 }
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status });
@@ -90,7 +92,7 @@ test("valid settings produce the full main sitemap", async () => {
   assert.equal(response.status, 200);
   const xml = await response.text();
   assert.equal((xml.match(/<loc>/g) || []).length, 10);
-  assert.ok(xml.includes("https://coupoonat.com/blog/"));
+  assert.ok(xml.includes("https://couponake.com/blog/"));
 });
 const invalid = [
   ["null body", () => null],

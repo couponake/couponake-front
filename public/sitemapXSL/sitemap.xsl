@@ -10,7 +10,7 @@
   <xsl:template match="/">
     <html>
       <head>
-        <title>Coupoonat - Sitemap</title>
+        <title>Couponake - Sitemap</title>
         <style>
           body {
             font-family: Arial, sans-serif;
@@ -46,7 +46,7 @@
         </style>
       </head>
       <body>
-        <h1>Coupoonat - Sitemap (<xsl:value-of select="count(//sitemap:sitemap)"/>)</h1>
+        <h1>Couponake - Sitemap (<xsl:value-of select="count(//sitemap:sitemap)"/>)</h1>
         <table>
           <!-- <thead>
             <tr>

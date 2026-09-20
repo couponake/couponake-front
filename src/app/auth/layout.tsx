@@ -8,40 +8,40 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "تسجيل الدخول/انشاء حساب |كوبونات"
-      : "Login / Create Account | Coupoonat",
+      ? "تسجيل الدخول/انشاء حساب |كوبونك"
+      : "Login / Create Account | Couponake",
     description: isArabic
-      ? "أدخل حسابك أو سجّل لتتابع كوبوناتك وتحفظ المفضلة بسهولة"
+      ? "أدخل حسابك أو سجّل لتتابع كوبونكك وتحفظ المفضلة بسهولة"
       : "Log in or register to track and save your favorite coupons",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}auth/` || "",
     },
     openGraph: {
       title: isArabic
-        ? "تسجيل الدخول/انشاء حساب |كوبونات"
-        : "Login / Create Account | Coupoonat",
+        ? "تسجيل الدخول/انشاء حساب |كوبونك"
+        : "Login / Create Account | Couponake",
       description: isArabic
-        ? "أدخل حسابك أو سجّل لتتابع كوبوناتك وتحفظ المفضلة بسهولة"
+        ? "أدخل حسابك أو سجّل لتتابع كوبونكك وتحفظ المفضلة بسهولة"
         : "Log in or register to track and save your favorite coupons",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "تسجيل الدخول/انشاء حساب |كوبونات"
-        : "Login / Create Account | Coupoonat",
+        ? "تسجيل الدخول/انشاء حساب |كوبونك"
+        : "Login / Create Account | Couponake",
       description: isArabic
-        ? "أدخل حسابك أو سجّل لتتابع كوبوناتك وتحفظ المفضلة بسهولة"
+        ? "أدخل حسابك أو سجّل لتتابع كوبونكك وتحفظ المفضلة بسهولة"
         : "Log in or register to track and save your favorite coupons",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },

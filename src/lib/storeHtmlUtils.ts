@@ -18,45 +18,56 @@ export function secureStoreHtmlLinks(htmlContent: string): string {
   // 2. إصلاح القوائم: تحديد اتجاه كل قائمة تلقائياً وحقن كلاسات صريحة (pl أو pr) لإنهاء المشكلة
   // قمنا بتحديث الـ Regex ليمسك الوسم بالكامل بمحتواه الداخلي
   const listRegex = /<(ul|ol)([^>]*)>([\s\S]*?)<\/\1>/gi;
-  htmlContent = htmlContent.replace(listRegex, (match, tag, attributes, innerContent) => {
-    
-    // 1. إزالة أي inline padding قديم داخل الـ style تماماً لمنع التعارض
-    let newAttributes = attributes.replace(/padding[-\w]*\s*:\s*[^;"]+[;]?/gi, '');
+  htmlContent = htmlContent.replace(
+    listRegex,
+    (match, tag, attributes, innerContent) => {
+      // 1. إزالة أي inline padding قديم داخل الـ style تماماً لمنع التعارض
+      let newAttributes = attributes.replace(
+        /padding[-\w]*\s*:\s*[^;"]+[;]?/gi,
+        "",
+      );
 
-    // 2. فحص محتوى القائمة الحالية لمعرفة لغتها واتجاهها الصحيح
-    const isArabicList = /[\u0600-\u06FF]/.test(innerContent);
-    const listDir = isArabicList ? 'rtl' : 'ltr';
-    
-    // 3. تحديد نوع القائمة واستخدام كلاسات فيزيائية صريحة (!pl أو !pr) لضمان النتيجة 100%
-    const listStyleClass = tag.toLowerCase() === 'ul' ? 'list-disc' : 'list-decimal';
-    const directionClass = isArabicList ? '!pr-4 !pl-0' : '!pl-4 !pr-0';
-    const tailwindClasses = `${listStyleClass} ${directionClass}`;
+      // 2. فحص محتوى القائمة الحالية لمعرفة لغتها واتجاهها الصحيح
+      const isArabicList = /[\u0600-\u06FF]/.test(innerContent);
+      const listDir = isArabicList ? "rtl" : "ltr";
 
-    // 4. حقن أو تحديث الـ dir الخاص بالقائمة نفسها بناءً على لغتها الحقيقية
-    const dirMatch = /dir\s*=\s*["']([^"']*)["']/i.exec(newAttributes);
-    if (dirMatch) {
-      newAttributes = newAttributes.replace(dirMatch[0], `dir="${listDir}"`);
-    } else {
-      newAttributes += ` dir="${listDir}"`;
-    }
+      // 3. تحديد نوع القائمة واستخدام كلاسات فيزيائية صريحة (!pl أو !pr) لضمان النتيجة 100%
+      const listStyleClass =
+        tag.toLowerCase() === "ul" ? "list-disc" : "list-decimal";
+      const directionClass = isArabicList ? "!pr-4 !pl-0" : "!pl-4 !pr-0";
+      const tailwindClasses = `${listStyleClass} ${directionClass}`;
 
-    // 5. حقن كلاسات التنسيق والمسافات
-    const classMatch = /class\s*=\s*["']([^"']*)["']/i.exec(newAttributes);
-    if (classMatch) {
-      newAttributes = newAttributes.replace(classMatch[0], `class="${classMatch[1]} ${tailwindClasses}"`);
-    } else {
-      newAttributes += ` class="${tailwindClasses}"`;
-    }
+      // 4. حقن أو تحديث الـ dir الخاص بالقائمة نفسها بناءً على لغتها الحقيقية
+      const dirMatch = /dir\s*=\s*["']([^"']*)["']/i.exec(newAttributes);
+      if (dirMatch) {
+        newAttributes = newAttributes.replace(dirMatch[0], `dir="${listDir}"`);
+      } else {
+        newAttributes += ` dir="${listDir}"`;
+      }
 
-    // إرجاع الوسم كاملاً بالـ dir والكلاسات الجديدة والمحتوى الأصلي
-    return `<${tag}${newAttributes}>${innerContent}</${tag}>`;
-  });
+      // 5. حقن كلاسات التنسيق والمسافات
+      const classMatch = /class\s*=\s*["']([^"']*)["']/i.exec(newAttributes);
+      if (classMatch) {
+        newAttributes = newAttributes.replace(
+          classMatch[0],
+          `class="${classMatch[1]} ${tailwindClasses}"`,
+        );
+      } else {
+        newAttributes += ` class="${tailwindClasses}"`;
+      }
+
+      // إرجاع الوسم كاملاً بالـ dir والكلاسات الجديدة والمحتوى الأصلي
+      return `<${tag}${newAttributes}>${innerContent}</${tag}>`;
+    },
+  );
 
   // 3. Regular expression to find all anchor tags
   const anchorTagRegex = /<a([^>]*)>/gi;
 
   return htmlContent.replace(anchorTagRegex, (match, attributes) => {
-    const hasReferrerPolicy = /referrerPolicy\s*=\s*["']no-referrer["']/i.test(attributes);
+    const hasReferrerPolicy = /referrerPolicy\s*=\s*["']no-referrer["']/i.test(
+      attributes,
+    );
     const hasTargetBlank = /target\s*=\s*["']_blank["']/i.test(attributes);
 
     let newAttributes = attributes;
@@ -77,7 +88,7 @@ export function secureStoreHtmlLinks(htmlContent: string): string {
 
     if (hrefMatch) {
       const originalHref = hrefMatch[1];
-      shouldFollow = originalHref.startsWith("https://coupoonat.com/");
+      shouldFollow = originalHref.startsWith("https://couponake.com/");
 
       try {
         const url = new URL(originalHref);
@@ -85,7 +96,10 @@ export function secureStoreHtmlLinks(htmlContent: string): string {
           url.pathname += "/";
         }
         const encodedHref = url.toString();
-        newAttributes = newAttributes.replace(hrefMatch[0], `href="${encodedHref}"`);
+        newAttributes = newAttributes.replace(
+          hrefMatch[0],
+          `href="${encodedHref}"`,
+        );
       } catch {
         // Keep original href if parsing fails
       }

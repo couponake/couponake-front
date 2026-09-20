@@ -12,10 +12,10 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "اتصل بنا: تواصل مع ادارة موقع كوبونات من هنا بسهولة"
+      ? "اتصل بنا: تواصل مع ادارة موقع كوبونك من هنا بسهولة"
       : "Contact Us: Easily contact the Couponat website administration here.",
     description: isArabic
-      ? "يمكنك الان التواصل مع ادارة موقع كوبونات من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
+      ? "يمكنك الان التواصل مع ادارة موقع كوبونك من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
       : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}contact/` || "",
@@ -25,30 +25,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "اتصل بنا: تواصل مع ادارة موقع كوبونات من هنا بسهولة"
+        ? "اتصل بنا: تواصل مع ادارة موقع كوبونك من هنا بسهولة"
         : "Contact Us: Easily contact the Couponat website administration here.",
       description: isArabic
-        ? "يمكنك الان التواصل مع ادارة موقع كوبونات من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
+        ? "يمكنك الان التواصل مع ادارة موقع كوبونك من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
         : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "اتصل بنا: تواصل مع ادارة موقع كوبونات من هنا بسهولة"
+        ? "اتصل بنا: تواصل مع ادارة موقع كوبونك من هنا بسهولة"
         : "Contact Us: Easily contact the Couponat website administration here.",
       description: isArabic
-        ? "يمكنك الان التواصل مع ادارة موقع كوبونات من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
+        ? "يمكنك الان التواصل مع ادارة موقع كوبونك من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
         : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },

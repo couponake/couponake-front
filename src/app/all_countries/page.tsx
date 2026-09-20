@@ -14,10 +14,10 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك"
+      ? "كل البلدان: صفحة مخصصة للبحث عن الكوبونك داخل بلدك"
       : "All Countries: A dedicated page for searching for coupons within your country",
     description: isArabic
-      ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب"
+      ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونك الخصم باختيار البلد الذي تحب"
       : "This page makes it easy for you to search and access discount coupons by selecting the country you prefer",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}all_countries/` || "",
@@ -27,30 +27,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك"
+        ? "كل البلدان: صفحة مخصصة للبحث عن الكوبونك داخل بلدك"
         : "All Countries: A dedicated page for searching for coupons within your country",
       description: isArabic
-        ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب"
+        ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونك الخصم باختيار البلد الذي تحب"
         : "This page makes it easy for you to search and access discount coupons by selecting the country you prefer",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك"
+        ? "كل البلدان: صفحة مخصصة للبحث عن الكوبونك داخل بلدك"
         : "All Countries: A dedicated page for searching for coupons within your country",
       description: isArabic
-        ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب"
+        ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونك الخصم باختيار البلد الذي تحب"
         : "This page makes it easy for you to search and access discount coupons by selecting the country you prefer",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
@@ -84,32 +84,32 @@ const AllCountries = async () => {
           {
             "@type": "ListItem",
             position: 2,
-            name: "كوبونات لبلدك",
+            name: "كوبونك لبلدك",
             item: `${baseUrl}all_countries/`,
           },
         ],
       },
       {
         "@type": "Organization",
-        name: "كوبونات",
+        name: "كوبونك",
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}coupoonatLogo.webp`,
+          url: `${baseUrl}couponakeLogo.webp`,
         },
       },
       {
         "@type": "WebPage",
-        name: "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك",
+        name: "كل البلدان: صفحة مخصصة للبحث عن الكوبونك داخل بلدك",
         description:
-          "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب",
+          "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونك الخصم باختيار البلد الذي تحب",
         url: `${baseUrl}all_countries/`,
         publisher: {
           "@type": "Organization",
-          name: "كوبونات",
+          name: "كوبونك",
           logo: {
             "@type": "ImageObject",
-            url: `${baseUrl}coupoonatLogo.webp`,
+            url: `${baseUrl}couponakeLogo.webp`,
           },
         },
       },

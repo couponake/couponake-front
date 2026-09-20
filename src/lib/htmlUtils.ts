@@ -4,7 +4,7 @@
 /**
  * Adds security attributes to all anchor tags in HTML content
  * - referrerPolicy="no-referrer" to prevent referrer information leakage
- * - rel="follow" if URL starts with "https://coupoonat.com/", otherwise "nofollow"
+ * - rel="follow" if URL starts with "https://couponake.com/", otherwise "nofollow"
  * - target="_blank" to open links in a new tab
  *
  * @param htmlContent The original HTML content
@@ -47,8 +47,8 @@ export function secureHtmlLinks(htmlContent: string): string {
     if (hrefMatch) {
       const originalHref = hrefMatch[1];
 
-      // UPDATED: Check if URL exactly starts with "https://coupoonat.com/"
-      shouldFollow = originalHref.startsWith("https://coupoonat.com/");
+      // UPDATED: Check if URL exactly starts with "https://couponake.com/"
+      shouldFollow = originalHref.startsWith("https://couponake.com/");
 
       // Clean and modify URL
       try {
@@ -69,7 +69,7 @@ export function secureHtmlLinks(htmlContent: string): string {
       }
     }
 
-    // Set rel attribute based on whether URL starts with "https://coupoonat.com/"
+    // Set rel attribute based on whether URL starts with "https://couponake.com/"
     const relValue = shouldFollow ? "follow" : "nofollow";
     const relMatch = /rel\s*=\s*["']([^"']*)["']/i.exec(attributes);
 

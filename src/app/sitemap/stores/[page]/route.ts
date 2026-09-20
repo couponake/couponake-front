@@ -7,7 +7,7 @@ const lastmod = (d?: string) => (d ? `<lastmod>${d}</lastmod>` : "");
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ page: string }> }
+  { params }: { params: Promise<{ page: string }> },
 ) {
   //get Settings
   const storesSettings = await getSitemapSettingEnabled();
@@ -19,7 +19,7 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const stores = await getAllStoresData(pageNumber);
-  const baseURL = "https://coupoonat.com/store/";
+  const baseURL = "https://couponake.com/store/";
 
   const urls = stores.storesSlugs
     .map((slug, i) => {

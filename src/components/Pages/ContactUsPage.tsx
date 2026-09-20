@@ -124,7 +124,7 @@ const ContactUsPage = () => {
   const contactPageSchema: ContactPage = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    name: "اتصل بنا - كوبونات",
+    name: "اتصل بنا - كوبونك",
     url: `${websiteUrl}contact/`,
     description: t("contact.desc"),
   } as ContactPage & { "@context": string };

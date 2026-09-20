@@ -24,7 +24,7 @@ export const dynamicParams = true;
 const STORE_REVALIDATE = 300;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
 
-// Retry waits for the store fetches. api.coupoonat.com sits behind a Cloudflare
+// Retry waits for the store fetches. api.couponake.com sits behind a Cloudflare
 // rate limit of 200 requests / 10 s per IP that blocks for 10 s, so the last
 // wait outlasts a block.
 const RETRY_DELAYS_MS = [1000, 3000, 11000];
@@ -185,15 +185,15 @@ export async function generateMetadata({
   // Default values when the store does not exist (the page itself answers 404)
   if (!seoData) {
     return {
-      title: "كوبونات",
-      description: "كوبونات",
+      title: "كوبونك",
+      description: "كوبونك",
     };
   }
 
   return {
     // Basic metadata
-    title: seoData.title || "كوبونات",
-    description: seoData.description || "كوبونات",
+    title: seoData.title || "كوبونك",
+    description: seoData.description || "كوبونك",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
     },
@@ -202,9 +202,9 @@ export async function generateMetadata({
     },
     // OpenGraph metadata
     openGraph: {
-      title: seoData["og:title"] || seoData.title || "كوبونات",
+      title: seoData["og:title"] || seoData.title || "كوبونك",
       description:
-        seoData["og:description"] || seoData.description || "كوبونات",
+        seoData["og:description"] || seoData.description || "كوبونك",
       images: [
         {
           url: seoData["og:image"] || "",
@@ -216,9 +216,9 @@ export async function generateMetadata({
     // Twitter metadata
     twitter: {
       card: "summary_large_image",
-      title: seoData["twitter:title"] || seoData.title || "كوبونات",
+      title: seoData["twitter:title"] || seoData.title || "كوبونك",
       description:
-        seoData["twitter:description"] || seoData.description || "كوبونات",
+        seoData["twitter:description"] || seoData.description || "كوبونك",
       images: [
         {
           url: seoData["twitter:image"] || "",

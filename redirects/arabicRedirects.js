@@ -100,7 +100,7 @@ const blogRedirects = [
   { from: '/موقع-waffarha/', to: '/blog/' },
   { from: '/موقع-ماماز-اند-باباز/', to: '/blog/' },
   { from: '/americaneagle/', to: '/blog/' },
-  { from: '/أفضل-الطرق-لاستخدام-كوبونات-الخصم/', to: '/blog/' },
+  { from: '/أفضل-الطرق-لاستخدام-كوبونك-الخصم/', to: '/blog/' },
   { from: '/موقع-دبدوب/', to: '/blog/' },
   { from: '/موقع-ايزيل/', to: '/blog/' },
   { from: '/موقع-قصر-الأواني/', to: '/blog/' },

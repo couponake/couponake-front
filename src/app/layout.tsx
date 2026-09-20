@@ -61,8 +61,8 @@ export async function generateMetadata() {
   const indexingSite = await getSettingEnabled(SettingsEnum.SuperSite);
 
 
-  const fallbackTitle = "كوبونات";
-  const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupoonatLogo.webp`;
+  const fallbackTitle = "كوبونك";
+  const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponakeLogo.webp`;
 
   if (!seoData?.description || !seoData?.author) {
     return {

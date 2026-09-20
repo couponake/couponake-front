@@ -3,7 +3,7 @@ import { getAllCategories } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseURL = "https://coupoonat.com/";
+  const baseURL = "https://couponake.com/";
   //get Settings
   const categoriesSettings = await getSitemapSettingEnabled();
   if (!categoriesSettings.categories || !categoriesSettings.superSite) {
@@ -20,7 +20,7 @@ export async function GET() {
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
-  `
+  `,
     )
     .join("");
 

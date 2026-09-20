@@ -36,8 +36,12 @@ const api = http.createServer((req, res) => {
   if (mode === "forbidden") { res.writeHead(403); return res.end("{}"); }
   if (mode === "failure") { res.writeHead(503); return res.end("{}"); }
   if (mode === "malformed") return res.end(JSON.stringify({ data: { settings: [] } }));
-  res.end(JSON.stringify({ data: { menus: [], notifications: [],
-    settings: names.map((name, id) => ({ id, name, val: flags[name] || "on" })) } }));
+  res.end(JSON.stringify({
+    data: {
+      menus: [], notifications: [],
+      settings: names.map((name, id) => ({ id, name, val: flags[name] || "on" }))
+    }
+  }));
 });
 (async () => {
   const apiPort = await listen(api);
@@ -55,16 +59,22 @@ const api = http.createServer((req, res) => {
   write("package.json", JSON.stringify({ private: true, dependencies: { next: "16.3.0", react: "19.2.3", "react-dom": "19.2.3" } }));
   fs.symlinkSync(fs.realpathSync(path.join(root, "node_modules")), path.join(dir, "node_modules"), "dir");
   write("next.config.js", 'module.exports = { experimental: { cpus: 1 } };');
-  write("tsconfig.json", JSON.stringify({ compilerOptions: { strict: true, esModuleInterop: true,
-    moduleResolution: "bundler", module: "esnext", target: "ES2017", jsx: "preserve",
-    paths: { "@/*": ["./src/*"] } } }));
+  write("tsconfig.json", JSON.stringify({
+    compilerOptions: {
+      strict: true, esModuleInterop: true,
+      moduleResolution: "bundler", module: "esnext", target: "ES2017", jsx: "preserve",
+      paths: { "@/*": ["./src/*"] }
+    }
+  }));
   write("src/app/layout.tsx", 'import { connection } from "next/server"; import { getSettings } from "@/services/GetSettingsRequest"; export default async function Layout({children}: {children: React.ReactNode}) { await connection(); await getSettings(); return <html><body>{children}</body></html>; }');
   write("src/app/probe/page.tsx", 'import { connection } from "next/server"; import { getSettingEnabled } from "@/services/getIndexingSettings"; export async function generateMetadata(){ await connection(); return { robots: { index: await getSettingEnabled("blogs") } }; } export default async function Page(){ await connection(); return <main>Indexing cache probe</main>; }');
   write("src/app/health/route.ts", 'export async function GET(){ return new Response("ok"); }');
   write("src/app/invalidate/route.ts", 'import { revalidateTag } from "next/cache"; export async function POST(){ revalidateTag("site-settings", "max"); return new Response("ok"); }');
-  const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1",
+  const env = {
+    ...process.env, NEXT_TELEMETRY_DISABLED: "1",
     NEXT_PUBLIC_API_URL: "http://127.0.0.1:" + apiPort + "/",
-    NODE_ENV: "production" };
+    NODE_ENV: "production"
+  };
   console.log("Building isolated Next.js fixture...");
   const build = await run(["build", "--webpack"], env);
   console.log(build.slice(-2500));
@@ -74,7 +84,7 @@ const api = http.createServer((req, res) => {
   next.stdout.on("data", d => logs += d);
   next.stderr.on("data", d => logs += d);
   for (let i = 0; i < 100; i++) {
-    try { if ((await fetch(origin + "/health")).ok) break; } catch {}
+    try { if ((await fetch(origin + "/health")).ok) break; } catch { }
     if (i === 99) throw new Error("Next did not start: " + logs.slice(-2500));
     await sleep(100);
   }
@@ -120,8 +130,8 @@ const api = http.createServer((req, res) => {
   assert.ok(noindexed(response));
   let sitemap = await get("/sitemap/main");
   assert.equal(sitemap.status, 200);
-  assert.ok(!sitemap.body.includes("https://coupoonat.com/blog/"));
-  assert.ok(sitemap.body.includes("https://coupoonat.com/stores/"));
+  assert.ok(!sitemap.body.includes("https://couponake.com/blog/"));
+  assert.ok(sitemap.body.includes("https://couponake.com/stores/"));
   console.log("PASS deliberate blogs OFF updates metadata and only that sitemap section");
   flags = { super_site: "off" };
   await invalidate();

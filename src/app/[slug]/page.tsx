@@ -44,7 +44,7 @@ export async function generateMetadata({
   }
   if (response.kind === "not_found" || !response.data?.blog) {
     // The page itself answers 404 (notFound()); metadata is irrelevant.
-    return { title: "كوبونات", description: "كوبونات" };
+    return { title: "كوبونك", description: "كوبونك" };
   }
 
   {
@@ -134,10 +134,10 @@ const BlogDetails = async ({
     },
     publisher: {
       "@type": "Organization",
-      name: "كوبونات",
+      name: "كوبونك",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}coupoonatLogo.webp`,
+        url: `${baseUrl}couponakeLogo.webp`,
         width: 600,
         height: 60,
       },
@@ -191,7 +191,7 @@ const BlogDetails = async ({
     isPartOf: {
       "@type": "WebSite",
       "@id": baseUrl,
-      name: "كوبونات",
+      name: "كوبونك",
       url: baseUrl,
     },
     primaryImageOfPage: {

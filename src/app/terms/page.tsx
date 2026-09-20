@@ -13,8 +13,8 @@ export async function generateMetadata() {
 
   return {
     title: isArabic
-      ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات"
-      : "Terms of Use | Coupoonat",
+      ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك"
+      : "Terms of Use | Couponake",
     description: isArabic
       ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
       : "Review site rules, your rights, and obligations as a user",
@@ -26,30 +26,30 @@ export async function generateMetadata() {
     },
     openGraph: {
       title: isArabic
-        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات"
-        : "Terms of Use | Coupoonat",
+        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك"
+        : "Terms of Use | Couponake",
       description: isArabic
         ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
         : "Review site rules, your rights, and obligations as a user",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات"
-        : "Terms of Use | Coupoonat",
+        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك"
+        : "Terms of Use | Couponake",
       description: isArabic
         ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
         : "Review site rules, your rights, and obligations as a user",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
@@ -71,7 +71,7 @@ const TermsPage = async () => {
       {
         "@type": "WebPage",
         "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/#webpage`,
-        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات",
+        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك",
         url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/`,
         description: "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم",
         datePublished: page.created_at
@@ -80,7 +80,7 @@ const TermsPage = async () => {
         dateModified: page.created_at
           ? new Date(page.created_at).toISOString()
           : undefined,
-        image: "https://coupoonat.com/coupoonatLogo.webp",
+        image: "https://couponake.com/couponakeLogo.webp",
         breadcrumb: {
           "@type": "BreadcrumbList",
           itemListElement: [
@@ -102,7 +102,7 @@ const TermsPage = async () => {
       {
         "@type": "Legislation",
         "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/#legislation`,
-        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونات",
+        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك",
         description: "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم",
         dateCreated: page.created_at
           ? new Date(page.created_at).toISOString()
@@ -119,10 +119,10 @@ const TermsPage = async () => {
         legislationType: "Terms of Use",
         publisher: {
           "@type": "Organization",
-          name: "كوبونات",
+          name: "كوبونك",
           logo: {
             "@type": "ImageObject",
-            url: "https://coupoonat.com/coupoonatLogo.webp",
+            url: "https://couponake.com/couponakeLogo.webp",
           },
         },
         isPartOf: {

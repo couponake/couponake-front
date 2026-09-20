@@ -41,11 +41,14 @@ function secretMatches(given: string | null): boolean {
 function cleanList(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value
-    .filter((v): v is string => typeof v === "string" && v.length > 0 && v.length <= 1024)
+    .filter(
+      (v): v is string =>
+        typeof v === "string" && v.length > 0 && v.length <= 1024,
+    )
     .slice(0, MAX_ITEMS);
 }
 
-// A slug may reach the cache key raw ("/كوبونات/") or percent-encoded
+// A slug may reach the cache key raw ("/كوبونك/") or percent-encoded
 // ("/%D9%83.../"); invalidate both spellings so the call never misses.
 function variants(value: string): string[] {
   const out = new Set<string>([value]);
@@ -64,25 +67,35 @@ function variants(value: string): string[] {
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   if (!secretMatches(req.headers.get("x-revalidate-secret"))) {
-    return NextResponse.json({ revalidated: false, message: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      { revalidated: false, message: "Unauthorized" },
+      { status: 401 },
+    );
   }
 
   let body: { paths?: unknown; tags?: unknown } = {};
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ revalidated: false, message: "Invalid JSON" }, { status: 400 });
+    return NextResponse.json(
+      { revalidated: false, message: "Invalid JSON" },
+      { status: 400 },
+    );
   }
 
   const paths = cleanList(body.paths).filter(
-    (p) => p.startsWith("/") && !p.includes("..") && !p.includes("?") && !p.includes("#")
+    (p) =>
+      p.startsWith("/") &&
+      !p.includes("..") &&
+      !p.includes("?") &&
+      !p.includes("#"),
   );
   const tags = cleanList(body.tags);
 
   if (paths.length === 0 && tags.length === 0) {
     return NextResponse.json(
       { revalidated: false, message: "Nothing to revalidate" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 

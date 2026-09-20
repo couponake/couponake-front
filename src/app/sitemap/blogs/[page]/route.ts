@@ -7,7 +7,7 @@ const lastmod = (d?: string) => (d ? `<lastmod>${d}</lastmod>` : "");
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ page: string }> }
+  { params }: { params: Promise<{ page: string }> },
 ) {
   //get Settings
   const blogSettings = await getSitemapSettingEnabled();
@@ -19,7 +19,7 @@ export async function GET(
   const page = resolvedParams?.page;
   const pageNumber = parseInt(page, 10);
   const blogs = await getAllBlogsData(pageNumber);
-  const baseURL = "https://coupoonat.com/";
+  const baseURL = "https://couponake.com/";
 
   const urls = blogs.slugs
     .map((slug, i) => {

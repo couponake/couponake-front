@@ -1,5 +1,5 @@
 // src/app/robots/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export function GET() {
   const content = `
@@ -13,12 +13,12 @@ Disallow: /api/
 Disallow: /private/
 Disallow: /*?couponID=
 
-Sitemap: https://coupoonat.com/sitemap.xml
+Sitemap: https://couponake.com/sitemap.xml
 `.trim();
 
   return new NextResponse(content, {
     headers: {
-      'Content-Type': 'text/plain',
+      "Content-Type": "text/plain",
     },
   });
 }

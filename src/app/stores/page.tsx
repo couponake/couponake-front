@@ -25,43 +25,43 @@ export async function generateMetadata({ searchParams }: PageProps) {
 
   return {
     title: isArabic
-      ? "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط"
+      ? "كل المتاجر: كوبونك خصم لجميع متاجر التسوق في الشرق الاوسط"
       : "All Stores: Discount coupons for all Middle Eastern shopping stores",
     description: isArabic
-      ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً"
+      ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونك خصم بكل سهولة ومجاناً"
       : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
     alternates: {
-      canonical: `https://coupoonat.com${storePageHref(page)}`,
+      canonical: `https://couponake.com${storePageHref(page)}`,
     },
     robots: {
       index: indexingStores,
     },
     openGraph: {
       title: isArabic
-        ? "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط"
+        ? "كل المتاجر: كوبونك خصم لجميع متاجر التسوق في الشرق الاوسط"
         : "All Stores: Discount coupons for all Middle Eastern shopping stores",
       description: isArabic
-        ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً"
+        ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونك خصم بكل سهولة ومجاناً"
         : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: isArabic
-        ? "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط"
+        ? "كل المتاجر: كوبونك خصم لجميع متاجر التسوق في الشرق الاوسط"
         : "All Stores: Discount coupons for all Middle Eastern shopping stores",
       description: isArabic
-        ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً"
+        ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونك خصم بكل سهولة ومجاناً"
         : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
       images: [
         {
-          url: "https://coupoonat.com/coupoonatLogo.webp",
-          alt: "Coupoonat Logo",
+          url: "https://couponake.com/couponakeLogo.webp",
+          alt: "Couponake Logo",
         },
       ],
     },
@@ -88,7 +88,7 @@ export default async function StoresPage({ params, searchParams }: PageProps) {
   const locale = (await params).locale;
   const t = await getTranslations({ locale });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
-  const pageUrl = 'https://coupoonat.com' + storePageHref(page);
+  const pageUrl = 'https://couponake.com' + storePageHref(page);
   const queryClient = new QueryClient();
   queryClient.setQueryData(["stores", page, "", null, null, false], firstPage, { updatedAt: firstPage.fetchedAt });
 
@@ -96,13 +96,13 @@ export default async function StoresPage({ params, searchParams }: PageProps) {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${pageUrl}#webpage`,
-    name: "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط",
-    description: "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً",
+    name: "كل المتاجر: كوبونك خصم لجميع متاجر التسوق في الشرق الاوسط",
+    description: "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونك خصم بكل سهولة ومجاناً",
     url: pageUrl,
     inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
-      name: "كوبونات",
+      name: "كوبونك",
       url: baseUrl,
     },
   };
