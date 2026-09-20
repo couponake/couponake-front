@@ -13,12 +13,12 @@ interface ErrorResponse {
 
 let base_url: string = "";
 
-if (!process.env.NEXT_PUBLIC_API_URL) {
+if (!process.env.NEXT_PUBLIC_Couponake_API_URL) {
   throw new Error(
-    "NEXT_PUBLIC_API_URL is not defined in environment variables",
+    "NEXT_PUBLIC_Couponake_API_URL is not defined in environment variables",
   );
 } else {
-  base_url = process.env.NEXT_PUBLIC_API_URL;
+  base_url = process.env.NEXT_PUBLIC_Couponake_API_URL;
 }
 
 const getAccessToken = (): string | null | undefined => {
@@ -104,17 +104,14 @@ export const api = {
       // Use a cache key that includes the endpoint and token to ensure proper caching
       const cacheKey = `${endpoint}${token ? `-${token.substring(0, 8)}` : ""}`;
 
-      const response = await fetch(
-        `${base_url}${endpoint}`,
-        {
-          next: { revalidate, tags: [cacheKey] },
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token ? `Bearer ${token}` : "",
-            "Accept-Language": lang || currentLang,
-          },
+      const response = await fetch(`${base_url}${endpoint}`, {
+        next: { revalidate, tags: [cacheKey] },
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: token ? `Bearer ${token}` : "",
+          "Accept-Language": lang || currentLang,
         },
-      );
+      });
 
       if (response.status === 301) {
         try {
@@ -166,17 +163,14 @@ export const api = {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
-      const response = await fetch(
-        `${base_url}${endpoint}`,
-        {
-          cache: "no-store",
-          headers: {
-            Authorization: token ? `Bearer ${token}` : "",
-            "Accept-Language": lang || currentLang,
-          },
-          signal: controller.signal,
+      const response = await fetch(`${base_url}${endpoint}`, {
+        cache: "no-store",
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "",
+          "Accept-Language": lang || currentLang,
         },
-      );
+        signal: controller.signal,
+      });
 
       clearTimeout(timeoutId);
 

@@ -19,7 +19,7 @@ export async function generateMetadata() {
       ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونك الشراء"
       : "Meet our vision and the experts delivering top shopping coupons",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}about-us/` || "",
     },
     robots: {
       index: indexingAbout,
@@ -86,7 +86,7 @@ const AboutUsPage = async () => {
     datePublished: page.created_at,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/`,
+      "@id": `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}about-us/`,
     },
   } as Article & { "@context": string };
 
@@ -98,13 +98,13 @@ const AboutUsPage = async () => {
         "@type": "ListItem",
         position: 1,
         name: "الرئيسية",
-        item: process.env.NEXT_PUBLIC_WEBSITE_URL || "https://example.com",
+        item: process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL || "https://example.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: page.title,
-        item: `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/`,
+        item: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}about-us/`,
       },
     ],
   } as BreadcrumbList & { "@context": string };

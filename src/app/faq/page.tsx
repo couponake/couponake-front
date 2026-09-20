@@ -20,7 +20,7 @@ export async function generateMetadata() {
       ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
       : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}faq/` || "",
     },
     robots: {
       index: indexingFAQ,
@@ -62,10 +62,10 @@ const FAQ = async () => {
   const FAQSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/#faqpage`,
+    "@id": `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}faq/#faqpage`,
     name: "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا",
     description: "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها",
-    url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/`,
+    url: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}faq/`,
     image: "https://couponake.com/couponakeLogo.webp",
     publisher: {
       "@type": "Organization",

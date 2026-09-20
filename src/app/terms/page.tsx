@@ -19,7 +19,7 @@ export async function generateMetadata() {
       ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
       : "Review site rules, your rights, and obligations as a user",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}terms/` || "",
     },
     robots: {
       index: indexingTerms,
@@ -70,9 +70,9 @@ const TermsPage = async () => {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/#webpage`,
+        "@id": `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}terms/#webpage`,
         name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك",
-        url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/`,
+        url: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}terms/`,
         description: "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم",
         datePublished: page.created_at
           ? new Date(page.created_at).toISOString()
@@ -88,20 +88,20 @@ const TermsPage = async () => {
               "@type": "ListItem",
               position: 1,
               name: "الرئيسية",
-              item: process.env.NEXT_PUBLIC_WEBSITE_URL,
+              item: process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL,
             },
             {
               "@type": "ListItem",
               position: 2,
               name: "شروط الاستخدام",
-              item: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/`,
+              item: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}terms/`,
             },
           ],
         },
       },
       {
         "@type": "Legislation",
-        "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/#legislation`,
+        "@id": `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}terms/#legislation`,
         name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك",
         description: "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم",
         dateCreated: page.created_at
@@ -110,7 +110,7 @@ const TermsPage = async () => {
         dateModified: page.created_at
           ? new Date(page.created_at).toISOString()
           : undefined,
-        url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/`,
+        url: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}terms/`,
         jurisdiction: {
           "@type": "AdministrativeArea",
           name: "Egypt",
@@ -126,7 +126,7 @@ const TermsPage = async () => {
           },
         },
         isPartOf: {
-          "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/#webpage`,
+          "@id": `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}terms/#webpage`,
         },
       },
     ],

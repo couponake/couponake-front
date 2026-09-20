@@ -38,7 +38,7 @@ export async function generateMetadata({
     description: country_seo?.description,
     alternates: {
       canonical:
-        `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupon_country/${slug}/` || "",
+        `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}coupon_country/${slug}/` || "",
     },
     robots: {
       index: indexingCountry,
@@ -48,7 +48,7 @@ export async function generateMetadata({
       description: country_seo?.description,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponakeLogo.webp`,
+          url: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}couponakeLogo.webp`,
           alt: "كوبونك",
         },
       ],
@@ -59,7 +59,7 @@ export async function generateMetadata({
       description: country_seo?.description,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponakeLogo.webp`,
+          url: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}couponakeLogo.webp`,
           alt: "كوبونك",
         },
       ],
@@ -82,7 +82,7 @@ export default async function CouponCountry({
   const { country, stores } = response.data.data;
 
   const t = await getTranslations({ locale });
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
 
   const graph = {
     "@context": "https://schema.org",

@@ -22,7 +22,7 @@ function services(fetchImpl) {
     }).outputText;
     const sandbox = {
       module, exports: module.exports, console,
-      process: { env: { NEXT_PUBLIC_API_URL: "https://api.example.test/api/" } },
+      process: { env: { NEXT_PUBLIC_Couponake_API_URL: "https://api.example.test/api/" } },
       AbortSignal, Response,
       setTimeout: (fn) => setTimeout(fn, 0),
       fetch: async (url, options) => {

@@ -16,8 +16,11 @@ const getValidatedSettings = unstable_cache(
     }
     return validateSettingsResponse(response.data);
   },
-  ["validated-site-settings-v1", process.env.NEXT_PUBLIC_API_URL ?? ""],
-  { revalidate: 60 * 60 * 6, tags: ["home", "site-settings"] }
+  [
+    "validated-site-settings-v1",
+    process.env.NEXT_PUBLIC_Couponake_API_URL ?? "",
+  ],
+  { revalidate: 60 * 60 * 6, tags: ["home", "site-settings"] },
 );
 
 export const getSettings = cache(getValidatedSettings);

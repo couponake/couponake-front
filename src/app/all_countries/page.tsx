@@ -20,7 +20,7 @@ export async function generateMetadata() {
       ? "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونك الخصم باختيار البلد الذي تحب"
       : "This page makes it easy for you to search and access discount coupons by selecting the country you prefer",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}all_countries/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}all_countries/` || "",
     },
     robots: {
       index: indexingCountries,
@@ -58,7 +58,7 @@ export async function generateMetadata() {
 }
 
 const AllCountries = async () => {
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
   // First page of countries fetched on the server so the 12 country links are
   // in the prerendered HTML. The client component fetched them through
   // /api/home/countries-meta, which robots.txt disallows — so even after

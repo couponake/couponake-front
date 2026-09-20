@@ -14,7 +14,7 @@ export async function generateMetadata() {
       ? "أدخل حسابك أو سجّل لتتابع كوبونكك وتحفظ المفضلة بسهولة"
       : "Log in or register to track and save your favorite coupons",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}auth/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}auth/` || "",
     },
     openGraph: {
       title: isArabic

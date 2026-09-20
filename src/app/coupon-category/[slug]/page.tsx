@@ -46,7 +46,7 @@ export async function generateMetadata({
       description: category?.category_seo?.description,
       alternates: {
         canonical:
-          `${process.env.NEXT_PUBLIC_WEBSITE_URL}coupon-category/${slug}/` || "",
+          `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}coupon-category/${slug}/` || "",
       },
       robots: {
         index: indexingCategory,
@@ -94,7 +94,7 @@ const ShowCouponCategoryPage = async ({
   }
 
   const category: any = response.data;
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
   const categoryData = category.category as CategoryItem;
 
   const graph = {

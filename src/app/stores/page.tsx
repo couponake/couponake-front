@@ -87,7 +87,7 @@ export default async function StoresPage({ params, searchParams }: PageProps) {
   if (page > firstPage.pagination.last_page) notFound();
   const locale = (await params).locale;
   const t = await getTranslations({ locale });
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
   const pageUrl = 'https://couponake.com' + storePageHref(page);
   const queryClient = new QueryClient();
   queryClient.setQueryData(["stores", page, "", null, null, false], firstPage, { updatedAt: firstPage.fetchedAt });

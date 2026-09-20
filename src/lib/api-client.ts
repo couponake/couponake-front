@@ -24,10 +24,10 @@ class ApiClient {
 
   constructor() {
     // Ensure API URL is defined
-    this.baseURL = process.env.NEXT_PUBLIC_API_URL || "";
+    this.baseURL = process.env.NEXT_PUBLIC_Couponake_API_URL || "";
     if (!this.baseURL) {
       throw new Error(
-        "NEXT_PUBLIC_API_URL is not defined in environment variables"
+        "NEXT_PUBLIC_Couponake_API_URL is not defined in environment variables",
       );
     }
 
@@ -92,7 +92,7 @@ class ApiClient {
       (error: AxiosError<ErrorResponse>) => {
         this.handleAuthError(error);
         return Promise.reject(error);
-      }
+      },
     );
   }
 
@@ -124,7 +124,7 @@ class ApiClient {
   async get<T>(
     endpoint: string,
     config?: AxiosRequestConfig,
-    req?: NextRequest
+    req?: NextRequest,
   ): Promise<T> {
     try {
       // Ensure token is set in headers for server-side requests
@@ -147,7 +147,7 @@ class ApiClient {
       // Handle manual redirect response
       if (response.status === 301 || response.status === 302) {
         console.warn(
-          `Redirected from ${endpoint} to ${response.headers.location}`
+          `Redirected from ${endpoint} to ${response.headers.location}`,
         );
 
         return response.data;
@@ -164,7 +164,7 @@ class ApiClient {
     endpoint: string,
     data?: any,
     config?: AxiosRequestConfig,
-    req?: NextRequest
+    req?: NextRequest,
   ): Promise<T> {
     try {
       // Ensure token is set in headers for server-side requests
@@ -186,7 +186,7 @@ class ApiClient {
     endpoint: string,
     data?: any,
     config?: AxiosRequestConfig,
-    req?: NextRequest
+    req?: NextRequest,
   ): Promise<T> {
     try {
       // Ensure token is set in headers for server-side requests
@@ -207,7 +207,7 @@ class ApiClient {
   async delete<T>(
     endpoint: string,
     config?: AxiosRequestConfig,
-    req?: NextRequest
+    req?: NextRequest,
   ): Promise<T> {
     try {
       // Ensure token is set in headers for server-side requests
@@ -230,7 +230,7 @@ class ApiClient {
     endpoint: string,
     options: FetchOptions = {},
     token?: string,
-    req?: NextRequest
+    req?: NextRequest,
   ): Promise<T> {
     const {
       revalidate = 60,
@@ -269,7 +269,7 @@ class ApiClient {
         }
         const errorText = await response.text();
         throw new Error(
-          `API error: ${response.status} ${errorText.substring(0, 100)}`
+          `API error: ${response.status} ${errorText.substring(0, 100)}`,
         );
       }
 
@@ -286,7 +286,7 @@ class ApiClient {
     token?: string,
     lang = this.defaultLang,
     timeoutMs = 10000,
-    req?: NextRequest
+    req?: NextRequest,
   ): Promise<T> {
     try {
       // If token is not provided, try to get it
@@ -317,7 +317,7 @@ class ApiClient {
         } catch (e) {
           console.error("Error parsing 301 response:", e);
           throw new Error(
-            `API error: ${response.status} ${response.statusText}`
+            `API error: ${response.status} ${response.statusText}`,
           );
         }
       }
@@ -332,7 +332,7 @@ class ApiClient {
         }
         const errorText = await response.text();
         throw new Error(
-          `API error: ${response.status} ${errorText.substring(0, 100)}`
+          `API error: ${response.status} ${errorText.substring(0, 100)}`,
         );
       }
 

@@ -10,7 +10,7 @@ export const runtime = "nodejs";
 export const revalidate = 300;
 
 export default async function Home() {
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
 
   const [
     generalBanners = [],
