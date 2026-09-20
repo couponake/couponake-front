@@ -24,10 +24,10 @@ class ApiClient {
 
   constructor() {
     // Ensure API URL is defined
-    this.baseURL = process.env.NEXT_PUBLIC_Couponake_API_URL || "";
+    this.baseURL = process.env.NEXT_PUBLIC_API_URL || "";
     if (!this.baseURL) {
       throw new Error(
-        "NEXT_PUBLIC_Couponake_API_URL is not defined in environment variables",
+        "NEXT_PUBLIC_API_URL is not defined in environment variables",
       );
     }
 

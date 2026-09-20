@@ -20,7 +20,7 @@ export async function generateMetadata() {
       ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
       : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}blog/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}blog/` || "",
     },
     robots: {
       index: indexingBlogs,
@@ -65,7 +65,7 @@ export default async function Home({
   const locale = (await params).locale;
   const blogs: any = await api.static("blogs");
   const t = await getTranslations({ locale });
-  const baseUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
   const structuredData = {
     "@context": "https://schema.org",

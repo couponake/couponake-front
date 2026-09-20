@@ -17,7 +17,7 @@ export function createDetailLoader<T>(
   validate: (value: unknown, slug: string) => T,
   revalidate = 300,
 ) {
-  const base = process.env.NEXT_PUBLIC_Couponake_API_URL ?? "";
+  const base = process.env.NEXT_PUBLIC_API_URL ?? "";
   const loader = unstable_cache(
     async (slug: string): Promise<ApiResult<T>> => {
       const endpoint =

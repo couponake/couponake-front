@@ -22,7 +22,7 @@ export type ApiResult<T> =
   | { kind: "redirect"; redirect_url: string }
   | { kind: "not_found" };
 
-const API_BASE = process.env.NEXT_PUBLIC_Couponake_API_URL ?? "";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
 const RETRY_DELAYS_MS = [1000, 3000, 11000];
 const FETCH_TIMEOUT_MS = 15000;
 

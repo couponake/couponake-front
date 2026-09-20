@@ -4,7 +4,7 @@ import { unstable_cache } from "next/cache";
 import { parseStorePage, validateStoresPage } from "@/lib/stores-list";
 
 export function createStoresPageLoader(revalidate = 300) {
-  const base = process.env.NEXT_PUBLIC_Couponake_API_URL ?? "";
+  const base = process.env.NEXT_PUBLIC_API_URL ?? "";
   const load = unstable_cache(
     async (page: number) => {
       const response = await fetch(

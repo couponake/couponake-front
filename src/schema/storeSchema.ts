@@ -6,7 +6,7 @@ const stripHtml = (html: string) => {
 };
 
 const getStructuredDataSchemas = (store: StoreResponse) => {
-  const baseUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
   const statisticsProperties = [
     {

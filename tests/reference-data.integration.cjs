@@ -56,7 +56,7 @@ async function run(args, env) {
     const short=createPublicListLoader('categories?per_page=50&test=expiry','public-expiry-test',validateCategories,1);
     export async function GET(_:Request,{params}:{params:Promise<{kind:string}>}){const {kind}=await params;return Response.json(await (kind==='categories'?getCategories():kind==='countries'?getCountries():short()));}`);
   write('src/app/invalidate/route.ts', `import {revalidateTag} from 'next/cache'; export async function POST(){for(const t of ['public-categories','public-countries','public-country-options'])revalidateTag(t,'max');return new Response('ok');}`);
-  const env = { ...process.env, NODE_ENV: 'production', NEXT_TELEMETRY_DISABLED: '1', NEXT_PUBLIC_Couponake_API_URL: 'http://127.0.0.1:' + apiPort + '/' };
+  const env = { ...process.env, NODE_ENV: 'production', NEXT_TELEMETRY_DISABLED: '1', NEXT_PUBLIC_API_URL: 'http://127.0.0.1:' + apiPort + '/' };
   console.log('Building isolated cache fixture...'); await run(['build', '--webpack'], env);
   next = spawn(process.execPath, [nextBin, 'start', '--hostname', '127.0.0.1', '--port', String(port)], { cwd: dir, env, stdio: ['ignore', 'pipe', 'pipe'] });
   next.stdout.on('data', d => log += d); next.stderr.on('data', d => log += d);

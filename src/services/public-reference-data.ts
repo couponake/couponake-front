@@ -15,7 +15,7 @@ export function createPublicListLoader<T>(
   validate: (value: unknown) => T,
   revalidate: number,
 ) {
-  const base = process.env.NEXT_PUBLIC_Couponake_API_URL ?? "";
+  const base = process.env.NEXT_PUBLIC_API_URL ?? "";
   return unstable_cache(
     async () => {
       const response = await fetch(`${base}${endpoint}`, {

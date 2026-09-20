@@ -19,7 +19,7 @@ export async function generateMetadata() {
       ? "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح"
       : "Learn how we protect your data and keep your information secure",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}privacy-policy/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/` || "",
     },
     robots: {
       index: indexingPrivacy,
@@ -68,9 +68,9 @@ const PrivacyPage = async () => {
   const privacyPolicySchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}privacy-policy/#webpage`,
+    "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#webpage`,
     name: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونك",
-    url: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}privacy-policy/`,
+    url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/`,
     description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
     datePublished: page.created_at
       ? new Date(page.created_at).toISOString()
@@ -85,19 +85,19 @@ const PrivacyPage = async () => {
           "@type": "ListItem",
           position: 1,
           name: "الرئيسية",
-          item: process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL,
+          item: process.env.NEXT_PUBLIC_WEBSITE_URL,
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "سياسة الخصوصية",
-          item: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}privacy-policy/`,
+          item: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/`,
         },
       ],
     },
     mainEntity: {
       "@type": "Article",
-      "@id": `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}privacy-policy/#article`,
+      "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#article`,
       headline: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك |كوبونك",
       description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
       datePublished: page.created_at
@@ -110,7 +110,7 @@ const PrivacyPage = async () => {
       author: {
         "@type": "Organization",
         name: "كوبونك",
-        url: process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL,
+        url: process.env.NEXT_PUBLIC_WEBSITE_URL,
       },
       publisher: {
         "@type": "Organization",

@@ -12,7 +12,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 
 const fallbackTitle = "كوبونك";
-const siteLogo = `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}couponakeLogo.webp`;
+const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponakeLogo.webp`;
 
 const getCouponLandingPage = cache(async (slug: string) => {
   return api.request.get<couponLandingPageSuccess | couponLandingPageError>(
@@ -42,7 +42,7 @@ export async function generateMetadata({
       title: landing_data.headline,
       description: landing_data.description,
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}${landing_data.path}/`,
+        canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}${landing_data.path}/`,
       },
       robots: {
         index: false,

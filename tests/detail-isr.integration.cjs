@@ -40,7 +40,7 @@ async function run(args, env) { return new Promise((resolve, reject) => { const 
  const get=cache(async(kind:string,slug:string)=>{await connection();const loader=slug==='cached-warm'?(kind==='country'?warmCountry:warmCategory):(kind==='country'?country:category);return loader(slug);});
  export async function generateMetadata({params}:any){const {kind,slug}=await params,r=await get(kind,slug);if(r.kind==='not_found')notFound();if(r.kind==='redirect')return {title:'Redirecting...',robots:{index:false},alternates:{canonical:r.redirect_url}};const d:any=(r.data as any).data||(r.data as any).category;return {title:(d.country_seo||d.category_seo).title,robots:{index:true},alternates:{canonical:'https://example.test/'+kind+'/'+slug}};}
  export default async function Page({params}:any){const {kind,slug}=await params,r=await get(kind,slug);if(r.kind==='not_found')notFound();if(r.kind==='redirect')redirect(r.redirect_url);const d:any=(r.data as any).data||(r.data as any).category;return <main><h1>{d.country||d.name}</h1>{d.stores.map((s:any)=><a key={s.id} href={'/store/'+s.slug}>{s.store_name}</a>)}</main>;}`);
-    const env = { ...process.env, NODE_ENV: 'production', NEXT_TELEMETRY_DISABLED: '1', NEXT_PUBLIC_Couponake_API_URL: 'http://127.0.0.1:' + apiPort + '/' };
+    const env = { ...process.env, NODE_ENV: 'production', NEXT_TELEMETRY_DISABLED: '1', NEXT_PUBLIC_API_URL: 'http://127.0.0.1:' + apiPort + '/' };
     console.log('Building real Next.js detail data-cache fixture...'); await run(['build'], env);
     const manifest = JSON.parse(fs.readFileSync(path.join(dir, '.next/prerender-manifest.json'), 'utf8'));
     assert.equal(Object.keys(manifest.routes).filter(x => /country|category/.test(x)).length, 0);

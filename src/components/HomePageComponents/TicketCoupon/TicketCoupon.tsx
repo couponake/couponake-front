@@ -90,7 +90,7 @@ function TicketCoupon() {
 
     try {
       const res = await axios.get(
-        process.env.NEXT_PUBLIC_Couponake_API_URL + "home/latest-coupons",
+        process.env.NEXT_PUBLIC_API_URL + "home/latest-coupons",
       );
 
       if (res.status !== 200 || !res.data?.data) {

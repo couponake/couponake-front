@@ -56,7 +56,7 @@ export async function generateMetadata({
       title: blog?.blog_seo?.title,
       description: blog?.blog_seo?.description,
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}${slug}/` || "",
+        canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}${slug}/` || "",
       },
       robots: {
         index: indexingBlog,
@@ -92,7 +92,7 @@ const BlogDetails = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const slug = (await params).slug;
-  const baseUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
   // fetchApi tells a missing post (API 404 → real 404 here) apart from an API
   // failure (thrown → uncached 500), so a service hiccup is never cached as 404.
   const response = await fetchApi<{ blog: Blog }>(`blogs/${slug}`, {

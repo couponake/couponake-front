@@ -22,7 +22,7 @@ export const dynamicParams = true;
 // Store data is cached for 5 minutes (stale-while-revalidate) instead of
 // being fetched from the API on every page view.
 const STORE_REVALIDATE = 300;
-const API_BASE = process.env.NEXT_PUBLIC_Couponake_API_URL ?? "";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
 
 // Retry waits for the store fetches. api.couponake.com sits behind a Cloudflare
 // rate limit of 200 requests / 10 s per IP that blocks for 10 s, so the last
@@ -195,7 +195,7 @@ export async function generateMetadata({
     title: seoData.title || "كوبونك",
     description: seoData.description || "كوبونك",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}store/${slug}/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
     },
     robots: {
       index: indexingStore,

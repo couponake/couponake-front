@@ -13,12 +13,12 @@ interface ErrorResponse {
 
 let base_url: string = "";
 
-if (!process.env.NEXT_PUBLIC_Couponake_API_URL) {
+if (!process.env.NEXT_PUBLIC_API_URL) {
   throw new Error(
-    "NEXT_PUBLIC_Couponake_API_URL is not defined in environment variables",
+    "NEXT_PUBLIC_API_URL is not defined in environment variables",
   );
 } else {
-  base_url = process.env.NEXT_PUBLIC_Couponake_API_URL;
+  base_url = process.env.NEXT_PUBLIC_API_URL;
 }
 
 const getAccessToken = (): string | null | undefined => {

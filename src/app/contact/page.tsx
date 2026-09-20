@@ -18,7 +18,7 @@ export async function generateMetadata() {
       ? "يمكنك الان التواصل مع ادارة موقع كوبونك من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
       : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}contact/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}contact/` || "",
     },
     robots: {
       index: indexingContact,

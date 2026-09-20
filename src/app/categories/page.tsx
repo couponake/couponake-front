@@ -24,7 +24,7 @@ export async function generateMetadata() {
       ? "يتم تصنيف اكواد و كوبونك الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونك التى تريدها باقل مجهود"
       : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}categories/` || "",
+      canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}categories/` || "",
     },
     robots: {
       index: indexingCategory,
@@ -71,7 +71,7 @@ export default async function CategoriesPage({
   // link is in the prerendered HTML and the grid needs no pagination.
   const categories = await getCategories();
   const t = await getTranslations({ locale });
-  const baseUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",

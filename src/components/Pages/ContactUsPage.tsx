@@ -13,7 +13,7 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { BreadcrumbList, ContactPage } from "schema-dts";
 import { InferType, object, string } from "yup";
 import ReCAPTCHA from "react-google-recaptcha";
-const websiteUrl = process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL;
+const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
 // Contact form validation schema
 const contactSchema = object().shape({

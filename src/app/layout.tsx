@@ -62,7 +62,7 @@ export async function generateMetadata() {
 
 
   const fallbackTitle = "كوبونك";
-  const siteLogo = `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}couponakeLogo.webp`;
+  const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponakeLogo.webp`;
 
   if (!seoData?.description || !seoData?.author) {
     return {
@@ -79,7 +79,7 @@ export async function generateMetadata() {
     keywords: seoData?.keywords || "",
     authors: [{ name: seoData?.author || fallbackTitle }],
     alternates: {
-      canonical: seoData?.url || `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}`,
+      canonical: seoData?.url || `${process.env.NEXT_PUBLIC_WEBSITE_URL}`,
     },
     robots: {
       index: indexingSite,
@@ -96,7 +96,7 @@ export async function generateMetadata() {
           alt: seoData["og:image:alt"] || fallbackTitle,
         },
       ],
-      url: seoData?.url || `${process.env.NEXT_PUBLIC_Couponake_WEBSITE_URL}`,
+      url: seoData?.url || `${process.env.NEXT_PUBLIC_WEBSITE_URL}`,
     },
 
     // Twitter metadata

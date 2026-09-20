@@ -72,7 +72,7 @@ const api = http.createServer((req, res) => {
   write("src/app/invalidate/route.ts", 'import { revalidateTag } from "next/cache"; export async function POST(){ revalidateTag("site-settings", "max"); return new Response("ok"); }');
   const env = {
     ...process.env, NEXT_TELEMETRY_DISABLED: "1",
-    NEXT_PUBLIC_Couponake_API_URL: "http://127.0.0.1:" + apiPort + "/",
+    NEXT_PUBLIC_API_URL: "http://127.0.0.1:" + apiPort + "/",
     NODE_ENV: "production"
   };
   console.log("Building isolated Next.js fixture...");
