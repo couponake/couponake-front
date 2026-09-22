@@ -1,11 +1,12 @@
-import {getRequestConfig} from 'next-intl/server';
-import {defaultLocale} from './config';
+import { getRequestConfig } from 'next-intl/server';
+import { routing } from './routing';
 
-// The locale is fixed to the site default (Arabic). Reading the NEXT_LOCALE
-// cookie here made every route in the site dynamically rendered, which
-// prevented ISR / edge caching of HTML (see PR "perf: unlock ISR").
-export default getRequestConfig(async () => {
-  const locale = defaultLocale;
+export default getRequestConfig(async ({ requestLocale }) => {
+  let locale = await requestLocale;
+
+  if (!locale || !routing.locales.includes(locale as any)) {
+    locale = routing.defaultLocale;
+  }
 
   return {
     locale,

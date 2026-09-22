@@ -5,7 +5,6 @@ import { useLocale, useTranslations } from "next-intl";
 import UserDropDown from "../HomePageComponents/UserDropDown";
 import Link from "next/link";
 import { Globe, Menu } from "lucide-react";
-import LanguageSelector from "../HomePageComponents/LanguageSelector";
 import { useStore } from "@/store";
 import {
   Drawer,
@@ -15,6 +14,7 @@ import {
 } from "@heroui/drawer";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import LanguageSelector from "./LanguageSelector";
 
 const MobileDrawer = ({
   websiteLogo,

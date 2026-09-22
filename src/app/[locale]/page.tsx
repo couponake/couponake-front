@@ -1,7 +1,7 @@
 import Main from "@/components/Pages/Home/main";
 import { getCachedData } from "@/lib/cached-data";
 import React from "react";
-import ClientSideComponents from "../components/HomePageComponents/ClientSideComponents";
+import ClientSideComponents from "../../components/HomePageComponents/ClientSideComponents";
 import ScrollTracker from "@/services/ScrollPageAnalytics";
 
 export const experimental_ppr = true;

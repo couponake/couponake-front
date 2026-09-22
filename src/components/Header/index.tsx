@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import LanguageSelector from "../HomePageComponents/LanguageSelector";
 import { NotificationProps } from "@/types";
 import UserNotifications from "../HomePageComponents/UserNotifications";
 import Link from "next/link";
@@ -11,6 +10,7 @@ const MobileDrawer = dynamic(() => import("./MobileDrawer"));
 import ShowLoginBtnOrUserDropDown from "./ShowLoginBtnOrUserDropDown";
 import NavLinks from "./NavLinks";
 import AppDownloader from "../AppDownloader/AppDownloader";
+import LanguageSelector from "./LanguageSelector";
 
 const Header = ({
   websiteLogo,
