@@ -38,15 +38,16 @@ const AllCountriesPage = ({
   const t = useTranslations();
   // When the server provides page 1 the list renders immediately (links in the
   // HTML); the client only fetches for search / pagination.
-  const hasInitial = Array.isArray(initialCountries) && initialCountries.length > 0;
+  const hasInitial =
+    Array.isArray(initialCountries) && initialCountries.length > 0;
   const [countries, setCountries] = useState<CountryEntry[] | null>(
-    hasInitial ? initialCountries : null
+    hasInitial ? initialCountries : null,
   );
   const [filteredCountries, setFilteredCountries] = useState<
     CountryEntry[] | null
   >(hasInitial ? initialCountries : null);
   const [pagination, setPagination] = useState<paginationProps | null>(
-    hasInitial ? initialPagination : null
+    hasInitial ? initialPagination : null,
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(!hasInitial);
@@ -63,7 +64,7 @@ const AllCountriesPage = ({
             page,
             perPage: 20,
           },
-        }
+        },
       );
       setCountries(response.data);
       setFilteredCountries(response.data);
@@ -93,7 +94,7 @@ const AllCountriesPage = ({
     debounce((value: string) => {
       fetchCountries(currentPage, value);
     }, 300),
-    [currentPage]
+    [currentPage],
   );
 
   // Handle search input change
@@ -120,7 +121,7 @@ const AllCountriesPage = ({
     },
   };
 
-  const itemVariants : Variants = {
+  const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
@@ -143,33 +144,39 @@ const AllCountriesPage = ({
         </div>
         <p className="text-gray-600 mb-8 text-center max-w-2xl">
           {t(
-            "Explore our comprehensive list of countries from around the world"
+            "Explore our comprehensive list of countries from around the world",
           )}
         </p>
 
         {/* Search Bar */}
-        <div className="w-full max-w-md mb-8 relative">
-          <Input
-            type="text"
-            placeholder={t("Search countries")}
-            value={searchQuery}
-            onChange={handleSearchChange}
-            className="pr-10"
-            startContent={<FaSearch className="text-gray-400" />}
-            endContent={
-              searchQuery && (
-                <Button
-                  isIconOnly
-                  variant="light"
-                  size="sm"
-                  onPress={handleClearSearch}
-                >
-                  <FaTimes className="text-gray-500" />
-                </Button>
-              )
-            }
-          />
-        </div>
+        {isLoading ? (
+          <div className="w-full max-w-md mb-8 relative">
+            <div className="bg-gray-100 animate-pulse rounded-lg p-6 h-11"></div>
+          </div>
+        ) : filteredCountries?.length === 0 ? null : (
+          <div className="w-full max-w-md mb-8 relative">
+            <Input
+              type="text"
+              placeholder={t("Search countries")}
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="pr-10"
+              startContent={<FaSearch className="text-gray-400" />}
+              endContent={
+                searchQuery && (
+                  <Button
+                    isIconOnly
+                    variant="light"
+                    size="sm"
+                    onPress={handleClearSearch}
+                  >
+                    <FaTimes className="text-gray-500" />
+                  </Button>
+                )
+              }
+            />
+          </div>
+        )}
       </div>
 
       {isLoading ? (
@@ -207,9 +214,9 @@ const AllCountriesPage = ({
                   href={`/coupon_country/${country?.name}`}
                   className="p-6 flex flex-col items-center gap-2"
                   onClick={() => {
-                    if (typeof window !== 'undefined' && (window as any).gtag) {
+                    if (typeof window !== "undefined" && (window as any).gtag) {
                       (window as any).gtag("event", "countries_click", {
-                        country_name: country.name
+                        country_name: country.name,
                       });
                     }
                   }}
@@ -219,7 +226,7 @@ const AllCountriesPage = ({
                   </h2>
                 </Link>
               </motion.div>
-            )
+            ),
           )}
         </motion.div>
       )}
