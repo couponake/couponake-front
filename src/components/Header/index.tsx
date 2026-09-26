@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import LanguageSelector from "../HomePageComponents/LanguageSelector";
 import { NotificationProps } from "@/types";
 import UserNotifications from "../HomePageComponents/UserNotifications";
 import Link from "next/link";
@@ -74,12 +73,12 @@ const Header = ({
         {/* Desktop Navigation */}
         <nav className="hidden md:inline-block" aria-label="desktop">
           <ul className="text-neutral-900 flex select-none items-center justify-center text-base font-medium">
-            <li className="relative z-50">
+            {/* <li className="relative z-50">
               <LanguageSelector />
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <div className="m-auto mx-2 h-6 border-r-2 border-neutral-100" />
-            </li>
+            </li> */}
             <Suspense>
               <ShowLoginBtnOrUserDropDown />
             </Suspense>
