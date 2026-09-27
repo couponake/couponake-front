@@ -4,8 +4,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import UserDropDown from "../HomePageComponents/UserDropDown";
 import Link from "next/link";
-import { Globe, Menu } from "lucide-react";
-import LanguageSelector from "../HomePageComponents/LanguageSelector";
+import { Menu } from "lucide-react";
 import { useStore } from "@/store";
 import {
   Drawer,
@@ -53,7 +52,7 @@ const MobileDrawer = ({
                     width={112}
                     height={40}
                     loading="lazy"
-                    className="h-10 w-28 rounded-md object-contain bg-main-600 p-2"
+                    className="h-10 w-28 rounded-md object-contain bg-transparent p-2"
                     src={websiteLogo}
                     alt="Website logo"
                     unoptimized
@@ -64,10 +63,10 @@ const MobileDrawer = ({
                 <div className="flex w-full flex-col pb-0">
                   <div className="relative flex h-fit w-full">
                     <div className="container relative z-10 flex w-full flex-col gap-6">
-                      <div dir={local === "ar" ? "ltr" : "rtl"} className="xxs:px-8 container px-5 py-4 xs:px-8 flex items-center gap-2">
+                      {/* <div dir={local === "ar" ? "ltr" : "rtl"} className="xxs:px-8 container px-5 py-4 xs:px-8 flex items-center gap-2">
                         <Globe size={20} />
                         <LanguageSelector />
-                      </div>
+                      </div> */}
                       {
                         user ? (
                           <UserDropDown />
