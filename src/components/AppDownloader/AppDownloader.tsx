@@ -8,13 +8,13 @@ const AppDownloadBanner = () => {
     const t = useTranslations();
   return (
     <div className="w-full mx-auto h-[62px] md:h-[71px] overflow-hidden">
-      <div className="relative overflow-hidden rounded-none bg-gradient-to-r from-main-50 to-purple-50 py-2 px-4 md:px-8 flex flex-row items-center justify-between gap-2 border border-main-100/50 shadow-sm">
+      <div className="relative overflow-hidden rounded-none bg-gradient-to-r from-main-50 to-main-50 py-2 px-4 md:px-8 flex flex-row items-center justify-between gap-2 border border-main-100/50 shadow-sm">
         {/* Left Side: Mockup Image */}
         <div className="flex flex-row gap-2 md:gap-4 w-fit md:w-auto">
           {/* Android Button */}
           <Link
             target="_blank"
-            href="https://play.google.com/store/apps/details?id=com.couponatt"
+            href="/"
             className="w-22 md:w-30 flex items-center justify-center gap-1 md:gap-3 py-1 bg-main-600 hover:bg-main-500 text-white rounded-md md:rounded-xl transition-all duration-200 shadow-lg hover:shadow-main-200"
           >
             <span className="text-sm md:text-md font-normal">{t("android")}</span>

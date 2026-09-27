@@ -9,7 +9,6 @@ import dynamic from "next/dynamic";
 const MobileDrawer = dynamic(() => import("./MobileDrawer"));
 import ShowLoginBtnOrUserDropDown from "./ShowLoginBtnOrUserDropDown";
 import NavLinks from "./NavLinks";
-import AppDownloader from "../AppDownloader/AppDownloader";
 
 const Header = ({
   websiteLogo,
@@ -25,15 +24,15 @@ const Header = ({
     >
       <header className="container relative mx-auto flex items-center justify-between py-3 sm:py-5">
         <nav className="flex flex-1 items-center gap-4 md:gap-0">
-          {websiteLogo && (
+          {(
             <Suspense>
               <Link
                 href="/"
                 className="my-auto cursor-pointer bg-transparent rounded-lg"
               >
                 <Image
-                  src={websiteLogo}
-                  alt="Website Logo"
+                  src={websiteLogo || "/couponak-logo.svg"}
+                  alt="كوبوناك"
                   width={144}
                   height={56}
                   sizes="(max-width: 768px) 108px, 144px"
@@ -85,7 +84,7 @@ const Header = ({
           </ul>
         </nav>
       </header>
-      <AppDownloader />
+      {/* AppDownloader: hidden until a Couponake app exists (the old link pointed to another site's app) */}
     </div>
   );
 };

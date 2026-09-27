@@ -1,7 +1,6 @@
 import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
-import arabicRedirects from "./redirects/arabicRedirects";
 import baseRedirects from "./redirects/baseRedirects";
 
 const withNextIntl = createNextIntlPlugin();
@@ -107,7 +106,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       ...baseRedirects,
-      ...arabicRedirects,
 
       // Comprehensive pattern matching
       {

@@ -13,12 +13,8 @@ export async function generateMetadata() {
   const indexingFAQ = await getSettingEnabled(SettingsEnum.FAQ);
 
   return {
-    title: isArabic
-      ? "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا"
-      : "Frequently Asked Questions: All customer questions and answers here",
-    description: isArabic
-      ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
-      : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
+    title: isArabic ? "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه — كوبوناك" : "FAQ: why a code fails and how to use it — Couponake",
+    description: isArabic ? "إجابات مباشرة: أين يُكتب الكود، لماذا يُرفض، هل يُجمع مع العروض، وهل كوبوناك مجاني." : "Straight answers: where to enter the code, why it gets rejected, whether it stacks with offers, and whether Couponake is free.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/` || "",
     },
@@ -26,30 +22,22 @@ export async function generateMetadata() {
       index: indexingFAQ,
     },
     openGraph: {
-      title: isArabic
-        ? "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا"
-        : "Frequently Asked Questions: All customer questions and answers here",
-      description: isArabic
-        ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
-        : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
+      title: isArabic ? "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه — كوبوناك" : "FAQ: why a code fails and how to use it — Couponake",
+      description: isArabic ? "إجابات مباشرة: أين يُكتب الكود، لماذا يُرفض، هل يُجمع مع العروض، وهل كوبوناك مجاني." : "Straight answers: where to enter the code, why it gets rejected, whether it stacks with offers, and whether Couponake is free.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic
-        ? "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا"
-        : "Frequently Asked Questions: All customer questions and answers here",
-      description: isArabic
-        ? "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها"
-        : "Here are all the questions customers interested in discount codes, coupons, and store offers in the Middle East ask, along with the correct answers.",
+      title: isArabic ? "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه — كوبوناك" : "FAQ: why a code fails and how to use it — Couponake",
+      description: isArabic ? "إجابات مباشرة: أين يُكتب الكود، لماذا يُرفض، هل يُجمع مع العروض، وهل كوبوناك مجاني." : "Straight answers: where to enter the code, why it gets rejected, whether it stacks with offers, and whether Couponake is free.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
@@ -64,15 +52,15 @@ const FAQ = async () => {
     "@type": "FAQPage",
     "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/#faqpage`,
     name: "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا",
-    description: "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونك وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها",
+    description: "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها",
     url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/`,
-    image: "https://couponake.com/couponakeLogo.webp",
+    image: "https://couponake.com/couponak-logo.svg",
     publisher: {
       "@type": "Organization",
-      name: "كوبونك",
+      name: "كوبوناك",
       logo: {
         "@type": "ImageObject",
-        url: "https://couponake.com/couponakeLogo.webp",
+        url: "https://couponake.com/couponak-logo.svg",
       },
     },
     mainEntity: data?.data.map((faq) => ({
@@ -85,7 +73,7 @@ const FAQ = async () => {
       },
       author: {
         "@type": "Organization",
-        name: "كوبونك",
+        name: "كوبوناك",
       },
     })),
   };

@@ -119,11 +119,11 @@ const ShowCouponCategoryPage = async ({
       },
       {
         "@type": "Organization",
-        name: "كوبونك",
+        name: "كوبوناك",
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}couponakeLogo.webp`,
+          url: `${baseUrl}couponak-logo.svg`,
         },
       },
       {
@@ -134,15 +134,15 @@ const ShowCouponCategoryPage = async ({
         sameAs: `${baseUrl}coupon-category/${slug}/`,
         isPartOf: {
           "@type": "WebSite",
-          name: "كوبونك",
+          name: "كوبوناك",
           url: baseUrl,
         },
         publisher: {
           "@type": "Organization",
-          name: "كوبونك",
+          name: "كوبوناك",
           logo: {
             "@type": "ImageObject",
-            url: `${baseUrl}couponakeLogo.webp`,
+            url: `${baseUrl}couponak-logo.svg`,
           },
         },
         mainEntity: {

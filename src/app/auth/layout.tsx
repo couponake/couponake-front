@@ -7,40 +7,28 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   return {
-    title: isArabic
-      ? "تسجيل الدخول/انشاء حساب |كوبونك"
-      : "Login / Create Account | Couponake",
-    description: isArabic
-      ? "أدخل حسابك أو سجّل لتتابع كوبونكك وتحفظ المفضلة بسهولة"
-      : "Log in or register to track and save your favorite coupons",
+    title: isArabic ? "حسابي: احفظ متاجرك المفضلة وتابع أكوادها — كوبوناك" : "My account: save your favourite stores — Couponake",
+    description: isArabic ? "سجّل الدخول لتحفظ المتاجر المفضلة وتصلك أكوادها الجديدة أولًا." : "Log in to save favourite stores and get their new codes first.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}auth/` || "",
     },
     openGraph: {
-      title: isArabic
-        ? "تسجيل الدخول/انشاء حساب |كوبونك"
-        : "Login / Create Account | Couponake",
-      description: isArabic
-        ? "أدخل حسابك أو سجّل لتتابع كوبونكك وتحفظ المفضلة بسهولة"
-        : "Log in or register to track and save your favorite coupons",
+      title: isArabic ? "حسابي: احفظ متاجرك المفضلة وتابع أكوادها — كوبوناك" : "My account: save your favourite stores — Couponake",
+      description: isArabic ? "سجّل الدخول لتحفظ المتاجر المفضلة وتصلك أكوادها الجديدة أولًا." : "Log in to save favourite stores and get their new codes first.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic
-        ? "تسجيل الدخول/انشاء حساب |كوبونك"
-        : "Login / Create Account | Couponake",
-      description: isArabic
-        ? "أدخل حسابك أو سجّل لتتابع كوبونكك وتحفظ المفضلة بسهولة"
-        : "Log in or register to track and save your favorite coupons",
+      title: isArabic ? "حسابي: احفظ متاجرك المفضلة وتابع أكوادها — كوبوناك" : "My account: save your favourite stores — Couponake",
+      description: isArabic ? "سجّل الدخول لتحفظ المتاجر المفضلة وتصلك أكوادها الجديدة أولًا." : "Log in to save favourite stores and get their new codes first.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],

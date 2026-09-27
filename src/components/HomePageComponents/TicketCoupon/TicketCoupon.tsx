@@ -229,7 +229,7 @@ function TicketCoupon() {
                 <div className="w-full h-fit flex items-center justify-center">
                   <button
                     name="ScrollTop"
-                    className="h-8 aspect-square flex items-center justify-center text-black/25 hover:text-[#7214d1] focus:text-[#7214d1] active:text-[#7214d1] bg-white/50 hover:bg-white border-[1px] border-black/10 hover:border-black/25 rounded-full p-1 shadow-none duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90"
+                    className="h-8 aspect-square flex items-center justify-center text-black/25 hover:text-main-500 focus:text-main-500 active:text-main-500 bg-white/50 hover:bg-white border-[1px] border-black/10 hover:border-black/25 rounded-full p-1 shadow-none duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90"
                     style={{ visibility: canScrollUp ? "visible" : "hidden" }}
                     onClick={() => scrollByStep("up")}
                   >
@@ -268,7 +268,7 @@ function TicketCoupon() {
                 <div className="w-full h-fit flex items-center justify-center">
                   <button
                     name="ScrollDown"
-                    className="h-8 aspect-square flex items-center justify-center text-black/25 hover:text-[#7214d1] focus:text-[#7214d1] active:text-[#7214d1] bg-white/50 hover:bg-white border-[1px] border-black/10 hover:border-black/25 rounded-full p-1 shadow-none duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90"
+                    className="h-8 aspect-square flex items-center justify-center text-black/25 hover:text-main-500 focus:text-main-500 active:text-main-500 bg-white/50 hover:bg-white border-[1px] border-black/10 hover:border-black/25 rounded-full p-1 shadow-none duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90"
                     style={{ visibility: canScrollDown ? "visible" : "hidden" }}
                     onClick={() => scrollByStep("down")}
                   >
@@ -295,7 +295,7 @@ function TicketCoupon() {
                                 width={110}
                                 height={110}
                                 unoptimized
-                                className="w-full aspect-square size-[110px] object-contain border-l-1 border-dashed border-[#7214d1]"
+                                className="w-full aspect-square size-[110px] object-contain border-l-1 border-dashed border-main-500"
                               />
                             </div>
                           </div>
@@ -360,14 +360,14 @@ function TicketCoupon() {
             <div className="w-fit h-fit flex items-center justify-center gap-2">
               <button
                 name="ScrollTop"
-                className="h-8 aspect-square flex items-center justify-center text-black/30 hover:text-[#7214d1] focus:text-[#7214d1] active:text-[#7214d1] bg-white/50 hover:bg-white border-[1px] border-black/10 hover:border-black/25 rounded-full p-1 shadow-none duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90"
+                className="h-8 aspect-square flex items-center justify-center text-black/30 hover:text-main-500 focus:text-main-500 active:text-main-500 bg-white/50 hover:bg-white border-[1px] border-black/10 hover:border-black/25 rounded-full p-1 shadow-none duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90"
                 onClick={() => scrollByStep("forward")}
               >
                 <IoMdArrowForward size={18} />
               </button>
               <button
                 name="ScrollTop"
-                className="h-8 aspect-square flex items-center justify-center text-black/30 hover:text-[#7214d1] focus:text-[#7214d1] active:text-[#7214d1] bg-white/50 hover:bg-white border-[1px] border-black/10 hover:border-black/25 rounded-full p-1 shadow-none duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90"
+                className="h-8 aspect-square flex items-center justify-center text-black/30 hover:text-main-500 focus:text-main-500 active:text-main-500 bg-white/50 hover:bg-white border-[1px] border-black/10 hover:border-black/25 rounded-full p-1 shadow-none duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90"
                 onClick={() => scrollByStep("back")}
               >
                 <IoMdArrowBack size={18} />
@@ -418,7 +418,7 @@ function TicketCoupon() {
                               width={110}
                               height={110}
                               unoptimized
-                              className="w-full aspect-square size-[110px] object-contain border-l-1 border-dashed border-[#7214d1]"
+                              className="w-full aspect-square size-[110px] object-contain border-l-1 border-dashed border-main-500"
                             />
                           </div>
                         </div>

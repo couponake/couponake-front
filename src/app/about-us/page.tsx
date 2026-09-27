@@ -12,12 +12,8 @@ export async function generateMetadata() {
   const indexingAbout = await getSettingEnabled(SettingsEnum.About);
 
   return {
-    title: isArabic
-      ? "من نحن: تعرف على فريق عمل كوبونك الخصم |كوبونك"
-      : "About Us | Couponake Coupons",
-    description: isArabic
-      ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونك الشراء"
-      : "Meet our vision and the experts delivering top shopping coupons",
+    title: isArabic ? "من نحن: كيف نجرّب الأكواد قبل نشرها — كوبوناك" : "About us: how we test every code before publishing it — Couponake",
+    description: isArabic ? "فريق صغير يجرّب كل كود قبل نشره ويحذفه أول ما يتوقف. اقرأ كيف نعمل، وكيف نربح، ولماذا لا ننشر كودًا لم يعمل معنا." : "A small team that tests every code before it goes live and removes it the moment it stops working. How we work and how we earn.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/` || "",
     },
@@ -25,30 +21,22 @@ export async function generateMetadata() {
       index: indexingAbout,
     },
     openGraph: {
-      title: isArabic
-        ? "من نحن: تعرف على فريق عمل كوبونك الخصم |كوبونك"
-        : "About Us | Couponake Coupons",
-      description: isArabic
-        ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونك الشراء"
-        : "Meet our vision and the experts delivering top shopping coupons",
+      title: isArabic ? "من نحن: كيف نجرّب الأكواد قبل نشرها — كوبوناك" : "About us: how we test every code before publishing it — Couponake",
+      description: isArabic ? "فريق صغير يجرّب كل كود قبل نشره ويحذفه أول ما يتوقف. اقرأ كيف نعمل، وكيف نربح، ولماذا لا ننشر كودًا لم يعمل معنا." : "A small team that tests every code before it goes live and removes it the moment it stops working. How we work and how we earn.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic
-        ? "من نحن: تعرف على فريق عمل كوبونك الخصم |كوبونك"
-        : "About Us | Couponake Coupons",
-      description: isArabic
-        ? "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونك الشراء"
-        : "Meet our vision and the experts delivering top shopping coupons",
+      title: isArabic ? "من نحن: كيف نجرّب الأكواد قبل نشرها — كوبوناك" : "About us: how we test every code before publishing it — Couponake",
+      description: isArabic ? "فريق صغير يجرّب كل كود قبل نشره ويحذفه أول ما يتوقف. اقرأ كيف نعمل، وكيف نربح، ولماذا لا ننشر كودًا لم يعمل معنا." : "A small team that tests every code before it goes live and removes it the moment it stops working. How we work and how we earn.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
@@ -69,18 +57,18 @@ const AboutUsPage = async () => {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: page.title,
-    description: "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونك الشراء",
-    image: "https://couponake.com/couponakeLogo.webp",
+    description: "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء",
+    image: "https://couponake.com/couponak-logo.svg",
     author: {
       "@type": "Organization",
-      name: "كوبونك",
+      name: "كوبوناك",
     },
     publisher: {
       "@type": "Organization",
-      name: "كوبونك",
+      name: "كوبوناك",
       logo: {
         "@type": "ImageObject",
-        url: "https://couponake.com/couponakeLogo.webp",
+        url: "https://couponake.com/couponak-logo.svg",
       },
     },
     datePublished: page.created_at,

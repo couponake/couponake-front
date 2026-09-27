@@ -13,8 +13,8 @@ export default function HorizontalCouponCard({ coupon }: { coupon: CouponProps }
   const locale = useLocale();
   const setSelectedCoupon = useStore((store) => store.setSelectedCoupon);
   return (
-    <div className="relative overflow-hidden rounded-lg shadow-lg bg-gradient-to-br from-purple-100 to-main-100" dir="auto">
-      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-500 to-main-500 transform rotate-45 translate-x-12 -translate-y-12"></div>
+    <div className="relative overflow-hidden rounded-lg shadow-lg bg-gradient-to-br from-main-100 to-main-100" dir="auto">
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-main-500 to-main-500 transform rotate-45 translate-x-12 -translate-y-12"></div>
 
       <div className="relative p-6 flex flex-col h-full">
         <div className="flex items-center mb-4 gap-3">

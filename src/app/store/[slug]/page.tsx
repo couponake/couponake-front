@@ -185,15 +185,15 @@ export async function generateMetadata({
   // Default values when the store does not exist (the page itself answers 404)
   if (!seoData) {
     return {
-      title: "كوبونك",
-      description: "كوبونك",
+      title: "كوبوناك",
+      description: "كوبوناك",
     };
   }
 
   return {
     // Basic metadata
-    title: seoData.title || "كوبونك",
-    description: seoData.description || "كوبونك",
+    title: seoData.title || "كوبوناك",
+    description: seoData.description || "كوبوناك",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}store/${slug}/` || "",
     },
@@ -202,9 +202,9 @@ export async function generateMetadata({
     },
     // OpenGraph metadata
     openGraph: {
-      title: seoData["og:title"] || seoData.title || "كوبونك",
+      title: seoData["og:title"] || seoData.title || "كوبوناك",
       description:
-        seoData["og:description"] || seoData.description || "كوبونك",
+        seoData["og:description"] || seoData.description || "كوبوناك",
       images: [
         {
           url: seoData["og:image"] || "",
@@ -216,9 +216,9 @@ export async function generateMetadata({
     // Twitter metadata
     twitter: {
       card: "summary_large_image",
-      title: seoData["twitter:title"] || seoData.title || "كوبونك",
+      title: seoData["twitter:title"] || seoData.title || "كوبوناك",
       description:
-        seoData["twitter:description"] || seoData.description || "كوبونك",
+        seoData["twitter:description"] || seoData.description || "كوبوناك",
       images: [
         {
           url: seoData["twitter:image"] || "",

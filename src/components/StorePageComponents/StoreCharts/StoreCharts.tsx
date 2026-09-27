@@ -277,7 +277,7 @@ function StoreCharts({
                 </p>
                 <ChartPie
                   strokeWidth={1.25}
-                  color="#7214d1"
+                  color="#0E7C86"
                   size={100}
                   aria-label={`Chart showing the usage of the coupon code: ${statistics?.max_coupon_discount ?? "N/A"}`}
                 />

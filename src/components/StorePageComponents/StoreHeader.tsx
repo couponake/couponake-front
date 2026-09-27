@@ -40,7 +40,7 @@ function StoreHeader({ store_id, store_slug, store_image, store_title, isMobile,
                 />
               </div>
             )}
-            <div className="flex-1 flex flex-row items-center justify-between gap-2 min-w-0 bg-purple-500/0">
+            <div className="flex-1 flex flex-row items-center justify-between gap-2 min-w-0 bg-main-500/0">
               <div className="flex flex-col items-start justify-center gap-1">
                 <h1 className="text-sm sm:text-base md:text-xl lg:text-xl xl:text-2xl text-white font-bold">
                   {store_title}

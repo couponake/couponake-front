@@ -51,7 +51,7 @@ const Categories = () => {
                 key={index}
                 className="z-10 my-5 basis-1/2 sm:basis-1/4 md:basis-1/5 lg:md:basis-1/6 2xl:basis-[11%]"
               >
-                <div className="flex h-64 flex-col justify-between overflow-hidden rounded-xl bg-gradient-to-br from-main-300 via-pink-500 to-main-700 p-6">
+                <div className="flex h-64 flex-col justify-between overflow-hidden rounded-xl bg-gradient-to-br from-main-300 via-main-400 to-main-700 p-6">
                   <Skeleton className="h-8 w-3/4 mx-auto mb-2.5 bg-white/30" />
                   <div className="flex justify-center items-end">
                     <Skeleton className="w-48 h-48 rounded-lg bg-white/30" />
@@ -102,7 +102,7 @@ const Categories = () => {
                 target="_self"
                 href={`/coupon-category/${category?.slug}`}
               >
-                <div className="flex h-64 flex-col justify-between overflow-hidden rounded-xl bg-gradient-to-br from-main-300 via-pink-500 to-main-700 p-6">
+                <div className="flex h-64 flex-col justify-between overflow-hidden rounded-xl bg-gradient-to-br from-main-300 via-main-400 to-main-700 p-6">
                   <p className="mb-2.5 text-center text-xl font-bold text-white lg:text-2xl">
                     {category?.name}
                   </p>

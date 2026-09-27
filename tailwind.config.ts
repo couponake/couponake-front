@@ -20,8 +20,8 @@ const config: Config = {
     backgroundImage: {},
     fontFamily: {
       inherit: ["inherit"],
-      cairo: ["var(--font-cairo)", "var(--font-poppins)", "monospace"],
-      poppins: ["var(--font-poppins)", "var(--font-cairo)", "monospace"],
+      almarai: ["var(--font-almarai)", "var(--font-inter)", "sans-serif"],
+      inter: ["var(--font-inter)", "var(--font-almarai)", "sans-serif"],
     },
     container: {
       center: true,
@@ -129,18 +129,24 @@ const config: Config = {
         "[auto,auto,1fr]": "auto auto 1fr",
       },
       colors: {
+        lime: {
+          DEFAULT: "#C6F135",
+          dark: "#A9D61C",
+          soft: "#EEF9C8",
+        },
+        sea: "#0B3B44",
         main: {
-          50: "#f5f3ff",
-          100: "#ede9fe",
-          200: "#ddd6fe",
-          300: "#c4b5fd",
-          400: "#a78bfa",
-          500: "#7214d1",
-          600: "#5b0faa",
-          700: "#470b87",
-          800: "#350865",
-          900: "#27064d",
-          950: "#150230",
+          50: "#EEF9F8",
+          100: "#D5F0EE",
+          200: "#ABE1DE",
+          300: "#74CBC8",
+          400: "#3FAEB0",
+          500: "#0E7C86",
+          600: "#0C6670",
+          700: "#0B535B",
+          800: "#0B3B44",
+          900: "#082C33",
+          950: "#041A1F",
         },
         red: {
           "50": "#fef2f2",
@@ -349,7 +355,7 @@ const config: Config = {
         light: {
           colors: {
             primary: {
-              DEFAULT: "#7214d1",
+              DEFAULT: "#0E7C86",
               foreground: "#FFFFFF",
             },
           },
@@ -357,7 +363,7 @@ const config: Config = {
         dark: {
           colors: {
             primary: {
-              DEFAULT: "#7214d1",
+              DEFAULT: "#0E7C86",
               foreground: "#FFFFFF",
             },
           },

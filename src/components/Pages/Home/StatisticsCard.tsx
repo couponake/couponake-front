@@ -13,14 +13,14 @@ interface StatisticsProps {
 export default function StatisticsCard({ collection_count }: StatisticsProps) {
   const t = useTranslations();
   return (
-    <div className="w-full min-h-fit bg-gradient-to-br from-purple-100 to-main-100 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+    <div className="w-full min-h-fit bg-gradient-to-br from-main-100 to-main-100 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
       <div className="p-2 md:p-4">
         <h1 className="text-sm md:text-lg lg:text-2xl xl:text-2xl 2xl:text-3xl text-center font-bold text-gray-800 mb-4 md:mb-8">
           {t("Valid discount coupons")}
         </h1>
         <div className="grid grid-cols-4 gap-4 place-items-baseline sm:place-items-center">
           <StatItem
-            icon={<Store className="w-8 h-8 text-purple-500" />}
+            icon={<Store className="w-8 h-8 text-main-500" />}
             label={t("statistics.stores")}
             value={collection_count.stores}
           />
@@ -46,7 +46,7 @@ export default function StatisticsCard({ collection_count }: StatisticsProps) {
           />
         </div>
       </div>
-      <div className="bg-gradient-to-r from-purple-500 to-main-500 h-2" />
+      <div className="bg-gradient-to-r from-main-500 to-main-500 h-2" />
     </div>
   );
 }
