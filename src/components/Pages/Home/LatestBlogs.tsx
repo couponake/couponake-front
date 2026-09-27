@@ -69,7 +69,7 @@ const LatestBlogs = () => {
 
   if (isLoading || isFetching) {
     return (
-      <section className="container pt-16">
+      <div className="container">
         <div className="flex flex-wrap items-center justify-between gap-5 mb-5">
           <h2 className="text-lg font-semibold text-neutral-900 sm:text-xl md:text-2xl">
             {t("Latest published blogs")}
@@ -81,22 +81,24 @@ const LatestBlogs = () => {
             {Array.from({ length: 3 }).map((_, i) => <BlogSkeleton key={i} />)}
           </CarouselContent>
         </Carousel>
-      </section>
+      </div>
     );
   }
 
   if (isError) {
     return (
-      <section className="container pt-16">
+      <div className="container">
         <div className="text-center text-red-500 py-10 border rounded-lg">
           {t("Failed to load blogs. Please try again.")}
         </div>
-      </section>
+      </div>
     );
   }
 
+  if (blogsData?.length === 0) return null;
+
   return (
-    <section ref={ref} className="container pt-16">
+    <div ref={ref} className="container">
       {inView && (
         <div className="">
           <Carousel
@@ -135,7 +137,7 @@ const LatestBlogs = () => {
           </Carousel>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 

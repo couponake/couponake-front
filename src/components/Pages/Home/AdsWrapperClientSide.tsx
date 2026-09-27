@@ -1,7 +1,6 @@
 'use client';
 import { useHomeData } from '@/hooks/useHomeData';
 import dynamic from 'next/dynamic';
-import React from 'react'
 import { useInView } from 'react-intersection-observer';
 
 const AdsSection = dynamic(() => import('./AdsSection'), { ssr: false });
@@ -12,6 +11,8 @@ function AdsWrapperClientSide() {
         triggerOnce: true,
         threshold: 0.2,
     });
+
+     if (ads?.length === 0) return null;
 
     return (
         <div ref={ref}>

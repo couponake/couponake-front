@@ -113,6 +113,8 @@ export default function CustomersReviews({
     };
   }, [reviewsReformat]);
 
+   if (reviews?.length === 0) return null;
+
   return (
     <div className={cn("mx-auto w-full max-w-6xl px-4 py-12", className)}>
       <div className="mb-12 text-center">

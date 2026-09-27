@@ -131,7 +131,7 @@ const Hero = ({
     }
   }
   return (
-    <div className={cn("mb-7 md:mb-14", className)}>
+    <div className={cn(className)}>
       <Carousel
         opts={{
           align: "center",

@@ -218,7 +218,7 @@ function TicketCoupon() {
     <Fragment>
       {!smallScreens ? (
         <div ref={inViewRef}>
-          <div className="bg-[#efefef] container flex items-start p-5 ">
+          <div className="bg-[#efefef] container flex items-start p-5">
             <h2 className="text-lg font-semibold text-neutral-900 sm:text-xl md:text-2xl">
               {t("BestCoupons")}
             </h2>

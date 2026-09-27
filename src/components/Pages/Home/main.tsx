@@ -35,7 +35,7 @@ const Main = ({
   };
 }) => {
   return (
-    <section>
+    <section className="flex flex-col gap-7 md:gap-14 my-7 md:my-14">
       <Hero autoplay lcp banners={hero_banners} />
 
       <div className="container">
@@ -45,7 +45,7 @@ const Main = ({
       <BestStoresWrapperClientSide stores={featured_stores} />
 
       {latest_stores?.length > 0 ? (
-        <div className="relative my-10 md:my-16 container">
+        <div className="relative container">
           <StoreCarousel
             className="max-w-full min-h-30"
             title="Latest Stores"

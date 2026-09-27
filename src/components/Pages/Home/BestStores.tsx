@@ -80,7 +80,7 @@ const BestStores = ({
 
   return (
     <Fragment>
-      <div className="w-full min-h-125 bg-[#fafafa] flex flex-col items-center gap-5 shadow-lg p-3 md:p-5 relative my-10 md:my-16 container">
+      <div className="w-full min-h-125 bg-[#fafafa] flex flex-col items-center gap-5 shadow-lg p-3 md:p-5 relative container">
         <div className="w-full h-fit overflow-hidden flex flex-wrap items-center justify-between gap-8 bg-green-250/0">
           <h2 className="text-lg font-semibold text-neutral-900 sm:text-xl md:text-2xl">
             {t("Best Stores")}
