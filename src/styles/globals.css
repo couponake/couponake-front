@@ -45,12 +45,12 @@
 }
 
 :root {
-  --header-h: 134px;
+  --header-h: 72px;
 }
 
 @media (min-width: 768px) {
   :root {
-    --header-h: 167px;
+    --header-h: 96px;
   }
 }
 
