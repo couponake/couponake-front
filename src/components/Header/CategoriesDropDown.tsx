@@ -68,7 +68,7 @@ const CategoriesDropDown = () => {
                     href={`/coupon-category/${category.slug}`}
                     prefetch={false}
                   >
-                    <div className="block rounded-lg p-2 font-semibold text-gray-800 transition duration-300 ease-in-out hover:bg-gradient-to-br hover:from-indigo-50 hover:via-main-50 hover:to-main-50 hover:text-main-600">
+                    <div className="block rounded-lg p-2 font-semibold text-gray-800 transition duration-300 ease-in-out hover:bg-gradient-to-br hover:from-main-50 hover:via-main-50 hover:to-main-50 hover:text-main-600">
                       <div className="flex flex-row flex-wrap items-center gap-2.5">
                         <div className="text-neutral-900 text-base font-medium line-clamp-1">
                           {category.name}

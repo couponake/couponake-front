@@ -11,12 +11,8 @@ export async function generateMetadata() {
   const indexingContact = await getSettingEnabled(SettingsEnum.Contact);
 
   return {
-    title: isArabic
-      ? "اتصل بنا: تواصل مع ادارة موقع كوبونك من هنا بسهولة"
-      : "Contact Us: Easily contact the Couponat website administration here.",
-    description: isArabic
-      ? "يمكنك الان التواصل مع ادارة موقع كوبونك من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
-      : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
+    title: isArabic ? "تواصل معنا: كود لم يعمل أو متجر تريد إضافته — كوبوناك" : "Contact us: a code that failed or a store to add — Couponake",
+    description: isArabic ? "أبلغنا عن كود توقف، اقترح متجرًا، أو راسلنا للشراكات. نرد خلال يوم عمل على البريد أو النموذج." : "Report a dead code, suggest a store, or reach us for partnerships. We reply within one business day.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}contact/` || "",
     },
@@ -24,30 +20,22 @@ export async function generateMetadata() {
       index: indexingContact,
     },
     openGraph: {
-      title: isArabic
-        ? "اتصل بنا: تواصل مع ادارة موقع كوبونك من هنا بسهولة"
-        : "Contact Us: Easily contact the Couponat website administration here.",
-      description: isArabic
-        ? "يمكنك الان التواصل مع ادارة موقع كوبونك من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
-        : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
+      title: isArabic ? "تواصل معنا: كود لم يعمل أو متجر تريد إضافته — كوبوناك" : "Contact us: a code that failed or a store to add — Couponake",
+      description: isArabic ? "أبلغنا عن كود توقف، اقترح متجرًا، أو راسلنا للشراكات. نرد خلال يوم عمل على البريد أو النموذج." : "Report a dead code, suggest a store, or reach us for partnerships. We reply within one business day.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic
-        ? "اتصل بنا: تواصل مع ادارة موقع كوبونك من هنا بسهولة"
-        : "Contact Us: Easily contact the Couponat website administration here.",
-      description: isArabic
-        ? "يمكنك الان التواصل مع ادارة موقع كوبونك من خلال هذة الصفحة فى حالة الاقتراحات او الشكاوي"
-        : "You can now contact the Couponat website administration through this page for any suggestions or complaints.",
+      title: isArabic ? "تواصل معنا: كود لم يعمل أو متجر تريد إضافته — كوبوناك" : "Contact us: a code that failed or a store to add — Couponake",
+      description: isArabic ? "أبلغنا عن كود توقف، اقترح متجرًا، أو راسلنا للشراكات. نرد خلال يوم عمل على البريد أو النموذج." : "Report a dead code, suggest a store, or reach us for partnerships. We reply within one business day.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],

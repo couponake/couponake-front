@@ -7,11 +7,11 @@
 }
 
 [dir="ltr"] {
-  font-family: "Poppins", "Cairo", monospace;
+  font-family: var(--font-inter), var(--font-almarai), sans-serif;
 }
 
 [dir="rtl"] {
-  font-family: "Cairo", "Poppins", monospace;
+  font-family: var(--font-almarai), var(--font-inter), sans-serif;
 }
 
 .hide-scroll-bar::-webkit-scrollbar {
@@ -62,19 +62,19 @@
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 334, 73%, 60%;
+    --primary: 185 81% 29%;
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
-    --secondary-foreground: 334, 73%, 60%;
+    --secondary-foreground: 185 81% 29%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
     --accent: 0 0% 96.1%;
-    --accent-foreground: 270, 83%, 45%;
+    --accent-foreground: 189 72% 15%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --ring: 185 81% 29%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -98,7 +98,7 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
-    --primary-foreground: 334, 73%, 60%;
+    --primary-foreground: 185 81% 29%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
@@ -160,5 +160,5 @@
 }
 
 .gradient-btn {
-  @apply bg-gradient-to-r from-purple-300 via-purple-500 to-main-700 text-white hover:opacity-70 transition-all;
+  @apply bg-gradient-to-r from-main-400 via-main-500 to-main-700 text-white hover:opacity-70 transition-all;
 }

@@ -24,12 +24,8 @@ export async function generateMetadata({ searchParams }: PageProps) {
   const indexingStores = await getSettingEnabled(SettingsEnum.Stores);
 
   return {
-    title: isArabic
-      ? "كل المتاجر: كوبونك خصم لجميع متاجر التسوق في الشرق الاوسط"
-      : "All Stores: Discount coupons for all Middle Eastern shopping stores",
-    description: isArabic
-      ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونك خصم بكل سهولة ومجاناً"
-      : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
+    title: isArabic ? "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب — كوبوناك" : "All stores: pick your store and grab its tested coupon — Couponake",
+    description: isArabic ? "تصفّح كل المتاجر التي نغطيها مرتبة بعدد الأكواد الفعّالة، وابحث بالاسم أو الفئة أو الدولة لتصل لكوبون متجرك في ثوانٍ." : "Browse every store we cover, ranked by working codes. Search by name, category or country and reach your store's coupon in seconds.",
     alternates: {
       canonical: `https://couponake.com${storePageHref(page)}`,
     },
@@ -37,30 +33,22 @@ export async function generateMetadata({ searchParams }: PageProps) {
       index: indexingStores,
     },
     openGraph: {
-      title: isArabic
-        ? "كل المتاجر: كوبونك خصم لجميع متاجر التسوق في الشرق الاوسط"
-        : "All Stores: Discount coupons for all Middle Eastern shopping stores",
-      description: isArabic
-        ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونك خصم بكل سهولة ومجاناً"
-        : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
+      title: isArabic ? "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب — كوبوناك" : "All stores: pick your store and grab its tested coupon — Couponake",
+      description: isArabic ? "تصفّح كل المتاجر التي نغطيها مرتبة بعدد الأكواد الفعّالة، وابحث بالاسم أو الفئة أو الدولة لتصل لكوبون متجرك في ثوانٍ." : "Browse every store we cover, ranked by working codes. Search by name, category or country and reach your store's coupon in seconds.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic
-        ? "كل المتاجر: كوبونك خصم لجميع متاجر التسوق في الشرق الاوسط"
-        : "All Stores: Discount coupons for all Middle Eastern shopping stores",
-      description: isArabic
-        ? "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونك خصم بكل سهولة ومجاناً"
-        : "Once you log in, you can easily find and search for any store for which you want discount coupons for, free of charge",
+      title: isArabic ? "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب — كوبوناك" : "All stores: pick your store and grab its tested coupon — Couponake",
+      description: isArabic ? "تصفّح كل المتاجر التي نغطيها مرتبة بعدد الأكواد الفعّالة، وابحث بالاسم أو الفئة أو الدولة لتصل لكوبون متجرك في ثوانٍ." : "Browse every store we cover, ranked by working codes. Search by name, category or country and reach your store's coupon in seconds.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
@@ -96,13 +84,13 @@ export default async function StoresPage({ params, searchParams }: PageProps) {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${pageUrl}#webpage`,
-    name: "كل المتاجر: كوبونك خصم لجميع متاجر التسوق في الشرق الاوسط",
-    description: "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونك خصم بكل سهولة ومجاناً",
+    name: "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط",
+    description: "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً",
     url: pageUrl,
     inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
-      name: "كوبونك",
+      name: "كوبوناك",
       url: baseUrl,
     },
   };

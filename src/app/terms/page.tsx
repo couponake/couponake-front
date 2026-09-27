@@ -12,12 +12,8 @@ export async function generateMetadata() {
   const indexingTerms = await getSettingEnabled(SettingsEnum.Terms);
 
   return {
-    title: isArabic
-      ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك"
-      : "Terms of Use | Couponake",
-    description: isArabic
-      ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
-      : "Review site rules, your rights, and obligations as a user",
+    title: isArabic ? "شروط الاستخدام — كوبوناك" : "Terms of use — Couponake",
+    description: isArabic ? "القواعد التي تنظّم استخدام كوبوناك: ما نضمنه وما لا نضمنه في الأكواد، وحقوقك عند استخدام الموقع." : "The rules for using Couponake: what we do and do not guarantee about codes, and your rights on the site.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/` || "",
     },
@@ -25,30 +21,22 @@ export async function generateMetadata() {
       index: indexingTerms,
     },
     openGraph: {
-      title: isArabic
-        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك"
-        : "Terms of Use | Couponake",
-      description: isArabic
-        ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
-        : "Review site rules, your rights, and obligations as a user",
+      title: isArabic ? "شروط الاستخدام — كوبوناك" : "Terms of use — Couponake",
+      description: isArabic ? "القواعد التي تنظّم استخدام كوبوناك: ما نضمنه وما لا نضمنه في الأكواد، وحقوقك عند استخدام الموقع." : "The rules for using Couponake: what we do and do not guarantee about codes, and your rights on the site.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic
-        ? "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك"
-        : "Terms of Use | Couponake",
-      description: isArabic
-        ? "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم"
-        : "Review site rules, your rights, and obligations as a user",
+      title: isArabic ? "شروط الاستخدام — كوبوناك" : "Terms of use — Couponake",
+      description: isArabic ? "القواعد التي تنظّم استخدام كوبوناك: ما نضمنه وما لا نضمنه في الأكواد، وحقوقك عند استخدام الموقع." : "The rules for using Couponake: what we do and do not guarantee about codes, and your rights on the site.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
@@ -71,7 +59,7 @@ const TermsPage = async () => {
       {
         "@type": "WebPage",
         "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/#webpage`,
-        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك",
+        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبوناك",
         url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/`,
         description: "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم",
         datePublished: page.created_at
@@ -80,7 +68,7 @@ const TermsPage = async () => {
         dateModified: page.created_at
           ? new Date(page.created_at).toISOString()
           : undefined,
-        image: "https://couponake.com/couponakeLogo.webp",
+        image: "https://couponake.com/couponak-logo.svg",
         breadcrumb: {
           "@type": "BreadcrumbList",
           itemListElement: [
@@ -102,7 +90,7 @@ const TermsPage = async () => {
       {
         "@type": "Legislation",
         "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/#legislation`,
-        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبونك",
+        name: "شروط الاستخدام اللازمة لاستخدام وزيارة موقع كوبوناك",
         description: "اقرأ قواعد استخدام الموقع وحقوقك وواجباتك كمستخدم",
         dateCreated: page.created_at
           ? new Date(page.created_at).toISOString()
@@ -119,10 +107,10 @@ const TermsPage = async () => {
         legislationType: "Terms of Use",
         publisher: {
           "@type": "Organization",
-          name: "كوبونك",
+          name: "كوبوناك",
           logo: {
             "@type": "ImageObject",
-            url: "https://couponake.com/couponakeLogo.webp",
+            url: "https://couponake.com/couponak-logo.svg",
           },
         },
         isPartOf: {

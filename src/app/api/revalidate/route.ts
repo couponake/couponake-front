@@ -48,7 +48,7 @@ function cleanList(value: unknown): string[] {
     .slice(0, MAX_ITEMS);
 }
 
-// A slug may reach the cache key raw ("/كوبونك/") or percent-encoded
+// A slug may reach the cache key raw ("/كوبونات/") or percent-encoded
 // ("/%D9%83.../"); invalidate both spellings so the call never misses.
 function variants(value: string): string[] {
   const out = new Set<string>([value]);

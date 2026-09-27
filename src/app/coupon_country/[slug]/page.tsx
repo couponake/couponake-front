@@ -48,8 +48,8 @@ export async function generateMetadata({
       description: country_seo?.description,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponakeLogo.webp`,
-          alt: "كوبونك",
+          url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponak-logo.svg`,
+          alt: "كوبوناك",
         },
       ],
     },
@@ -59,8 +59,8 @@ export async function generateMetadata({
       description: country_seo?.description,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponakeLogo.webp`,
-          alt: "كوبونك",
+          url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponak-logo.svg`,
+          alt: "كوبوناك",
         },
       ],
     },
@@ -106,11 +106,11 @@ export default async function CouponCountry({
       },
       {
         "@type": "Organization",
-        name: "كوبونك",
+        name: "كوبوناك",
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}couponakeLogo.webp`,
+          url: `${baseUrl}couponak-logo.svg`,
         },
       },
       {
@@ -120,15 +120,15 @@ export default async function CouponCountry({
         url: `${baseUrl}coupon_country/${slug}/`,
         isPartOf: {
           "@type": "WebSite",
-          name: "كوبونك",
+          name: "كوبوناك",
           url: baseUrl,
         },
         publisher: {
           "@type": "Organization",
-          name: "كوبونك",
+          name: "كوبوناك",
           logo: {
             "@type": "ImageObject",
-            url: `${baseUrl}couponakeLogo.webp`,
+            url: `${baseUrl}couponak-logo.svg`,
           },
         },
         mainEntity: {

@@ -58,7 +58,7 @@ export default function AdsItem({ item }: { item: AdItem }) {
               className="w-full h-50 object-cover"
             />
           ) : (
-            <div className="w-full md:text-3xl h-50 bg-gradient-to-r bg-clip-text text-transparent from-main-200 via-main-600 to-purple-300 flex items-center justify-center text-xl font-bold">
+            <div className="w-full md:text-3xl h-50 bg-gradient-to-r bg-clip-text text-transparent from-main-200 via-main-600 to-main-300 flex items-center justify-center text-xl font-bold">
               No Media
             </div>
           )}

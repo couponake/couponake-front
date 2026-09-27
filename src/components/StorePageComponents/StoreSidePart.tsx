@@ -102,7 +102,7 @@ function StoreSidePart({
                 className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1 mb-4"
               >
                 <div
-                  className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4 last:mb-0`}
+                  className={`${styles.prose} prose prose-sm max-w-none font-almarai mb-4 last:mb-0`}
                   dir={getContentDirection(item.content)}
                   dangerouslySetInnerHTML={makeSafeHtml(item.content)}
                 />

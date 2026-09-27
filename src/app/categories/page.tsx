@@ -17,12 +17,8 @@ export async function generateMetadata() {
   const indexingCategory = await getSettingEnabled(SettingsEnum.Categories);
 
   return {
-    title: isArabic
-      ? "الفئات: صفحة لتصنيف الكوبونك وفق فئات المنتجات"
-      : "Categories: A page that categorizes coupons by product category",
-    description: isArabic
-      ? "يتم تصنيف اكواد و كوبونك الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونك التى تريدها باقل مجهود"
-      : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
+    title: isArabic ? "الفئات: أكواد خصم مرتبة حسب ما تشتريه — كوبوناك" : "Categories: discount codes sorted by what you buy — Couponake",
+    description: isArabic ? "أزياء، إلكترونيات، جمال، سفر، مطاعم وغيرها: اختر الفئة وشوف المتاجر التي فيها أكواد فعّالة اليوم بدل البحث متجرًا متجرًا." : "Fashion, electronics, beauty, travel, food and more: pick a category and see the stores with working codes today.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}categories/` || "",
     },
@@ -30,30 +26,22 @@ export async function generateMetadata() {
       index: indexingCategory,
     },
     openGraph: {
-      title: isArabic
-        ? "الفئات: صفحة لتصنيف الكوبونك وفق فئات المنتجات"
-        : "Categories: A page that categorizes coupons by product category",
-      description: isArabic
-        ? "يتم تصنيف اكواد و كوبونك الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونك التى تريدها باقل مجهود"
-        : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
+      title: isArabic ? "الفئات: أكواد خصم مرتبة حسب ما تشتريه — كوبوناك" : "Categories: discount codes sorted by what you buy — Couponake",
+      description: isArabic ? "أزياء، إلكترونيات، جمال، سفر، مطاعم وغيرها: اختر الفئة وشوف المتاجر التي فيها أكواد فعّالة اليوم بدل البحث متجرًا متجرًا." : "Fashion, electronics, beauty, travel, food and more: pick a category and see the stores with working codes today.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic
-        ? "الفئات: صفحة لتصنيف الكوبونك وفق فئات المنتجات"
-        : "Categories: A page that categorizes coupons by product category",
-      description: isArabic
-        ? "يتم تصنيف اكواد و كوبونك الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونك التى تريدها باقل مجهود"
-        : "Discount codes and coupons are categorized by product category, making it easy to find the coupons you want with minimal effort",
+      title: isArabic ? "الفئات: أكواد خصم مرتبة حسب ما تشتريه — كوبوناك" : "Categories: discount codes sorted by what you buy — Couponake",
+      description: isArabic ? "أزياء، إلكترونيات، جمال، سفر، مطاعم وغيرها: اختر الفئة وشوف المتاجر التي فيها أكواد فعّالة اليوم بدل البحث متجرًا متجرًا." : "Fashion, electronics, beauty, travel, food and more: pick a category and see the stores with working codes today.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
@@ -95,23 +83,23 @@ export default async function CategoriesPage({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "كوبونك",
+    name: "كوبوناك",
     url: `${baseUrl}`,
-    logo: `${baseUrl}couponakeLogo.webp`,
+    logo: `${baseUrl}couponak-logo.svg`,
   };
 
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "الفئات: صفحة لتصنيف الكوبونك وفق فئات المنتجات",
-    description: "يتم تصنيف اكواد و كوبونك الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونك التى تريدها باقل مجهود",
+    name: "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات",
+    description: "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود",
     url: `${baseUrl}categories/`,
     publisher: {
       "@type": "Organization",
-      name: "كوبونك",
+      name: "كوبوناك",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}couponakeLogo.webp`,
+        url: `${baseUrl}couponak-logo.svg`,
       },
     },
   };

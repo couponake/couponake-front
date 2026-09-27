@@ -13,12 +13,8 @@ export async function generateMetadata() {
   const indexingBlogs = await getSettingEnabled(SettingsEnum.Blogs);
 
   return {
-    title: isArabic
-      ? "مدونة موقع كوبونك لجميع اخبار متاجر التسوق"
-      : "Couponat's blog for all the latest shopping news",
-    description: isArabic
-      ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
-      : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
+    title: isArabic ? "مدونة كوبوناك: طرق توفّر بها أكثر في كل طلب" : "Couponake blog: practical ways to save more on every order",
+    description: isArabic ? "شروحات عملية: كيف تجمع كودين، متى تشتري، ما الفرق بين التطبيق والموقع، ومراجعات صادقة للمتاجر قبل أن تدفع." : "Hands-on guides: stacking codes, when to buy, app vs website, and honest store reviews before you pay.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}blog/` || "",
     },
@@ -26,30 +22,22 @@ export async function generateMetadata() {
       index: indexingBlogs,
     },
     openGraph: {
-      title: isArabic
-        ? "مدونة موقع كوبونك لجميع اخبار متاجر التسوق"
-        : "Couponat's blog for all the latest shopping news",
-      description: isArabic
-        ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
-        : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
+      title: isArabic ? "مدونة كوبوناك: طرق توفّر بها أكثر في كل طلب" : "Couponake blog: practical ways to save more on every order",
+      description: isArabic ? "شروحات عملية: كيف تجمع كودين، متى تشتري، ما الفرق بين التطبيق والموقع، ومراجعات صادقة للمتاجر قبل أن تدفع." : "Hands-on guides: stacking codes, when to buy, app vs website, and honest store reviews before you pay.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic
-        ? "مدونة موقع كوبونك لجميع اخبار متاجر التسوق"
-        : "Couponat's blog for all the latest shopping news",
-      description: isArabic
-        ? "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم"
-        : "Here you'll find everything you need to know about stores, their services, and the latest offers and products",
+      title: isArabic ? "مدونة كوبوناك: طرق توفّر بها أكثر في كل طلب" : "Couponake blog: practical ways to save more on every order",
+      description: isArabic ? "شروحات عملية: كيف تجمع كودين، متى تشتري، ما الفرق بين التطبيق والموقع، ومراجعات صادقة للمتاجر قبل أن تدفع." : "Hands-on guides: stacking codes, when to buy, app vs website, and honest store reviews before you pay.",
       images: [
         {
-          url: "https://couponake.com/couponakeLogo.webp",
+          url: "https://couponake.com/couponak-logo.svg",
           alt: "Couponake Logo",
         },
       ],
@@ -70,7 +58,7 @@ export default async function Home({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: "مدونة موقع كوبونك لجميع اخبار متاجر التسوق",
+    name: "مدونة موقع كوبوناك لجميع اخبار متاجر التسوق",
     description: "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم",
     url: `${baseUrl}blog/`,
     isPartOf: {
@@ -85,11 +73,11 @@ export default async function Home({
       dateModified: post.content_updated_at || post.created_at,
       author: {
         "@type": "Organization",
-        name: "كوبونك",
+        name: "كوبوناك",
       },
       image: {
         "@type": "ImageObject",
-        url: post.image || `${baseUrl}couponakeLogo.webp`,
+        url: post.image || `${baseUrl}couponak-logo.svg`,
       },
     })),
   };
@@ -116,9 +104,9 @@ export default async function Home({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "كوبونك",
+    name: "كوبوناك",
     url: baseUrl,
-    logo: `${baseUrl}couponakeLogo.webp`,
+    logo: `${baseUrl}couponak-logo.svg`,
   };
 
   return (

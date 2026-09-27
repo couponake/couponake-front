@@ -197,7 +197,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
                 <div className="overflow-x-auto overflow-y-hidden px-1 w-full">
                   <div
                     dir="rtl"
-                    className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-cairo [&_*]:font-cairo [&_table]:w-full`}
+                    className={`${styles.prose} prose prose-sm max-w-none leading-relaxed font-almarai [&_*]:font-almarai [&_table]:w-full`}
                     dangerouslySetInnerHTML={makeSafeHtml(store?.about_store)}
                   />
                 </div>
@@ -251,7 +251,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
                       <div
                         key={`desc2-${idx}`}
                         dir={getContentDirection(item.content)}
-                        className={`${styles.prose} prose prose-sm max-w-none font-cairo mb-4`}
+                        className={`${styles.prose} prose prose-sm max-w-none font-almarai mb-4`}
                         dangerouslySetInnerHTML={makeSafeHtml(item.content)}
                       />
                     ))}

@@ -10,8 +10,7 @@ import { Settings } from '@/types';
 import { Analytics } from '@vercel/analytics/react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
-import { Cairo, Poppins } from 'next/font/google';
-import Script from 'next/script';
+import { Almarai, Inter } from 'next/font/google';
 import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { SettingsEnum } from '@/types/settingsEnum';
 
@@ -42,17 +41,17 @@ const getSeo = async (): Promise<homeSeoType> => {
 };
 
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "600", "700"],
-  variable: "--font-poppins",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
-const cairo = Cairo({ subsets: ["latin"], variable: "--font-cairo" });
+const almarai = Almarai({ weight: ["400", "700", "800"], subsets: ["arabic"], variable: "--font-almarai", display: "swap" });
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+export const viewport = {
+  themeColor: "#0E7C86",
+};
 
 export async function generateMetadata() {
   // Fetch SEO data
@@ -61,13 +60,14 @@ export async function generateMetadata() {
   const indexingSite = await getSettingEnabled(SettingsEnum.SuperSite);
 
 
-  const fallbackTitle = "كوبونك";
-  const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}couponakeLogo.webp`;
+  const fallbackTitle = "كوبوناك";
+  const siteLogo = `${process.env.NEXT_PUBLIC_WEBSITE_URL}og-default.png`;
 
   if (!seoData?.description || !seoData?.author) {
     return {
-      title: fallbackTitle,
-      description: fallbackTitle,
+      title: "كوبوناك: أكواد خصم مجرّبة اليوم لأشهر متاجر السعودية والخليج",
+      description: "كوبوناتك في مكان واحد: أكواد خصم نجرّبها كل يوم على أشهر المتاجر، مع نسبة التوفير وتاريخ آخر تجربة ناجحة. انسخ ووفّر في طلبك التالي.",
+      manifest: "/site.webmanifest",
       robots: { index: indexingSite },
     };
   }
@@ -81,6 +81,7 @@ export async function generateMetadata() {
     alternates: {
       canonical: seoData?.url || `${process.env.NEXT_PUBLIC_WEBSITE_URL}`,
     },
+    manifest: "/site.webmanifest",
     robots: {
       index: indexingSite,
     },
@@ -128,44 +129,7 @@ export default async function LocaleLayout({
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
     >
-      <head>
-        <Script id="google-tag-manager" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-PG9NG3R');
-          `}
-        </Script>
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-NWJT32SKJ7`}
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-NWJT32SKJ7', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
-      </head>
-      <body className={`${cairo.variable} ${poppins.variable} font-inherit`}>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PG9NG3R"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+      <body className={`${almarai.variable} ${inter.variable} font-almarai`}>
         <SessionProvider>
           <Analytics />
           <NextIntlClientProvider locale={locale} messages={messages}>

@@ -31,7 +31,7 @@ function RelatedTicketCouponItem({ coupon }: { coupon: CouponProps }) {
               alt={coupon?.store_slug}
               width={110}
               height={110}
-              className="w-full aspect-square size-[110px] p-2 object-contain border-l-1 border-dashed border-[#7214d1]"
+              className="w-full aspect-square size-[110px] p-2 object-contain border-l-1 border-dashed border-main-500"
             />
           </div>
         </div>
