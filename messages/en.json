@@ -389,5 +389,6 @@
   "footer_sitemap_url": "Site Map",
   "redirecting": "Redirecting...",
   "redirected": "Redirected successfully",
-  "second": "seconds"
+  "second": "seconds",
+  "noCountriesFound": "No countries found matching your search."
 }

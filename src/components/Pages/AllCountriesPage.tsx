@@ -191,7 +191,7 @@ const AllCountriesPage = ({
       ) : filteredCountries?.length === 0 ? (
         <div className="text-center py-10">
           <p className="text-gray-600 text-lg">
-            No countries found matching your search.
+            {t("noCountriesFound")}
           </p>
         </div>
       ) : (

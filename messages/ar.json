@@ -372,5 +372,6 @@
   "footer_sitemap_url": "خريطة الموقع",
   "redirecting": "جاري إعادة توجيهك",
   "redirected": "تم التوجيه بنجاح",
-  "second": "ثانية"
+  "second": "ثانية",
+  "noCountriesFound": "لم يتم العثور على دول تطابق البحث."
 }
