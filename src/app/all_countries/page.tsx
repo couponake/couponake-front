@@ -72,7 +72,7 @@ const AllCountries = async () => {
           {
             "@type": "ListItem",
             position: 2,
-            name: "كوبونات لبلدك",
+            name: "خصومات حسب بلدك",
             item: `${baseUrl}all_countries/`,
           },
         ],

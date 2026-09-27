@@ -1,5 +1,5 @@
 {
-  "All Countries": "كوبونات لبلدك",
+  "All Countries": "خصومات حسب بلدك",
   "All Users": "جميع المستخدمين",
   "emailPlaceholder": "أدخل بريدك الإلكتروني",
   "getEarlyAccess": "احصل على الوصول المبكر",
@@ -345,7 +345,7 @@
   "Author": "المؤلف",
   "Article Author": "مؤلف المقال",
   "StoreStatistics": "احصائيات المتجر والكوبونات",
-  "Valid discount coupons": "كوبونات خصم فعّالة لأفضل المتاجر أونلاين",
+  "Valid discount coupons": "أكواد خصم مجرّبة اليوم لأشهر متاجر السعودية والخليج",
   "Your message has been sent successfully": "تم إرسال رسالتك بنجاح",
   "Failed to send your message": "فشل في إرسال رسالتك. يرجى المحاولة مرة أخرى.",
   "Error submitting contact form:": "خطأ في إرسال نموذج الاتصال: ",
