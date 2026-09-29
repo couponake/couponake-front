@@ -132,8 +132,7 @@ function TicketCoupon() {
       setCouponsCategoriesList(uniqueCategories);
       setSelectedCat(firstCatId ?? 0);
       setFilteredCoupons(filtered);
-    } catch (error) {
-      console.error("Error fetching coupons:", error);
+    } catch {
       setCouponsData([]);
       setCouponsCategoriesList([]);
       setFilteredCoupons([]);
@@ -213,6 +212,8 @@ function TicketCoupon() {
       behavior: "smooth",
     });
   };
+
+  if(couponsData?.length === 0) return null;
 
   return (
     <Fragment>
