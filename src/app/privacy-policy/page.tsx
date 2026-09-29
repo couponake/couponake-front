@@ -12,7 +12,7 @@ export async function generateMetadata() {
   const indexingPrivacy = await getSettingEnabled(SettingsEnum.Privacy);
 
   return {
-    title: isArabic ? "سياسة الخصوصية — كوبوناك" : "Privacy policy — Couponake",
+    title: isArabic ? "سياسة الخصوصية | كوبوناك" : "Privacy policy | Couponake",
     description: isArabic ? "ما نجمعه عند زيارتك لكوبوناك، ولماذا، وكيف تحذفه." : "What Couponake collects when you visit, why, and how to delete it.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/` || "",
@@ -21,7 +21,7 @@ export async function generateMetadata() {
       index: indexingPrivacy,
     },
     openGraph: {
-      title: isArabic ? "سياسة الخصوصية — كوبوناك" : "Privacy policy — Couponake",
+      title: isArabic ? "سياسة الخصوصية | كوبوناك" : "Privacy policy | Couponake",
       description: isArabic ? "ما نجمعه عند زيارتك لكوبوناك، ولماذا، وكيف تحذفه." : "What Couponake collects when you visit, why, and how to delete it.",
       images: [
         {
@@ -32,7 +32,7 @@ export async function generateMetadata() {
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic ? "سياسة الخصوصية — كوبوناك" : "Privacy policy — Couponake",
+      title: isArabic ? "سياسة الخصوصية | كوبوناك" : "Privacy policy | Couponake",
       description: isArabic ? "ما نجمعه عند زيارتك لكوبوناك، ولماذا، وكيف تحذفه." : "What Couponake collects when you visit, why, and how to delete it.",
       images: [
         {
@@ -57,7 +57,7 @@ const PrivacyPage = async () => {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#webpage`,
-    name: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك  — كوبوناك",
+    name: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك | كوبوناك",
     url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/`,
     description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
     datePublished: page.created_at
@@ -86,7 +86,7 @@ const PrivacyPage = async () => {
     mainEntity: {
       "@type": "Article",
       "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#article`,
-      headline: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك  — كوبوناك",
+      headline: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك | كوبوناك",
       description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
       datePublished: page.created_at
         ? new Date(page.created_at).toISOString()

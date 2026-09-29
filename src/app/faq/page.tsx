@@ -13,7 +13,7 @@ export async function generateMetadata() {
   const indexingFAQ = await getSettingEnabled(SettingsEnum.FAQ);
 
   return {
-    title: isArabic ? "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه — كوبوناك" : "FAQ: why a code fails and how to use it — Couponake",
+    title: isArabic ? "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه | كوبوناك" : "FAQ: why a code fails and how to use it | Couponake",
     description: isArabic ? "إجابات مباشرة: أين يُكتب الكود، لماذا يُرفض، هل يُجمع مع العروض، وهل كوبوناك مجاني." : "Straight answers: where to enter the code, why it gets rejected, whether it stacks with offers, and whether Couponake is free.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/` || "",
@@ -22,7 +22,7 @@ export async function generateMetadata() {
       index: indexingFAQ,
     },
     openGraph: {
-      title: isArabic ? "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه — كوبوناك" : "FAQ: why a code fails and how to use it — Couponake",
+      title: isArabic ? "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه | كوبوناك" : "FAQ: why a code fails and how to use it | Couponake",
       description: isArabic ? "إجابات مباشرة: أين يُكتب الكود، لماذا يُرفض، هل يُجمع مع العروض، وهل كوبوناك مجاني." : "Straight answers: where to enter the code, why it gets rejected, whether it stacks with offers, and whether Couponake is free.",
       images: [
         {
@@ -33,7 +33,7 @@ export async function generateMetadata() {
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic ? "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه — كوبوناك" : "FAQ: why a code fails and how to use it — Couponake",
+      title: isArabic ? "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه | كوبوناك" : "FAQ: why a code fails and how to use it | Couponake",
       description: isArabic ? "إجابات مباشرة: أين يُكتب الكود، لماذا يُرفض، هل يُجمع مع العروض، وهل كوبوناك مجاني." : "Straight answers: where to enter the code, why it gets rejected, whether it stacks with offers, and whether Couponake is free.",
       images: [
         {

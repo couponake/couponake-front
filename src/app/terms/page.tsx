@@ -12,7 +12,7 @@ export async function generateMetadata() {
   const indexingTerms = await getSettingEnabled(SettingsEnum.Terms);
 
   return {
-    title: isArabic ? "شروط الاستخدام — كوبوناك" : "Terms of use — Couponake",
+    title: isArabic ? "شروط الاستخدام | كوبوناك" : "Terms of use | Couponake",
     description: isArabic ? "القواعد التي تنظّم استخدام كوبوناك: ما نضمنه وما لا نضمنه في الأكواد، وحقوقك عند استخدام الموقع." : "The rules for using Couponake: what we do and do not guarantee about codes, and your rights on the site.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}terms/` || "",
@@ -21,7 +21,7 @@ export async function generateMetadata() {
       index: indexingTerms,
     },
     openGraph: {
-      title: isArabic ? "شروط الاستخدام — كوبوناك" : "Terms of use — Couponake",
+      title: isArabic ? "شروط الاستخدام | كوبوناك" : "Terms of use | Couponake",
       description: isArabic ? "القواعد التي تنظّم استخدام كوبوناك: ما نضمنه وما لا نضمنه في الأكواد، وحقوقك عند استخدام الموقع." : "The rules for using Couponake: what we do and do not guarantee about codes, and your rights on the site.",
       images: [
         {
@@ -32,7 +32,7 @@ export async function generateMetadata() {
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic ? "شروط الاستخدام — كوبوناك" : "Terms of use — Couponake",
+      title: isArabic ? "شروط الاستخدام | كوبوناك" : "Terms of use | Couponake",
       description: isArabic ? "القواعد التي تنظّم استخدام كوبوناك: ما نضمنه وما لا نضمنه في الأكواد، وحقوقك عند استخدام الموقع." : "The rules for using Couponake: what we do and do not guarantee about codes, and your rights on the site.",
       images: [
         {

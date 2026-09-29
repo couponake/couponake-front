@@ -13,7 +13,7 @@ export async function generateMetadata() {
   const indexingCountries = await getSettingEnabled(SettingsEnum.Countries);
 
   return {
-    title: isArabic ? "اختر دولتك: أكواد خصم تعمل في بلدك — كوبوناك" : "Pick your country: discount codes that work where you are — Couponake",
+    title: isArabic ? "اختر دولتك: أكواد خصم تعمل في بلدك | كوبوناك" : "Pick your country: discount codes that work where you are | Couponake",
     description: isArabic ? "الكود الذي يعمل في السعودية قد لا يعمل في مصر. اختر دولتك لترى فقط المتاجر والأكواد التي جرّبناها على عنوان شحن محلي." : "A code that works in Saudi Arabia may fail in Egypt. Pick your country to see only stores and codes we tested with a local address.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}all_countries/` || "",
@@ -22,7 +22,7 @@ export async function generateMetadata() {
       index: indexingCountries,
     },
     openGraph: {
-      title: isArabic ? "اختر دولتك: أكواد خصم تعمل في بلدك — كوبوناك" : "Pick your country: discount codes that work where you are — Couponake",
+      title: isArabic ? "اختر دولتك: أكواد خصم تعمل في بلدك | كوبوناك" : "Pick your country: discount codes that work where you are | Couponake",
       description: isArabic ? "الكود الذي يعمل في السعودية قد لا يعمل في مصر. اختر دولتك لترى فقط المتاجر والأكواد التي جرّبناها على عنوان شحن محلي." : "A code that works in Saudi Arabia may fail in Egypt. Pick your country to see only stores and codes we tested with a local address.",
       images: [
         {
@@ -33,7 +33,7 @@ export async function generateMetadata() {
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic ? "اختر دولتك: أكواد خصم تعمل في بلدك — كوبوناك" : "Pick your country: discount codes that work where you are — Couponake",
+      title: isArabic ? "اختر دولتك: أكواد خصم تعمل في بلدك | كوبوناك" : "Pick your country: discount codes that work where you are | Couponake",
       description: isArabic ? "الكود الذي يعمل في السعودية قد لا يعمل في مصر. اختر دولتك لترى فقط المتاجر والأكواد التي جرّبناها على عنوان شحن محلي." : "A code that works in Saudi Arabia may fail in Egypt. Pick your country to see only stores and codes we tested with a local address.",
       images: [
         {

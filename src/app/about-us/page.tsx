@@ -12,7 +12,7 @@ export async function generateMetadata() {
   const indexingAbout = await getSettingEnabled(SettingsEnum.About);
 
   return {
-    title: isArabic ? "من نحن: كيف نجرّب الأكواد قبل نشرها — كوبوناك" : "About us: how we test every code before publishing it — Couponake",
+    title: isArabic ? "من نحن: كيف نجرّب الأكواد قبل نشرها | كوبوناك" : "About us: how we test every code before publishing it | Couponake",
     description: isArabic ? "فريق صغير يجرّب كل كود قبل نشره ويحذفه أول ما يتوقف. اقرأ كيف نعمل، وكيف نربح، ولماذا لا ننشر كودًا لم يعمل معنا." : "A small team that tests every code before it goes live and removes it the moment it stops working. How we work and how we earn.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/` || "",
@@ -21,7 +21,7 @@ export async function generateMetadata() {
       index: indexingAbout,
     },
     openGraph: {
-      title: isArabic ? "من نحن: كيف نجرّب الأكواد قبل نشرها — كوبوناك" : "About us: how we test every code before publishing it — Couponake",
+      title: isArabic ? "من نحن: كيف نجرّب الأكواد قبل نشرها | كوبوناك" : "About us: how we test every code before publishing it | Couponake",
       description: isArabic ? "فريق صغير يجرّب كل كود قبل نشره ويحذفه أول ما يتوقف. اقرأ كيف نعمل، وكيف نربح، ولماذا لا ننشر كودًا لم يعمل معنا." : "A small team that tests every code before it goes live and removes it the moment it stops working. How we work and how we earn.",
       images: [
         {
@@ -32,7 +32,7 @@ export async function generateMetadata() {
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic ? "من نحن: كيف نجرّب الأكواد قبل نشرها — كوبوناك" : "About us: how we test every code before publishing it — Couponake",
+      title: isArabic ? "من نحن: كيف نجرّب الأكواد قبل نشرها | كوبوناك" : "About us: how we test every code before publishing it | Couponake",
       description: isArabic ? "فريق صغير يجرّب كل كود قبل نشره ويحذفه أول ما يتوقف. اقرأ كيف نعمل، وكيف نربح، ولماذا لا ننشر كودًا لم يعمل معنا." : "A small team that tests every code before it goes live and removes it the moment it stops working. How we work and how we earn.",
       images: [
         {

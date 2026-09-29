@@ -11,7 +11,7 @@ export async function generateMetadata() {
   const indexingContact = await getSettingEnabled(SettingsEnum.Contact);
 
   return {
-    title: isArabic ? "تواصل معنا: كود لم يعمل أو متجر تريد إضافته — كوبوناك" : "Contact us: a code that failed or a store to add — Couponake",
+    title: isArabic ? "تواصل معنا: كود لم يعمل أو متجر تريد إضافته | كوبوناك" : "Contact us: a code that failed or a store to add | Couponake",
     description: isArabic ? "أبلغنا عن كود توقف، اقترح متجرًا، أو راسلنا للشراكات. نرد خلال يوم عمل على البريد أو النموذج." : "Report a dead code, suggest a store, or reach us for partnerships. We reply within one business day.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}contact/` || "",
@@ -20,7 +20,7 @@ export async function generateMetadata() {
       index: indexingContact,
     },
     openGraph: {
-      title: isArabic ? "تواصل معنا: كود لم يعمل أو متجر تريد إضافته — كوبوناك" : "Contact us: a code that failed or a store to add — Couponake",
+      title: isArabic ? "تواصل معنا: كود لم يعمل أو متجر تريد إضافته | كوبوناك" : "Contact us: a code that failed or a store to add | Couponake",
       description: isArabic ? "أبلغنا عن كود توقف، اقترح متجرًا، أو راسلنا للشراكات. نرد خلال يوم عمل على البريد أو النموذج." : "Report a dead code, suggest a store, or reach us for partnerships. We reply within one business day.",
       images: [
         {
@@ -31,7 +31,7 @@ export async function generateMetadata() {
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic ? "تواصل معنا: كود لم يعمل أو متجر تريد إضافته — كوبوناك" : "Contact us: a code that failed or a store to add — Couponake",
+      title: isArabic ? "تواصل معنا: كود لم يعمل أو متجر تريد إضافته | كوبوناك" : "Contact us: a code that failed or a store to add | Couponake",
       description: isArabic ? "أبلغنا عن كود توقف، اقترح متجرًا، أو راسلنا للشراكات. نرد خلال يوم عمل على البريد أو النموذج." : "Report a dead code, suggest a store, or reach us for partnerships. We reply within one business day.",
       images: [
         {

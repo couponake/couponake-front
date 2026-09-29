@@ -24,7 +24,7 @@ export async function generateMetadata({ searchParams }: PageProps) {
   const indexingStores = await getSettingEnabled(SettingsEnum.Stores);
 
   return {
-    title: isArabic ? "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب — كوبوناك" : "All stores: pick your store and grab its tested coupon — Couponake",
+    title: isArabic ? "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب | كوبوناك" : "All stores: pick your store and grab its tested coupon | Couponake",
     description: isArabic ? "تصفّح كل المتاجر التي نغطيها مرتبة بعدد الأكواد الفعّالة، وابحث بالاسم أو الفئة أو الدولة لتصل لكوبون متجرك في ثوانٍ." : "Browse every store we cover, ranked by working codes. Search by name, category or country and reach your store's coupon in seconds.",
     alternates: {
       canonical: `https://couponake.com${storePageHref(page)}`,
@@ -33,7 +33,7 @@ export async function generateMetadata({ searchParams }: PageProps) {
       index: indexingStores,
     },
     openGraph: {
-      title: isArabic ? "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب — كوبوناك" : "All stores: pick your store and grab its tested coupon — Couponake",
+      title: isArabic ? "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب | كوبوناك" : "All stores: pick your store and grab its tested coupon | Couponake",
       description: isArabic ? "تصفّح كل المتاجر التي نغطيها مرتبة بعدد الأكواد الفعّالة، وابحث بالاسم أو الفئة أو الدولة لتصل لكوبون متجرك في ثوانٍ." : "Browse every store we cover, ranked by working codes. Search by name, category or country and reach your store's coupon in seconds.",
       images: [
         {
@@ -44,7 +44,7 @@ export async function generateMetadata({ searchParams }: PageProps) {
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic ? "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب — كوبوناك" : "All stores: pick your store and grab its tested coupon — Couponake",
+      title: isArabic ? "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب | كوبوناك" : "All stores: pick your store and grab its tested coupon | Couponake",
       description: isArabic ? "تصفّح كل المتاجر التي نغطيها مرتبة بعدد الأكواد الفعّالة، وابحث بالاسم أو الفئة أو الدولة لتصل لكوبون متجرك في ثوانٍ." : "Browse every store we cover, ranked by working codes. Search by name, category or country and reach your store's coupon in seconds.",
       images: [
         {

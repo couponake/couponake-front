@@ -17,7 +17,7 @@ export async function generateMetadata() {
   const indexingCategory = await getSettingEnabled(SettingsEnum.Categories);
 
   return {
-    title: isArabic ? "الفئات: أكواد خصم مرتبة حسب ما تشتريه — كوبوناك" : "Categories: discount codes sorted by what you buy — Couponake",
+    title: isArabic ? "الفئات: أكواد خصم مرتبة حسب ما تشتريه | كوبوناك" : "Categories: discount codes sorted by what you buy | Couponake",
     description: isArabic ? "أزياء، إلكترونيات، جمال، سفر، مطاعم وغيرها: اختر الفئة وشوف المتاجر التي فيها أكواد فعّالة اليوم بدل البحث متجرًا متجرًا." : "Fashion, electronics, beauty, travel, food and more: pick a category and see the stores with working codes today.",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_WEBSITE_URL}categories/` || "",
@@ -26,7 +26,7 @@ export async function generateMetadata() {
       index: indexingCategory,
     },
     openGraph: {
-      title: isArabic ? "الفئات: أكواد خصم مرتبة حسب ما تشتريه — كوبوناك" : "Categories: discount codes sorted by what you buy — Couponake",
+      title: isArabic ? "الفئات: أكواد خصم مرتبة حسب ما تشتريه | كوبوناك" : "Categories: discount codes sorted by what you buy | Couponake",
       description: isArabic ? "أزياء، إلكترونيات، جمال، سفر، مطاعم وغيرها: اختر الفئة وشوف المتاجر التي فيها أكواد فعّالة اليوم بدل البحث متجرًا متجرًا." : "Fashion, electronics, beauty, travel, food and more: pick a category and see the stores with working codes today.",
       images: [
         {
@@ -37,7 +37,7 @@ export async function generateMetadata() {
     },
     twitter: {
       card: "summary_large_image",
-      title: isArabic ? "الفئات: أكواد خصم مرتبة حسب ما تشتريه — كوبوناك" : "Categories: discount codes sorted by what you buy — Couponake",
+      title: isArabic ? "الفئات: أكواد خصم مرتبة حسب ما تشتريه | كوبوناك" : "Categories: discount codes sorted by what you buy | Couponake",
       description: isArabic ? "أزياء، إلكترونيات، جمال، سفر، مطاعم وغيرها: اختر الفئة وشوف المتاجر التي فيها أكواد فعّالة اليوم بدل البحث متجرًا متجرًا." : "Fashion, electronics, beauty, travel, food and more: pick a category and see the stores with working codes today.",
       images: [
         {
