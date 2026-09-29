@@ -1,6 +1,5 @@
 import Main from "@/components/Pages/Home/main";
 import { getCachedData } from "@/lib/cached-data";
-import React from "react";
 import ClientSideComponents from "../components/HomePageComponents/ClientSideComponents";
 import ScrollTracker from "@/services/ScrollPageAnalytics";
 
@@ -16,13 +15,11 @@ export default async function Home() {
     generalBanners = [],
     featuredStores = [],
     latestStores = [],
-    collectionCount = { stores: 0, coupons: 0, used: 0 },
     testimonials = [],
   ] = await Promise.all([
     getCachedData("home/general-banners"),
     getCachedData("home/featured-stores"),
     getCachedData("home/latest-stores"),
-    getCachedData("home/collection-count"),
     getCachedData("home/testimonials"),
   ]);
 
@@ -104,7 +101,6 @@ export default async function Home() {
           hero_banners={generalBanners}
           featured_stores={featuredStores}
           latest_stores={latestStores}
-          collection_count={collectionCount}
         />
 
         <ClientSideComponents />
