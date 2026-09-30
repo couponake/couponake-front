@@ -13,8 +13,7 @@ export interface StoreResponse {
   store: StoreProps;
   similarStores: StoreProps[];
   store_table:
-  | { id: number; code: string; title: string; description: string }[]
-  | [];
+    { id: number; code: string; title: string; description: string }[] | [];
   store_reviews: userReviewType[];
   store_banner: BannerItem[] | null;
   store_faqs: FaqItem[];
@@ -23,10 +22,6 @@ export interface StoreResponse {
     current_date: string;
     latest_coupon: CouponProps | null;
   } | null;
-  popular_category: { count: number; category: any };
-  max_coupon_discount: string;
-  max_coupon_used: string;
-  returned_visitors: string;
   store_seo: {
     title: string;
     description: string;

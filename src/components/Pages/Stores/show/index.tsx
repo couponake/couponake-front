@@ -3,7 +3,6 @@ import ShowCouponDetails from "@/components/Modals/ShowCouponDetails";
 import FAQ from "@/components/Pages/Home/FAQ";
 import Author from "@/components/StorePageComponents/Author";
 import FollowStore from "@/components/StorePageComponents/FollowStore";
-import StoreCharts from "@/components/StorePageComponents/StoreCharts/StoreCharts";
 import StoreCoupons from "@/components/StorePageComponents/StoreCoupons";
 import StoreHeader from "@/components/StorePageComponents/StoreHeader";
 import StoreRatingCard from "@/components/StorePageComponents/StoreRatingCard";
@@ -13,13 +12,12 @@ import useDetectMobile from "@/hooks/useDetectMobile";
 import { useStoreData } from "@/hooks/useStoreData";
 import { getContentDirection, secureStoreHtmlLinks } from "@/lib/storeHtmlUtils";
 import ScrollTracker from "@/services/ScrollPageAnalytics";
-import { CategoryItem, InfoItem, statisticsType } from "@/types";
+import { InfoItem } from "@/types";
 import { Button } from "@heroui/button";
 import { Divider } from "@heroui/divider";
 import { useLocale, useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React from "react";
 import styles from "@/styles/htmlTablesScroll.module.css";
 import Image from "next/image";
 
@@ -58,24 +56,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
     locale === "ar"
       ? (store?.store_name?.split("-")[0] ?? "")
       : store?.store_name?.split("-")[1] || store?.store_name || "";
-
-  const statistics: statisticsType = {
-    store_love: store?.store_love ?? "0%",
-    currency: store?.currency ?? "",
-    saved_price: Number(store?.saved_price) ?? 0,
-    orders_number: store?.orders_number ?? 0,
-    total_used_coupons: store?.total_used_coupons ?? 0,
-    max_coupon_discount: data?.max_coupon_discount ?? "null",
-    max_coupon_used: data?.max_coupon_used ?? "null",
-    popular_category: data?.popular_category ?? {
-      count: 0,
-      category: {} as CategoryItem,
-    },
-    returned_visitors: data?.returned_visitors ?? "0%",
-    coupon_peak_times: store?.coupon_peak_times ?? "null",
-    popular_discounts: store?.popular_discounts ?? "null",
-    coupon_share_rate: store?.coupon_share_rate ?? "0",
-  };
 
   // Show loading state
   if (isLoading) {
@@ -208,7 +188,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
             store_coupons={store?.coupons}
             store_image={store?.image}
           />
-          <StoreCharts statistics={statistics} storeName={store.slug} />
           {store?.coupon_image && (
             <div className="flex justify-center">
               <div className="relative w-full max-w-[430px] overflow-hidden rounded-lg shadow-md">
