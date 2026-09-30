@@ -136,30 +136,17 @@ const ShowCouponDetails = ({ storeName }: Props) => {
                 </h2>
               </div>
             </div>
-            <div className="w-full bg-white p-5 text-base sm:text-lg md:text-lg lg:text-lg xl:text-xl 2xl:text-3xl text-neutral-800">
-              {coupon?.description &&
-                (storeName === undefined ? (
-                  <>
-                    <h3 className="mb-2.5 font-semibold">{t("Details")}:</h3>
-                    <div
-                      className="prose max-w-none leading-normal"
-                      dangerouslySetInnerHTML={{
-                        __html: secureHtmlLinks(coupon?.description),
-                      }}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <h3 className="mb-2.5 font-semibold">{t("Note")}:</h3>
-                    <div className="prose max-w-none leading-normal text-main-500 text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg 2xl:text-lg">
-                      {t("StoreAnalytics")}
-                      {local === "ar"
-                        ? ` ${storeName?.split("-")[0]}`
-                        : ` ${storeName?.split("-")[1]}`}
-                    </div>
-                  </>
-                ))}
-            </div>
+            {coupon?.description && (
+              <div className="w-full bg-white p-5 text-base sm:text-lg md:text-lg lg:text-lg xl:text-xl 2xl:text-3xl text-neutral-800">
+                <h3 className="mb-2.5 font-semibold">{t("Details")}:</h3>
+                <div
+                  className="prose max-w-none leading-normal"
+                  dangerouslySetInnerHTML={{
+                    __html: secureHtmlLinks(coupon?.description),
+                  }}
+                />
+              </div>
+            )}
 
             <div className="w-[90%] my-6">
               <div
