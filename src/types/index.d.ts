@@ -332,10 +332,9 @@ export type CouponProps = {
   landing_page: couponLandingPageResponse | null;
 };
 
-export type LatestCoupons = {
+export type LatestCouponsType = {
   id: number;
   title: string;
-  description: string;
   image: string;
   store_image: string;
   store_slug: string;
@@ -344,16 +343,11 @@ export type LatestCoupons = {
   url: string;
   discount_value: string;
   store_id: number;
-  views: any;
-  used: any;
-  expire_date: any;
-  order: any;
-  country: any;
   created_at: string;
   updated_at: string;
-  emojis: any[];
   type: string;
   category: any[];
+  landing_page: couponLandingPageResponse | null;
 };
 
 export type InfoItem = {

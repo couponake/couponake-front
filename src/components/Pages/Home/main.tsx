@@ -8,11 +8,9 @@ import dynamic from "next/dynamic";
 import Hero from "./Hero";
 import BestStoresWrapperClientSide from "./BestStoresWrapperClientSide";
 import { useTranslations } from "next-intl";
+import LatestCoupons from "./LatestCoupons";
 
 const StoreCarousel = dynamic(() => import("./StoreCarousel"));
-const TicketCouponWrapperClientSide = dynamic(
-  () => import("./TicketCouponWrapperClientSide"),
-);
 const AdsWrapperClientSide = dynamic(() => import("./AdsWrapperClientSide"));
 const LatestBlogs = dynamic(() => import("./LatestBlogs"));
 
@@ -56,7 +54,7 @@ const Main = ({
         </div>
       ) : null}
 
-      <TicketCouponWrapperClientSide />
+      <LatestCoupons />
       <AdsWrapperClientSide />
       <LatestBlogs />
     </section>
