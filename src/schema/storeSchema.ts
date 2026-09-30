@@ -8,49 +8,6 @@ const stripHtml = (html: string) => {
 const getStructuredDataSchemas = (store: StoreResponse) => {
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
-  const statisticsProperties = [
-    {
-      "@type": "PropertyValue",
-      name: "Love Score",
-      value: `${store?.store?.store_love}%`,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Saved Price",
-      value: `${store?.store?.saved_price} ${store?.store?.currency}`,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Orders Number",
-      value: store?.store?.orders_number,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Total Used Coupons",
-      value: store?.store?.total_used_coupons,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Maximum Coupon Discount",
-      value: store?.max_coupon_discount || "N/A",
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Most Used Coupon",
-      value: store?.max_coupon_used || "N/A",
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Returned Visitors Rate",
-      value: `${store?.returned_visitors}%`,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Most Popular Category",
-      value: store?.popular_category?.category?.name,
-    },
-  ];
-
   const socialLinks = store?.store?.social_links
     ? Object.values(store.store.social_links).filter(
         (link) => typeof link === "string" && link.startsWith("http"),
@@ -88,7 +45,6 @@ const getStructuredDataSchemas = (store: StoreResponse) => {
       bestRating: 5,
       worstRating: 1,
     },
-    additionalProperty: statisticsProperties,
     sameAs: socialLinks,
   };
 

@@ -273,14 +273,6 @@ export type StoreProps = {
   responsible: Responsibile;
   store_table:
     { id: number; code: string; title: string; description: string }[] | [];
-  currency: string;
-  saved_price: string;
-  orders_number: number;
-  store_love: string;
-  total_used_coupons: number;
-  coupon_peak_times: string;
-  popular_discounts: string;
-  coupon_share_rate: string;
 };
 
 export type featuredStores = {
@@ -297,21 +289,6 @@ export type featuredStores = {
     name: string;
     slug: string;
   }[];
-};
-
-export type statisticsType = {
-  store_love: string;
-  currency: string;
-  saved_price: number;
-  orders_number: number;
-  popular_category: { count: number; category: CategoryItem };
-  max_coupon_discount: string;
-  max_coupon_used: string;
-  total_used_coupons: number;
-  returned_visitors: string;
-  coupon_peak_times: string;
-  popular_discounts: string;
-  coupon_share_rate: string;
 };
 
 export type CouponReaction = {
@@ -470,13 +447,12 @@ export type CuratedStoresResponse = {
 export type couponLandingPageSuccess = {
   status: "success";
   data: couponLandingPageResponse;
-}
+};
 
 export type couponLandingPageError = {
   status: "error";
   message: string;
-}
-
+};
 
 export type couponLandingPageResponse = {
   id: number;
@@ -495,9 +471,9 @@ export type couponLandingPageResponse = {
 };
 
 export type couponLandingPageButton = {
-    title: string;
-    url: string;
-    open_in: string;
-    image: null | string;
-    order: number;
-  }
+  title: string;
+  url: string;
+  open_in: string;
+  image: null | string;
+  order: number;
+};
