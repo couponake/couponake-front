@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "cdn.coupoonat.com",
+        hostname: "cdn.couponake.com",
         pathname: "/**",
       },
     ],

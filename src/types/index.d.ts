@@ -355,10 +355,9 @@ export type CouponProps = {
   landing_page: couponLandingPageResponse | null;
 };
 
-export type LatestCoupons = {
+export type LatestCouponsType = {
   id: number;
   title: string;
-  description: string;
   image: string;
   store_image: string;
   store_slug: string;
@@ -367,16 +366,11 @@ export type LatestCoupons = {
   url: string;
   discount_value: string;
   store_id: number;
-  views: any;
-  used: any;
-  expire_date: any;
-  order: any;
-  country: any;
   created_at: string;
   updated_at: string;
-  emojis: any[];
   type: string;
   category: any[];
+  landing_page: couponLandingPageResponse | null;
 };
 
 export type InfoItem = {
@@ -470,13 +464,12 @@ export type CuratedStoresResponse = {
 export type couponLandingPageSuccess = {
   status: "success";
   data: couponLandingPageResponse;
-}
+};
 
 export type couponLandingPageError = {
   status: "error";
   message: string;
-}
-
+};
 
 export type couponLandingPageResponse = {
   id: number;
@@ -495,9 +488,9 @@ export type couponLandingPageResponse = {
 };
 
 export type couponLandingPageButton = {
-    title: string;
-    url: string;
-    open_in: string;
-    image: null | string;
-    order: number;
-  }
+  title: string;
+  url: string;
+  open_in: string;
+  image: null | string;
+  order: number;
+};
