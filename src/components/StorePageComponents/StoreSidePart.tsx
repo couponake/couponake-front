@@ -1,5 +1,8 @@
 "use client";
-import { getContentDirection, secureStoreHtmlLinks } from "@/lib/storeHtmlUtils";
+import {
+  getContentDirection,
+  secureStoreHtmlLinks,
+} from "@/lib/storeHtmlUtils";
 import { BannerItem, CouponProps, InfoItem, StoreProps } from "@/types";
 import { useLocale, useTranslations } from "next-intl";
 import SimilarStores from "./SimilarStores";
@@ -111,18 +114,20 @@ function StoreSidePart({
           })}
         </div>
       )}
-      <aside>
-        <div className="mt-5 border-t-gray-300 border-t">
-          <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
-            {t("Similar Stores")}
-          </p>
-          <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 items-start justify-start gap-1.5 overflow-hidden">
-            {similarStores?.map((store: StoreProps) => (
-              <SimilarStores key={store?.slug} store={store} />
-            ))}
+      {similarStores?.length > 0 && (
+        <aside>
+          <div className="mt-5 border-t-gray-300 border-t">
+            <p className="font-semibold text-gray-700 text-lg mt-3 mb-5">
+              {t("Similar Stores")}
+            </p>
+            <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 items-start justify-start gap-1.5 overflow-hidden">
+              {similarStores?.map((store: StoreProps) => (
+                <SimilarStores key={store?.slug} store={store} />
+              ))}
+            </div>
           </div>
-        </div>
-      </aside>
+        </aside>
+      )}
       {storeBanners?.some((banner) => banner?.location === "side_part") && (
         <Hero
           carouselItemClassName="basis-full md:basis-full lg:basis-full"

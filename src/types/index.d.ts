@@ -270,7 +270,6 @@ export type StoreProps = {
   coupons: CouponProps[];
   social_links: string | [];
   category?: { id: number; name: string; slug: string }[];
-  responsible: Responsibile;
   store_table:
     { id: number; code: string; title: string; description: string }[] | [];
 };

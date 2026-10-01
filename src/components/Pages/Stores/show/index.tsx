@@ -1,7 +1,6 @@
 "use client";
 import ShowCouponDetails from "@/components/Modals/ShowCouponDetails";
 import FAQ from "@/components/Pages/Home/FAQ";
-import Author from "@/components/StorePageComponents/Author";
 import FollowStore from "@/components/StorePageComponents/FollowStore";
 import StoreCoupons from "@/components/StorePageComponents/StoreCoupons";
 import StoreHeader from "@/components/StorePageComponents/StoreHeader";
@@ -10,7 +9,10 @@ import StoreSidePart from "@/components/StorePageComponents/StoreSidePart";
 import { Skeleton } from "@/components/ui/skeleton";
 import useDetectMobile from "@/hooks/useDetectMobile";
 import { useStoreData } from "@/hooks/useStoreData";
-import { getContentDirection, secureStoreHtmlLinks } from "@/lib/storeHtmlUtils";
+import {
+  getContentDirection,
+  secureStoreHtmlLinks,
+} from "@/lib/storeHtmlUtils";
 import ScrollTracker from "@/services/ScrollPageAnalytics";
 import { InfoItem } from "@/types";
 import { Button } from "@heroui/button";
@@ -22,6 +24,7 @@ import styles from "@/styles/htmlTablesScroll.module.css";
 import Image from "next/image";
 
 import Hero from "../../Home/Hero";
+import { Sparkles } from "lucide-react";
 
 declare module "react-window";
 
@@ -121,7 +124,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
       <ScrollTracker event_name={`${store?.slug}_page_depth`} />
       <ShowCouponDetails storeName={store?.store_name} />
       <FollowStore links={store?.social_links} storeName={store?.slug} />
-      <Author author={store?.responsible} storeName={store?.slug} />
       <StoreHeader
         store_id={store.id as number}
         store_slug={store.slug}
@@ -147,6 +149,10 @@ const ShowStore = ({ slug }: { slug: string }) => {
             isMobile={isMobile}
             t={t}
           />
+          <div className="w-full h-fit text-xs bg-white/75 p-4 rounded-lg flex items-center justify-start gap-2">
+            <Sparkles className="h-4 w-4 text-emerald-600" />
+            <p>{t("storeReviewdByCouponakTeam")}</p>
+          </div>
           {store?.description && (
             <div
               className="prose max-w-none mb-5"
@@ -170,9 +176,6 @@ const ShowStore = ({ slug }: { slug: string }) => {
           )}
           {store?.about_store && (
             <div className="space-y-5 my-10">
-              {/* <h2 className="text-lg md:text-2xl font-semibold text-neutral-900 sm:text-xl">
-                {t("About The store")} {": " + store?.store_name}
-              </h2> */}
               <div className="w-full h-fit bg-white rounded-md p-4 border-1">
                 <div className="overflow-x-auto overflow-y-hidden px-1 w-full">
                   <div
@@ -223,7 +226,9 @@ const ShowStore = ({ slug }: { slug: string }) => {
                 return (
                   <div
                     key={info.id}
-                    dir={getContentDirection(cleanDesc2.map((item) => item.content).join(" "))}
+                    dir={getContentDirection(
+                      cleanDesc2.map((item) => item.content).join(" "),
+                    )}
                     className="overflow-x-auto overflow-y-hidden h-fit bg-white rounded-md p-4 border-1"
                   >
                     {cleanDesc2.map((item, idx) => (
