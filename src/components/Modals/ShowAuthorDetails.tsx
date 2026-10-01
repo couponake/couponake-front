@@ -1,6 +1,6 @@
 "use client";
 import { Drawer, DrawerContent, DrawerTitle } from '@/components/ui/drawer';
-import { Responsibile } from '@/types';
+import { ResponsibleType } from '@/types';
 import { Button } from '@heroui/button';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
 import { X } from 'lucide-react';
@@ -11,7 +11,7 @@ import React from 'react';
 import { Rate } from '../ui/rate';
 
 interface authorProps {
-  author: Responsibile;
+  author: ResponsibleType;
   openDrawer: boolean;
   onClose: () => void;
 }

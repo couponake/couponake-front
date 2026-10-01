@@ -25,7 +25,7 @@ export interface Blog {
   content_updated_at?: string; // real last content change (API)
   rate: string;
   voters: number;
-  responsible: responsibile;
+  responsible: ResponsibleType;
   review: {
     id: number;
     created_by: User | null;
@@ -50,7 +50,7 @@ export interface Blog {
   };
 }
 
-export type Responsibile = {
+export type ResponsibleType = {
   id: number;
   name: string;
   image: string;
@@ -270,7 +270,6 @@ export type StoreProps = {
   coupons: CouponProps[];
   social_links: string | [];
   category?: { id: number; name: string; slug: string }[];
-  responsible: Responsibile;
   store_table:
     { id: number; code: string; title: string; description: string }[] | [];
 };
