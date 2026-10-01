@@ -206,7 +206,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
           {store_infos?.length > 0 && (
             <div className="space-y-5 pt-5">
               <p className="font-bold text-gray-700 text-lg">
-                {t("aboutStore")} {" " + store_name_lang}
+                {t("aboutStore")} {" " + store?.keywords}
               </p>
               {store_infos?.map((info: InfoItem) => {
                 // 1. Ensure it's an array, then filter out empty/null content
