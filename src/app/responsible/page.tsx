@@ -1,17 +1,17 @@
 'use client'
 import { Rate } from '@/components/ui/rate';
 import { secureHtmlLinks } from '@/lib/htmlUtils';
-import { Responsibile } from '@/types';
+import { ResponsibleType } from '@/types';
 import { Spinner } from '@heroui/spinner';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-function Responsible() {
+function ResponsiblePage() {
     const locale = useLocale();
     const t = useTranslations();
-    const [responsible, setResponsible] = React.useState<Responsibile>({} as Responsibile);
+    const [responsible, setResponsible] = React.useState<ResponsibleType>({} as ResponsibleType);
     const [rating, setRating] = useState<number>(0);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -105,4 +105,4 @@ function Responsible() {
     )
 }
 
-export default Responsible
+export default ResponsiblePage
