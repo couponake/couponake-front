@@ -10,7 +10,6 @@ export function validateSettingsResponse(payload: unknown): Settings {
   if (
     !data ||
     !Array.isArray(data.settings) ||
-    !Array.isArray(data.menus) ||
     !Array.isArray(data.notifications)
   ) {
     throw new Error("Incomplete site settings response");

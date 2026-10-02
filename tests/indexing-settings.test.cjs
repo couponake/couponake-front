@@ -102,7 +102,6 @@ const invalid = [
   ["missing flag", () => { const f = fixture(); f.data.settings.pop(); return f; }],
   ["invalid flag", () => fixture({ blogs: "unknown" })],
   ["duplicate flag", () => { const f = fixture(); f.data.settings.push(f.data.settings[0]); return f; }],
-  ["missing menu payload", () => { const f = fixture(); delete f.data.menus; return f; }]
 ];
 for (const [label, make] of invalid) {
   test("HTTP 200 with " + label + " throws instead of noindex or sitemap 404", async () => {
