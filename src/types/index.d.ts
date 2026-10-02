@@ -359,15 +359,6 @@ export type InfoItem = {
   updated_at: string; // ISO 8601 formatted date string
 };
 
-export type MenuItem = {
-  id: number;
-  title: string;
-  url: string;
-  page: string;
-  status: number;
-  created_at: string; // ISO 8601 date string
-  updated_at: string;
-};
 export type HeaderCategory = {
   id: number;
   name: string;
@@ -407,7 +398,6 @@ export type SettingsResponse = {
 };
 
 export type Settings = {
-  menus: MenuItem[];
   settings: SettingsItem[];
   notifications: NotificationProps[];
 };

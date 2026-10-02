@@ -7,9 +7,6 @@ import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
 
 const Footer = dynamic(() => import("@/components/Footer/Footer"));
-const StickyMenu = dynamic(
-  () => import("@/components/HomePageComponents/StickyMenu"),
-);
 const FollowUs = dynamic(
   () => import("@/components/HomePageComponents/FollowUs"),
 );
@@ -43,7 +40,6 @@ const HomeLayout = async ({
       >
         <Suspense>
           <FollowUs settings={safeSettings?.settings} />
-          <StickyMenu menus={safeSettings?.menus} />
           <ImagePopUp settings={safeSettings?.settings} />
           <CookieConsent />
         </Suspense>
