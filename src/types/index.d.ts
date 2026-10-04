@@ -25,7 +25,6 @@ export interface Blog {
   content_updated_at?: string; // real last content change (API)
   rate: string;
   voters: number;
-  responsible: ResponsibleType;
   review: {
     id: number;
     created_by: User | null;
@@ -49,20 +48,6 @@ export interface Blog {
     "og:image": string;
   };
 }
-
-export type ResponsibleType = {
-  id: number;
-  name: string;
-  image: string;
-  rate: string;
-  short_content: string;
-  long_content: string;
-  articles_number: number;
-  experience_years: number;
-  created_at: string;
-  updated_at: string;
-};
-
 export type User = {
   id: number;
   name: string;

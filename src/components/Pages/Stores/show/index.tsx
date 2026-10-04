@@ -151,7 +151,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
           />
           <div className="w-full h-fit text-xs bg-white/75 p-4 rounded-lg flex items-center justify-start gap-2">
             <Sparkles className="h-4 w-4 text-emerald-600" />
-            <p>{t("storeReviewdByCouponakTeam")}</p>
+            <p>{t("reviewdByCouponakTeam")}</p>
           </div>
           {store?.description && (
             <div
