@@ -148,7 +148,7 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
               </Tooltip>
               <div className="flex items-center justify-start gap-2">
                 <Check size={16} />
-                <p>{t("reviewdByCoupoonatTeam")}</p>
+                <p>{t("reviewdByCouponakTeam")}</p>
               </div>
             </div>
           </CardHeader>
