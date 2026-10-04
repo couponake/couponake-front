@@ -2,7 +2,6 @@ import { fetchApi } from "@/lib/api-result";
 import ShowBlog from "@/components/Pages/Blogs/show";
 import { Blog } from "@/types";
 import { notFound, redirect } from "next/navigation";
-import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
@@ -126,11 +125,6 @@ const BlogDetails = async ({
       url: blog?.image || `${baseUrl}noPreview.webp`,
       width: 1200,
       height: 628,
-    },
-    author: {
-      "@type": "Person",
-      name: blog?.responsible?.name || "Anonymous",
-      url: `${baseUrl}${blog.slug}/`,
     },
     publisher: {
       "@type": "Organization",

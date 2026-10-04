@@ -1,26 +1,25 @@
 "use client";
-import ShowAuthorDetails from '@/components/Modals/ShowAuthorDetails';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { toast } from '@/components/ui/custom-toast';
-import { Rate } from '@/components/ui/rate';
-import ScrollTracker from '@/services/ScrollPageAnalytics';
-import api from '@/lib/api';
-import { secureHtmlLinks } from '@/lib/htmlUtils';
-import { useStore } from '@/store';
-import { Blog } from '@/types';
-import { Avatar } from '@heroui/avatar';
-import { Button } from '@heroui/button';
-import { Chip } from '@heroui/chip';
-import { Textarea } from '@heroui/input';
-import { Tooltip } from '@heroui/tooltip';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Calendar, CircleUser, Clock } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import * as yup from 'yup';
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { toast } from "@/components/ui/custom-toast";
+import { Rate } from "@/components/ui/rate";
+import ScrollTracker from "@/services/ScrollPageAnalytics";
+import api from "@/lib/api";
+import { secureHtmlLinks } from "@/lib/htmlUtils";
+import { useStore } from "@/store";
+import { Blog } from "@/types";
+import { Avatar } from "@heroui/avatar";
+import { Button } from "@heroui/button";
+import { Chip } from "@heroui/chip";
+import { Textarea } from "@heroui/input";
+import { Tooltip } from "@heroui/tooltip";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Calendar, Check, Clock } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
 
 // Define validation schema for review form
 const reviewSchema = yup.object({
@@ -55,18 +54,13 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
     },
   });
 
-  const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
-  const openResponsibleDrawer = () => {
-    setIsDrawerOpened(true);
-  };
-
   // Handle form submission
   const onSubmit = async (formData: ReviewFormData) => {
     setIsSubmitting(true);
     try {
       const data = await api.request.post(
         `blogs/${blog?.slug}/review`,
-        formData
+        formData,
       );
       toast.success(data?.message);
       setReviewSubmitted(true);
@@ -79,7 +73,10 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
 
   return (
     <>
-      <ScrollTracker event_name={`${blog.slug}_blog_view`} event_category={`${blog.slug}_Scroll`} />
+      <ScrollTracker
+        event_name={`${blog.slug}_blog_view`}
+        event_category={`${blog.slug}_Scroll`}
+      />
       <main className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Blog Content */}
         <Card className="mb-8 shadow-lg border-none">
@@ -109,7 +106,7 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
                     >
                       {category}
                     </Chip>
-                  )
+                  ),
                 )}
             </div>
             <h1 className="text-3xl md:text-4xl md:leading-[3.5rem] font-bold text-foreground mt-2">
@@ -118,20 +115,30 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
             <div className="w-full flex flex-wrap items-center gap-5 text-sm text-default-500 mt-2">
               <div className="min-w-max flex flex-nowrap items-center gap-1">
                 <Calendar size={16} />
-                <span>{new Date(blog?.created_at).toLocaleDateString(locale === "ar" ? 'ar-SA' : 'en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}</span>
+                <span>
+                  {new Date(blog?.created_at).toLocaleDateString(
+                    locale === "ar" ? "ar-SA" : "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    },
+                  )}
+                </span>
               </div>
               <div className="min-w-max flex flex-nowrap items-center gap-1">
                 <Clock size={16} />
-                <span> {new Date(blog?.created_at).toLocaleTimeString(locale === 'ar' ? 'ar-SA' : 'en-US', {
-                  hour: 'numeric',
-                  minute: 'numeric',
-                  hour12: true,
-                }
-                )}</span>
+                <span>
+                  {" "}
+                  {new Date(blog?.created_at).toLocaleTimeString(
+                    locale === "ar" ? "ar-SA" : "en-US",
+                    {
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: true,
+                    },
+                  )}
+                </span>
               </div>
               <Tooltip content={`${blog?.rate || 0} rating`}>
                 <div className="flex items-center gap-1">
@@ -139,25 +146,18 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
                   <span>({blog?.voters || 0})</span>
                 </div>
               </Tooltip>
-              {
-                blog?.responsible?.name && (
-                  <div
-                    className="flex justify-start items-center gap-2 text-black/50 hover:text-main-500 transition-colors duration-300 cursor-pointer"
-                    onClick={openResponsibleDrawer}
-                  >
-                    <CircleUser size={16} />
-                    <p className="text-sm">
-                      {t("Author")}{":"}{blog?.responsible?.name}
-                    </p>
-                  </div>
-                )
-              }
+              <div className="flex items-center justify-start gap-2">
+                <Check size={16} />
+                <p>{t("reviewdByCouponakTeam")}</p>
+              </div>
             </div>
           </CardHeader>
           <CardContent className="px-6 py-4">
             <div
               className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-img:rounded-xl prose-img:shadow-lg transition-all duration-300"
-              dangerouslySetInnerHTML={{ __html: secureHtmlLinks(blog?.content as string) }}
+              dangerouslySetInnerHTML={{
+                __html: secureHtmlLinks(blog?.content as string),
+              }}
             />
           </CardContent>
         </Card>
@@ -184,11 +184,14 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
                               {review?.created_by?.name || "Anonymous"}
                             </p>
                             <p className="text-xs text-default-500">
-                              {new Date(review.created_at).toLocaleDateString(locale === "ar" ? 'ar-SA' : 'en-US', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric',
-                              })}
+                              {new Date(review.created_at).toLocaleDateString(
+                                locale === "ar" ? "ar-SA" : "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                },
+                              )}
                             </p>
                           </div>
                           <Rate
@@ -254,7 +257,7 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
                     render={({ field }) => (
                       <Textarea
                         {...field}
-                        value={field.value ?? ''}
+                        value={field.value ?? ""}
                         minRows={3}
                         variant="bordered"
                         className="w-full"
@@ -296,14 +299,6 @@ const ShowBlog = ({ blog }: { blog: Blog }) => {
               </p>
             </CardContent>
           </Card>
-        )}
-
-        {isDrawerOpened && (
-          <ShowAuthorDetails
-            author={blog?.responsible}
-            openDrawer={isDrawerOpened}
-            onClose={() => setIsDrawerOpened(!isDrawerOpened)}
-          />
         )}
       </main>
     </>
