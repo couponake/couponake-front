@@ -1,3 +1,5 @@
+import { secureAnchorTags } from "./htmlUtils";
+
 export const getContentDirection = (html: string): "rtl" | "ltr" => {
   // إزالة الـ HTML tags
   const text = html.replace(/<[^>]*>/g, "").trim();
@@ -61,59 +63,7 @@ export function secureStoreHtmlLinks(htmlContent: string): string {
     },
   );
 
-  // 3. Regular expression to find all anchor tags
-  const anchorTagRegex = /<a([^>]*)>/gi;
-
-  return htmlContent.replace(anchorTagRegex, (match, attributes) => {
-    const hasReferrerPolicy = /referrerPolicy\s*=\s*["']no-referrer["']/i.test(
-      attributes,
-    );
-    const hasTargetBlank = /target\s*=\s*["']_blank["']/i.test(attributes);
-
-    let newAttributes = attributes;
-
-    // Add referrerPolicy if not present
-    if (!hasReferrerPolicy) {
-      newAttributes += ' referrerPolicy="no-referrer"';
-    }
-
-    // Add target="_blank" if not present
-    if (!hasTargetBlank) {
-      newAttributes += ' target="_blank"';
-    }
-
-    // Handle rel attribute based on URL content
-    const hrefMatch = /href\s*=\s*["']([^"']+)["']/i.exec(newAttributes);
-    let shouldFollow = false;
-
-    if (hrefMatch) {
-      const originalHref = hrefMatch[1];
-      shouldFollow = originalHref.startsWith("https://couponake.com/");
-
-      try {
-        const url = new URL(originalHref);
-        if (!url.pathname.endsWith("/")) {
-          url.pathname += "/";
-        }
-        const encodedHref = url.toString();
-        newAttributes = newAttributes.replace(
-          hrefMatch[0],
-          `href="${encodedHref}"`,
-        );
-      } catch {
-        // Keep original href if parsing fails
-      }
-    }
-
-    const relValue = shouldFollow ? "follow" : "nofollow";
-    const relMatch = /rel\s*=\s*["']([^"']*)["']/i.exec(attributes);
-
-    if (relMatch) {
-      newAttributes = newAttributes.replace(relMatch[0], `rel="${relValue}"`);
-    } else {
-      newAttributes += ` rel="${relValue}"`;
-    }
-
-    return `<a${newAttributes}>`;
-  });
+  // 3. Links: same rules as secureHtmlLinks — internal links (couponake.com or "/...") stay in the same tab,
+  //    keep the referrer and are followed; external links get no-referrer, _blank and nofollow.
+  return secureAnchorTags(htmlContent);
 }

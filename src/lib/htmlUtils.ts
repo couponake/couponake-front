@@ -52,6 +52,16 @@ export function secureHtmlLinks(htmlContent: string): string {
     return `<div>${match}</div>`;
   });
 
+  return secureAnchorTags(htmlContent);
+}
+
+/**
+ * Anchor-only part of secureHtmlLinks (no table wrapping), shared with the store page renderer
+ * (secureStoreHtmlLinks) so every content block treats internal and external links the same way.
+ */
+export function secureAnchorTags(htmlContent: string): string {
+  if (!htmlContent) return htmlContent;
+
   // Regular expression to find all anchor tags
   const anchorTagRegex = /<a(\s[^>]*)?>/gi;
 
