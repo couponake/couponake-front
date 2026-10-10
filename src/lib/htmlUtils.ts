@@ -1,11 +1,44 @@
 /**
  * Utility functions for handling HTML content with security enhancements
  */
+
+const SITE_ORIGIN = "https://couponake.com";
+
 /**
- * Adds security attributes to all anchor tags in HTML content
- * - referrerPolicy="no-referrer" to prevent referrer information leakage
- * - rel="follow" if URL starts with "https://couponake.com/", otherwise "nofollow"
- * - target="_blank" to open links in a new tab
+ * Internal link = absolute URL on https://couponake.com or a root-relative path ("/store/x/").
+ */
+function isInternalHref(href: string): boolean {
+  if (href.startsWith("//")) return false;
+  if (href.startsWith("/")) return true;
+  return href === SITE_ORIGIN || href.startsWith(`${SITE_ORIGIN}/`);
+}
+
+/**
+ * Normalizes an internal href to an absolute https://couponake.com URL whose path ends with "/".
+ */
+function normalizeInternalHref(href: string): string {
+  try {
+    const url = new URL(href, `${SITE_ORIGIN}/`);
+    if (!url.pathname.endsWith("/")) {
+      url.pathname += "/";
+    }
+    return url.toString();
+  } catch {
+    return href;
+  }
+}
+
+/**
+ * Adds security attributes to anchor tags in HTML content.
+ *
+ * Internal links (https://couponake.com/... or "/..."):
+ *   - normalized to an absolute https://couponake.com URL ending with "/"
+ *   - opened in the same tab (no target="_blank"), referrer kept, no rel attribute (followed)
+ *
+ * External links:
+ *   - referrerPolicy="no-referrer", target="_blank", rel="nofollow"
+ *
+ * Tables are wrapped in a <div> for horizontal scrolling.
  *
  * @param htmlContent The original HTML content
  * @returns HTML content with security attributes added to anchor tags
@@ -20,65 +53,52 @@ export function secureHtmlLinks(htmlContent: string): string {
   });
 
   // Regular expression to find all anchor tags
-  const anchorTagRegex = /<a([^>]*)>/gi;
+  const anchorTagRegex = /<a(\s[^>]*)?>/gi;
 
-  return htmlContent.replace(anchorTagRegex, (match, attributes) => {
-    const hasReferrerPolicy = /referrerPolicy\s*=\s*["']no-referrer["']/i.test(
-      attributes,
-    );
-    const hasTargetBlank = /target\s*=\s*["']_blank["']/i.test(attributes);
+  return htmlContent.replace(anchorTagRegex, (match, attrs) => {
+    const attributes: string = attrs ?? "";
+    const hrefMatch = /href\s*=\s*["']([^"']+)["']/i.exec(attributes);
+    const href = hrefMatch ? hrefMatch[1].trim() : "";
 
+    if (hrefMatch && isInternalHref(href)) {
+      // Internal link: same tab, keep referrer, followed
+      let internal = attributes
+        .replace(/\s*target\s*=\s*["'][^"']*["']/gi, "")
+        .replace(/\s*referrerPolicy\s*=\s*["'][^"']*["']/gi, "")
+        .replace(/\s*rel\s*=\s*["'][^"']*["']/gi, "");
+      internal = internal.replace(
+        /href\s*=\s*["'][^"']+["']/i,
+        `href="${normalizeInternalHref(href)}"`,
+      );
+      return `<a${internal}>`;
+    }
+
+    // External link (unchanged behaviour)
     let newAttributes = attributes;
 
-    // Add referrerPolicy if not present
-    if (!hasReferrerPolicy) {
+    if (!/referrerPolicy\s*=\s*["']no-referrer["']/i.test(attributes)) {
       newAttributes += ' referrerPolicy="no-referrer"';
     }
-
-    // Add target="_blank" if not present
-    if (!hasTargetBlank) {
+    if (!/target\s*=\s*["']_blank["']/i.test(attributes)) {
       newAttributes += ' target="_blank"';
     }
-
-    // Handle rel attribute based on URL content
-    const hrefMatch = /href\s*=\s*["']([^"']+)["']/i.exec(newAttributes);
-    let shouldFollow = false;
-
     if (hrefMatch) {
-      const originalHref = hrefMatch[1];
-
-      // UPDATED: Check if URL exactly starts with "https://couponake.com/"
-      shouldFollow = originalHref.startsWith("https://couponake.com/");
-
-      // Clean and modify URL
       try {
-        const url = new URL(originalHref);
-
+        const url = new URL(href);
         if (!url.pathname.endsWith("/")) {
           url.pathname += "/";
         }
-        url.pathname = url.pathname;
-        const encodedHref = url.toString();
-        newAttributes = newAttributes.replace(
-          hrefMatch[0],
-          `href="${encodedHref}"`,
-        );
+        newAttributes = newAttributes.replace(hrefMatch[0], `href="${url.toString()}"`);
       } catch {
-        // If it's a malformed URL (e.g., relative), still relies on the startsWith check above
-        // Keep the original href
+        // Malformed or non-http URL (mailto:, tel:, #anchor): keep the original href
       }
     }
 
-    // Set rel attribute based on whether URL starts with "https://couponake.com/"
-    const relValue = shouldFollow ? "follow" : "nofollow";
     const relMatch = /rel\s*=\s*["']([^"']*)["']/i.exec(attributes);
-
     if (relMatch) {
-      // Replace existing rel attribute
-      newAttributes = newAttributes.replace(relMatch[0], `rel="${relValue}"`);
+      newAttributes = newAttributes.replace(relMatch[0], 'rel="nofollow"');
     } else {
-      // Add new rel attribute
-      newAttributes += ` rel="${relValue}"`;
+      newAttributes += ' rel="nofollow"';
     }
 
     return `<a${newAttributes}>`;
