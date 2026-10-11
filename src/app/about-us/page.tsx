@@ -1,7 +1,8 @@
 import React from "react";
 import api from "@/lib/api";
 import { secureHtmlLinks } from "@/lib/htmlUtils";
-import type { Article, BreadcrumbList } from "schema-dts";
+import JsonLd from "@/components/shared/JsonLd";
+import { HOME_CRUMB, ORG_ID, SITE_URL, breadcrumbNode, buildGraph, ref, webPageNode } from "@/lib/structured-data";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
@@ -50,52 +51,25 @@ const AboutUsPage = async () => {
     title: string;
     content: string;
     created_at?: string;
+    updated_at?: string;
   };
+  // The visible date and dateModified use updated_at (last real content edit).
+  // created_at on these rows predates Couponake (rows were carried over and
+  // rewritten on 2026-09-29), so showing it would be wrong.
+  const shownDate = page.updated_at || page.created_at;
   const locale = "ar"; // site renders in Arabic only (static)
 
-  const articleSchema: Article = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: page.title,
-    description: "تعرف على رؤيتنا وفريق الخبراء وراء أفضل كوبونات الشراء",
-    image: "https://couponake.com/couponak-logo.svg",
-    author: {
-      "@type": "Organization",
-      name: "كوبوناك",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "كوبوناك",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://couponake.com/couponak-logo.svg",
-      },
-    },
-    datePublished: page.created_at,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/`,
-    },
-  } as Article & { "@context": string };
-
-  const breadcrumbSchema: BreadcrumbList = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "الرئيسية",
-        item: process.env.NEXT_PUBLIC_WEBSITE_URL || "https://example.com",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: page.title,
-        item: `${process.env.NEXT_PUBLIC_WEBSITE_URL}about-us/`,
-      },
-    ],
-  } as BreadcrumbList & { "@context": string };
+  const pageUrl = `${SITE_URL}about-us/`;
+  const graph = buildGraph([
+    webPageNode({
+      type: "AboutPage",
+      url: pageUrl,
+      name: page.title,
+      dateModified: page.updated_at,
+      extra: { about: ref(ORG_ID), mainEntity: ref(ORG_ID) },
+    }),
+    breadcrumbNode(pageUrl, [HOME_CRUMB, { name: page.title, url: pageUrl }]),
+  ]);
 
   return (
     <main className="container mx-auto px-4 py-8 animate-fadeIn">
@@ -104,9 +78,9 @@ const AboutUsPage = async () => {
           <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white tracking-tight">
             {page.title}
           </h1>
-          {page.created_at && (
+          {shownDate && (
             <div className="text-sm text-gray-500 dark:text-gray-400 mb-8">
-              {new Date(page.created_at).toLocaleDateString(
+              {new Date(shownDate).toLocaleDateString(
                 locale === 'ar' ? 'ar-SA' : 'en-US',
                 {
                   year: 'numeric',
@@ -124,14 +98,7 @@ const AboutUsPage = async () => {
           />
         </div>
       </article>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <JsonLd data={graph} />
     </main>
   );
 };

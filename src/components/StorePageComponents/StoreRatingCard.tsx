@@ -31,16 +31,21 @@ function StoreRatingCard({
       <Card className="relative overflow-hidden max-sm:mt-4 border-none shadow-md rounded-full">
         <CardContent className="p-0">
           <div className="flex items-center justify-between p-2">
-            <div className="flex items-center gap-2">
-              <StarIcon className="text-yellow-400 fill-yellow-400 w-5 h-5" />
-              <span className="text-black font-medium">
-                {Math.round(Number(store_rate))}
-                <span className="text-black">/5</span>
-              </span>
-              <span className="text-black text-sm">
-                ({store_voters} {t("Votes")})
-              </span>
-            </div>
+            {/* Rating shown only when real visitors have voted (no default "1/5 (1 vote)"). */}
+            {Number(store_voters) > 0 ? (
+              <div className="flex items-center gap-2">
+                <StarIcon className="text-yellow-400 fill-yellow-400 w-5 h-5" />
+                <span className="text-black font-medium">
+                  {Number(store_rate).toFixed(1)}
+                  <span className="text-black">/5</span>
+                </span>
+                <span className="text-black text-sm">
+                  ({store_voters} {t("Votes")})
+                </span>
+              </div>
+            ) : (
+              <div />
+            )}
             <div className="flex items-center gap-2">
               <RateThisComponent
                 title={`${t("Rate")} ${store_title ?? ""}`}

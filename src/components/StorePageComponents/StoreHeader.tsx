@@ -46,12 +46,13 @@ function StoreHeader({ store_id, store_slug, store_image, store_title, isMobile,
                   {store_title}
                 </h1>
                 <div className="w-fit flex items-center gap-2">
-                  {!isMobile && (
+                  {/* Rating shown only when real visitors have voted (no default "1/5 (1 vote)"). */}
+                  {!isMobile && Number(store_voters) > 0 && (
                     <>
                       <div className="flex items-center gap-2">
                         <StarIcon className="text-yellow-400 fill-yellow-400 w-5 h-5" />
                         <span className="text-white font-medium">
-                          {Math.round(Number(store_rate))}
+                          {Number(store_rate).toFixed(1)}
                           <span className="text-white">/5</span>
                         </span>
                         <span className="text-white text-sm">

@@ -2,6 +2,8 @@ import ContactUsPage from '@/components/Pages/ContactUsPage';
 import React from 'react';
 import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { SettingsEnum } from '@/types/settingsEnum';
+import JsonLd from '@/components/shared/JsonLd';
+import { HOME_CRUMB, ORG_ID, SITE_URL, breadcrumbNode, buildGraph, ref, webPageNode } from '@/lib/structured-data';
 
 export async function generateMetadata() {
   const locale = "ar"; // site renders in Arabic only (static)
@@ -43,8 +45,27 @@ export async function generateMetadata() {
   };
 }
 
+// JSON-LD is rendered here (server) instead of inside the client form
+// component, so it is in the initial HTML.
 const ContactPage = async () => {
-  return <ContactUsPage />;
+  const pageUrl = `${SITE_URL}contact/`;
+  const graph = buildGraph([
+    webPageNode({
+      type: "ContactPage",
+      url: pageUrl,
+      name: "تواصل معنا: كود لم يعمل أو متجر تريد إضافته",
+      description:
+        "أبلغنا عن كود توقف، اقترح متجرًا، أو راسلنا للشراكات. نرد خلال يوم عمل على البريد أو النموذج.",
+      extra: { about: ref(ORG_ID) },
+    }),
+    breadcrumbNode(pageUrl, [HOME_CRUMB, { name: "تواصل معنا", url: pageUrl }]),
+  ]);
+  return (
+    <>
+      <JsonLd data={graph} />
+      <ContactUsPage />
+    </>
+  );
 };
 
 export default ContactPage;

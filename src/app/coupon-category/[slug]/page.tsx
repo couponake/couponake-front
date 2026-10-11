@@ -6,6 +6,8 @@ import { notFound, redirect } from "next/navigation";
 import { connection } from "next/server";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
+import JsonLd from "@/components/shared/JsonLd";
+import { HOME_CRUMB, SITE_URL, absoluteUrl, breadcrumbNode, buildGraph, ref, storeItemList, stripBrandSuffix, webPageNode } from "@/lib/structured-data";
 
 // Keep redirects out of Full Route Cache (Next.js #82117). The public data
 // loader still caches validated anonymous data for 300 seconds. connection()
@@ -94,80 +96,35 @@ const ShowCouponCategoryPage = async ({
   }
 
   const category: any = response.data;
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
   const categoryData = category.category as CategoryItem;
 
-  const graph = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "الرئيسية",
-            item: baseUrl,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: categoryData?.category_seo?.title,
-            item: `${baseUrl}coupon-category/${slug}/`,
-          },
-        ],
-      },
-      {
-        "@type": "Organization",
-        name: "كوبوناك",
-        url: baseUrl,
-        logo: {
-          "@type": "ImageObject",
-          url: `${baseUrl}couponak-logo.svg`,
-        },
-      },
-      {
-        "@type": "WebPage",
-        name: categoryData?.category_seo?.title,
-        description: categoryData?.category_seo?.description,
-        url: `${baseUrl}coupon-category/${slug}/`,
-        sameAs: `${baseUrl}coupon-category/${slug}/`,
-        isPartOf: {
-          "@type": "WebSite",
-          name: "كوبوناك",
-          url: baseUrl,
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "كوبوناك",
-          logo: {
-            "@type": "ImageObject",
-            url: `${baseUrl}couponak-logo.svg`,
-          },
-        },
-        mainEntity: {
-          "@type": "CollectionPage",
-          name: categoryData?.category_seo?.title,
-          hasPart: categoryData?.stores
-            ?.slice(0, 5)
-            ?.map((store: any, index: number) => ({
-              "@type": "webPage",
-              name: store.store_name,
-              url: `${baseUrl}store/${store.slug}/`,
-              identifier: store.id,
-              position: index + 1,
-            })),
-        },
-      },
-    ],
-  };
+  const pageUrl = absoluteUrl(`coupon-category/${slug}/`);
+  const categoryName =
+    categoryData?.name || stripBrandSuffix(categoryData?.category_seo?.title);
+  const itemList = storeItemList(`${pageUrl}#list`, categoryData?.stores ?? []);
+
+  // CollectionPage (title/description = this page's SEO meta) listing the
+  // category's stores; the old nested WebPage › CollectionPage with an invalid
+  // "webPage" type was replaced.
+  const graph = buildGraph([
+    webPageNode({
+      type: "CollectionPage",
+      url: pageUrl,
+      name: stripBrandSuffix(categoryData?.category_seo?.title) || categoryName,
+      description: categoryData?.category_seo?.description,
+      extra: itemList ? { mainEntity: ref(`${pageUrl}#list`) } : undefined,
+    }),
+    ...(itemList ? [itemList] : []),
+    breadcrumbNode(pageUrl, [
+      HOME_CRUMB,
+      { name: "الفئات", url: `${SITE_URL}categories/` },
+      { name: categoryName, url: pageUrl },
+    ]),
+  ]);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-      />
+      <JsonLd data={graph} />
       <ShowCategory slug={slug} {...category} />
     </>
   );
