@@ -32,7 +32,8 @@ const FAQ = ({
       </div>
 
       <div className="space-y-5">
-        <Accordion variant="splitted">
+        {/* keepContentMounted: answers stay in the HTML (collapsed), matching the FAQ JSON-LD. */}
+        <Accordion variant="splitted" keepContentMounted>
           {faqsToDisplay?.map((faq) => (
             <AccordionItem
               className="rounded-xl"

@@ -6,25 +6,23 @@ import { Button } from '@heroui/button';
 import { Input } from '@heroui/input';
 import { SearchIcon, XIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 const FAQPage = ({ faqs }: { faqs: FaqItem[] }) => {
   const t = useTranslations();
   const [searchQuery, setSearchQuery] = useState("");
-  const [showAll, setShowAll] = useState(false);
-  const [filteredFaqs, setFilteredFaqs] = useState<FaqItem[]>([]);
-
-  useEffect(() => {
-    const filtered = faqs.filter((faq) => {
-      const matchesSearch = faq.question
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
-      return matchesSearch;
-    });
-    setFilteredFaqs(filtered);
-  }, [searchQuery, faqs]);
-
-  const faqsToDisplay = showAll ? filteredFaqs : filteredFaqs.slice(0, 8);
+  // Derived during render (not in an effect) so the server HTML already lists
+  // every question: before, the first render had an empty list and showed the
+  // "no FAQs found" message until JavaScript ran, while the FAQPage JSON-LD
+  // listed the questions. All questions are rendered (no 8-item cut) so the
+  // page shows exactly what the structured data declares.
+  const filteredFaqs = useMemo(
+    () =>
+      faqs.filter((faq) =>
+        faq.question.toLowerCase().includes(searchQuery.toLowerCase()),
+      ),
+    [searchQuery, faqs],
+  );
 
   return (
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white -mt-5">
@@ -62,8 +60,8 @@ const FAQPage = ({ faqs }: { faqs: FaqItem[] }) => {
           </div>
 
           <div className="max-w-3xl mx-auto">
-            <Accordion variant="splitted" className="space-y-4">
-              {faqsToDisplay.map((faq) => (
+            <Accordion variant="splitted" className="space-y-4" keepContentMounted>
+              {filteredFaqs.map((faq) => (
                 <AccordionItem
                   key={faq.id}
                   aria-label={faq.question}
@@ -79,17 +77,6 @@ const FAQPage = ({ faqs }: { faqs: FaqItem[] }) => {
                 </AccordionItem>
               ))}
             </Accordion>
-
-            {filteredFaqs.length > 5 && (
-              <div className="text-center mt-8">
-                <Button
-                  className="gradient-btn"
-                  onPress={() => setShowAll(!showAll)}
-                >
-                  {showAll ? t("View less") : t("View more")}
-                </Button>
-              </div>
-            )}
 
             {filteredFaqs.length === 0 && (
               <div className="text-center py-8">
