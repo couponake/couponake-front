@@ -4,6 +4,8 @@ import { FaqItem } from '@/types';
 import React from 'react';
 import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { SettingsEnum } from '@/types/settingsEnum';
+import JsonLd from '@/components/shared/JsonLd';
+import { HOME_CRUMB, SITE_URL, breadcrumbNode, buildGraph, plainText, webPageNode } from '@/lib/structured-data';
 
 export async function generateMetadata() {
   const locale = "ar"; // site renders in Arabic only (static)
@@ -47,47 +49,33 @@ export async function generateMetadata() {
 
 const FAQ = async () => {
   const data: { data: FaqItem[] } = await api.static("home/faqs", 3600);
-  const FAQSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/#faqpage`,
-    name: "الاسئلة المتكررة: كل اسئلة العملاء والاجابة عليها هنا",
-    description: "اليكم جميع ما يسال عنه العملاء المهتمين باكواد الخصم والكوبونات وعروض المتاجر في الشرق الاوسط مع الاجابات الصحيحة لها",
-    url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}faq/`,
-    image: "https://couponake.com/couponak-logo.svg",
-    publisher: {
-      "@type": "Organization",
-      name: "كوبوناك",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://couponake.com/couponak-logo.svg",
-      },
-    },
-    mainEntity: data?.data.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer.replace(/<[^>]+>/g, ""),
-        dateCreated: new Date().toISOString(),
-      },
-      author: {
-        "@type": "Organization",
-        name: "كوبوناك",
-      },
-    })),
-  };
+  // Markup = exactly the questions the page shows (site-wide FAQs only). With
+  // no questions the page is a plain WebPage: an empty FAQPage is invalid.
+  const faqs = Array.isArray(data?.data)
+    ? data.data.filter((faq) => faq.store_id === null)
+    : [];
+  const pageUrl = `${SITE_URL}faq/`;
+  const graph = buildGraph([
+    webPageNode({
+      type: faqs.length ? "FAQPage" : "WebPage",
+      url: pageUrl,
+      name: "أسئلة شائعة: لماذا لا يعمل الكود؟ وكيف تستخدمه",
+      extra: faqs.length
+        ? {
+            mainEntity: faqs.map((faq) => ({
+              "@type": "Question",
+              name: plainText(faq.question),
+              acceptedAnswer: { "@type": "Answer", text: plainText(faq.answer) },
+            })),
+          }
+        : undefined,
+    }),
+    breadcrumbNode(pageUrl, [HOME_CRUMB, { name: "الأسئلة الشائعة", url: pageUrl }]),
+  ]);
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQSchema) }}
-      />
-      <FAQPage
-        faqs={
-          data?.data ? data?.data.filter((faq) => faq.store_id === null) : []
-        }
-      />
+      <JsonLd data={graph} />
+      <FAQPage faqs={faqs} />
     </>
   );
 };

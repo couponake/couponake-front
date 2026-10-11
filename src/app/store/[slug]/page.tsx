@@ -2,6 +2,7 @@ import ShowStore from "@/components/Pages/Stores/show";
 import { StoreResponse } from "@/hooks/useStoreData";
 import { api } from "@/lib/MyAxios";
 import getStructuredDataSchemas from "@/schema/storeSchema";
+import JsonLd from "@/components/shared/JsonLd";
 import {
   dehydrate,
   HydrationBoundary,
@@ -235,7 +236,6 @@ const ShowStorePage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const slug = (await params).slug;
-  let schemas: any = [];
 
   const queryClient = new QueryClient();
 
@@ -254,7 +254,7 @@ const ShowStorePage = async ({
   }
 
   const storeData = result.data;
-  schemas = getStructuredDataSchemas(storeData);
+  const schemas = getStructuredDataSchemas(storeData);
 
   await queryClient.prefetchQuery({
     queryKey: ["store", slug],
@@ -263,12 +263,7 @@ const ShowStorePage = async ({
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas),
-        }}
-      />
+      <JsonLd data={schemas} />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ShowStore slug={slug} />
       </HydrationBoundary>

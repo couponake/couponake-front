@@ -1,127 +1,96 @@
 import { StoreResponse } from "@/hooks/useStoreData";
+import {
+  HOME_CRUMB,
+  SITE_URL,
+  absoluteUrl,
+  breadcrumbNode,
+  buildGraph,
+  plainText,
+  ref,
+  stripBrandSuffix,
+  webPageNode,
+} from "@/lib/structured-data";
 
-const stripHtml = (html: string) => {
-  if (!html) return "";
-  return html.replace(/<[^>]*>/g, "").trim();
+/**
+ * Store (coupon) page structured data — one @graph:
+ *   ItemPage (+ FAQPage when the page shows FAQs) → about → OnlineStore (the brand)
+ *   BreadcrumbList: الرئيسية › المتاجر › <store>
+ *
+ * Deliberately NOT emitted (decision 2026-10-11, see Couponak memory log):
+ * - `Store`: a LocalBusiness subtype (physical shop). The brands are online
+ *   shops → `OnlineStore` (Google Organization docs recommend it for ecommerce).
+ * - `AggregateRating`: there are no genuine user votes yet; the old markup
+ *   printed the DB default (1/5 from 1 vote). Stars are switched off until a
+ *   real, de-duplicated voting system exists.
+ * - `Offer` per coupon: no Google coupon rich result, no schema.org coupon type,
+ *   and Couponake publishes no expiry dates (a dead code is replaced).
+ */
+
+const storeNames = (storeName?: string, fallback?: string) => {
+  // Same convention as the page UI: "<Arabic>-<Latin>" (e.g. "أبرا-abra2").
+  const [ar, ...rest] = (storeName || fallback || "").split("-");
+  const en = rest.join("-").trim();
+  return { ar: ar.trim() || (fallback ?? ""), en };
 };
 
-const getStructuredDataSchemas = (store: StoreResponse) => {
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
+const socialLinksOf = (links: unknown): string[] => {
+  const values =
+    links && typeof links === "object" ? Object.values(links as Record<string, unknown>) : [];
+  return values.filter(
+    (link): link is string => typeof link === "string" && /^https?:\/\//.test(link),
+  );
+};
 
-  const socialLinks = store?.store?.social_links
-    ? Object.values(store.store.social_links).filter(
-        (link) => typeof link === "string" && link.startsWith("http"),
-      )
-    : [];
+const getStructuredDataSchemas = (data: StoreResponse) => {
+  const store = data.store;
+  const url = absoluteUrl(`store/${store.slug}/`);
+  const brandId = `${url}#brand`;
+  const { ar, en } = storeNames(store.store_name, stripBrandSuffix(store.title));
+  const logo = store.image || store.coupon_image || undefined;
+  const sameAs = socialLinksOf(store.social_links);
 
-  const imageObject = {
-    "@context": "https://schema.org",
-    "@type": "ImageObject",
-    "@id": `${baseUrl}store/${store?.store?.slug}/#logo`,
-    url:
-      (store?.store?.coupon_image
-        ? store?.store?.coupon_image
-        : store?.store?.image) || `${baseUrl}noPreview.webp`,
-    contentUrl:
-      (store?.store?.coupon_image
-        ? store?.store?.coupon_image
-        : store?.store?.image) || `${baseUrl}noPreview.webp`,
-    caption: store?.store?.title,
+  // Exactly the FAQs the page renders (same filter as components/Pages/Stores/show).
+  const faqs = (Array.isArray(data.store_faqs) ? data.store_faqs : []).filter(
+    (faq) => Number(faq?.store_id) === Number(store.id) && faq?.question && faq?.answer,
+  );
+
+  const brand: Record<string, unknown> = {
+    "@type": "OnlineStore",
+    "@id": brandId,
+    name: ar,
+    ...(en ? { alternateName: en } : {}),
+    ...(logo ? { logo, image: logo } : {}),
+    ...(sameAs.length ? { sameAs } : {}),
   };
 
-  const storeSchema = {
-    "@context": "https://schema.org",
-    "@type": "Store",
-    url: `${baseUrl}store/${store?.store?.slug}/`,
-    name: store?.store?.title,
-    image: { "@id": `${baseUrl}store/${store?.store?.slug}/#logo` },
-    description: stripHtml(
-      store?.store?.description ? store?.store?.description : "",
-    ),
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: parseFloat(store?.store?.rate) || 1,
-      ratingCount: store?.store?.voters || 1,
-      bestRating: 5,
-      worstRating: 1,
+  const page = webPageNode({
+    type: faqs.length ? ["ItemPage", "FAQPage"] : "ItemPage",
+    url,
+    name: stripBrandSuffix(store.title),
+    datePublished: store.created_at,
+    dateModified: store.content_updated_at || store.created_at,
+    extra: {
+      about: ref(brandId),
+      ...(logo ? { primaryImageOfPage: { "@type": "ImageObject", url: logo } } : {}),
+      ...(faqs.length
+        ? {
+            mainEntity: faqs.map((faq) => ({
+              "@type": "Question",
+              name: plainText(faq.question),
+              acceptedAnswer: { "@type": "Answer", text: plainText(faq.answer) },
+            })),
+          }
+        : {}),
     },
-    sameAs: socialLinks,
-  };
+  });
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "الرئيسية",
-        item: baseUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: store.store.title,
-        item: `${baseUrl}store/${store.store.slug}/`,
-      },
-    ],
-  };
+  const breadcrumb = breadcrumbNode(url, [
+    HOME_CRUMB,
+    { name: "المتاجر", url: `${SITE_URL}stores/` },
+    { name: ar, url },
+  ]);
 
-  const faqItems =
-    Array.isArray(store?.store_faqs) && store?.store_faqs.length > 0
-      ? store?.store_faqs.map((faq) => ({
-          "@type": "Question",
-          name: faq.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: stripHtml(faq.answer),
-          },
-        }))
-      : [];
-
-  const faqSchema =
-    faqItems.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqItems,
-        }
-      : null;
-
-  const couponsSchema =
-    Array.isArray(store?.store?.coupons) && store?.store?.coupons.length > 0
-      ? store?.store?.coupons.slice(0, 3).map((coupon, index) => ({
-          "@context": "https://schema.org",
-          "@type": "Offer",
-          "@id": `${baseUrl}store/${store?.store?.slug}/#coupon-${index}`,
-          name: coupon.title,
-          description: stripHtml(coupon.description || ""),
-          url: coupon.url || `${baseUrl}store/${store?.store?.slug}/`,
-          validFrom: coupon.created_at,
-          validThrough: coupon.expire_date || coupon.updated_at,
-          availability: "https://schema.org/InStock",
-          identifier: coupon.code,
-          seller: {
-            "@id": `${baseUrl}store/${store?.store?.slug}/#store`,
-          },
-          image:
-            (store?.store?.coupon_image
-              ? store?.store?.coupon_image
-              : store?.store?.image) || `${baseUrl}noPreview.webp`,
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            description: `خصم بقيمة ${coupon?.discount_value}`,
-            eligibleQuantity: {
-              "@type": "QuantitativeValue",
-              value: coupon?.discount_value,
-            },
-          },
-        }))
-      : [];
-
-  return faqSchema
-    ? [storeSchema, imageObject, breadcrumbSchema, faqSchema, ...couponsSchema]
-    : [storeSchema, imageObject, breadcrumbSchema, ...couponsSchema];
+  return buildGraph([page, brand, breadcrumb]);
 };
 
 export default getStructuredDataSchemas;

@@ -5,6 +5,8 @@ import { getTranslations } from "next-intl/server";
 import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { SettingsEnum } from '@/types/settingsEnum';
 import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
+import JsonLd from "@/components/shared/JsonLd";
+import { HOME_CRUMB, ORG_ID, SITE_URL, absoluteUrl, breadcrumbNode, buildGraph, ref, webPageNode } from "@/lib/structured-data";
 
 export async function generateMetadata() {
   const locale = "ar"; // site renders in Arabic only (static)
@@ -53,76 +55,50 @@ export default async function Home({
   const locale = (await params).locale;
   const blogs: any = await api.static("blogs");
   const t = await getTranslations({ locale });
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    name: "مدونة موقع كوبوناك لجميع اخبار متاجر التسوق",
-    description: "هنا تجد كل ما تبحث عنه من معلومات حول المتاجر وخدماتها واحدث العروض والمنتجات لديهم",
-    url: `${baseUrl}blog/`,
-    isPartOf: {
-      "@type": "WebSite",
-      url: baseUrl,
+  const blogUrl = `${SITE_URL}blog/`;
+  const posts: Blog[] = Array.isArray(blogs?.blogs) ? blogs.blogs.slice(0, 10) : [];
+
+  // CollectionPage (the listing) whose main entity is the Blog; the posts are
+  // the ones visible in the first page of the list. Name/description mirror
+  // this page's <title> and meta description.
+  const graph = buildGraph([
+    webPageNode({
+      type: "CollectionPage",
+      url: blogUrl,
+      name: "مدونة كوبوناك: طرق توفّر بها أكثر في كل طلب",
+      description:
+        "شروحات عملية: كيف تجمع كودين، متى تشتري، ما الفرق بين التطبيق والموقع، ومراجعات صادقة للمتاجر قبل أن تدفع.",
+      extra: { mainEntity: ref(`${blogUrl}#blog`) },
+    }),
+    {
+      "@type": "Blog",
+      "@id": `${blogUrl}#blog`,
+      name: "مدونة كوبوناك",
+      url: blogUrl,
+      inLanguage: "ar",
+      publisher: ref(ORG_ID),
+      ...(posts.length
+        ? {
+            blogPost: posts.map((post) => ({
+              "@type": "BlogPosting",
+              "@id": `${absoluteUrl(`${post.slug}/`)}#article`,
+              headline: post.title,
+              url: absoluteUrl(`${post.slug}/`),
+              datePublished: post.created_at,
+              dateModified: post.content_updated_at || post.created_at,
+              author: ref(ORG_ID),
+              ...(post.image ? { image: post.image } : {}),
+            })),
+          }
+        : {}),
     },
-    blogPost: blogs?.blogs?.slice(0, 5).map((post: Blog) => ({
-      "@type": "BlogPosting",
-      headline: post.title,
-      url: `${baseUrl}${post.slug}`,
-      datePublished: post.created_at,
-      dateModified: post.content_updated_at || post.created_at,
-      author: {
-        "@type": "Organization",
-        name: "كوبوناك",
-      },
-      image: {
-        "@type": "ImageObject",
-        url: post.image || `${baseUrl}couponak-logo.svg`,
-      },
-    })),
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "الرئيسية",
-        item: `${baseUrl}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "المدونة",
-        item: `${baseUrl}blog/`,
-      },
-    ],
-  };
-
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "كوبوناك",
-    url: baseUrl,
-    logo: `${baseUrl}couponak-logo.svg`,
-  };
+    breadcrumbNode(blogUrl, [HOME_CRUMB, { name: "المدونة", url: blogUrl }]),
+  ]);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
+      <JsonLd data={graph} />
      <section className="px-0 py-18 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
         <div className="container mx-auto flex flex-col md:flex-row-reverse gap-5">
           <div className="w-full max-w-5xl overflow-hidden">

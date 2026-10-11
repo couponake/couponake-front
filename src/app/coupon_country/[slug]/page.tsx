@@ -9,6 +9,8 @@ import { connection } from "next/server";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
+import JsonLd from "@/components/shared/JsonLd";
+import { HOME_CRUMB, SITE_URL, absoluteUrl, breadcrumbNode, buildGraph, ref, storeItemList, webPageNode } from "@/lib/structured-data";
 
 // Keep redirects out of Full Route Cache (Next.js #82117). The public data
 // loader still caches validated anonymous data for 300 seconds. connection()
@@ -79,79 +81,34 @@ export default async function CouponCountry({
     redirect(response.redirect_url);
   }
   if (response.kind === "not_found") notFound();
-  const { country, stores } = response.data.data;
+  const { country, stores, country_seo } = response.data.data;
 
   const t = await getTranslations({ locale });
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
-  const graph = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "الرئيسية",
-            item: baseUrl,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: `متاجر دولة ${country}`,
-            item: `${baseUrl}coupon_country/${slug}/`,
-          },
-        ],
-      },
-      {
-        "@type": "Organization",
-        name: "كوبوناك",
-        url: baseUrl,
-        logo: {
-          "@type": "ImageObject",
-          url: `${baseUrl}couponak-logo.svg`,
-        },
-      },
-      {
-        "@type": "WebPage",
-        name: `متاجر دولة ${country}`,
-        description: `أكواد خصم وعروض المتاجر ${country}`,
-        url: `${baseUrl}coupon_country/${slug}/`,
-        isPartOf: {
-          "@type": "WebSite",
-          name: "كوبوناك",
-          url: baseUrl,
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "كوبوناك",
-          logo: {
-            "@type": "ImageObject",
-            url: `${baseUrl}couponak-logo.svg`,
-          },
-        },
-        mainEntity: {
-          "@type": "CollectionPage",
-          name: `متاجر دولة ${country}`,
-          hasPart: stores?.slice(0, 5)?.map((store: any, index: number) => ({
-            "@type": "WebPage",
-            name: store.store_name,
-            url: `${baseUrl}store/${store.slug}/`,
-            identifier: store.id,
-            position: index + 1,
-          })),
-        },
-      },
-    ],
-  };
+  const pageUrl = absoluteUrl(`coupon_country/${slug}/`);
+  // Same text as the visible H1 ("متاجر دولة <country>").
+  const heading = `${t("The stores of")} ${country}`;
+  const itemList = storeItemList(`${pageUrl}#list`, stores ?? []);
+
+  const graph = buildGraph([
+    webPageNode({
+      type: "CollectionPage",
+      url: pageUrl,
+      name: heading,
+      description: country_seo?.description,
+      extra: itemList ? { mainEntity: ref(`${pageUrl}#list`) } : undefined,
+    }),
+    ...(itemList ? [itemList] : []),
+    breadcrumbNode(pageUrl, [
+      HOME_CRUMB,
+      { name: "خصومات حسب بلدك", url: `${SITE_URL}all_countries/` },
+      { name: heading, url: pageUrl },
+    ]),
+  ]);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-      />
+      <JsonLd data={graph} />
       <section className="bg-white -mt-9 sm:-mt-7">
         <div className="bg-gradient-to-tr from-blue-200  via-main-600 to-blue-300 pt-5 sm:pt-12">
           <div className="container mx-auto py-8">

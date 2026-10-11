@@ -4,6 +4,8 @@ import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
+import JsonLd from "@/components/shared/JsonLd";
+import { HOME_CRUMB, SITE_URL, breadcrumbNode, buildGraph, webPageNode } from "@/lib/structured-data";
 
 export async function generateMetadata() {
   const locale = "ar"; // site renders in Arabic only (static)
@@ -46,7 +48,6 @@ export async function generateMetadata() {
 }
 
 const AllCountries = async () => {
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
   // First page of countries fetched on the server so the 12 country links are
   // in the prerendered HTML. The client component fetched them through
   // /api/home/countries-meta, which robots.txt disallows — so even after
@@ -57,59 +58,22 @@ const AllCountries = async () => {
     : null;
   const initialPagination = countriesRes?.meta ?? null;
 
-  const graph = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "الرئيسية",
-            item: baseUrl,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "خصومات حسب بلدك",
-            item: `${baseUrl}all_countries/`,
-          },
-        ],
-      },
-      {
-        "@type": "Organization",
-        name: "كوبوناك",
-        url: baseUrl,
-        logo: {
-          "@type": "ImageObject",
-          url: `${baseUrl}couponak-logo.svg`,
-        },
-      },
-      {
-        "@type": "WebPage",
-        name: "كل البلدان: صفحة مخصصة للبحث عن الكوبونات داخل بلدك",
-        description:
-          "نسهل عليك عبر هذة الصفحة البحث والوصول الى كوبونات الخصم باختيار البلد الذي تحب",
-        url: `${baseUrl}all_countries/`,
-        publisher: {
-          "@type": "Organization",
-          name: "كوبوناك",
-          logo: {
-            "@type": "ImageObject",
-            url: `${baseUrl}couponak-logo.svg`,
-          },
-        },
-      },
-    ],
-  };
+  const pageUrl = `${SITE_URL}all_countries/`;
+  // Name/description mirror this page's <title> and meta description.
+  const graph = buildGraph([
+    webPageNode({
+      type: "CollectionPage",
+      url: pageUrl,
+      name: "اختر دولتك: أكواد خصم تعمل في بلدك",
+      description:
+        "الكود الذي يعمل في السعودية قد لا يعمل في مصر. اختر دولتك لترى فقط المتاجر والأكواد التي جرّبناها على عنوان شحن محلي.",
+    }),
+    breadcrumbNode(pageUrl, [HOME_CRUMB, { name: "خصومات حسب بلدك", url: pageUrl }]),
+  ]);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-      />
+      <JsonLd data={graph} />
       <section className="container flex flex-col md:flex-row-reverse gap-5 py-4 overflow-hidden">
         <AllCountriesPage
         initialCountries={initialCountries}

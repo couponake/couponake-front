@@ -3,6 +3,8 @@ import { secureHtmlLinks } from '@/lib/htmlUtils';
 import React from 'react';
 import { getSettingEnabled } from '@/services/getIndexingSettings';
 import { SettingsEnum } from '@/types/settingsEnum';
+import JsonLd from '@/components/shared/JsonLd';
+import { HOME_CRUMB, SITE_URL, breadcrumbNode, buildGraph, webPageNode } from '@/lib/structured-data';
 
 export async function generateMetadata() {
   const locale = "ar"; // site renders in Arabic only (static)
@@ -50,85 +52,32 @@ const PrivacyPage = async () => {
     title: string;
     content: string;
     created_at?: string;
+    updated_at?: string;
   };
+  // The visible date and dateModified use updated_at (last real content edit).
+  // created_at on these rows predates Couponake (rows were carried over and
+  // rewritten on 2026-09-29), so showing it would be wrong.
+  const shownDate = page.updated_at || page.created_at;
   const locale = "ar"; // site renders in Arabic only (static)
 
-  const privacyPolicySchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#webpage`,
-    name: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك | كوبوناك",
-    url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/`,
-    description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
-    datePublished: page.created_at
-      ? new Date(page.created_at).toISOString()
-      : undefined,
-    dateModified: page.created_at
-      ? new Date(page.created_at).toISOString()
-      : undefined,
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "الرئيسية",
-          item: process.env.NEXT_PUBLIC_WEBSITE_URL,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "سياسة الخصوصية",
-          item: `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/`,
-        },
-      ],
-    },
-    mainEntity: {
-      "@type": "Article",
-      "@id": `${process.env.NEXT_PUBLIC_WEBSITE_URL}privacy-policy/#article`,
-      headline: "سياسة الخصوصية لتتعرف على امانك اثناء زيارتك | كوبوناك",
-      description: "اعرف كيف نحمي بياناتك ونضمن سرية معلوماتك أثناء التصفح",
-      datePublished: page.created_at
-        ? new Date(page.created_at).toISOString()
-        : undefined,
-      dateModified: page.created_at
-        ? new Date(page.created_at).toISOString()
-        : undefined,
-      image: "https://couponake.com/couponak-logo.svg",
-      author: {
-        "@type": "Organization",
-        name: "كوبوناك",
-        url: process.env.NEXT_PUBLIC_WEBSITE_URL,
-      },
-      publisher: {
-        "@type": "Organization",
-        name: "كوبوناك",
-        logo: {
-          "@type": "ImageObject",
-          url: "https://couponake.com/couponak-logo.svg",
-        },
-      },
-      articleBody: secureHtmlLinks(page.content as string),
-    },
-  };
+  const pageUrl = `${SITE_URL}privacy-policy/`;
+  const graph = buildGraph([
+    webPageNode({ url: pageUrl, name: page.title, dateModified: page.updated_at }),
+    breadcrumbNode(pageUrl, [HOME_CRUMB, { name: "سياسة الخصوصية", url: pageUrl }]),
+  ]);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(privacyPolicySchema),
-        }}
-      />
+      <JsonLd data={graph} />
       <main className="container mx-auto px-4 py-8 animate-fadeIn">
         <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
           <div className="p-8">
             <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white tracking-tight">
               {page.title}
             </h1>
-            {page.created_at && (
+            {shownDate && (
               <div className="text-sm text-gray-500 dark:text-gray-400 mb-8">
-                {new Date(page.created_at).toLocaleDateString(
+                {new Date(shownDate).toLocaleDateString(
                   locale === 'ar' ? 'ar-SA' : 'en-US',
                   {
                     year: 'numeric',

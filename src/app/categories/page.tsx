@@ -7,6 +7,8 @@ import CategoriesStaticGrid from "@/components/Pages/Categories/StaticGrid";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 import CuratedStoreWidget from "@/components/shared/CuratedStoreWidget";
+import JsonLd from "@/components/shared/JsonLd";
+import { HOME_CRUMB, SITE_URL, absoluteUrl, breadcrumbNode, buildGraph, ref, webPageNode } from "@/lib/structured-data";
 
 export const experimental_ppr = true;
 
@@ -59,62 +61,44 @@ export default async function CategoriesPage({
   // link is in the prerendered HTML and the grid needs no pagination.
   const categories = await getCategories();
   const t = await getTranslations({ locale });
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "الرئيسية",
-        item: baseUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "الفئات",
-        item: `${baseUrl}categories/`,
-      },
-    ],
-  };
+  const pageUrl = `${SITE_URL}categories/`;
+  const list: any[] = Array.isArray(categories?.categories) ? categories.categories : [];
 
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "كوبوناك",
-    url: `${baseUrl}`,
-    logo: `${baseUrl}couponak-logo.svg`,
-  };
-
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: "الفئات: صفحة لتصنيف الكوبونات وفق فئات المنتجات",
-    description: "يتم تصنيف اكواد و كوبونات الخصم وفق فئات المنتجات حتى يسهل الوصول للكوبونات التى تريدها باقل مجهود",
-    url: `${baseUrl}categories/`,
-    publisher: {
-      "@type": "Organization",
-      name: "كوبوناك",
-      logo: {
-        "@type": "ImageObject",
-        url: `${baseUrl}couponak-logo.svg`,
-      },
-    },
-  };
-
-  const graph = {
-    "@context": "https://schema.org",
-    "@graph": [breadcrumbSchema, organizationSchema, websiteSchema],
-  };
+  // Name/description mirror this page's <title> and meta description; the
+  // ItemList holds the category links rendered in the server HTML grid.
+  const graph = buildGraph([
+    webPageNode({
+      type: "CollectionPage",
+      url: pageUrl,
+      name: "الفئات: أكواد خصم مرتبة حسب ما تشتريه",
+      description:
+        "أزياء، إلكترونيات، جمال، سفر، مطاعم وغيرها: اختر الفئة وشوف المتاجر التي فيها أكواد فعّالة اليوم بدل البحث متجرًا متجرًا.",
+      extra: list.length ? { mainEntity: ref(`${pageUrl}#list`) } : undefined,
+    }),
+    ...(list.length
+      ? [
+          {
+            "@type": "ItemList",
+            "@id": `${pageUrl}#list`,
+            numberOfItems: list.length,
+            itemListElement: list
+              .filter((category) => category?.slug && category?.name)
+              .map((category, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: category.name,
+                url: absoluteUrl(`coupon-category/${category.slug}/`),
+              })),
+          },
+        ]
+      : []),
+    breadcrumbNode(pageUrl, [HOME_CRUMB, { name: "الفئات", url: pageUrl }]),
+  ]);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-      />
+      <JsonLd data={graph} />
       <section className="bg-white">
         <div className="bg-gradient-to-tr from-blue-200  via-main-600 to-blue-300 pt-4">
           <div className="container mx-auto py-4">

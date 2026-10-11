@@ -10,10 +10,8 @@ import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { BreadcrumbList, ContactPage } from "schema-dts";
 import { InferType, object, string } from "yup";
 import ReCAPTCHA from "react-google-recaptcha";
-const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
 // Contact form validation schema
 const contactSchema = object().shape({
@@ -101,33 +99,6 @@ const ContactUsPage = () => {
       setIsSubmitting(false);
     }
   };
-
-  const breadcrumbSchema: BreadcrumbList = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "الرئيسية",
-        item: websiteUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "اتصل بنا",
-        item: `${websiteUrl}contact/`,
-      },
-    ],
-  } as BreadcrumbList & { "@context": string };
-
-  const contactPageSchema: ContactPage = {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    name: "اتصل بنا | كوبوناك",
-    url: `${websiteUrl}contact/`,
-    description: t("contact.desc"),
-  } as ContactPage & { "@context": string };
 
   return (
     <>
@@ -293,14 +264,6 @@ const ContactUsPage = () => {
           </div>
         </div>
       </div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
     </>
   );
 };

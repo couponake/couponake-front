@@ -12,6 +12,8 @@ import {
 } from "@tanstack/react-query";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
+import JsonLd from "@/components/shared/JsonLd";
+import { HOME_CRUMB, SITE_URL, breadcrumbNode, buildGraph, webPageNode } from "@/lib/structured-data";
 
 type PageProps = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | string[] | undefined>> };
 
@@ -75,55 +77,25 @@ export default async function StoresPage({ params, searchParams }: PageProps) {
   if (page > firstPage.pagination.last_page) notFound();
   const locale = (await params).locale;
   const t = await getTranslations({ locale });
-  const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
   const pageUrl = 'https://couponake.com' + storePageHref(page);
   const queryClient = new QueryClient();
   queryClient.setQueryData(["stores", page, "", null, null, false], firstPage, { updatedAt: firstPage.fetchedAt });
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": `${pageUrl}#webpage`,
-    name: "كل المتاجر: كوبونات خصم لجميع متاجر التسوق في الشرق الاوسط",
-    description: "بعد الدخول يمكنك ايجاد والبحث عن اى متجر تريد له كوبونات خصم بكل سهولة ومجاناً",
-    url: pageUrl,
-    inLanguage: locale,
-    isPartOf: {
-      "@type": "WebSite",
-      name: "كوبوناك",
-      url: baseUrl,
-    },
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "الرئيسية",
-        item: `${baseUrl}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "المتاجر",
-        item: `${baseUrl}stores/`,
-      },
-    ],
-  };
+  // Name/description mirror this page's <title> and meta description.
+  const graph = buildGraph([
+    webPageNode({
+      type: "CollectionPage",
+      url: pageUrl,
+      name: "دليل المتاجر: اختر متجرك وخذ كوبونه المجرّب",
+      description:
+        "تصفّح كل المتاجر التي نغطيها مرتبة بعدد الأكواد الفعّالة، وابحث بالاسم أو الفئة أو الدولة لتصل لكوبون متجرك في ثوانٍ.",
+    }),
+    breadcrumbNode(pageUrl, [HOME_CRUMB, { name: "المتاجر", url: `${SITE_URL}stores/` }]),
+  ]);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <JsonLd data={graph} />
       <section className="bg-white">
         <div className="bg-gradient-to-tr from-blue-200 via-main-600 to-blue-300 pt-4">
           <div className="container mx-auto py-4">
