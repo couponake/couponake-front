@@ -1,7 +1,7 @@
 import { fetchApi } from "@/lib/api-result";
 import ShowBlog from "@/components/Pages/Blogs/show";
 import { Blog } from "@/types";
-import { notFound, redirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
 
@@ -110,7 +110,7 @@ const BlogDetails = async ({
   });
 
   if (response.kind === "redirect") {
-    redirect(response.redirect_url);
+    permanentRedirect(response.redirect_url);
   }
 
   // Unknown slug (bot probes like /wp-login.php, deleted or unpublished posts):

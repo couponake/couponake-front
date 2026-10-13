@@ -4,7 +4,7 @@ import { getCountryDetail } from "@/services/public-detail-data";
 import { Avatar } from "@heroui/avatar";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { connection } from "next/server";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
@@ -78,7 +78,7 @@ export default async function CouponCountry({
   const { locale, slug } = await params;
   const response = await getCountryDetail(slug);
   if (response.kind === "redirect") {
-    redirect(response.redirect_url);
+    permanentRedirect(response.redirect_url);
   }
   if (response.kind === "not_found") notFound();
   const { country, stores, country_seo } = response.data.data;

@@ -8,7 +8,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { notFound, redirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import React from "react";
 import { getSettingEnabled } from "@/services/getIndexingSettings";
 import { SettingsEnum } from "@/types/settingsEnum";
@@ -244,7 +244,7 @@ const ShowStorePage = async ({
 
   if (result.kind === "redirect") {
     // Deleted store with a replacement: keep the 301 (checked first, as before).
-    redirect(result.redirect_url);
+    permanentRedirect(result.redirect_url);
   }
 
   if (result.kind !== "ok" || !result.data?.store) {
