@@ -48,7 +48,7 @@ const ShowCategory = ({ category }: { category: CategoryItem }) => {
                     <div className="w-20 aspect-square">
                       <Image
                         src={store?.image || "noPreview.webp"}
-                        alt={store?.slug || "Store Image"}
+                        alt={store?.store_name || store?.slug || "Store Image"}
                         width={120}
                         height={120}
                         loading="lazy"
@@ -57,7 +57,7 @@ const ShowCategory = ({ category }: { category: CategoryItem }) => {
                       />
                     </div>
                     <h2 className="text-xl font-semibold text-gray-800 text-center">
-                      {store?.slug}
+                      {store?.store_name || store?.slug}
                     </h2>
                   </Link>
                 </div>
