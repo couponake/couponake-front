@@ -2,8 +2,6 @@ import { getSitemapSettingEnabled } from "@/services/getSitemapIndexingSettings"
 import { getAllStoresData } from "@/lib/sitemap-utils";
 import { NextResponse } from "next/server";
 
-const lastmod = (d?: string) => (d ? `<lastmod>${d}</lastmod>` : "");
-
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ page: string }> }
@@ -28,23 +26,20 @@ export async function GET(
       .replace(/'/g, "&apos;");
   }
 
+  // Image sitemap: each image sits under its store page (an image URL is never a <loc>).
   const urls = slugs.images
-    .map((slug, i) => {
-      const safeSlug = escapeXml(encodeURI(slug));
-      return `
+    .map((img, i) => (img ? `
   <url>
-    <loc>${safeSlug}</loc>
-    ${lastmod(slugs.lastmods[i])}
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>`;
-    })
+    <loc>https://couponake.com/store/${encodeURI(slugs.storesSlugs[i])}/</loc>
+    <image:image><image:loc>${escapeXml(encodeURI(img))}</image:loc></image:image>
+  </url>` : ""))
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/sitemapXSL/sitemap-stores.xsl"?>
 <urlset 
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
 >
   ${urls}
 </urlset>`;
