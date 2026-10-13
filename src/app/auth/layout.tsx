@@ -7,6 +7,7 @@ export async function generateMetadata() {
   const isArabic = locale === "ar";
 
   return {
+    robots: { index: false, follow: true },
     title: isArabic ? "حسابي: احفظ متاجرك المفضلة وتابع أكوادها | كوبوناك" : "My account: save your favourite stores | Couponake",
     description: isArabic ? "سجّل الدخول لتحفظ المتاجر المفضلة وتصلك أكوادها الجديدة أولًا." : "Log in to save favourite stores and get their new codes first.",
     alternates: {
