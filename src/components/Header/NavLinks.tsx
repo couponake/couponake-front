@@ -37,7 +37,7 @@ const NavLinks = () => {
       <Link
         prefetch={false}
         target="_self"
-        href="/stores"
+        href="/stores/"
         aria-label="Stores"
       >
         <li
@@ -58,7 +58,7 @@ const NavLinks = () => {
       <Link
         prefetch={false}
         target="_self"
-        href="/blog"
+        href="/blog/"
         aria-label="blog"
       >
         <li
@@ -79,7 +79,7 @@ const NavLinks = () => {
       <Link
         prefetch={false}
         target="_self"
-        href="/all_countries"
+        href="/all_countries/"
         aria-label="all_countries"
       >
         <li

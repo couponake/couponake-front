@@ -115,11 +115,11 @@ const Footer = ({
                   <Link
                     href={
                       link.url === "terms"
-                        ? "/terms"
+                        ? "/terms/"
                         : link.url === "privacy-policy"
-                          ? "/privacy-policy"
+                          ? "/privacy-policy/"
                           : link.url === "about"
-                            ? "/about-us"
+                            ? "/about-us/"
                             : `/${link.url}`
                     }
                     target="_self"
@@ -138,7 +138,7 @@ const Footer = ({
                 <Link
                   target="_self"
                   prefetch={false}
-                  href={`/contact`}
+                  href={`/contact/`}
                   className="text-sm hover:underline"
                 >
                   {t("Contact Us")}
@@ -148,7 +148,7 @@ const Footer = ({
                 <Link
                   target="_self"
                   prefetch={false}
-                  href={`/faq`}
+                  href={`/faq/`}
                   className="text-sm hover:underline"
                 >
                   {t("Frequently Asked Questions")}

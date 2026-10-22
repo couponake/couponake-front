@@ -89,7 +89,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
         <p className="text-gray-700 mb-4">
           {"We couldn't load the store information. Please try again later."}
         </p>
-        <Button color="primary" as={Link} href="/stores">
+        <Button color="primary" as={Link} href="/stores/">
           {"Browse All Stores"}
         </Button>
       </div>
@@ -108,7 +108,7 @@ const ShowStore = ({ slug }: { slug: string }) => {
             "The store you are looking for does not exist or has been removed",
           )}
         </p>
-        <Button color="primary" as={Link} href="/stores">
+        <Button color="primary" as={Link} href="/stores/">
           {t("Browse All Stores")}
         </Button>
       </div>

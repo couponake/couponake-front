@@ -68,7 +68,7 @@ const StoreCarousel = ({
             <Link
               prefetch={false}
               target="_self"
-              href={viewAllLink ? viewAllLink : "/stores"}>
+              href={viewAllLink ? viewAllLink : "/stores/"}>
               <button className="max-sm:text-sm rounded-xl px-3 py-2 gradient-btn transition-all">
                 {t("View all")}
               </button>
