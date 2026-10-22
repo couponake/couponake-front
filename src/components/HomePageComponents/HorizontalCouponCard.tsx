@@ -4,13 +4,12 @@ import { useStore } from '@/store';
 import { CouponProps } from '@/types';
 import { Button } from '@heroui/button';
 import { CopyIcon, Eye, ShoppingBag } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React from 'react';
 
 export default function HorizontalCouponCard({ coupon }: { coupon: CouponProps }) {
   const t = useTranslations();
-  const locale = useLocale();
   const setSelectedCoupon = useStore((store) => store.setSelectedCoupon);
   return (
     <div className="relative overflow-hidden rounded-lg shadow-lg bg-gradient-to-br from-main-100 to-main-100" dir="auto">
@@ -40,15 +39,6 @@ export default function HorizontalCouponCard({ coupon }: { coupon: CouponProps }
             <ShoppingBag className="w-4 h-4 me-2 text-main-500" />
             <span className="text-sm font-semibold text-main-700">{coupon.discount_value} {t("OFF")}</span>
           </div>
-          {coupon.expire_date && (<div className="text-sm text-gray-600">{t("Expire Date")}: {new Date(coupon.expire_date).toLocaleDateString(
-            locale === 'ar' ? 'ar-SA' : 'en-US',
-            {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            }
-          )}</div>
-          )}
         </div>
 
         <div className="mt-4 pt-4 border-t border-gray-200">
