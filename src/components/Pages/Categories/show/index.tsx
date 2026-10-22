@@ -42,7 +42,7 @@ const ShowCategory = ({ category }: { category: CategoryItem }) => {
                 >
                   <Link
                     target="_self"
-                    href={`/store/${store?.slug}`}
+                    href={`/store/${store?.slug}/`}
                     className="p-6 flex flex-col items-center"
                   >
                     <div className="w-20 aspect-square">

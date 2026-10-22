@@ -65,7 +65,7 @@ const CategoriesDropDown = () => {
               {!isLoading && categories?.map((category) => (
                 <li className="mt-1" key={category.id}>
                   <Link
-                    href={`/coupon-category/${category.slug}`}
+                    href={`/coupon-category/${category.slug}/`}
                     prefetch={false}
                   >
                     <div className="block rounded-lg p-2 font-semibold text-gray-800 transition duration-300 ease-in-out hover:bg-gradient-to-br hover:from-main-50 hover:via-main-50 hover:to-main-50 hover:text-main-600">

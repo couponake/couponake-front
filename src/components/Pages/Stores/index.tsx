@@ -263,7 +263,7 @@ const Stores = ({ initialPage = 1 }: { initialPage?: number }) => {
                   <Link
                     prefetch={false}
                     target="_self"
-                    href={`/store/${store?.slug}`}
+                    href={`/store/${store?.slug}/`}
                     className="flex items-center w-full gap-4 flex-grow max-sm:flex-col max-sm:justify-center"
                   >
                     <div className="relative w-20 h-20 shadow-md bg-white rounded-full shrink-0 overflow-hidden ">

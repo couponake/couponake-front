@@ -131,7 +131,7 @@ const Categories = ({
             <Link
               prefetch={false}
               target="_self"
-              href={`/coupon-category/${category.slug}`}
+              href={`/coupon-category/${category.slug}/`}
               key={category.id}
               className="group block"
               onClick={() => {
