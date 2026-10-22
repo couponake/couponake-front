@@ -183,7 +183,7 @@ const AuthPage = () => {
           {t("auth.already_have_account")}{" "}
           <Link
             target="_self"
-            href="/auth/login"
+            href="/auth/login/"
             className="font-bold underline"
           >
             {t("auth.login")}

@@ -126,7 +126,7 @@ const AuthPage = () => {
           {t("auth.dont_have_account")}{" "}
           <Link 
           target="_self" 
-          href="/auth" className="font-bold underline">
+          href="/auth/" className="font-bold underline">
             {t("auth.register")}
           </Link>
         </p>

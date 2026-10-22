@@ -128,7 +128,7 @@ const Categories = () => {
         <Link
           prefetch={false}
           target="_self"
-          href="/categories"
+          href="/categories/"
         >
           <button className="sm:text-lg rounded-xl px-3 py-2 gradient-btn transition-all">
             {t("View all")}

@@ -83,7 +83,7 @@ const MobileDrawer = ({
                             <div className="xxs:px-8 px-5 pb-6 xs:px-8">
                               <Link
                                 target="_self"
-                                href="/auth"
+                                href="/auth/"
                                 onClick={onClose}
                               >
                                 <button className="sm:text-lg rounded-xl px-3 py-2 bg-main-500 text-white hover:opacity-70 transition-all">
@@ -112,7 +112,7 @@ const MobileDrawer = ({
                       </Link>
                       <Link
                         target="_self"
-                        href="/categories"
+                        href="/categories/"
                         aria-label="categories"
                         onClick={onClose}
                         className={cn(
@@ -124,7 +124,7 @@ const MobileDrawer = ({
                       </Link>
                       <Link
                         target="_self"
-                        href="/stores"
+                        href="/stores/"
                         onClick={onClose}
                         className={cn(
                           "underline-active text-neutral-900 relative text-xl font-medium",
@@ -136,7 +136,7 @@ const MobileDrawer = ({
                       </Link>
                       <Link
                         target="_self"
-                        href="/blog"
+                        href="/blog/"
                         aria-label="blog"
                         onClick={onClose}
                         className={cn(
@@ -149,7 +149,7 @@ const MobileDrawer = ({
 
                       <Link
                         target="_self"
-                        href="/all_countries"
+                        href="/all_countries/"
                         aria-label="all_countries"
                         onClick={onClose}
                         className={cn(

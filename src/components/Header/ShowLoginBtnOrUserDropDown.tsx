@@ -17,7 +17,7 @@ const ShowLoginBtnOrUserDropDown = () => {
       ) : (
         <Link
           target="_self"
-          href="/auth/login">
+          href="/auth/login/">
           <li className="group relative rounded-full border border-neutral-100 px-4 py-2">
             <div className="flex items-center justify-between gap-3">
               <UserIcon className="size-5 text-neutral-900" />
