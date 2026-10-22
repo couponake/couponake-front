@@ -54,7 +54,7 @@ const Favorites = () => {
               <div className="flex items-center justify-between gap-2 rounded-3xl border border-neutral-100 bg-white p-4 sm:p-5 w-full">
                 <Link
                   target="_self"
-                  href={`/store/${store?.id}`}
+                  href={`/store/${store?.slug}/`}
                   className="flex flex-1 items-start gap-1 sm:gap-3"
                 >
                   <Avatar

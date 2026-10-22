@@ -139,7 +139,7 @@ const BestStores = ({
                 prefetch={false}
                 target="_self"
                 key={store?.id}
-                href={`/store/${store?.slug}`}
+                href={`/store/${store?.slug}/`}
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).gtag) {
                     (window as any).gtag("event", "featured_store_click", {

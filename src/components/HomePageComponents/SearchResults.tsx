@@ -57,10 +57,10 @@ const SearchResults = ({
               {({ index, style }) => {
                 const href =
                   results[index]?.type === "store"
-                    ? `/store/${results[index]?.slug}`
+                    ? `/store/${results[index]?.slug}/`
                     : results[index]?.type === "blog"
                       ? `/${results[index]?.id}`
-                      : `/coupon-category/${results[index]?.slug}`;
+                      : `/coupon-category/${results[index]?.slug}/`;
 
                 return (
                   <li

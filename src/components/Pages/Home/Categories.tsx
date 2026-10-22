@@ -100,7 +100,7 @@ const Categories = () => {
               <Link
                 prefetch={false}
                 target="_self"
-                href={`/coupon-category/${category?.slug}`}
+                href={`/coupon-category/${category?.slug}/`}
               >
                 <div className="flex h-64 flex-col justify-between overflow-hidden rounded-xl bg-gradient-to-br from-main-300 via-main-400 to-main-700 p-6">
                   <p className="mb-2.5 text-center text-xl font-bold text-white lg:text-2xl">
