@@ -83,7 +83,7 @@ const MobileDrawer = ({
                             <div className="xxs:px-8 px-5 pb-6 xs:px-8">
                               <Link
                                 target="_self"
-                                href="/auth"
+                                href="/auth/"
                                 onClick={onClose}
                               >
                                 <button className="sm:text-lg rounded-xl px-3 py-2 bg-main-500 text-white hover:opacity-70 transition-all">

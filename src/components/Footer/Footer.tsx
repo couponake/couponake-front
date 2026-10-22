@@ -120,7 +120,7 @@ const Footer = ({
                           ? "/privacy-policy/"
                           : link.url === "about"
                             ? "/about-us/"
-                            : `/${link.url}`
+                            : `/${link.url}/`
                     }
                     target="_self"
                     prefetch={false}
