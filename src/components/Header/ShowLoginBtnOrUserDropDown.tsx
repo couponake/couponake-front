@@ -16,6 +16,7 @@ const ShowLoginBtnOrUserDropDown = () => {
         <UserDropDown />
       ) : (
         <Link
+          prefetch={false}
           target="_self"
           href="/auth/login/">
           <li className="group relative rounded-full border border-neutral-100 px-4 py-2">

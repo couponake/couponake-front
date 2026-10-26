@@ -13,6 +13,7 @@ const AppDownloadBanner = () => {
         <div className="flex flex-row gap-2 md:gap-4 w-fit md:w-auto">
           {/* Android Button */}
           <Link
+            prefetch={false}
             target="_blank"
             href="/"
             className="w-22 md:w-30 flex items-center justify-center gap-1 md:gap-3 py-1 bg-main-600 hover:bg-main-500 text-white rounded-md md:rounded-xl transition-all duration-200 shadow-lg hover:shadow-main-200"

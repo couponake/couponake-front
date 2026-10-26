@@ -27,6 +27,7 @@ const Header = ({
           {(
             <Suspense>
               <Link
+                prefetch={false}
                 href="/"
                 className="my-auto cursor-pointer bg-transparent rounded-lg"
               >

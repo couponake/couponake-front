@@ -82,6 +82,7 @@ const MobileDrawer = ({
                             </div>
                             <div className="xxs:px-8 px-5 pb-6 xs:px-8">
                               <Link
+                                prefetch={false}
                                 target="_self"
                                 href="/auth/"
                                 onClick={onClose}
@@ -99,6 +100,7 @@ const MobileDrawer = ({
                   <div className="xxs:ps-8 container flex-1 py-4 ps-5 xs:ps-8">
                     <div className="flex flex-col gap-5">
                       <Link
+                        prefetch={false}
                         target="_self"
                         href="/"
                         onClick={onClose}
@@ -111,6 +113,7 @@ const MobileDrawer = ({
                         {t("common.home")}
                       </Link>
                       <Link
+                        prefetch={false}
                         target="_self"
                         href="/categories/"
                         aria-label="categories"
