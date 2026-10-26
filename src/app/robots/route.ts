@@ -11,6 +11,8 @@ Allow: /_next/image/
 Disallow: /api/
 Disallow: /private/
 Disallow: /*?couponID=
+Disallow: /_vercel/insights/
+Disallow: /_vercel/speed-insights/
 
 Sitemap: https://couponake.com/sitemap.xml
 `.trim();
