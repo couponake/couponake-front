@@ -39,6 +39,7 @@ const CategoriesDropDown = () => {
   return (
     <div className="group relative ml-2 mr-[18px] hidden min-w-fit items-center md:flex">
       <Link
+        prefetch={false}
         href="/categories/"
         className="text-base font-medium text-neutral-800 hover:text-main-600 lg:flex"
       >
